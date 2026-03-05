@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Maderarte | Dashboard</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { 
+            --mad-orange: #FF7300; 
+            --mad-black: #0a0a0a; 
+            --mad-dark-card: #151515;
+            --mad-gold: #d4af37; 
+            --mad-text: #e0e0e0;
+        }
+        
+        @font-face {
+            font-family: 'Algerian';
+            src: local('Algerian'), url('https://fonts.cdnfonts.com/s/13158/ALGER.woff') format('woff');
+        }
+
+        body { 
+            background: radial-gradient(circle at top center, #2a2a2a 0%, #111111 50%, #050505 100%);
+            font-family: 'Montserrat', sans-serif; 
+            color: var(--mad-text); 
+            margin: 0; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ANIMACIÓN DE ENTRADA AL SISTEMA */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dashboard-container { 
+            width: 100%; 
+            max-width: 450px; 
+            padding: 40px 25px; 
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        /* HEADER DEL DASHBOARD */
+        .header-brand { 
+            text-align: center; 
+            margin-bottom: 45px;
+        }
+        .logo-img { 
+            width: 110px; 
+            height: auto; 
+            filter: drop-shadow(0 0 25px rgba(255, 115, 0, 0.2)); 
+            margin-bottom: 15px;
+            border-radius: 50%;
+        }
+        .brand-logo-text { 
+            font-family: 'Algerian', serif; 
+            font-size: 3.2rem; 
+            color: #ffffff; 
+            margin: 0; 
+            letter-spacing: 5px; 
+            line-height: 1; 
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .brand-slogan { 
+            color: var(--mad-orange); 
+            font-size: 0.60rem; 
+            font-weight: 600; 
+            letter-spacing: 3px; 
+            margin-top: 10px; 
+            text-transform: uppercase;
+        }
+
+        /* INDICADOR DE ESTADO ONLINE */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 15px;
+            border-radius: 30px;
+            margin-top: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+        .pulse-dot {
+            width: 6px; height: 6px; background: #2ecc71; border-radius: 50%; margin-right: 8px;
+            box-shadow: 0 0 8px rgba(46, 204, 113, 0.8);
+            position: relative;
+        }
+        .pulse-dot::after {
+            content: ""; position: absolute; width: 100%; height: 100%; background: #2ecc71; 
+            border-radius: 50%; animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
+
+        /* MENÚ DE TARJETAS (CARDS) */
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .menu-card { 
+            background: rgba(20, 20, 20, 0.6); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px; 
+            padding: 22px 20px; 
+            display: flex; 
+            align-items: center; 
+            text-decoration: none; 
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Tarjeta Principal (Activa) */
+        .card-active {
+            border-left: 4px solid var(--mad-orange);
+            background: linear-gradient(90deg, rgba(255,115,0,0.05) 0%, rgba(20,20,20,0.6) 100%);
+        }
+        .card-active:hover {
+            transform: translateX(5px);
+            background: linear-gradient(90deg, rgba(255,115,0,0.1) 0%, rgba(20,20,20,0.8) 100%);
+            border-color: rgba(255, 115, 0, 0.3);
+        }
+
+        /* Tarjetas Desactivadas (Próximamente) */
+        .card-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-left: 4px solid #333;
+        }
+        .card-disabled:hover { opacity: 0.6; }
+
+        .icon-box { 
+            width: 55px; height: 55px; min-width: 55px; 
+            border-radius: 12px; display: flex; align-items: center; justify-content: center; 
+            font-size: 1.4rem; margin-right: 20px; 
+            transition: all 0.3s ease;
+        }
+        
+        .card-active .icon-box { 
+            background: rgba(255, 115, 0, 0.1); 
+            color: var(--mad-orange); 
+            box-shadow: inset 0 0 10px rgba(255, 115, 0, 0.05);
+        }
+        .card-disabled .icon-box { 
+            background: rgba(255, 255, 255, 0.05); 
+            color: #666; 
+        }
+
+        .menu-text { text-align: left; flex-grow: 1;}
+        .menu-text h3 { 
+            margin: 0 0 5px 0; font-size: 1rem; font-weight: 700; color: white; letter-spacing: 1px;
+        }
+        .menu-text p { 
+            margin: 0; font-size: 0.75rem; color: #888; font-weight: 500;
+        }
+
+        .lock-icon {
+            font-size: 1rem; color: #444; margin-left: auto;
+        }
+
+        /* FOOTER */
+        .app-footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            width: 100%;
+        }
+        .footer-logo { font-family: 'Algerian', serif; font-size: 1.2rem; color: #555; letter-spacing: 3px; margin-bottom: 5px;}
+        .footer-version { font-size: 0.6rem; color: #444; letter-spacing: 2px; text-transform: uppercase;}
+
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <div class="header-brand fade-in-up" style="animation-delay: 0.1s;">
+            <img src="logomaderarte2026.png" alt="Maderarte Logo" class="logo-img">
+            <h1 class="brand-logo-text">MADERARTE</h1>
+            <div class="brand-slogan">Muebles con un estilo diferente para cada cliente</div>
+            
+            <div class="status-pill">
+                <div class="pulse-dot"></div>
+                Sistema en línea
+            </div>
+        </div>
+
+        <div class="menu-grid">
+            
+            <a href="cotizacion.html" class="menu-card card-active fade-in-up" style="animation-delay: 0.3s;">
+                <div class="icon-box">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <div class="menu-text">
+                    <h3>COTIZACIONES</h3>
+                    <p>Generador de propuestas Premium</p>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color: var(--mad-orange); font-size: 0.9rem;"></i>
+            </a>
+
+            <a href="#" class="menu-card card-disabled fade-in-up" style="animation-delay: 0.4s;" onclick="event.preventDefault();">
+                <div class="icon-box">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </div>
+                <div class="menu-text">
+                    <h3>ÓRDENES DE TRABAJO</h3>
+                    <p>Próximamente</p>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </a>
+
+            <a href="#" class="menu-card card-disabled fade-in-up" style="animation-delay: 0.5s;" onclick="event.preventDefault();">
+                <div class="icon-box">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="menu-text">
+                    <h3>DIRECTORIO CLIENTES</h3>
+                    <p>Próximamente</p>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </a>
+
+            <a href="#" class="menu-card card-disabled fade-in-up" style="animation-delay: 0.6s;" onclick="event.preventDefault();">
+                <div class="icon-box">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+                <div class="menu-text">
+                    <h3>FINANZAS Y ABONOS</h3>
+                    <p>Próximamente</p>
+                </div>
+                <i class="fa-solid fa-lock lock-icon"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+    <footer class="app-footer fade-in-up" style="animation-delay: 0.8s;">
+        <div class="footer-logo">MADERARTE</div>
+        <div class="footer-version">Software de Gestión &copy; 2026</div>
+    </footer>
+
+</body>
+</html>

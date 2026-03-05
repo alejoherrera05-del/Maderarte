@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Maderarte | Cotización Lujo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { 
+            --mad-orange: #FF7300; 
+            --mad-black: #111111; 
+            --mad-gold: #d4af37; 
+        }
+        
+        @font-face {
+            font-family: 'Algerian';
+            src: local('Algerian'), url('https://fonts.cdnfonts.com/s/13158/ALGER.woff') format('woff');
+        }
+
+        body { background-color: #eef0f2; font-family: 'Montserrat', sans-serif; color: #222; margin: 0; padding: 20px 0;}
+        .text-uppercase-input { text-transform: uppercase; }
+        
+        .btn-back { position: fixed; top: 15px; left: 15px; z-index: 1000; background: var(--mad-black); border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); color: var(--mad-orange); text-decoration: none; border: 1px solid var(--mad-orange);}
+        
+        #area-pdf { background-color: white; width: 100%; max-width: 800px; margin: auto; min-height: 100vh; position: relative; display: flex; flex-direction: column; box-shadow: 0 15px 35px rgba(0,0,0,0.1);}
+        
+        /* =========================================
+           HEADER PREMIUM: Degradado Radial (Spotlight)
+           ========================================= */
+        .header-brand { 
+            background: radial-gradient(circle at 15% 40%, #383838 0%, #151515 60%, #080808 100%);
+            padding: 40px 40px 25px 40px; 
+            border-bottom: 4px solid var(--mad-orange); 
+        }
+        
+        .header-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        
+        .brand-group { display: flex; align-items: center; gap: 20px; }
+        .logo-img { width: 85px; height: auto; filter: drop-shadow(0 0 15px rgba(255, 115, 0, 0.15)); }
+        
+        .brand-text-container { display: flex; flex-direction: column; }
+        .brand-logo-text { font-family: 'Algerian', serif; font-size: 3.2rem; color: #ffffff; margin: 0; letter-spacing: 4px; line-height: 0.9; }
+        
+        /* 🔥 ESLOGAN CORREGIDO: Más pequeño, fino y elegante 🔥 */
+        .brand-slogan { 
+            color: var(--mad-orange); 
+            font-size: 0.52rem;  /* Reducido para que no compita con el logo */
+            font-weight: 500;    /* Letra media, no súper gruesa */
+            letter-spacing: 2.5px; /* Mantiene el aire entre letras */
+            margin-top: 8px; 
+            text-transform: uppercase;
+            opacity: 0.95;       /* Sutilmente integrado */
+            line-height: 1.5;
+            max-width: 95%;      /* Evita que se estire demasiado */
+        }
+
+        .meta-box { text-align: right; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 25px; }
+        .meta-title { color: var(--mad-gold); font-size: 0.75rem; font-weight: 800; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 5px;}
+        .meta-number { color: white; font-size: 1.6rem; font-weight: 300; letter-spacing: 1px; line-height: 1;}
+        .meta-number span { font-weight: 800; color: var(--mad-orange); }
+        .meta-date { color: #888; font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; margin-top: 8px; text-transform: uppercase;}
+
+        .header-contact-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+        }
+        .contact-item { font-size: 0.65rem; color: #ccc; letter-spacing: 1.5px; font-weight: 500;}
+        .contact-item i { color: var(--mad-orange); margin-right: 6px; font-size: 0.75rem;}
+
+        /* =========================================
+           CUERPO DEL DOCUMENTO
+           ========================================= */
+        .card-body { padding: 40px; flex-grow: 1; }
+
+        .section-title { font-weight: 800; text-transform: uppercase; font-size: 0.75rem; color: var(--mad-black); letter-spacing: 3px; display: flex; align-items: center; margin-bottom: 25px;}
+        .section-title::after { content: ''; flex-grow: 1; height: 1px; background: #ddd; margin-left: 15px; }
+        
+        .form-label-small { font-size: 0.65rem; font-weight: 700; color: #888; text-transform: uppercase; margin: 0; letter-spacing: 1.5px;}
+        .form-control-compact { border: none; border-bottom: 1px solid #ccc; border-radius: 0; padding: 6px 0; font-size: 0.95rem; background: transparent; width: 100%; transition: all 0.3s; color: var(--mad-black); font-weight: 600;}
+        .form-control-compact:focus { outline: none; border-bottom-color: var(--mad-orange); box-shadow: 0 1px 0 0 var(--mad-orange); }
+
+        .table { margin-bottom: 10px; }
+        .table th { font-size: 0.7rem; text-transform: uppercase; font-weight: 800; color: var(--mad-black); background-color: transparent; border-bottom: 2px solid var(--mad-black); padding: 15px 5px; letter-spacing: 2px;}
+        .table td { padding: 15px 5px; border-bottom: 1px solid #eee; vertical-align: middle;}
+        
+        .btn-add-item { background: transparent; border: 1px dashed #ccc; color: #888; font-weight: 700; font-size: 0.65rem; letter-spacing: 2px; padding: 10px 20px; border-radius: 4px; transition: all 0.3s; margin-bottom: 40px;}
+        .btn-add-item:hover { border-color: var(--mad-orange); color: var(--mad-orange); border-style: solid;}
+
+        .finance-box { text-align: right; padding-top: 10px;}
+        .finance-label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; display: block; margin-bottom: 5px;}
+        .finance-total { font-size: 2rem; color: var(--mad-black); font-weight: 800; letter-spacing: -1px; line-height: 1;}
+
+        /* BOTÓN PRINCIPAL */
+        .btn-maderarte { background-color: var(--mad-orange); color: white; border: none; font-weight: 800; padding: 22px; width: 100%; text-transform: uppercase; border-radius: 4px; margin-top: 40px; font-size: 1rem; letter-spacing: 4px; transition: all 0.3s; box-shadow: 0 5px 15px rgba(255, 115, 0, 0.3);}
+        .btn-maderarte:hover { background-color: var(--mad-black); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);}
+        
+        .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 17, 17, 0.95); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; color: white;}
+        .spinner { width: 60px; height: 60px; border: 3px solid rgba(255, 115, 0, 0.2); border-top-color: var(--mad-orange); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 25px;}
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* =========================================
+           NUEVO FOOTER OSCURO
+           ========================================= */
+        .pdf-footer { 
+            background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
+            padding: 30px 40px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            border-top: 2px solid var(--mad-orange);
+        }
+        .footer-creds { font-family: 'Algerian', serif; font-size: 1.4rem; color: #ffffff; letter-spacing: 4px;}
+        
+        /* 🔥 ESLOGAN FOOTER TAMBIÉN AFINADO 🔥 */
+        .footer-slogan { font-size: 0.50rem; color: var(--mad-orange); letter-spacing: 2px; text-transform: uppercase; font-weight: 500; opacity: 0.9;}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div id="loading" class="loading-overlay">
+    <div class="spinner"></div>
+    <h5 style="color:var(--mad-orange); font-weight: 800; letter-spacing: 4px;">PROCESANDO</h5>
+    <p class="small text-muted mb-3" style="color:#aaa; letter-spacing: 1px;">Asegurando documento en la nube...</p>
+</div>
+
+<a href="index.html" class="btn-back no-print"><i class="fas fa-arrow-left"></i></a>
+
+<div id="area-pdf">
+    <div class="header-brand">
+        <div class="header-top-row">
+            <div class="brand-group">
+                <img src="logomaderarte2026.png" alt="Logo Maderarte" class="logo-img">
+                <div class="brand-text-container">
+                    <h1 class="brand-logo-text">MADERARTE</h1>
+                    <div class="brand-slogan">Muebles con un estilo diferente para cada cliente</div>
+                </div>
+            </div>
+            <div class="meta-box">
+                <div class="meta-title">Cotización</div>
+                <div class="meta-number">N° <span id="n_cot_display">---</span></div>
+                <div class="meta-date">Fecha: <span id="fecha_display"></span></div>
+            </div>
+        </div>
+        
+        <div class="header-contact-bar">
+            <span class="contact-item"><i class="fas fa-gem"></i> Mobiliario de Lujo</span>
+            <span class="contact-item"><i class="fas fa-map-marker-alt"></i> Transv 9 # 6N-26 | C.C. Terraplaza L-113</span>
+            <span class="contact-item"><i class="fab fa-whatsapp"></i> 3006748590 | 3117476465</span>
+            <span class="contact-item"><i class="fab fa-instagram"></i> @maderartepopayan</span>
+        </div>
+    </div>
+    
+    <div class="card-body">
+        <span class="section-title">Datos del Cliente</span>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4 col-6"><label class="form-label-small">Cédula / NIT</label><input type="text" id="cedula" inputmode="numeric" class="form-control-compact"></div>
+            <div class="col-md-8 col-6"><label class="form-label-small">Nombre / Razón Social</label><input type="text" id="nombre" class="form-control-compact text-uppercase-input"></div>
+            <div class="col-md-4 col-6"><label class="form-label-small">Teléfono</label><input type="tel" id="telefono" inputmode="numeric" class="form-control-compact"></div>
+            <div class="col-md-8 col-6"><label class="form-label-small">Email</label><input type="email" id="email" class="form-control-compact"></div>
+            <div class="col-12"><label class="form-label-small">Dirección de Instalación / Entrega</label><input type="text" id="direccion" class="form-control-compact text-uppercase-input" value="POPAYÁN - "></div>
+        </div>
+
+        <span class="section-title">Especificaciones del Proyecto</span>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Descripción del Mueble</th>
+                        <th width="80" class="text-center">Cant.</th>
+                        <th width="150" class="text-center">V. Unitario</th>
+                        <th width="150" class="text-end">Total</th>
+                        <th width="40" class="no-print"></th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-body">
+                    <tr>
+                        <td><input type="text" class="form-control-compact row-desc" placeholder="Ej: Juego de Sala de Lujo tapizada en tela antifluido"></td>
+                        <td><input type="number" class="form-control-compact text-center cant" value="1" inputmode="numeric" oninput="calcular()"></td>
+                        <td><input type="text" class="form-control-compact text-center precio" placeholder="$ 0" inputmode="numeric" oninput="formatear(this); calcular()"></td>
+                        <td class="item-total fw-bold text-end" style="color:var(--mad-black); font-size: 1.05rem;">$ 0</td>
+                        <td class="no-print text-center"><button class="btn btn-sm text-danger" style="background:none; border:none; color: #ccc !important;" onclick="this.parentElement.parentElement.remove(); calcular()"><i class="fas fa-times"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn btn-add-item no-print" onclick="agregarFila()">+ AGREGAR ÍTEM</button>
+
+        <div class="mb-5">
+            <label class="form-label-small">Detalles, Maderas y Acabados</label>
+            <textarea id="notas" class="form-control-compact" style="height: 60px; resize: none; color: #444;" placeholder="Ej: Fabricado en madera maciza secada al horno, espumas de alta densidad, acabados premium en poliuretano..."></textarea>
+        </div>
+
+        <div class="row g-4 mt-2 align-items-end">
+            <div class="col-md-7">
+                <span class="section-title" style="margin-bottom: 15px;">Condiciones Comerciales</span>
+                <div style="font-size: 0.68rem; color: #555; line-height: 2; letter-spacing: 0.5px;">
+                    • Validez de la propuesta: <b style="color:var(--mad-black)">15 días calendario</b>.<br>
+                    • Tiempo estimado de fabricación: <b style="color:var(--mad-black)">A convenir</b>.<br>
+                    • Forma de pago: <b style="color:var(--mad-black)">A partir del 30% de anticipo</b> para iniciar producción, saldo contra entrega.
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="finance-box">
+                    <span class="finance-label">Inversión Total</span>
+                    <span class="finance-total" id="total_val">$ 0</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-maderarte no-print shadow" onclick="finalizar()">GUARDAR COTIZACIÓN</button>
+    </div>
+
+    <div class="pdf-footer">
+        <div class="footer-creds">MADERARTE</div>
+        <div class="footer-slogan">Muebles con un estilo diferente para cada cliente</div>
+    </div>
+</div>
+
+<script>
+    // URL de tu Apps Script
+    const URL_G = "https://script.google.com/macros/s/AKfycbz9xaB6Vfi1UGihaNDuO5dAEPygQ7cXcO2d0pIPE8VU5rAIjbYRwCZmNHxl69aVAMQ/exec";
+
+    window.onload = () => {
+        document.getElementById('fecha_display').innerText = new Date().toLocaleDateString('es-CO');
+        fetch(URL_G)
+            .then(r => r.json())
+            .then(d => { 
+                if(d.status === "ok") {
+                    document.getElementById("n_cot_display").innerText = d.nextCotizacion; 
+                }
+            }).catch(e => console.log("Cargando número local temporal..."));
+    };
+
+    function formatear(i) {
+        let v = i.value.replace(/\D/g, "");
+        i.value = v ? new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(v) : "";
+    }
+
+    function calcular() {
+        let total = 0;
+        document.querySelectorAll('#tabla-body tr').forEach(tr => {
+            let c = parseFloat(tr.querySelector('.cant').value) || 0;
+            let p = parseFloat(tr.querySelector('.precio').value.replace(/\D/g, "")) || 0;
+            let sub = c * p;
+            tr.querySelector('.item-total').innerText = `$ ${sub.toLocaleString('es-CO')}`;
+            total += sub;
+        });
+        document.getElementById('total_val').innerText = `$ ${total.toLocaleString('es-CO')}`;
+    }
+
+    function agregarFila() {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `<td><input type="text" class="form-control-compact row-desc"></td><td><input type="number" class="form-control-compact text-center cant" value="1" inputmode="numeric" oninput="calcular()"></td><td><input type="text" class="form-control-compact text-center precio" inputmode="numeric" oninput="formatear(this); calcular()"></td><td class="item-total fw-bold text-end" style="color:var(--mad-black); font-size: 1.05rem;">$ 0</td><td class="no-print text-center"><button class="btn btn-sm text-danger" style="background:none; border:none; color: #ccc !important;" onclick="this.parentElement.parentElement.remove(); calcular()"><i class="fas fa-times"></i></button></td>`;
+        document.getElementById('tabla-body').appendChild(tr);
+    }
+
+    async function finalizar() {
+        const cedula = document.getElementById('cedula').value.trim();
+        let nombre = document.getElementById('nombre').value.toUpperCase();
+
+        if (!nombre) return alert("Por favor, ingresa al menos el nombre del cliente.");
+
+        const loading = document.getElementById('loading');
+        loading.style.display = 'flex';
+
+        try {
+            const btns = document.querySelectorAll('.no-print, button, .btn, .btn-add-item');
+            btns.forEach(b => { b.dataset.originalDisplay = b.style.display; b.style.display = 'none'; });
+
+            const filas = document.querySelectorAll('#tabla-body tr');
+            filas.forEach(f => {
+                if(!f.querySelector('.row-desc').value.trim()) f.style.display = 'none';
+            });
+
+            // Forzamos un poco más de calidad en el PDF
+            const element = document.getElementById('area-pdf');
+            const canvas = await html2canvas(element, { scale: 3, useCORS: true, width: 800, windowWidth: 800, backgroundColor: "#ffffff" });
+
+            btns.forEach(b => b.style.display = b.dataset.originalDisplay || '');
+            filas.forEach(f => f.style.display = '');
+
+            const { jsPDF } = window.jspdf;
+            const imgData = canvas.toDataURL("image/jpeg", 1.0);
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
+
+            const pdfBase64 = pdf.output('datauristring').split(',')[1];
+            
+            let descripcionTexto = "";
+            document.querySelectorAll('#tabla-body tr').forEach(tr => {
+                let descripcion = tr.querySelector('.row-desc').value.trim();
+                let cantidad = tr.querySelector('.cant').value;
+                if(descripcion) descripcionTexto += `${cantidad}x ${descripcion} | `;
+            });
+
+            const totalFinal = document.getElementById('total_val').innerText.replace(/\D/g, "");
+
+            // Enviar a Google Sheets
+            const response = await fetch(URL_G, { 
+                method: 'POST', 
+                body: JSON.stringify({
+                    cedula: cedula,
+                    nombre: nombre,
+                    telefono: document.getElementById('telefono').value,
+                    email: document.getElementById('email').value,
+                    direccion: document.getElementById('direccion').value,
+                    descripcion: descripcionTexto,
+                    total: totalFinal,
+                    observaciones: document.getElementById('notas').value,
+                    pdfBase64: pdfBase64,
+                    nombreArchivo: `Cotizacion_Maderarte_${nombre.replace(/\s+/g, '_')}.pdf`
+                }) 
+            });
+
+            const result = await response.json();
+            
+            if (result.status === "success") {
+                pdf.save(`Cotizacion_Maderarte_${nombre}.pdf`);
+                alert("¡Cotización guardada y descargada exitosamente!");
+                window.location.replace("index.html"); 
+            } else {
+                alert("Hubo un problema al guardar en la nube, pero tu PDF se descargará de todos modos.");
+                pdf.save(`Cotizacion_Maderarte_${nombre}.pdf`);
+                loading.style.display = 'none';
+            }
+        } catch (e) {
+            alert("Error: " + e.message);
+            loading.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

@@ -27,7 +27,7 @@
         #area-pdf { background-color: white; width: 100%; max-width: 800px; margin: auto; min-height: 100vh; position: relative; display: flex; flex-direction: column; box-shadow: 0 15px 35px rgba(0,0,0,0.1);}
         
         /* =========================================
-           HEADER PREMIUM: Degradado Radial (Spotlight)
+           HEADER PREMIUM: Degradado Radial
            ========================================= */
         .header-brand { 
             background: radial-gradient(circle at 15% 40%, #383838 0%, #151515 60%, #080808 100%);
@@ -43,17 +43,16 @@
         .brand-text-container { display: flex; flex-direction: column; }
         .brand-logo-text { font-family: 'Algerian', serif; font-size: 3.2rem; color: #ffffff; margin: 0; letter-spacing: 4px; line-height: 0.9; }
         
-        /* 🔥 ESLOGAN CORREGIDO: Más pequeño, fino y elegante 🔥 */
         .brand-slogan { 
             color: var(--mad-orange); 
-            font-size: 0.52rem;  /* Reducido para que no compita con el logo */
-            font-weight: 500;    /* Letra media, no súper gruesa */
-            letter-spacing: 2.5px; /* Mantiene el aire entre letras */
+            font-size: 0.52rem; 
+            font-weight: 500;    
+            letter-spacing: 2.5px; 
             margin-top: 8px; 
             text-transform: uppercase;
-            opacity: 0.95;       /* Sutilmente integrado */
+            opacity: 0.95;       
             line-height: 1.5;
-            max-width: 95%;      /* Evita que se estire demasiado */
+            max-width: 95%;      
         }
 
         .meta-box { text-align: right; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 25px; }
@@ -68,6 +67,8 @@
             align-items: center;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
         .contact-item { font-size: 0.65rem; color: #ccc; letter-spacing: 1.5px; font-weight: 500;}
         .contact-item i { color: var(--mad-orange); margin-right: 6px; font-size: 0.75rem;}
@@ -95,7 +96,6 @@
         .finance-label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; display: block; margin-bottom: 5px;}
         .finance-total { font-size: 2rem; color: var(--mad-black); font-weight: 800; letter-spacing: -1px; line-height: 1;}
 
-        /* BOTÓN PRINCIPAL */
         .btn-maderarte { background-color: var(--mad-orange); color: white; border: none; font-weight: 800; padding: 22px; width: 100%; text-transform: uppercase; border-radius: 4px; margin-top: 40px; font-size: 1rem; letter-spacing: 4px; transition: all 0.3s; box-shadow: 0 5px 15px rgba(255, 115, 0, 0.3);}
         .btn-maderarte:hover { background-color: var(--mad-black); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);}
         
@@ -113,9 +113,28 @@
             border-top: 2px solid var(--mad-orange);
         }
         .footer-creds { font-family: 'Algerian', serif; font-size: 1.4rem; color: #ffffff; letter-spacing: 4px;}
-        
-        /* 🔥 ESLOGAN FOOTER TAMBIÉN AFINADO 🔥 */
         .footer-slogan { font-size: 0.50rem; color: var(--mad-orange); letter-spacing: 2px; text-transform: uppercase; font-weight: 500; opacity: 0.9;}
+
+        /* =========================================
+           📱 OPTIMIZACIÓN PARA MÓVILES (iPhone)
+           ========================================= */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .header-brand { padding: 25px 20px; }
+            .header-top-row { flex-direction: column; text-align: center; gap: 20px; }
+            .brand-group { flex-direction: column; }
+            .meta-box { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; text-align: center; width: 100%; }
+            .header-contact-bar { flex-direction: column; text-align: center; }
+            .card-body { padding: 20px; }
+            .pdf-footer { flex-direction: column; text-align: center; gap: 15px; }
+            .finance-box { text-align: center; border-top: 1px solid #eee; padding-top: 20px; margin-top: 20px;}
+        }
+        
+        /* Esta clase engaña al sistema al exportar el PDF para que siempre lo vea como en PC */
+        .pdf-mode-active {
+            width: 800px !important;
+            max-width: 800px !important;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -125,7 +144,7 @@
 <div id="loading" class="loading-overlay">
     <div class="spinner"></div>
     <h5 style="color:var(--mad-orange); font-weight: 800; letter-spacing: 4px;">PROCESANDO</h5>
-    <p class="small text-muted mb-3" style="color:#aaa; letter-spacing: 1px;">Asegurando documento en la nube...</p>
+    <p class="small text-muted mb-3" id="loading-texto" style="color:#aaa; letter-spacing: 1px;">Asegurando documento en la nube...</p>
 </div>
 
 <a href="index.html" class="btn-back no-print"><i class="fas fa-arrow-left"></i></a>
@@ -158,10 +177,10 @@
     <div class="card-body">
         <span class="section-title">Datos del Cliente</span>
         <div class="row g-4 mb-5">
-            <div class="col-md-4 col-6"><label class="form-label-small">Cédula / NIT</label><input type="text" id="cedula" inputmode="numeric" class="form-control-compact"></div>
-            <div class="col-md-8 col-6"><label class="form-label-small">Nombre / Razón Social</label><input type="text" id="nombre" class="form-control-compact text-uppercase-input"></div>
-            <div class="col-md-4 col-6"><label class="form-label-small">Teléfono</label><input type="tel" id="telefono" inputmode="numeric" class="form-control-compact"></div>
-            <div class="col-md-8 col-6"><label class="form-label-small">Email</label><input type="email" id="email" class="form-control-compact"></div>
+            <div class="col-md-4 col-12"><label class="form-label-small">Cédula / NIT</label><input type="text" id="cedula" inputmode="numeric" class="form-control-compact"></div>
+            <div class="col-md-8 col-12"><label class="form-label-small">Nombre / Razón Social</label><input type="text" id="nombre" class="form-control-compact text-uppercase-input"></div>
+            <div class="col-md-4 col-12"><label class="form-label-small">Teléfono</label><input type="tel" id="telefono" inputmode="numeric" class="form-control-compact"></div>
+            <div class="col-md-8 col-12"><label class="form-label-small">Email</label><input type="email" id="email" class="form-control-compact"></div>
             <div class="col-12"><label class="form-label-small">Dirección de Instalación / Entrega</label><input type="text" id="direccion" class="form-control-compact text-uppercase-input" value="POPAYÁN - "></div>
         </div>
 
@@ -172,14 +191,14 @@
                     <tr>
                         <th style="text-align: left;">Descripción del Mueble</th>
                         <th width="80" class="text-center">Cant.</th>
-                        <th width="150" class="text-center">V. Unitario</th>
-                        <th width="150" class="text-end">Total</th>
+                        <th width="120" class="text-center">V. Unitario</th>
+                        <th width="140" class="text-end">Total</th>
                         <th width="40" class="no-print"></th>
                     </tr>
                 </thead>
                 <tbody id="tabla-body">
                     <tr>
-                        <td><input type="text" class="form-control-compact row-desc" placeholder="Ej: Juego de Sala de Lujo tapizada en tela antifluido"></td>
+                        <td><input type="text" class="form-control-compact row-desc" placeholder="Ej: Juego de Sala de Lujo"></td>
                         <td><input type="number" class="form-control-compact text-center cant" value="1" inputmode="numeric" oninput="calcular()"></td>
                         <td><input type="text" class="form-control-compact text-center precio" placeholder="$ 0" inputmode="numeric" oninput="formatear(this); calcular()"></td>
                         <td class="item-total fw-bold text-end" style="color:var(--mad-black); font-size: 1.05rem;">$ 0</td>
@@ -192,11 +211,11 @@
 
         <div class="mb-5">
             <label class="form-label-small">Detalles, Maderas y Acabados</label>
-            <textarea id="notas" class="form-control-compact" style="height: 60px; resize: none; color: #444;" placeholder="Ej: Fabricado en madera maciza secada al horno, espumas de alta densidad, acabados premium en poliuretano..."></textarea>
+            <textarea id="notas" class="form-control-compact" style="height: 60px; resize: none; color: #444;" placeholder="Ej: Fabricado en madera maciza secada al horno, acabados premium..."></textarea>
         </div>
 
         <div class="row g-4 mt-2 align-items-end">
-            <div class="col-md-7">
+            <div class="col-md-7 col-12">
                 <span class="section-title" style="margin-bottom: 15px;">Condiciones Comerciales</span>
                 <div style="font-size: 0.68rem; color: #555; line-height: 2; letter-spacing: 0.5px;">
                     • Validez de la propuesta: <b style="color:var(--mad-black)">15 días calendario</b>.<br>
@@ -204,7 +223,7 @@
                     • Forma de pago: <b style="color:var(--mad-black)">A partir del 30% de anticipo</b> para iniciar producción, saldo contra entrega.
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 col-12">
                 <div class="finance-box">
                     <span class="finance-label">Inversión Total</span>
                     <span class="finance-total" id="total_val">$ 0</span>
@@ -222,18 +241,25 @@
 </div>
 
 <script>
-    // URL de tu Apps Script
     const URL_G = "https://script.google.com/macros/s/AKfycbz9xaB6Vfi1UGihaNDuO5dAEPygQ7cXcO2d0pIPE8VU5rAIjbYRwCZmNHxl69aVAMQ/exec";
 
     window.onload = () => {
         document.getElementById('fecha_display').innerText = new Date().toLocaleDateString('es-CO');
+        
+        // Buscar el número consecutivo
         fetch(URL_G)
             .then(r => r.json())
             .then(d => { 
                 if(d.status === "ok") {
                     document.getElementById("n_cot_display").innerText = d.nextCotizacion; 
+                } else {
+                    console.error("Error del servidor:", d);
+                    alert("Aviso: El Script respondió, pero hubo un error leyendo la pestaña 'Config'. Asegúrate de que la pestaña se llame exactamente 'Config' (con la C mayúscula) y el número esté en B1.");
                 }
-            }).catch(e => console.log("Cargando número local temporal..."));
+            }).catch(e => {
+                console.error("Fallo al conectar con Google Sheets:", e);
+                alert("No se pudo cargar el número de cotización. Verifica que publicaste el Apps Script como 'Aplicación Web', ejecutando como 'TÚ' y con acceso a 'Cualquier Persona'.");
+            });
     };
 
     function formatear(i) {
@@ -266,27 +292,48 @@
         if (!nombre) return alert("Por favor, ingresa al menos el nombre del cliente.");
 
         const loading = document.getElementById('loading');
+        const loadingText = document.getElementById('loading-texto');
         loading.style.display = 'flex';
 
         try {
+            // 1. Ocultar botones que no van en el PDF
             const btns = document.querySelectorAll('.no-print, button, .btn, .btn-add-item');
             btns.forEach(b => { b.dataset.originalDisplay = b.style.display; b.style.display = 'none'; });
 
+            // 2. Ocultar filas vacías de la tabla
             const filas = document.querySelectorAll('#tabla-body tr');
             filas.forEach(f => {
                 if(!f.querySelector('.row-desc').value.trim()) f.style.display = 'none';
             });
 
-            // Forzamos un poco más de calidad en el PDF
+            // 3. 🚨 TRUCO DE MAGIA PARA PDF: Forzamos el ancho de PC para que no salga aplastado en celulares
             const element = document.getElementById('area-pdf');
-            const canvas = await html2canvas(element, { scale: 3, useCORS: true, width: 800, windowWidth: 800, backgroundColor: "#ffffff" });
+            element.classList.add('pdf-mode-active');
+            
+            loadingText.innerText = "Creando diseño Tamaño Carta...";
 
+            // 4. Tomar la foto con máxima calidad (Tamaño PC 1024)
+            const canvas = await html2canvas(element, { 
+                scale: 2, 
+                useCORS: true, 
+                width: 800,
+                windowWidth: 1024, // Engañamos al sistema para que active el diseño de PC
+                backgroundColor: "#ffffff" 
+            });
+
+            // 5. Devolver la vista móvil a la normalidad
+            element.classList.remove('pdf-mode-active');
             btns.forEach(b => b.style.display = b.dataset.originalDisplay || '');
             filas.forEach(f => f.style.display = '');
 
+            loadingText.innerText = "Guardando documento PDF...";
+
+            // 6. Configurar PDF en TAMAÑO CARTA (letter)
             const { jsPDF } = window.jspdf;
             const imgData = canvas.toDataURL("image/jpeg", 1.0);
-            const pdf = new jsPDF("p", "mm", "a4");
+            
+            // "letter" garantiza el formato carta americano estándar
+            const pdf = new jsPDF("p", "mm", "letter");
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
             pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
@@ -301,6 +348,8 @@
             });
 
             const totalFinal = document.getElementById('total_val').innerText.replace(/\D/g, "");
+
+            loadingText.innerText = "Subiendo a la nube...";
 
             // Enviar a Google Sheets
             const response = await fetch(URL_G, { 
@@ -326,7 +375,7 @@
                 alert("¡Cotización guardada y descargada exitosamente!");
                 window.location.replace("index.html"); 
             } else {
-                alert("Hubo un problema al guardar en la nube, pero tu PDF se descargará de todos modos.");
+                alert("Hubo un problema al guardar en Google Drive, pero tu PDF se descargará a tu dispositivo.");
                 pdf.save(`Cotizacion_Maderarte_${nombre}.pdf`);
                 loading.style.display = 'none';
             }

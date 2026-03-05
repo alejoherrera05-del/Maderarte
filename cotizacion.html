@@ -1123,11 +1123,42 @@
         showLoading('Creando PDF...');
 
         const { jsPDF } = window.jspdf;
-        const imgData = canvas.toDataURL('image/jpeg', 1.0);
         const pdf = new jsPDF('p', 'mm', 'a4');
         const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        const pdfPageHeight = pdf.internal.pageSize.getHeight();
+
+        // Calculate the total height the image would be at A4 width
+        const imgTotalHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        if (imgTotalHeight <= pdfPageHeight) {
+          // Fits in one page
+          const imgData = canvas.toDataURL('image/jpeg', 0.95);
+          pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, imgTotalHeight);
+        } else {
+          // Multiple pages needed - slice the canvas
+          const pageCanvasHeight = Math.floor(canvas.width * pdfPageHeight / pdfWidth);
+          const totalPages = Math.ceil(canvas.height / pageCanvasHeight);
+
+          for (let page = 0; page < totalPages; page++) {
+            if (page > 0) pdf.addPage();
+
+            const srcY = page * pageCanvasHeight;
+            const srcH = Math.min(pageCanvasHeight, canvas.height - srcY);
+
+            // Create a temporary canvas for this page slice
+            const pageCanvas = document.createElement('canvas');
+            pageCanvas.width = canvas.width;
+            pageCanvas.height = srcH;
+            const ctx = pageCanvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
+            ctx.drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
+
+            const pageImgData = pageCanvas.toDataURL('image/jpeg', 0.95);
+            const pageImgHeight = (srcH * pdfWidth) / canvas.width;
+            pdf.addImage(pageImgData, 'JPEG', 0, 0, pdfWidth, pageImgHeight);
+          }
+        }
 
         const pdfBase64 = pdf.output('datauristring').split(',')[1];
 

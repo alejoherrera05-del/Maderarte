@@ -243,5 +243,36 @@
     ],
     "descripcion": "Nuestro producto más confortable, diseño compuesto por (1) sofá de 3 puestos (1) sofa de 2 puestos + mesa de centro y cojines decorativos",
     "acabados": []
+  },
+  {
+    "id": 1780697281549,
+    "categoria": "salas",
+    "nombre": "Sala Brunatty (Reclinable) “L”",
+    "precio": 9800000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697281550_klcv1.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697283455_ndowk.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697284687_oaiwz.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697286320_20tvj.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697287581_nys9o.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697288880_1f0db.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Microfibra - cuero vegano",
+      "espuma": "Espuma penta - algodón siliconado"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Sistema eléctrico reclinable en (2) sillas con puerto de carga usb. (2) portavasos con cava interna. (5) modulares independientes + mesa de centro y cojines decorativos",
+    "acabados": []
   }
 ]

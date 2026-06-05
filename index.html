@@ -35,7 +35,7 @@
   --sans:'Inter',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;}
+html,body{height:100%; overscroll-behavior-y: none;}
 body{
   font-family:var(--sans);
   background:#CFCABF;
@@ -48,6 +48,7 @@ body{
   width:100%;max-width:460px;height:94vh;min-height:640px;
   background:var(--bg-canvas);position:relative;display:flex;flex-direction:column;
   box-shadow:0 30px 70px rgba(0,0,0,.22);overflow:hidden;border-radius:26px;
+  overscroll-behavior-y: none;
 }
 
 /* ---------- TOP BAR ---------- */
@@ -80,9 +81,10 @@ body{
 .phone-wrapper.is-cover .bottom-nav{display:none;}
 
 /* ---------- CONTENIDO ---------- */
-.content-scroll{flex:1;overflow-y:auto;position:relative;-webkit-overflow-scrolling:touch;}
+.content-scroll{flex:1;overflow-y:auto;position:relative;-webkit-overflow-scrolling:touch; overscroll-behavior-y: contain;}
 .content-scroll::-webkit-scrollbar{width:0;}
 .pad{padding:0 1.1rem 6rem 1.1rem;}
+.pad-admin{padding-bottom: 12rem;} /* Cirugía: margen profundo para arreglar el rebote del teclado */
 .view-panel{display:none;}
 .view-panel.active{display:block;animation:fade .4s ease;}
 @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
@@ -105,7 +107,6 @@ body{
     rgba(12,9,6,.97) 100%);
 }
 .hero-inner{position:relative;z-index:2;padding:1.6rem 1.6rem 2rem;color:#fff;}
-/* Difuminado extra justo detrás del texto para máxima legibilidad */
 .hero-inner::before{
   content:'';position:absolute;left:0;right:0;bottom:0;top:-30px;z-index:-1;
   background:linear-gradient(180deg,rgba(12,9,6,0) 0%,rgba(12,9,6,.55) 45%,rgba(12,9,6,.85) 100%);
@@ -177,7 +178,9 @@ body{
   font-size:.74rem;text-transform:uppercase;letter-spacing:1.5px;
 }
 .back-link svg{width:16px;height:16px;}
-.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1rem;}
+.sort-bar{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;margin-bottom:.8rem;}
+.sort-select{padding:.6rem .8rem;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:.75rem;outline:none;font-family:inherit;color:var(--dark);cursor:pointer;}
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .product-item-card{
   background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05);
   display:flex;flex-direction:column;cursor:pointer;transition:transform .2s,box-shadow .2s;
@@ -190,7 +193,7 @@ body{
 .product-price{font-size:.85rem;font-weight:600;color:var(--brand-deep);}
 .empty-msg{grid-column:span 2;text-align:center;color:var(--muted);padding:3rem 1rem;font-size:.85rem;font-weight:300;line-height:1.6;}
 
-/* ---------- DETALLE PRODUCTO (imagen 2) ---------- */
+/* ---------- DETALLE PRODUCTO ---------- */
 .detail-top{display:flex;justify-content:space-between;align-items:center;margin:1.1rem 0 1rem;}
 .detail-back{display:flex;align-items:center;gap:8px;cursor:pointer;color:var(--dark);font-size:.74rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:500;}
 .detail-back svg{width:16px;height:16px;}
@@ -200,14 +203,14 @@ body{
 .icon-btn svg{width:18px;height:18px;}
 .icon-btn.fav-on{background:var(--orange);border-color:var(--orange);color:#fff;}
 
-/* Galería tipo carrusel: deslizable + miniaturas */
+/* Galería */
 .gallery{margin-top:.2rem;}
 .gallery-viewport{
   position:relative;width:100%;aspect-ratio:1/1;border-radius:16px;overflow:hidden;
   background:#E7E2D8;touch-action:pan-y;
 }
 .gallery-track{display:flex;height:100%;transition:transform .35s cubic-bezier(.4,0,.2,1);}
-.gallery-track img{min-width:100%;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none;}
+.gallery-track img{min-width:100%;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none;cursor:zoom-in;}
 .gal-nav{
   position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;
   background:rgba(255,255,255,.92);border:none;display:flex;align-items:center;justify-content:center;
@@ -229,14 +232,13 @@ body{
 
 .detail-name{font-family:var(--serif);font-size:2rem;font-weight:600;letter-spacing:.5px;margin:1.4rem 0 .2rem;text-transform:uppercase;line-height:1;}
 .detail-price{font-size:1.05rem;font-weight:600;color:var(--brand-deep);margin-bottom:.9rem;}
-.detail-desc{font-size:.9rem;font-weight:300;line-height:1.55;color:#4a443c;}
+.detail-desc{font-family:var(--sans);font-size:.9rem;font-weight:300;line-height:1.55;color:#4a443c;}
 .detail-block{margin-top:1.2rem;}
 .detail-block .lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;margin-bottom:.35rem;}
 .detail-block .val{font-size:.88rem;font-weight:300;color:#4a443c;line-height:1.5;}
 .acabados-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:.2rem;}
 .acabado-dot{width:30px;height:30px;border-radius:50%;border:1px solid rgba(0,0,0,.12);box-shadow:inset 0 0 6px rgba(0,0,0,.15);}
 
-/* Materiales con iconos */
 .mat-list{display:flex;flex-direction:column;gap:.7rem;margin-top:.3rem;}
 .mat-item{display:flex;align-items:center;gap:11px;}
 .mat-ic{width:36px;height:36px;border-radius:10px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;color:var(--brand-deep);flex-shrink:0;}
@@ -263,6 +265,21 @@ body{
 .btn-wa{background:var(--bg-soft);color:var(--dark);border:1px solid var(--line);}
 .btn-wa .wa{color:#25D366;}
 
+/* ---------- LIGHTBOX PANTALLA COMPLETA ---------- */
+.lightbox{
+  position:fixed;inset:0;background:rgba(12,9,6,0.96);z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(5px);
+}
+.lightbox.open{opacity:1;pointer-events:auto;}
+.lightbox-img{max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.5);}
+.lightbox-close{
+  position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.3);
+  z-index:10000;
+}
+
 /* ---------- FAVORITOS / BUSCAR / CONTACTO ---------- */
 .simple-pad{padding-top:1.4rem;}
 .search-input{width:100%;padding:.95rem 1rem;border-radius:12px;border:1px solid var(--line);font-size:.9rem;font-family:inherit;outline:none;background:#fff;}
@@ -287,12 +304,12 @@ body{
 .nav-item span{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;font-weight:500;}
 .nav-item.active{color:var(--brand-deep);}
 
-/* ---------- AJUSTES MÓVIL (iPhone / Safari): pantalla completa, barra siempre visible ---------- */
+/* ---------- AJUSTES MÓVIL ---------- */
 @media (max-width:520px){
   body{display:block;background:var(--bg-canvas);}
   .phone-wrapper{
     max-width:100%;width:100%;min-height:0;
-    height:100vh;height:100dvh;          /* dvh se ajusta cuando aparece/desaparece la barra de Safari */
+    height:100vh;height:100dvh;
     border-radius:0;box-shadow:none;
   }
   .bottom-nav{
@@ -300,6 +317,7 @@ body{
     padding-bottom:env(safe-area-inset-bottom);
   }
   .pad{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom));}
+  .pad-admin{padding-bottom:calc(14rem + env(safe-area-inset-bottom));}
   .hero-inner{padding-bottom:calc(2rem + env(safe-area-inset-bottom));}
 }
 
@@ -334,10 +352,20 @@ body{
 .upload-area b{display:block;font-size:.82rem;color:var(--dark);}
 .upload-area small{font-size:.7rem;}
 .preview-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:.8rem;}
-.preview-item{width:62px;height:62px;border-radius:10px;background-size:cover;background-position:center;position:relative;border:2px solid transparent;cursor:pointer;}
+.preview-item{width:62px;height:62px;border-radius:10px;background-size:cover;background-position:center;position:relative;border:2px solid transparent;cursor:grab;transition:transform 0.2s;}
+.preview-item:active{cursor:grabbing;}
+.preview-item.dragging{opacity:0.4; border:2px dashed var(--brand); transform:scale(0.95);}
 .preview-item.is-main{border-color:var(--brand-deep);}
-.preview-item .rm{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#CC3B3B;color:#fff;font-size:.8rem;display:flex;align-items:center;justify-content:center;border:2px solid #fff;}
-.preview-item .main-tag{position:absolute;bottom:0;left:0;right:0;background:var(--brand-deep);color:#fff;font-size:.52rem;text-align:center;padding:1px;text-transform:uppercase;letter-spacing:.5px;}
+.preview-item .rm{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#CC3B3B;color:#fff;font-size:.8rem;display:flex;align-items:center;justify-content:center;border:2px solid #fff;cursor:pointer;z-index:5;}
+.preview-item .main-tag{position:absolute;bottom:0;left:0;right:0;background:var(--brand-deep);color:#fff;font-size:.52rem;text-align:center;padding:1px;text-transform:uppercase;letter-spacing:.5px;pointer-events:none;}
+
+/* Ajuste de miniatura */
+.thumb-adjuster{margin-top:1rem;background:var(--bg-canvas);padding:1rem;border-radius:12px;display:none;border:1px solid #E2DDD3;}
+.thumb-adjuster.active{display:block;}
+.thumb-preview-box{width:120px;height:120px;border-radius:10px;background-size:cover;margin:0 auto 1rem;border:2px solid var(--brand-deep);box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.range-group{margin-bottom:.8rem;display:flex;align-items:center;gap:10px;}
+.range-group label{font-size:.7rem;width:60px;margin-bottom:0;flex-shrink:0;}
+.range-group input[type=range]{flex:1;accent-color:var(--brand-deep);}
 
 /* paleta colores */
 .palette{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:.7rem;}
@@ -384,7 +412,6 @@ body{
 
 <div class="phone-wrapper is-cover" id="wrapper">
 
-  <!-- MODAL ACCESO ADMIN -->
   <div id="modal-admin-auth" class="admin-modal">
     <div class="modal-box">
       <h3>Acceso Administrador</h3>
@@ -396,8 +423,11 @@ body{
     </div>
   </div>
 
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-close" onclick="cerrarLightbox()">×</div>
+    <img class="lightbox-img" id="lightbox-img" src="">
+  </div>
 
-  <!-- TOP BAR -->
   <div class="top-navbar">
     <div class="brand-box">
       <img class="brand-logo-img" src="logomaderarte2026.png" alt="Maderarte"
@@ -409,10 +439,8 @@ body{
     <div class="menu-icon" onclick="abrirModalAdmin()"><span></span><span></span><span></span></div>
   </div>
 
-  <!-- CONTENIDO -->
   <div class="content-scroll" id="main-scroll-container">
 
-    <!-- PORTADA -->
     <div id="view-inicio" class="view-panel active">
       <div class="hero" id="hero-bg" style="background-image:url('Portada.png');">
         <div class="hero-inner">
@@ -434,7 +462,6 @@ body{
       </div>
     </div>
 
-    <!-- CATEGORÍAS -->
     <div id="view-categorias" class="view-panel">
       <div class="pad">
         <div class="section-head"><h2>Categorías</h2><p>Explora nuestras colecciones</p></div>
@@ -467,23 +494,30 @@ body{
       </div>
     </div>
 
-    <!-- LISTA DE PRODUCTOS POR CATEGORÍA -->
     <div id="view-productos-ver" class="view-panel">
       <div class="pad">
         <div class="back-link" onclick="cambiarPantalla('categorias', document.getElementById('nav-btn-cats'))">
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           Volver a categorías
         </div>
+        
+        <div class="sort-bar">
+          <span style="font-size:1.3rem;font-family:var(--serif);font-weight:600;color:var(--dark);" id="cat-title-label"></span>
+          <select class="sort-select" id="sort-select" onchange="aplicarFiltroPrecio()">
+            <option value="default">Recomendados</option>
+            <option value="asc">Menor precio</option>
+            <option value="desc">Mayor precio</option>
+          </select>
+        </div>
+
         <div class="products-grid" id="grid-productos-dinamicos"></div>
       </div>
     </div>
 
-    <!-- DETALLE DE PRODUCTO -->
     <div id="view-detalle" class="view-panel">
       <div class="pad" id="detalle-contenido"></div>
     </div>
 
-    <!-- FAVORITOS -->
     <div id="view-favoritos" class="view-panel">
       <div class="pad">
         <div class="section-head"><h2>Favoritos</h2><p>Tus muebles guardados</p></div>
@@ -491,7 +525,6 @@ body{
       </div>
     </div>
 
-    <!-- BUSCAR -->
     <div id="view-buscar" class="view-panel">
       <div class="pad simple-pad">
         <input type="text" class="search-input" id="buscar-input" placeholder="Buscar en el catálogo..." oninput="ejecutarBusqueda()">
@@ -499,7 +532,6 @@ body{
       </div>
     </div>
 
-    <!-- CONTACTO -->
     <div id="view-contacto" class="view-panel">
       <div class="pad">
         <div class="contact-box">
@@ -523,11 +555,8 @@ body{
       </div>
     </div>
 
-    <!-- ADMIN -->
     <div id="view-admin" class="view-panel">
-      <div class="pad">
-
-        <div class="admin-section-title" style="font-size:1.4rem;">Conexión en línea</div>
+      <div class="pad pad-admin"> <div class="admin-section-title" style="font-size:1.4rem;">Conexión en línea</div>
         <p class="admin-hint">Conecta tu repositorio de GitHub para que los productos se publiquen en internet y todos los vean con el link. El token se guarda <b>solo en este dispositivo</b>, nunca se comparte.</p>
         <div class="admin-card">
           <div id="gh-status" style="font-size:.82rem;font-weight:600;margin-bottom:1rem;">⚪ Sin conexión configurada</div>
@@ -578,7 +607,7 @@ body{
           </div>
 
           <div class="admin-form-group">
-            <label>Fotos del producto</label>
+            <label>Fotos del producto <span class="opt-tag">(Mantén presionada y arrastra para reordenar)</span></label>
             <div class="upload-area" onclick="document.getElementById('prod-imagenes').click()">
               <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               <b>Toca para subir fotos</b>
@@ -586,12 +615,23 @@ body{
             </div>
             <input type="file" id="prod-imagenes" accept="image/*" multiple style="display:none" onchange="agregarImagenes(event)">
             <div class="preview-grid" id="preview-grid"></div>
+
+            <div class="thumb-adjuster" id="thumb-adjuster">
+              <label style="text-align:center;margin-bottom:.8rem;">Ajuste de la miniatura principal</label>
+              <div class="thumb-preview-box" id="thumb-preview-box"></div>
+              <div class="range-group">
+                <label>Horizontal</label>
+                <input type="range" id="thumb-x" min="0" max="100" value="50" oninput="actualizarThumbPreview()">
+              </div>
+              <div class="range-group">
+                <label>Vertical</label>
+                <input type="range" id="thumb-y" min="0" max="100" value="50" oninput="actualizarThumbPreview()">
+              </div>
+            </div>
           </div>
 
-          <div class="admin-form-group">
-            <label>Ajuste de las fotos <span class="opt-tag">(cómo se ven en el catálogo)</span></label>
+          <div class="admin-form-group" style="display:none;"> <label>Ajuste de las fotos</label>
             <div class="ajuste-row" id="ajuste-toggle"></div>
-            <small style="display:block;margin-top:.4rem;color:var(--muted);font-size:.72rem;">“Foto completa” muestra toda la imagen sin recortar (recomendado). “Rellenar” llena el recuadro y puede recortar bordes.</small>
           </div>
 
           <div class="admin-form-group">
@@ -604,7 +644,7 @@ body{
           </div>
 
           <div class="admin-form-group">
-            <label>Materiales <span class="opt-tag">(rellena solo los que apliquen · cada uno muestra su ícono)</span></label>
+            <label>Materiales <span class="opt-tag">(rellena solo los que apliquen)</span></label>
             <div id="mat-fields"></div>
           </div>
 
@@ -647,7 +687,6 @@ body{
 
   </div>
 
-  <!-- BOTTOM NAV -->
   <div class="bottom-nav">
     <div class="nav-item" id="nav-btn-inicio" onclick="cambiarPantalla('inicio', this)">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -702,13 +741,15 @@ const CERT_FIELDS = [
 
 let catalogoProductos = [];
 let favoritos = JSON.parse(localStorage.getItem('maderarte_favs') || '[]');
-let formImagenes = [];        // imágenes (dataURL) del producto en edición
-let formAcabados = [];        // colores seleccionados
-let formCerts = [];           // características activas (mascotas, antifluido)
-let formAjuste = 'contain';   // cómo se muestran las fotos: 'contain' (completa) o 'cover' (rellena)
+let formImagenes = [];        // imágenes
+let formThumbX = 50, formThumbY = 50; // posición del thumbnail
+let formAcabados = [];        
+let formCerts = [];           
+let formAjuste = 'cover';     // fijo a cover por defecto, usamos el reubicador 
 let paletaColores = [...PALETA_BASE];
-let editandoId = null;        // id del producto que se está editando
-let productoActual = null;    // producto abierto en detalle
+let editandoId = null;        
+let productoActual = null;    
+let listaCategoriaActual = []; // Para poder ordenar
 
 /* ============ CONEXIÓN EN LÍNEA (GITHUB) ============ */
 const GH_API='https://api.github.com';
@@ -735,9 +776,7 @@ function ghContentsUrl(path){ return `${GH_API}/repos/${cfg.owner}/${cfg.repo}/c
 function ghPuedeLeer(){ return !!(cfg.owner && cfg.repo); }
 function ghPuedeEscribir(){ return !!(cfg.owner && cfg.repo && cfg.token); }
 
-// Codifica texto UTF-8 (con acentos) a base64
 function b64(str){ return btoa(unescape(encodeURIComponent(str))); }
-// Decodifica base64 (de la API de GitHub) a texto UTF-8
 function b64d(str){ return decodeURIComponent(escape(atob((str||'').replace(/\s/g,'')))); }
 
 async function ghPutFile(path, base64content, mensaje, sha){
@@ -818,48 +857,41 @@ function ghRellenarForm(){
   else ghEstado(false,'Sin conexión configurada (modo local)');
 }
 
-/* ============ INDEXEDDB (respaldo local en el dispositivo) ============ */
+/* ============ INDEXEDDB ============ */
 const DB_NAME='maderarte_db_v2', STORE='kv';
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,1);r.onupgradeneeded=()=>r.result.createObjectStore(STORE);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
 async function dbGet(k){try{const db=await openDB();return await new Promise((res,rej)=>{const t=db.transaction(STORE,'readonly').objectStore(STORE).get(k);t.onsuccess=()=>res(t.result);t.onerror=()=>rej(t.error);});}catch(e){const v=localStorage.getItem('idbfb_'+k);return v?JSON.parse(v):undefined;}}
 async function dbSet(k,v){try{const db=await openDB();await new Promise((res,rej)=>{const t=db.transaction(STORE,'readwrite');t.objectStore(STORE).put(v,k);t.oncomplete=()=>res();t.onerror=()=>rej(t.error);});}catch(e){try{localStorage.setItem('idbfb_'+k,JSON.stringify(v));}catch(_){}}}
 
 async function guardarCatalogo(){
-  await dbSet('productos', catalogoProductos);      // respaldo local siempre
+  await dbSet('productos', catalogoProductos);
   if(ghPuedeEscribir()){
     try{ await ghGuardarProductos(); }
-    catch(e){ alert('Se guardó en este dispositivo, pero no se pudo subir a GitHub:\n'+e.message); }
+    catch(e){ alert('Se guardó localmente, pero falló al subir a GitHub:\n'+e.message); }
   }
 }
 async function cargarCatalogo(){
-  // 1) Dueño conectado: leer del repositorio vía API (siempre la versión más reciente)
   if(ghPuedeEscribir()){
     try{
       const r=await fetch(ghContentsUrl('data/productos.json')+'?ref='+ghBranch()+'&t='+Date.now(), {headers:ghHeaders(), cache:'no-store'});
       if(r.status===200){ const d=await r.json(); catalogoProductos=JSON.parse(b64d(d.content)); await dbSet('productos',catalogoProductos); return; }
-      if(r.status===404){ // aún no existe el archivo: conservar lo local para poder "Publicar todo"
-        const local=await dbGet('productos'); catalogoProductos = local || []; return;
-      }
+      if(r.status===404){ const local=await dbGet('productos'); catalogoProductos = local || []; return; }
     }catch(e){}
   }
-  // 2) Visitantes: leer el JSON publicado por GitHub Pages (ruta relativa, funciona con cualquier dominio)
   try{
     const r=await fetch('data/productos.json?t='+Date.now(), {cache:'no-store'});
     if(r.ok){ catalogoProductos=await r.json(); await dbSet('productos',catalogoProductos); return; }
   }catch(e){}
-  // 3) Respaldo: raw de GitHub si se conoce el usuario y repo
   if(ghPuedeLeer()){
     try{
       const r=await fetch(ghRawUrl('data/productos.json')+'?t='+Date.now(), {cache:'no-store'});
       if(r.ok){ catalogoProductos=await r.json(); await dbSet('productos',catalogoProductos); return; }
     }catch(e){}
   }
-  // 4) Respaldo final: cache local del dispositivo / migración
   let data = await dbGet('productos');
   if(!data){ const viejo=localStorage.getItem('maderarte_db'); if(viejo) data=JSON.parse(viejo); }
   catalogoProductos = data || [];
 }
-
 
 /* ============ NAVEGACIÓN ============ */
 function cambiarPantalla(id, menuEl){
@@ -874,7 +906,7 @@ function cambiarPantalla(id, menuEl){
   const t = document.getElementById('current-view-title');
   if(id==='inicio'){ t.innerText=''; document.getElementById('nav-btn-inicio').classList.add('active'); }
   else if(id==='admin'){ t.innerText='Panel'; }
-  else if(id==='detalle' || id==='productos-ver'){ /* el título lo fija la categoría */ }
+  else if(id==='detalle' || id==='productos-ver'){ /* fijado por la categoria */ }
   else { t.innerText = CAT_LABELS[id] || id; }
 
   if(id==='favoritos') renderizarFavoritos();
@@ -916,20 +948,76 @@ async function agregarImagenes(ev){
   for(const f of files){ try{ formImagenes.push(await fileToDataURL(f)); }catch(e){} }
   ev.target.value='';
   renderizarPreviews();
+  gestionarAjusteThumb();
 }
+
+let dragSrcIndex = null;
+function handleDragStart(e, i) {
+  dragSrcIndex = i;
+  e.currentTarget.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+function handleDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; return false; }
+function handleDragEnter(e) { e.currentTarget.style.transform = 'scale(1.05)'; }
+function handleDragLeave(e) { e.currentTarget.style.transform = 'none'; }
+function handleDrop(e, targetIndex) {
+  e.stopPropagation();
+  e.currentTarget.style.transform = 'none';
+  if (dragSrcIndex !== targetIndex && dragSrcIndex !== null) {
+    const item = formImagenes.splice(dragSrcIndex, 1)[0];
+    formImagenes.splice(targetIndex, 0, item);
+    renderizarPreviews();
+    gestionarAjusteThumb();
+  }
+  return false;
+}
+function handleDragEnd(e) { e.currentTarget.classList.remove('dragging'); }
+
 function renderizarPreviews(){
   const grid=document.getElementById('preview-grid');grid.innerHTML='';
   formImagenes.forEach((img,i)=>{
     const d=document.createElement('div');
     d.className='preview-item'+(i===0?' is-main':'');
     d.style.backgroundImage=`url('${img}')`;
-    d.onclick=()=>hacerPrincipal(i);
+    
+    // Drag and Drop listeners
+    d.draggable = true;
+    d.addEventListener('dragstart', (e) => handleDragStart(e, i));
+    d.addEventListener('dragover', handleDragOver);
+    d.addEventListener('dragenter', handleDragEnter);
+    d.addEventListener('dragleave', handleDragLeave);
+    d.addEventListener('drop', (e) => handleDrop(e, i));
+    d.addEventListener('dragend', handleDragEnd);
+
     d.innerHTML=`<span class="rm" onclick="event.stopPropagation();quitarImagen(${i})">×</span>${i===0?'<span class="main-tag">Principal</span>':''}`;
     grid.appendChild(d);
   });
 }
-function hacerPrincipal(i){const [x]=formImagenes.splice(i,1);formImagenes.unshift(x);renderizarPreviews();}
-function quitarImagen(i){formImagenes.splice(i,1);renderizarPreviews();}
+function quitarImagen(i){
+  formImagenes.splice(i,1);
+  renderizarPreviews();
+  gestionarAjusteThumb();
+}
+
+/* Ajustador de miniatura */
+function gestionarAjusteThumb(){
+  const adj = document.getElementById('thumb-adjuster');
+  if(formImagenes.length > 0){
+    adj.classList.add('active');
+    actualizarThumbPreview();
+  } else {
+    adj.classList.remove('active');
+  }
+}
+function actualizarThumbPreview(){
+  const box = document.getElementById('thumb-preview-box');
+  formThumbX = document.getElementById('thumb-x').value;
+  formThumbY = document.getElementById('thumb-y').value;
+  if(formImagenes.length > 0){
+    box.style.backgroundImage = `url('${formImagenes[0]}')`;
+    box.style.backgroundPosition = `${formThumbX}% ${formThumbY}%`;
+  }
+}
 
 async function cambiarPortada(ev){
   const f=ev.target.files[0]; if(!f)return;
@@ -942,10 +1030,8 @@ async function cambiarPortada(ev){
       const sha=await ghGetSha('Portada.png');
       await ghPutFile('Portada.png', data.split(',')[1], 'Actualizar portada', sha);
       mostrarToast('Portada publicada en línea ✓');
-    }catch(e){ alert('No se pudo subir la portada a GitHub:\n'+e.message); }
-  } else {
-    mostrarToast('Portada actualizada');
-  }
+    }catch(e){ alert('Error en GitHub:\n'+e.message); }
+  } else { mostrarToast('Portada actualizada'); }
 }
 function aplicarPortada(data){
   const hero=document.getElementById('hero-bg');
@@ -1000,17 +1086,6 @@ function toggleCert(key){
   formCerts = formCerts.includes(key) ? formCerts.filter(k=>k!==key) : [...formCerts,key];
   renderizarCerts();
 }
-function renderizarAjuste(){
-  const cont=document.getElementById('ajuste-toggle'); if(!cont)return;
-  cont.innerHTML='';
-  [['contain','Foto completa'],['cover','Rellenar recuadro']].forEach(([val,label])=>{
-    const chip=document.createElement('div');
-    chip.className='ajuste-chip'+(formAjuste===val?' on':'');
-    chip.textContent=label;
-    chip.onclick=()=>{ formAjuste=val; renderizarAjuste(); };
-    cont.appendChild(chip);
-  });
-}
 
 /* ============ ADMIN: GUARDAR / EDITAR / ELIMINAR ============ */
 async function registrarNuevoProducto(){
@@ -1030,7 +1105,9 @@ async function registrarNuevoProducto(){
     nombre,
     precio: parseFloat(precio),
     imagenes: [...formImagenes],
-    ajuste: formAjuste,
+    thumbPosX: formThumbX,
+    thumbPosY: formThumbY,
+    ajuste: 'cover', // Fijo
     ancho: document.getElementById('prod-ancho').value.trim(),
     alto: document.getElementById('prod-alto').value.trim(),
     fondo: document.getElementById('prod-fondo').value.trim(),
@@ -1040,7 +1117,6 @@ async function registrarNuevoProducto(){
     acabados: [...formAcabados]
   };
 
-  // En línea: subir las fotos nuevas a GitHub y reemplazar por sus enlaces
   if(ghPuedeEscribir()){
     const btn=document.getElementById('btn-guardar');
     const txt=btn.innerText; btn.innerText='Subiendo a internet...'; btn.disabled=true;
@@ -1052,7 +1128,7 @@ async function registrarNuevoProducto(){
       prod.imagenes=finales;
     }catch(e){
       btn.innerText=txt; btn.disabled=false;
-      alert('No se pudieron subir las fotos a GitHub:\n'+e.message); return;
+      alert('Error en fotos GitHub:\n'+e.message); return;
     }
     btn.innerText=txt; btn.disabled=false;
   }
@@ -1067,15 +1143,18 @@ async function registrarNuevoProducto(){
   resetFormulario();
   renderizarListaAdmin();
   mostrarToast(ghPuedeEscribir() ? (editandoId?'Actualizado en línea ✓':'Publicado en línea ✓') : (editandoId?'Producto actualizado':'Producto agregado'));
-  editandoId=null;
 }
 
 function resetFormulario(){
   editandoId=null;
   ['prod-nombre','prod-precio','prod-ancho','prod-alto','prod-fondo','prod-descripcion'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('prod-categoria').value='salas';
-  formImagenes=[]; formAcabados=[]; formCerts=[]; formAjuste='contain'; paletaColores=[...PALETA_BASE];
-  renderizarPreviews(); renderizarPaleta(); renderizarMateriales({}); renderizarCerts(); renderizarAjuste();
+  formImagenes=[]; formAcabados=[]; formCerts=[]; 
+  formThumbX=50; formThumbY=50;
+  document.getElementById('thumb-x').value=50; document.getElementById('thumb-y').value=50;
+  paletaColores=[...PALETA_BASE];
+  renderizarPreviews(); renderizarPaleta(); renderizarMateriales({}); renderizarCerts();
+  gestionarAjusteThumb();
   const b=document.getElementById('btn-guardar');b.innerText='Guardar en catálogo';b.classList.remove('editing');
 }
 
@@ -1092,10 +1171,16 @@ function editarProducto(id){
   formImagenes=[...(p.imagenes||[])];
   formAcabados=[...(p.acabados||[])];
   formCerts=[...(p.certificados||[])];
-  formAjuste = p.ajuste || 'contain';
+  
+  formThumbX = p.thumbPosX || 50; formThumbY = p.thumbPosY || 50;
+  document.getElementById('thumb-x').value = formThumbX;
+  document.getElementById('thumb-y').value = formThumbY;
+  
   paletaColores=[...new Set([...PALETA_BASE,...formAcabados])];
   renderizarPreviews(); renderizarPaleta();
-  renderizarMateriales(p.materialesData||{}); renderizarCerts(); renderizarAjuste();
+  renderizarMateriales(p.materialesData||{}); renderizarCerts();
+  gestionarAjusteThumb();
+  
   const b=document.getElementById('btn-guardar');b.innerText='Actualizar producto';b.classList.add('editing');
   document.getElementById('main-scroll-container').scrollTop=0;
 }
@@ -1116,9 +1201,10 @@ function renderizarListaAdmin(){
   }
   catalogoProductos.slice().reverse().forEach(p=>{
     const img=(p.imagenes&&p.imagenes[0])||'';
+    const tx = p.thumbPosX || 50; const ty = p.thumbPosY || 50;
     const fila=document.createElement('div');fila.className='admin-prod-row';
     fila.innerHTML=`
-      <div class="thumb-sm" style="background-image:url('${img}')"></div>
+      <div class="thumb-sm" style="background-image:url('${img}');background-position:${tx}% ${ty}%"></div>
       <div class="info">
         <strong>${p.nombre}</strong>
         <div class="meta">${CAT_LABELS[p.categoria]} · ${formatoCOP(p.precio)}</div>
@@ -1131,17 +1217,30 @@ function renderizarListaAdmin(){
   });
 }
 
-/* ============ MONEDA ============ */
 function formatoCOP(n){return '$ '+Number(n).toLocaleString('es-CO')+' COP';}
 
-/* ============ LISTA POR CATEGORÍA ============ */
+/* ============ LISTA POR CATEGORÍA Y FILTROS ============ */
 function irACategoria(catKey, etiqueta){
   document.getElementById('current-view-title').innerText=etiqueta;
-  const grid=document.getElementById('grid-productos-dinamicos');
-  pintarGrid(grid, catalogoProductos.filter(p=>p.categoria===catKey),
-    `Aún no hay productos en ${etiqueta}.<br>Agrégalos desde el panel (icono ☰ arriba).`);
+  document.getElementById('cat-title-label').innerText=etiqueta;
+  document.getElementById('sort-select').value='default';
+  listaCategoriaActual = catalogoProductos.filter(p=>p.categoria===catKey);
+  aplicarFiltroPrecio(); // Pinta con orden por defecto
   cambiarPantalla('productos-ver', null);
-  document.getElementById('current-view-title').innerText=etiqueta;
+}
+
+function aplicarFiltroPrecio(){
+  const modo = document.getElementById('sort-select').value;
+  let lista = [...listaCategoriaActual];
+  
+  if (modo === 'asc') {
+    lista.sort((a,b) => a.precio - b.precio);
+  } else if (modo === 'desc') {
+    lista.sort((a,b) => b.precio - a.precio);
+  } // 'default' conserva el orden original
+
+  const grid = document.getElementById('grid-productos-dinamicos');
+  pintarGrid(grid, lista, `Aún no hay productos en esta categoría.<br>Agrégalos desde el panel.`);
 }
 
 function pintarGrid(grid, lista, vacioMsg){
@@ -1149,11 +1248,11 @@ function pintarGrid(grid, lista, vacioMsg){
   if(lista.length===0){grid.innerHTML=`<p class="empty-msg">${vacioMsg}</p>`;return;}
   lista.forEach(p=>{
     const img=(p.imagenes&&p.imagenes[0])||'';
-    const fit=(p.ajuste==='cover')?'cover':'contain';
+    const tx = p.thumbPosX || 50; const ty = p.thumbPosY || 50;
     const card=document.createElement('div');card.className='product-item-card';
     card.onclick=()=>abrirDetalle(p.id);
     const holder = img
-      ? `<div class="product-img-holder" style="background-image:url('${img}');background-size:${fit}"></div>`
+      ? `<div class="product-img-holder" style="background-image:url('${img}');background-position:${tx}% ${ty}%"></div>`
       : `<div class="product-img-holder"><span class="ph-empty">Maderarte</span></div>`;
     card.innerHTML=`${holder}
       <div class="product-info-box">
@@ -1164,20 +1263,17 @@ function pintarGrid(grid, lista, vacioMsg){
   });
 }
 
-/* ============ DETALLE DE PRODUCTO (imagen 2) ============ */
+/* ============ DETALLE DE PRODUCTO ============ */
 function abrirDetalle(id){
   const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
-  // recordar desde qué pantalla se abrió, para el botón Volver
   const activa=document.querySelector('.view-panel.active');
   if(activa){ const vid=activa.id.replace('view-',''); if(vid!=='detalle') pantallaAnterior=vid; }
   productoActual=p;
   const imgs=(p.imagenes&&p.imagenes.length)?p.imagenes:[''];
   const esFav=favoritos.includes(p.id);
 
-  // galería deslizable (carrusel)
   const galleryHtml = construirGaleria(imgs, p.ajuste);
 
-  // secciones condicionales
   let medidas='';
   const dims=[];
   if(p.ancho) dims.push(`Ancho: ${p.ancho} cm`);
@@ -1193,8 +1289,6 @@ function abrirDetalle(id){
     matInner += '<div class="mat-list">'+matItems.map(f=>
       `<div class="mat-item"><span class="mat-ic">${f.icon}</span>
         <div class="mat-tx"><b>${f.label}</b><span>${p.materialesData[f.key]}</span></div></div>`).join('')+'</div>';
-  } else if(p.materiales){ // compatibilidad con productos antiguos
-    matInner += `<div class="val">${p.materiales}</div>`;
   }
   if(certItems.length){
     matInner += '<div class="cert-row">'+certItems.map(c=>
@@ -1261,15 +1355,15 @@ function volverDeDetalle(){
   cambiarPantalla(pantallaAnterior, menuEl);
 }
 
-/* ============ CARRUSEL DE FOTOS ============ */
+/* ============ CARRUSEL Y PANTALLA COMPLETA ============ */
 let galImgs=[], galIndex=0;
 
 function construirGaleria(imgs, ajuste){
   galImgs = imgs.slice();
   galIndex = 0;
-  const fit = (ajuste==='cover') ? 'cover' : 'contain';
   const multi = imgs.length>1;
-  const slides = imgs.map(im=>`<img src="${im}" draggable="false" alt="" style="object-fit:${fit}">`).join('');
+  // Añadimos el evento onclick para abrir el lightbox
+  const slides = imgs.map(im=>`<img src="${im}" draggable="false" alt="" onclick="abrirLightbox('${im}')">`).join('');
   const navs = multi
     ? `<button class="gal-nav prev" onclick="galPrev()">‹</button><button class="gal-nav next" onclick="galNext()">›</button>`
     : '';
@@ -1307,16 +1401,19 @@ function galPrev(){ galGo(galIndex-1); }
 function iniciarCarrusel(){
   const vp=document.getElementById('gal-viewport');
   if(!vp) return;
-  let startX=0, startY=0, dx=0, dy=0, active=false, locked=false;
-  vp.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;startY=e.touches[0].clientY;dx=0;dy=0;active=true;locked=false;},{passive:true});
-  vp.addEventListener('touchmove',e=>{
-    if(!active)return;
-    dx=e.touches[0].clientX-startX; dy=e.touches[0].clientY-startY;
-  },{passive:true});
-  vp.addEventListener('touchend',()=>{
-    if(!active)return; active=false;
-    if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){ dx<0 ? galNext() : galPrev(); }
-  });
+  let startX=0, startY=0, dx=0, dy=0, active=false;
+  vp.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;startY=e.touches[0].clientY;dx=0;dy=0;active=true;},{passive:true});
+  vp.addEventListener('touchmove',e=>{if(!active)return;dx=e.touches[0].clientX-startX;dy=e.touches[0].clientY-startY;},{passive:true});
+  vp.addEventListener('touchend',()=>{if(!active)return;active=false;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){dx<0?galNext():galPrev();}});
+}
+
+/* Lightbox Functions */
+function abrirLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function cerrarLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
 }
 
 /* ============ FAVORITOS ============ */
@@ -1324,7 +1421,6 @@ function toggleFavorito(id){
   if(favoritos.includes(id)) favoritos=favoritos.filter(f=>f!==id);
   else favoritos.push(id);
   localStorage.setItem('maderarte_favs', JSON.stringify(favoritos));
-  // actualizar botones si está en detalle
   const esFav=favoritos.includes(id);
   const ic=document.getElementById('fav-icon'), b=document.getElementById('fav-btn'), txt=document.getElementById('fav-text');
   if(ic){ic.classList.toggle('fav-on',esFav);ic.querySelector('svg').setAttribute('fill',esFav?'currentColor':'none');}
@@ -1353,10 +1449,7 @@ function ejecutarBusqueda(){
 /* ============ WHATSAPP / COMPARTIR ============ */
 function solicitarInfo(id){
   const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
-  let msg=`Hola Maderarte 👋 Estoy interesado(a) en este producto del catálogo:\n\n`;
-  msg+=`*${p.nombre}*\n`;
-  msg+=`Precio: ${formatoCOP(p.precio)}\n`;
-  msg+=`Categoría: ${CAT_LABELS[p.categoria]}\n`;
+  let msg=`Hola Maderarte 👋 Estoy interesado(a) en este producto del catálogo:\n\n*${p.nombre}*\nPrecio: ${formatoCOP(p.precio)}\nCategoría: ${CAT_LABELS[p.categoria]}\n`;
   const dims=[];if(p.ancho)dims.push(`Ancho ${p.ancho}cm`);if(p.alto)dims.push(`Alto ${p.alto}cm`);if(p.fondo)dims.push(`Fondo ${p.fondo}cm`);
   if(dims.length) msg+=`Medidas: ${dims.join(' · ')}\n`;
   msg+=`\n¿Me podrían dar más información?`;
@@ -1365,12 +1458,8 @@ function solicitarInfo(id){
 async function compartirProducto(id){
   const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
   const texto=`Mira este mueble de Maderarte: ${p.nombre} — ${formatoCOP(p.precio)}. Más info: https://wa.me/${WHATSAPP}`;
-  if(navigator.share){
-    try{ await navigator.share({title:`Maderarte · ${p.nombre}`, text:texto}); }catch(e){}
-  } else {
-    try{ await navigator.clipboard.writeText(texto); mostrarToast('Enlace copiado para compartir'); }
-    catch(e){ prompt('Copia y comparte este texto:', texto); }
-  }
+  if(navigator.share){ try{ await navigator.share({title:`Maderarte · ${p.nombre}`, text:texto}); }catch(e){}
+  } else { try{ await navigator.clipboard.writeText(texto); mostrarToast('Enlace copiado'); }catch(e){ prompt('Copia y comparte este texto:', texto); } }
 }
 
 /* ============ TOAST ============ */

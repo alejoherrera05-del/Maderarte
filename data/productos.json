@@ -82,5 +82,37 @@
     ],
     "descripcion": "Sala en “L” (3) modulares independientes + cojines decorativos y mesa de centro",
     "acabados": []
+  },
+  {
+    "id": 1780677536047,
+    "categoria": "salas",
+    "nombre": "Sala Oslo",
+    "precio": 10800000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677536048_tmalb.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677537779_lc9ol.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677539082_8nouu.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677540377_njh6a.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677541635_0fiai.jpg"
+    ],
+    "ajuste": "contain",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flomorado",
+      "tela": "Microfibra",
+      "espuma": "Espuma penta"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Compuesta por (1) modular de 3 puestos (1) modular de 2 puestos + mesa de centro y cojines decorativos.",
+    "acabados": [
+      "#d8b08c",
+      "#8a5a2b",
+      "#3b2417"
+    ]
   }
 ]

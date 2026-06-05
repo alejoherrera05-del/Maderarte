@@ -150,15 +150,15 @@
     "nombre": "Sala Canoa",
     "precio": 8500000,
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678903244_4jkx9.jpg",
       "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678901312_bdd9p.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678903244_4jkx9.jpg",
       "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678904468_05ltu.jpg",
       "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678905587_3hxma.jpg",
       "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678908359_a3hpb.jpg",
       "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678909796_tk8qr.jpg",
       "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678911126_jioeo.jpg"
     ],
-    "thumbPosX": "50",
+    "thumbPosX": "53",
     "thumbPosY": "50",
     "ajuste": "cover",
     "ancho": "",

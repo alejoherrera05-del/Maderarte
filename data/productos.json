@@ -26,5 +26,32 @@
     ],
     "descripcion": "Compuesta por (1) sofá de 3 puestos (1) sofá de 2 puestos, mesa de centro y silla auxiliar giratoria.",
     "acabados": []
+  },
+  {
+    "id": 1780676468332,
+    "categoria": "salas",
+    "nombre": "Sala multifuncional",
+    "precio": 4500000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676468333_19sno.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676470543_fxjlz.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676472898_o00wo.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676475802_t9bmi.jpg"
+    ],
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Microfibras o cuero vegano",
+      "espuma": "Espuma naranja ortopédica"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Multifuncional tipo sofá cama. (2) modulares independientes con brazos abatibles + puff baúl.",
+    "acabados": []
   }
 ]

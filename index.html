@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <title>Maderarte | Catálogo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -285,6 +287,22 @@ body{
 .nav-item span{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;font-weight:500;}
 .nav-item.active{color:var(--brand-deep);}
 
+/* ---------- AJUSTES MÓVIL (iPhone / Safari): pantalla completa, barra siempre visible ---------- */
+@media (max-width:520px){
+  body{display:block;background:var(--bg-canvas);}
+  .phone-wrapper{
+    max-width:100%;width:100%;min-height:0;
+    height:100vh;height:100dvh;          /* dvh se ajusta cuando aparece/desaparece la barra de Safari */
+    border-radius:0;box-shadow:none;
+  }
+  .bottom-nav{
+    height:calc(64px + env(safe-area-inset-bottom));
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .pad{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom));}
+  .hero-inner{padding-bottom:calc(2rem + env(safe-area-inset-bottom));}
+}
+
 /* ---------- MODAL ADMIN ---------- */
 .admin-modal{position:absolute;inset:0;background:rgba(20,15,10,.6);backdrop-filter:blur(4px);z-index:100;display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:.3s;}
 .admin-modal.open{opacity:1;pointer-events:auto;}
@@ -339,6 +357,9 @@ body{
 .cert-chip{display:inline-flex;align-items:center;gap:8px;padding:.6rem .9rem;border-radius:30px;border:1.5px solid #E2DDD3;background:var(--bg-canvas);font-size:.78rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s;}
 .cert-chip svg{width:17px;height:17px;}
 .cert-chip.on{border-color:var(--orange);background:#fff;color:var(--orange);}
+.ajuste-row{display:flex;gap:8px;}
+.ajuste-chip{flex:1;text-align:center;padding:.65rem;border-radius:10px;border:1.5px solid #E2DDD3;background:var(--bg-canvas);font-size:.76rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s;}
+.ajuste-chip.on{border-color:var(--orange);background:#fff;color:var(--orange);}
 
 .btn-block{width:100%;background:var(--brand-deep);color:#fff;padding:1rem;border:none;border-radius:12px;text-transform:uppercase;letter-spacing:2px;font-weight:600;cursor:pointer;margin-top:.4rem;font-size:.8rem;transition:.2s;}
 .btn-block:active{transform:scale(.98);}
@@ -568,6 +589,12 @@ body{
           </div>
 
           <div class="admin-form-group">
+            <label>Ajuste de las fotos <span class="opt-tag">(cómo se ven en el catálogo)</span></label>
+            <div class="ajuste-row" id="ajuste-toggle"></div>
+            <small style="display:block;margin-top:.4rem;color:var(--muted);font-size:.72rem;">“Foto completa” muestra toda la imagen sin recortar (recomendado). “Rellenar” llena el recuadro y puede recortar bordes.</small>
+          </div>
+
+          <div class="admin-form-group">
             <label>Medidas <span class="opt-tag">(opcional · en cm)</span></label>
             <div class="dim-row">
               <input type="number" id="prod-ancho" placeholder="Ancho">
@@ -678,6 +705,7 @@ let favoritos = JSON.parse(localStorage.getItem('maderarte_favs') || '[]');
 let formImagenes = [];        // imágenes (dataURL) del producto en edición
 let formAcabados = [];        // colores seleccionados
 let formCerts = [];           // características activas (mascotas, antifluido)
+let formAjuste = 'contain';   // cómo se muestran las fotos: 'contain' (completa) o 'cover' (rellena)
 let paletaColores = [...PALETA_BASE];
 let editandoId = null;        // id del producto que se está editando
 let productoActual = null;    // producto abierto en detalle
@@ -972,6 +1000,17 @@ function toggleCert(key){
   formCerts = formCerts.includes(key) ? formCerts.filter(k=>k!==key) : [...formCerts,key];
   renderizarCerts();
 }
+function renderizarAjuste(){
+  const cont=document.getElementById('ajuste-toggle'); if(!cont)return;
+  cont.innerHTML='';
+  [['contain','Foto completa'],['cover','Rellenar recuadro']].forEach(([val,label])=>{
+    const chip=document.createElement('div');
+    chip.className='ajuste-chip'+(formAjuste===val?' on':'');
+    chip.textContent=label;
+    chip.onclick=()=>{ formAjuste=val; renderizarAjuste(); };
+    cont.appendChild(chip);
+  });
+}
 
 /* ============ ADMIN: GUARDAR / EDITAR / ELIMINAR ============ */
 async function registrarNuevoProducto(){
@@ -991,6 +1030,7 @@ async function registrarNuevoProducto(){
     nombre,
     precio: parseFloat(precio),
     imagenes: [...formImagenes],
+    ajuste: formAjuste,
     ancho: document.getElementById('prod-ancho').value.trim(),
     alto: document.getElementById('prod-alto').value.trim(),
     fondo: document.getElementById('prod-fondo').value.trim(),
@@ -1034,8 +1074,8 @@ function resetFormulario(){
   editandoId=null;
   ['prod-nombre','prod-precio','prod-ancho','prod-alto','prod-fondo','prod-descripcion'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('prod-categoria').value='salas';
-  formImagenes=[]; formAcabados=[]; formCerts=[]; paletaColores=[...PALETA_BASE];
-  renderizarPreviews(); renderizarPaleta(); renderizarMateriales({}); renderizarCerts();
+  formImagenes=[]; formAcabados=[]; formCerts=[]; formAjuste='contain'; paletaColores=[...PALETA_BASE];
+  renderizarPreviews(); renderizarPaleta(); renderizarMateriales({}); renderizarCerts(); renderizarAjuste();
   const b=document.getElementById('btn-guardar');b.innerText='Guardar en catálogo';b.classList.remove('editing');
 }
 
@@ -1052,9 +1092,10 @@ function editarProducto(id){
   formImagenes=[...(p.imagenes||[])];
   formAcabados=[...(p.acabados||[])];
   formCerts=[...(p.certificados||[])];
+  formAjuste = p.ajuste || 'contain';
   paletaColores=[...new Set([...PALETA_BASE,...formAcabados])];
   renderizarPreviews(); renderizarPaleta();
-  renderizarMateriales(p.materialesData||{}); renderizarCerts();
+  renderizarMateriales(p.materialesData||{}); renderizarCerts(); renderizarAjuste();
   const b=document.getElementById('btn-guardar');b.innerText='Actualizar producto';b.classList.add('editing');
   document.getElementById('main-scroll-container').scrollTop=0;
 }
@@ -1108,10 +1149,11 @@ function pintarGrid(grid, lista, vacioMsg){
   if(lista.length===0){grid.innerHTML=`<p class="empty-msg">${vacioMsg}</p>`;return;}
   lista.forEach(p=>{
     const img=(p.imagenes&&p.imagenes[0])||'';
+    const fit=(p.ajuste==='cover')?'cover':'contain';
     const card=document.createElement('div');card.className='product-item-card';
     card.onclick=()=>abrirDetalle(p.id);
     const holder = img
-      ? `<div class="product-img-holder" style="background-image:url('${img}')"></div>`
+      ? `<div class="product-img-holder" style="background-image:url('${img}');background-size:${fit}"></div>`
       : `<div class="product-img-holder"><span class="ph-empty">Maderarte</span></div>`;
     card.innerHTML=`${holder}
       <div class="product-info-box">
@@ -1133,7 +1175,7 @@ function abrirDetalle(id){
   const esFav=favoritos.includes(p.id);
 
   // galería deslizable (carrusel)
-  const galleryHtml = construirGaleria(imgs);
+  const galleryHtml = construirGaleria(imgs, p.ajuste);
 
   // secciones condicionales
   let medidas='';
@@ -1222,11 +1264,12 @@ function volverDeDetalle(){
 /* ============ CARRUSEL DE FOTOS ============ */
 let galImgs=[], galIndex=0;
 
-function construirGaleria(imgs){
+function construirGaleria(imgs, ajuste){
   galImgs = imgs.slice();
   galIndex = 0;
+  const fit = (ajuste==='cover') ? 'cover' : 'contain';
   const multi = imgs.length>1;
-  const slides = imgs.map(im=>`<img src="${im}" draggable="false" alt="">`).join('');
+  const slides = imgs.map(im=>`<img src="${im}" draggable="false" alt="" style="object-fit:${fit}">`).join('');
   const navs = multi
     ? `<button class="gal-nav prev" onclick="galPrev()">‹</button><button class="gal-nav next" onclick="galNext()">›</button>`
     : '';

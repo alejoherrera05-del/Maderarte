@@ -177,5 +177,37 @@
       "#8a5a2b",
       "#3b2417"
     ]
+  },
+  {
+    "id": 1780682377563,
+    "categoria": "salas",
+    "nombre": "Sala Nube",
+    "precio": 8900000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682377564_cv5yf.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682379622_nsmsv.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682381775_dtxl7.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682382729_7uavx.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682383715_2czb2.jpg"
+    ],
+    "ajuste": "contain",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Tela bucle",
+      "espuma": "Espuma penta y algodón siliconado"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Compuesta por (1) sofá de 3 puestos (1) sofá de 2 puestos + mesa de centro, silla auxiliar y cojines decorativos",
+    "acabados": [
+      "#ffffff",
+      "#adadad",
+      "#000000"
+    ]
   }
 ]

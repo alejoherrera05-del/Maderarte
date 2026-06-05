@@ -143,5 +143,39 @@
     ],
     "descripcion": "Sala confortable con (2) módulos eléctrico reclinable. (5) módulos independientes (2) portavasos + mesa de centro y cojines decorativos",
     "acabados": []
+  },
+  {
+    "id": 1780678901311,
+    "categoria": "salas",
+    "nombre": "Sala Canoa",
+    "precio": 8500000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678901312_bdd9p.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678903244_4jkx9.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678904468_05ltu.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678905587_3hxma.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678908359_a3hpb.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678909796_tk8qr.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678911126_jioeo.jpg"
+    ],
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Microfibra - Tela bucle",
+      "espuma": "Espuma Penta"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Compuesta por (1) modular de 3 puestos (1) modular de 2 puestos + mesa de centro y cojines decorativos",
+    "acabados": [
+      "#d8b08c",
+      "#8a5a2b",
+      "#3b2417"
+    ]
   }
 ]

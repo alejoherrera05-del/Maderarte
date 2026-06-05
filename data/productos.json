@@ -53,5 +53,34 @@
     ],
     "descripcion": "Multifuncional tipo sofá cama. (2) modulares independientes con brazos abatibles + puff baúl.",
     "acabados": []
+  },
+  {
+    "id": 1780676977096,
+    "categoria": "salas",
+    "nombre": "Sala Prisma “L”",
+    "precio": 7900000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676977097_mi9th.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677020709_3x4n2.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677022992_u696v.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677024325_xjtb7.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677025626_t38lp.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677027078_flv0f.jpg"
+    ],
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flomorado",
+      "tela": "Microfibra",
+      "espuma": "Espuma penta / algodón siliconado"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Sala en “L” (3) modulares independientes + cojines decorativos y mesa de centro",
+    "acabados": []
   }
 ]

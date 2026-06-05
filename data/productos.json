@@ -95,7 +95,7 @@
       "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677540377_njh6a.jpg",
       "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677541635_0fiai.jpg"
     ],
-    "ajuste": "contain",
+    "ajuste": "cover",
     "ancho": "",
     "alto": "",
     "fondo": "",

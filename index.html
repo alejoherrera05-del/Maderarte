@@ -499,6 +499,34 @@ body{
     <!-- ADMIN -->
     <div id="view-admin" class="view-panel">
       <div class="pad">
+
+        <div class="admin-section-title" style="font-size:1.4rem;">Conexión en línea</div>
+        <p class="admin-hint">Conecta tu repositorio de GitHub para que los productos se publiquen en internet y todos los vean con el link. El token se guarda <b>solo en este dispositivo</b>, nunca se comparte.</p>
+        <div class="admin-card">
+          <div id="gh-status" style="font-size:.82rem;font-weight:600;margin-bottom:1rem;">⚪ Sin conexión configurada</div>
+          <div class="admin-form-group">
+            <label>Usuario de GitHub</label>
+            <input type="text" id="gh-owner" class="admin-input" placeholder="ej: maderartepopayan">
+          </div>
+          <div class="admin-form-group">
+            <label>Repositorio</label>
+            <input type="text" id="gh-repo" class="admin-input" placeholder="ej: catalogo">
+          </div>
+          <div class="admin-form-group">
+            <label>Rama <span class="opt-tag">(normalmente main)</span></label>
+            <input type="text" id="gh-branch" class="admin-input" placeholder="main">
+          </div>
+          <div class="admin-form-group">
+            <label>Token de acceso <span class="opt-tag">(secreto · solo en tu dispositivo)</span></label>
+            <input type="password" id="gh-token" class="admin-input" placeholder="github_pat_...">
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="mini-btn" style="flex:1;padding:.85rem;" onclick="ghProbarConexion()">Probar conexión</button>
+            <button class="btn-block" style="flex:1;margin-top:0;" onclick="ghGuardarConfigDesdeForm()">Guardar conexión</button>
+          </div>
+          <button class="btn-block" id="gh-publish-all" style="margin-top:10px;background:var(--gold);" onclick="ghPublicarTodo()">Publicar todo el catálogo en línea</button>
+        </div>
+
         <div class="admin-section-title">Alimentar catálogo</div>
         <p class="admin-hint">Sube las fotos desde tu celular o computador. Los campos marcados como opcionales solo aparecerán en el catálogo si los llenas.</p>
 
@@ -648,22 +676,156 @@ let paletaColores = [...PALETA_BASE];
 let editandoId = null;        // id del producto que se está editando
 let productoActual = null;    // producto abierto en detalle
 
-/* ============ INDEXEDDB (almacenamiento grande para fotos) ============ */
+/* ============ CONEXIÓN EN LÍNEA (GITHUB) ============ */
+const GH_API='https://api.github.com';
+let cfg = {branch:'main'};
+function ghCargarConfig(){
+  const auto = ghAutoDetect() || {};
+  const guardado = JSON.parse(localStorage.getItem('maderarte_gh')||'{}');
+  cfg = Object.assign({branch:'main'}, auto, guardado);
+}
+function ghAutoDetect(){
+  const h=location.hostname;
+  if(h.endsWith('.github.io')){
+    const owner=h.replace('.github.io','');
+    const parts=location.pathname.split('/').filter(Boolean);
+    const repo=parts.length ? parts[0] : (owner+'.github.io');
+    return {owner, repo, branch:'main'};
+  }
+  return null;
+}
+function ghBranch(){ return cfg.branch || 'main'; }
+function ghHeaders(){ return {Authorization:'token '+cfg.token, Accept:'application/vnd.github+json'}; }
+function ghRawUrl(path){ return `https://raw.githubusercontent.com/${cfg.owner}/${cfg.repo}/${ghBranch()}/${path}`; }
+function ghContentsUrl(path){ return `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${path}`; }
+function ghPuedeLeer(){ return !!(cfg.owner && cfg.repo); }
+function ghPuedeEscribir(){ return !!(cfg.owner && cfg.repo && cfg.token); }
+
+// Codifica texto UTF-8 (con acentos) a base64
+function b64(str){ return btoa(unescape(encodeURIComponent(str))); }
+// Decodifica base64 (de la API de GitHub) a texto UTF-8
+function b64d(str){ return decodeURIComponent(escape(atob((str||'').replace(/\s/g,'')))); }
+
+async function ghPutFile(path, base64content, mensaje, sha){
+  const body={message:mensaje, content:base64content, branch:ghBranch()};
+  if(sha) body.sha=sha;
+  const r=await fetch(ghContentsUrl(path),{method:'PUT',headers:ghHeaders(),body:JSON.stringify(body)});
+  if(!r.ok) throw new Error((r.status)+' '+(await r.text()).slice(0,120));
+  return r.json();
+}
+async function ghGetSha(path){
+  try{
+    const r=await fetch(ghContentsUrl(path)+'?ref='+ghBranch()+'&t='+Date.now(),{headers:cfg.token?ghHeaders():{}});
+    if(r.ok){ return (await r.json()).sha; }
+  }catch(e){}
+  return null;
+}
+async function ghSubirImagen(dataURL){
+  const base64=dataURL.split(',')[1];
+  let ext=(dataURL.substring(11,dataURL.indexOf(';'))||'jpeg');
+  if(ext==='jpeg') ext='jpg';
+  const name='p_'+Date.now()+'_'+Math.random().toString(36).slice(2,7)+'.'+ext;
+  await ghPutFile('img/'+name, base64, 'Subir foto '+name);
+  return ghRawUrl('img/'+name);
+}
+async function ghGuardarProductos(){
+  const sha=await ghGetSha('data/productos.json');
+  await ghPutFile('data/productos.json', b64(JSON.stringify(catalogoProductos,null,2)), 'Actualizar catálogo', sha);
+}
+async function ghPublicarTodo(){
+  if(!ghPuedeEscribir()){ alert('Primero guarda la conexión (usuario, repositorio y token).'); return; }
+  if(!catalogoProductos.length){ alert('Todavía no hay productos para publicar.'); return; }
+  const btn=document.getElementById('gh-publish-all'); const t=btn.innerText;
+  btn.innerText='Publicando catálogo...'; btn.disabled=true;
+  try{
+    for(const p of catalogoProductos){
+      const fin=[];
+      for(const im of (p.imagenes||[])){ fin.push(im.startsWith('data:') ? await ghSubirImagen(im) : im); }
+      p.imagenes=fin;
+    }
+    await ghGuardarProductos();
+    await dbSet('productos', catalogoProductos);
+    ghEstado(true,'Catálogo publicado en línea ✓');
+    mostrarToast('Catálogo publicado ✓');
+  }catch(e){ alert('No se pudo publicar todo:\n'+e.message); }
+  btn.innerText=t; btn.disabled=false;
+}
+async function ghProbarConexion(){
+  if(!ghPuedeEscribir()){ alert('Completa usuario, repositorio y token primero.'); return; }
+  try{
+    const r=await fetch(`${GH_API}/repos/${cfg.owner}/${cfg.repo}`,{headers:ghHeaders()});
+    if(r.ok){ const d=await r.json(); ghEstado(true, 'Conectado a '+d.full_name); }
+    else { ghEstado(false, 'Error '+r.status+'. Revisa usuario, repo y token.'); }
+  }catch(e){ ghEstado(false, 'No se pudo conectar: '+e.message); }
+}
+function ghGuardarConfigDesdeForm(){
+  cfg.owner=document.getElementById('gh-owner').value.trim();
+  cfg.repo=document.getElementById('gh-repo').value.trim();
+  cfg.branch=(document.getElementById('gh-branch').value.trim()||'main');
+  const tk=document.getElementById('gh-token').value.trim();
+  if(tk) cfg.token=tk;
+  localStorage.setItem('maderarte_gh', JSON.stringify({owner:cfg.owner,repo:cfg.repo,branch:cfg.branch,token:cfg.token}));
+  ghEstado(ghPuedeEscribir(), ghPuedeEscribir()?'Conexión guardada en este dispositivo':'Faltan datos para escribir');
+  mostrarToast('Conexión guardada');
+}
+function ghEstado(ok, msg){
+  const el=document.getElementById('gh-status'); if(!el)return;
+  el.innerHTML = (ok?'🟢 ':'⚪ ')+msg;
+  el.style.color = ok ? '#2E7D4F' : 'var(--muted)';
+}
+function ghRellenarForm(){
+  if(!document.getElementById('gh-owner'))return;
+  document.getElementById('gh-owner').value=cfg.owner||'';
+  document.getElementById('gh-repo').value=cfg.repo||'';
+  document.getElementById('gh-branch').value=cfg.branch||'main';
+  document.getElementById('gh-token').value=cfg.token||'';
+  if(ghPuedeEscribir()) ghEstado(true,'Listo para subir productos en línea');
+  else if(ghPuedeLeer()) ghEstado(false,'Modo solo lectura (falta el token para subir)');
+  else ghEstado(false,'Sin conexión configurada (modo local)');
+}
+
+/* ============ INDEXEDDB (respaldo local en el dispositivo) ============ */
 const DB_NAME='maderarte_db_v2', STORE='kv';
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(DB_NAME,1);r.onupgradeneeded=()=>r.result.createObjectStore(STORE);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
 async function dbGet(k){try{const db=await openDB();return await new Promise((res,rej)=>{const t=db.transaction(STORE,'readonly').objectStore(STORE).get(k);t.onsuccess=()=>res(t.result);t.onerror=()=>rej(t.error);});}catch(e){const v=localStorage.getItem('idbfb_'+k);return v?JSON.parse(v):undefined;}}
-async function dbSet(k,v){try{const db=await openDB();await new Promise((res,rej)=>{const t=db.transaction(STORE,'readwrite');t.objectStore(STORE).put(v,k);t.oncomplete=()=>res();t.onerror=()=>rej(t.error);});}catch(e){try{localStorage.setItem('idbfb_'+k,JSON.stringify(v));}catch(_){alert('No se pudo guardar. El almacenamiento está lleno; intenta con fotos más livianas.');}}}
+async function dbSet(k,v){try{const db=await openDB();await new Promise((res,rej)=>{const t=db.transaction(STORE,'readwrite');t.objectStore(STORE).put(v,k);t.oncomplete=()=>res();t.onerror=()=>rej(t.error);});}catch(e){try{localStorage.setItem('idbfb_'+k,JSON.stringify(v));}catch(_){}}}
 
-async function guardarCatalogo(){await dbSet('productos', catalogoProductos);}
-async function cargarCatalogo(){
-  let data = await dbGet('productos');
-  // Migración desde la versión anterior (localStorage)
-  if(!data){
-    const viejo = localStorage.getItem('maderarte_db');
-    if(viejo){data = JSON.parse(viejo);}
+async function guardarCatalogo(){
+  await dbSet('productos', catalogoProductos);      // respaldo local siempre
+  if(ghPuedeEscribir()){
+    try{ await ghGuardarProductos(); }
+    catch(e){ alert('Se guardó en este dispositivo, pero no se pudo subir a GitHub:\n'+e.message); }
   }
+}
+async function cargarCatalogo(){
+  // 1) Dueño conectado: leer del repositorio vía API (siempre la versión más reciente)
+  if(ghPuedeEscribir()){
+    try{
+      const r=await fetch(ghContentsUrl('data/productos.json')+'?ref='+ghBranch()+'&t='+Date.now(), {headers:ghHeaders(), cache:'no-store'});
+      if(r.status===200){ const d=await r.json(); catalogoProductos=JSON.parse(b64d(d.content)); await dbSet('productos',catalogoProductos); return; }
+      if(r.status===404){ // aún no existe el archivo: conservar lo local para poder "Publicar todo"
+        const local=await dbGet('productos'); catalogoProductos = local || []; return;
+      }
+    }catch(e){}
+  }
+  // 2) Visitantes: leer el JSON publicado por GitHub Pages (ruta relativa, funciona con cualquier dominio)
+  try{
+    const r=await fetch('data/productos.json?t='+Date.now(), {cache:'no-store'});
+    if(r.ok){ catalogoProductos=await r.json(); await dbSet('productos',catalogoProductos); return; }
+  }catch(e){}
+  // 3) Respaldo: raw de GitHub si se conoce el usuario y repo
+  if(ghPuedeLeer()){
+    try{
+      const r=await fetch(ghRawUrl('data/productos.json')+'?t='+Date.now(), {cache:'no-store'});
+      if(r.ok){ catalogoProductos=await r.json(); await dbSet('productos',catalogoProductos); return; }
+    }catch(e){}
+  }
+  // 4) Respaldo final: cache local del dispositivo / migración
+  let data = await dbGet('productos');
+  if(!data){ const viejo=localStorage.getItem('maderarte_db'); if(viejo) data=JSON.parse(viejo); }
   catalogoProductos = data || [];
 }
+
 
 /* ============ NAVEGACIÓN ============ */
 function cambiarPantalla(id, menuEl){
@@ -690,7 +852,7 @@ function abrirModalAdmin(){document.getElementById('admin-pass-input').value='';
 function cerrarModalAdmin(){document.getElementById('modal-admin-auth').classList.remove('open');}
 function procesarAutenticacion(){
   if(document.getElementById('admin-pass-input').value==='271064'){
-    cerrarModalAdmin(); resetFormulario(); renderizarPaleta(); renderizarListaAdmin();
+    cerrarModalAdmin(); resetFormulario(); renderizarPaleta(); renderizarListaAdmin(); ghRellenarForm();
     cambiarPantalla('admin', null);
   } else { alert('Contraseña incorrecta.'); }
 }
@@ -740,7 +902,16 @@ async function cambiarPortada(ev){
   const data=await fileToDataURL(f,1400,0.85);
   await dbSet('portada', data);
   aplicarPortada(data);
-  mostrarToast('Portada actualizada');
+  if(ghPuedeEscribir()){
+    mostrarToast('Subiendo portada...');
+    try{
+      const sha=await ghGetSha('Portada.png');
+      await ghPutFile('Portada.png', data.split(',')[1], 'Actualizar portada', sha);
+      mostrarToast('Portada publicada en línea ✓');
+    }catch(e){ alert('No se pudo subir la portada a GitHub:\n'+e.message); }
+  } else {
+    mostrarToast('Portada actualizada');
+  }
 }
 function aplicarPortada(data){
   const hero=document.getElementById('hero-bg');
@@ -823,6 +994,23 @@ async function registrarNuevoProducto(){
     acabados: [...formAcabados]
   };
 
+  // En línea: subir las fotos nuevas a GitHub y reemplazar por sus enlaces
+  if(ghPuedeEscribir()){
+    const btn=document.getElementById('btn-guardar');
+    const txt=btn.innerText; btn.innerText='Subiendo a internet...'; btn.disabled=true;
+    try{
+      const finales=[];
+      for(const im of prod.imagenes){
+        finales.push(im.startsWith('data:') ? await ghSubirImagen(im) : im);
+      }
+      prod.imagenes=finales;
+    }catch(e){
+      btn.innerText=txt; btn.disabled=false;
+      alert('No se pudieron subir las fotos a GitHub:\n'+e.message); return;
+    }
+    btn.innerText=txt; btn.disabled=false;
+  }
+
   if(editandoId){
     const i=catalogoProductos.findIndex(p=>p.id===editandoId);
     catalogoProductos[i]=prod;
@@ -832,7 +1020,7 @@ async function registrarNuevoProducto(){
   await guardarCatalogo();
   resetFormulario();
   renderizarListaAdmin();
-  mostrarToast(editandoId?'Producto actualizado':'Producto agregado');
+  mostrarToast(ghPuedeEscribir() ? (editandoId?'Actualizado en línea ✓':'Publicado en línea ✓') : (editandoId?'Producto actualizado':'Producto agregado'));
   editandoId=null;
 }
 
@@ -1145,6 +1333,7 @@ function mostrarToast(txt){
 
 /* ============ INICIO ============ */
 (async function init(){
+  ghCargarConfig();
   await cargarCatalogo();
   const portada=await dbGet('portada');
   if(portada) aplicarPortada(portada);

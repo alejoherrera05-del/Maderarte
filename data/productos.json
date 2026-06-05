@@ -274,5 +274,39 @@
     ],
     "descripcion": "Sistema eléctrico reclinable en (2) sillas con puerto de carga usb. (2) portavasos con cava interna. (5) modulares independientes + mesa de centro y cojines decorativos",
     "acabados": []
+  },
+  {
+    "id": 1780700532107,
+    "categoria": "salas",
+    "nombre": "Sala Italiana",
+    "precio": 8900000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700532109_nv2n5.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700534189_s2p1h.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700535987_9e2ve.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700537420_vqkai.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700538961_r1skb.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700540492_c841e.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700541824_3q5zh.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "madera": "Acabado al natural",
+      "tela": "Microfibra",
+      "espuma": "Espuma penta",
+      "pintura": "Poliuretano semi mate"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Compuesta por (1) sofá de 3 puestos (1) sofá de 2 puestos (1) mesa de centro (1) silla auxiliar Mesedora + cojines decorativos. Brazos enchapados en Flomorado",
+    "acabados": []
   }
 ]

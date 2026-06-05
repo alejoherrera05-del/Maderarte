@@ -213,5 +213,35 @@
       "#adadad",
       "#000000"
     ]
+  },
+  {
+    "id": 1780696059688,
+    "categoria": "salas",
+    "nombre": "Sala Ditroit",
+    "precio": 8900000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696059692_zpkvs.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696061512_t8no1.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696062605_zno0x.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696063861_egynj.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696065295_64izx.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Tecla Microfibra",
+      "espuma": "(Máxima comodidad) Espuma penta y espaldares en algodón siliconado"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Nuestro producto más confortable, diseño compuesto por (1) sofá de 3 puestos (1) sofa de 2 puestos + mesa de centro y cojines decorativos",
+    "acabados": []
   }
 ]

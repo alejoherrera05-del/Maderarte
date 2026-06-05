@@ -114,5 +114,34 @@
       "#8a5a2b",
       "#3b2417"
     ]
+  },
+  {
+    "id": 1780678305098,
+    "categoria": "salas",
+    "nombre": "Sala Diamante  (Reclinable)",
+    "precio": 9800000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678305099_upuoa.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678307176_r71ne.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678308400_4gasf.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678309426_xc85u.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678310655_foe1x.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678311728_sr9qr.jpg"
+    ],
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Microfibra",
+      "espuma": "Espuma penta"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Sala confortable con (2) módulos eléctrico reclinable. (5) módulos independientes (2) portavasos + mesa de centro y cojines decorativos",
+    "acabados": []
   }
 ]

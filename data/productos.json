@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1780675331586,
+    "categoria": "salas",
+    "nombre": "Sala luxury",
+    "precio": 9500000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675331587_vmkwh.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675333511_xb3a1.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675335964_42q21.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675337289_gleqc.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675338930_hy323.jpg"
+    ],
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Microfibra",
+      "espuma": "Espuma penta y algodón siliconado"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Compuesta por (1) sofá de 3 puestos (1) sofá de 2 puestos, mesa de centro y silla auxiliar giratoria.",
+    "acabados": []
+  }
+]

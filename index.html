@@ -6,7 +6,7 @@
 <title>Maderarte | Catálogo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 @font-face{
   font-family:'Algerian';
@@ -165,9 +165,9 @@ body{
   position:absolute;right:1.2rem;bottom:1.3rem;z-index:2;width:36px;height:36px;border-radius:50%;
   background:rgba(255,255,255,.92);color:var(--dark);display:flex;align-items:center;justify-content:center;font-size:1.2rem;
 }
-.card-junior{border:1.5px solid var(--gold);}
-.card-junior .card-details h3{color:var(--gold);}
-.card-junior .card-arrow{background:var(--gold);color:#fff;}
+.junior-eyebrow{font-family:var(--serif);font-size:.92rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.92);font-weight:600;margin-bottom:1px;text-shadow:0 1px 8px rgba(0,0,0,.7);}
+.junior-word{font-family:'Baloo 2','Inter',sans-serif;font-weight:800;font-size:2.3rem;line-height:.9;letter-spacing:1px;margin-bottom:.35rem;}
+.junior-word span{display:inline-block;text-shadow:0 2px 6px rgba(0,0,0,.4);}
 
 /* ---------- GRID PRODUCTOS ---------- */
 .back-link{
@@ -434,7 +434,13 @@ body{
           <div class="card-arrow">›</div>
         </div>
         <div class="category-card card-junior" style="background-image:url('junior.png');" onclick="irACategoria('junior','Maderarte Junior')">
-          <div class="card-details"><h3>Maderarte Junior</h3><p>Detalles que transforman sus espacios.</p></div>
+          <div class="card-details">
+            <p class="junior-eyebrow">Maderarte</p>
+            <h3 class="junior-word">
+              <span style="color:#FF4E4E;transform:rotate(-6deg)">J</span><span style="color:#2E9BFF;transform:rotate(4deg)">U</span><span style="color:#FFC400;transform:rotate(-3deg)">N</span><span style="color:#3FBF4F;transform:rotate(5deg)">I</span><span style="color:#FF8A1E;transform:rotate(-4deg)">O</span><span style="color:#A24BE0;transform:rotate(5deg)">R</span>
+            </h3>
+            <p>Detalles que transforman sus espacios.</p>
+          </div>
           <div class="card-arrow">›</div>
         </div>
       </div>

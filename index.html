@@ -35,20 +35,30 @@
   --sans:'Inter',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%; overscroll-behavior-y: none;}
+
+/* ANTI REBOTE NATIVO */
+html,body{
+  height:100%; 
+  overscroll-behavior: none; 
+}
 body{
   font-family:var(--sans);
   background:#CFCABF;
   color:var(--dark);
-  display:flex;justify-content:center;align-items:center;min-height:100vh;
+  display:flex;justify-content:center;align-items:center;
+  min-height:100vh;
+}
+body.modal-abierto {
+  overflow: hidden; 
+  touch-action: none; 
 }
 
 /* ---------- DISPOSITIVO ---------- */
 .phone-wrapper{
-  width:100%;max-width:460px;height:94vh;min-height:640px;
+  width:100%;max-width:460px;height:100dvh;min-height:640px;
   background:var(--bg-canvas);position:relative;display:flex;flex-direction:column;
   box-shadow:0 30px 70px rgba(0,0,0,.22);overflow:hidden;border-radius:26px;
-  overscroll-behavior-y: none;
+  overscroll-behavior: none;
 }
 
 /* ---------- TOP BAR ---------- */
@@ -83,8 +93,8 @@ body{
 /* ---------- CONTENIDO ---------- */
 .content-scroll{flex:1;overflow-y:auto;position:relative;-webkit-overflow-scrolling:touch; overscroll-behavior-y: contain;}
 .content-scroll::-webkit-scrollbar{width:0;}
-.pad{padding:0 1.1rem 6rem 1.1rem;}
-.pad-admin{padding-bottom: 12rem;} /* Cirugía: margen profundo para arreglar el rebote del teclado */
+.pad{padding:0 1.1rem 7rem 1.1rem;}
+.pad-admin{padding-bottom: 12rem;} /* Margen extra para que el scroll finalice cómodamente sobre el menú */
 .view-panel{display:none;}
 .view-panel.active{display:block;animation:fade .4s ease;}
 @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
@@ -267,17 +277,30 @@ body{
 
 /* ---------- LIGHTBOX PANTALLA COMPLETA ---------- */
 .lightbox{
-  position:fixed;inset:0;background:rgba(12,9,6,0.96);z-index:9999;
+  position:fixed;top:0;left:0;right:0;bottom:0; /* Anclaje estricto */
+  background:rgba(12,9,6,0.96);z-index:9999;
   display:flex;align-items:center;justify-content:center;
   opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(5px);
+  touch-action: none; /* Bloquea el scroll de fondo cuando está abierto */
 }
 .lightbox.open{opacity:1;pointer-events:auto;}
-.lightbox-img{max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.5);}
+.lightbox-img{
+  max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
+  transition: opacity 0.15s ease-in-out; /* Efecto suave al cambiar foto */
+  -webkit-user-drag: none;
+  user-select: none;
+}
 .lightbox-close{
   position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;
   background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem;
   display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.3);
   z-index:10000;
+}
+/* Indicador de galería en el lightbox */
+.lightbox-indicator {
+  position: absolute; bottom: 30px; left: 0; right: 0; text-align: center;
+  color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 500; letter-spacing: 2px;
 }
 
 /* ---------- FAVORITOS / BUSCAR / CONTACTO ---------- */
@@ -298,6 +321,7 @@ body{
   position:absolute;bottom:0;left:0;width:100%;height:68px;background:#fff;
   border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:20;
   box-shadow:0 -4px 20px rgba(0,0,0,.04);
+  transform: translateZ(0); /* Aceleración por hardware */
 }
 .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;gap:4px;}
 .nav-item svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
@@ -309,14 +333,14 @@ body{
   body{display:block;background:var(--bg-canvas);}
   .phone-wrapper{
     max-width:100%;width:100%;min-height:0;
-    height:100vh;height:100dvh;
+    height:100dvh;
     border-radius:0;box-shadow:none;
   }
   .bottom-nav{
     height:calc(64px + env(safe-area-inset-bottom));
     padding-bottom:env(safe-area-inset-bottom);
   }
-  .pad{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom));}
+  .pad{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom));}
   .pad-admin{padding-bottom:calc(14rem + env(safe-area-inset-bottom));}
   .hero-inner{padding-bottom:calc(2rem + env(safe-area-inset-bottom));}
 }
@@ -362,7 +386,7 @@ body{
 /* Ajuste de miniatura */
 .thumb-adjuster{margin-top:1rem;background:var(--bg-canvas);padding:1rem;border-radius:12px;display:none;border:1px solid #E2DDD3;}
 .thumb-adjuster.active{display:block;}
-.thumb-preview-box{width:120px;height:120px;border-radius:10px;background-size:cover;margin:0 auto 1rem;border:2px solid var(--brand-deep);box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.thumb-preview-box{width:120px;height:120px;border-radius:10px;background-size:cover;background-position:center;transition:background-position 0.1s ease-out;margin:0 auto 1rem;border:2px solid var(--brand-deep);box-shadow:0 4px 12px rgba(0,0,0,0.1);}
 .range-group{margin-bottom:.8rem;display:flex;align-items:center;gap:10px;}
 .range-group label{font-size:.7rem;width:60px;margin-bottom:0;flex-shrink:0;}
 .range-group input[type=range]{flex:1;accent-color:var(--brand-deep);}
@@ -385,9 +409,6 @@ body{
 .cert-chip{display:inline-flex;align-items:center;gap:8px;padding:.6rem .9rem;border-radius:30px;border:1.5px solid #E2DDD3;background:var(--bg-canvas);font-size:.78rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s;}
 .cert-chip svg{width:17px;height:17px;}
 .cert-chip.on{border-color:var(--orange);background:#fff;color:var(--orange);}
-.ajuste-row{display:flex;gap:8px;}
-.ajuste-chip{flex:1;text-align:center;padding:.65rem;border-radius:10px;border:1.5px solid #E2DDD3;background:var(--bg-canvas);font-size:.76rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s;}
-.ajuste-chip.on{border-color:var(--orange);background:#fff;color:var(--orange);}
 
 .btn-block{width:100%;background:var(--brand-deep);color:#fff;padding:1rem;border:none;border-radius:12px;text-transform:uppercase;letter-spacing:2px;font-weight:600;cursor:pointer;margin-top:.4rem;font-size:.8rem;transition:.2s;}
 .btn-block:active{transform:scale(.98);}
@@ -426,6 +447,7 @@ body{
   <div class="lightbox" id="lightbox">
     <div class="lightbox-close" onclick="cerrarLightbox()">×</div>
     <img class="lightbox-img" id="lightbox-img" src="">
+    <div class="lightbox-indicator" id="lightbox-indicator"></div>
   </div>
 
   <div class="top-navbar">
@@ -556,7 +578,9 @@ body{
     </div>
 
     <div id="view-admin" class="view-panel">
-      <div class="pad pad-admin"> <div class="admin-section-title" style="font-size:1.4rem;">Conexión en línea</div>
+      <div class="pad pad-admin">
+
+        <div class="admin-section-title" style="font-size:1.4rem;">Conexión en línea</div>
         <p class="admin-hint">Conecta tu repositorio de GitHub para que los productos se publiquen en internet y todos los vean con el link. El token se guarda <b>solo en este dispositivo</b>, nunca se comparte.</p>
         <div class="admin-card">
           <div id="gh-status" style="font-size:.82rem;font-weight:600;margin-bottom:1rem;">⚪ Sin conexión configurada</div>
@@ -628,10 +652,6 @@ body{
                 <input type="range" id="thumb-y" min="0" max="100" value="50" oninput="actualizarThumbPreview()">
               </div>
             </div>
-          </div>
-
-          <div class="admin-form-group" style="display:none;"> <label>Ajuste de las fotos</label>
-            <div class="ajuste-row" id="ajuste-toggle"></div>
           </div>
 
           <div class="admin-form-group">
@@ -741,15 +761,15 @@ const CERT_FIELDS = [
 
 let catalogoProductos = [];
 let favoritos = JSON.parse(localStorage.getItem('maderarte_favs') || '[]');
-let formImagenes = [];        // imágenes
-let formThumbX = 50, formThumbY = 50; // posición del thumbnail
+let formImagenes = [];        
+let formThumbX = 50, formThumbY = 50; 
 let formAcabados = [];        
 let formCerts = [];           
-let formAjuste = 'cover';     // fijo a cover por defecto, usamos el reubicador 
+let formAjuste = 'cover';     
 let paletaColores = [...PALETA_BASE];
 let editandoId = null;        
 let productoActual = null;    
-let listaCategoriaActual = []; // Para poder ordenar
+let listaCategoriaActual = []; 
 
 /* ============ CONEXIÓN EN LÍNEA (GITHUB) ============ */
 const GH_API='https://api.github.com';
@@ -924,7 +944,7 @@ function procesarAutenticacion(){
 }
 document.getElementById('admin-pass-input').addEventListener('keyup',e=>{if(e.key==='Enter')procesarAutenticacion();});
 
-/* ============ ADMIN: IMÁGENES ============ */
+/* ============ ADMIN: IMÁGENES Y DRAG & DROP ============ */
 function fileToDataURL(file, max=1100, q=0.82){
   return new Promise((resolve,reject)=>{
     const reader=new FileReader();
@@ -980,7 +1000,7 @@ function renderizarPreviews(){
     d.className='preview-item'+(i===0?' is-main':'');
     d.style.backgroundImage=`url('${img}')`;
     
-    // Drag and Drop listeners
+    // Listeners Drag & Drop
     d.draggable = true;
     d.addEventListener('dragstart', (e) => handleDragStart(e, i));
     d.addEventListener('dragover', handleDragOver);
@@ -1107,7 +1127,7 @@ async function registrarNuevoProducto(){
     imagenes: [...formImagenes],
     thumbPosX: formThumbX,
     thumbPosY: formThumbY,
-    ajuste: 'cover', // Fijo
+    ajuste: 'cover', 
     ancho: document.getElementById('prod-ancho').value.trim(),
     alto: document.getElementById('prod-alto').value.trim(),
     fondo: document.getElementById('prod-fondo').value.trim(),
@@ -1225,7 +1245,7 @@ function irACategoria(catKey, etiqueta){
   document.getElementById('cat-title-label').innerText=etiqueta;
   document.getElementById('sort-select').value='default';
   listaCategoriaActual = catalogoProductos.filter(p=>p.categoria===catKey);
-  aplicarFiltroPrecio(); // Pinta con orden por defecto
+  aplicarFiltroPrecio(); 
   cambiarPantalla('productos-ver', null);
 }
 
@@ -1237,7 +1257,7 @@ function aplicarFiltroPrecio(){
     lista.sort((a,b) => a.precio - b.precio);
   } else if (modo === 'desc') {
     lista.sort((a,b) => b.precio - a.precio);
-  } // 'default' conserva el orden original
+  } 
 
   const grid = document.getElementById('grid-productos-dinamicos');
   pintarGrid(grid, lista, `Aún no hay productos en esta categoría.<br>Agrégalos desde el panel.`);
@@ -1355,15 +1375,15 @@ function volverDeDetalle(){
   cambiarPantalla(pantallaAnterior, menuEl);
 }
 
-/* ============ CARRUSEL Y PANTALLA COMPLETA ============ */
+/* ============ CARRUSEL ============ */
 let galImgs=[], galIndex=0;
 
 function construirGaleria(imgs, ajuste){
   galImgs = imgs.slice();
   galIndex = 0;
   const multi = imgs.length>1;
-  // Añadimos el evento onclick para abrir el lightbox
-  const slides = imgs.map(im=>`<img src="${im}" draggable="false" alt="" onclick="abrirLightbox('${im}')">`).join('');
+  // Llamamos a abrirLightbox pasando el índice, no la URL
+  const slides = imgs.map((im, i) =>`<img src="${im}" draggable="false" alt="" onclick="abrirLightbox(${i})">`).join('');
   const navs = multi
     ? `<button class="gal-nav prev" onclick="galPrev()">‹</button><button class="gal-nav next" onclick="galNext()">›</button>`
     : '';
@@ -1407,14 +1427,70 @@ function iniciarCarrusel(){
   vp.addEventListener('touchend',()=>{if(!active)return;active=false;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){dx<0?galNext():galPrev();}});
 }
 
-/* Lightbox Functions */
-function abrirLightbox(src) {
-  document.getElementById('lightbox-img').src = src;
+/* ============ LIGHTBOX Y DESLIZAMIENTO (SWIPE) ============ */
+let lightboxIndex = 0;
+let lbStartX = 0;
+let lbEndX = 0;
+
+function abrirLightbox(index) {
+  lightboxIndex = index;
+  actualizarLightboxUI();
   document.getElementById('lightbox').classList.add('open');
+  document.body.classList.add('modal-abierto');
 }
+
 function cerrarLightbox() {
   document.getElementById('lightbox').classList.remove('open');
+  document.body.classList.remove('modal-abierto');
 }
+
+function actualizarLightboxUI() {
+  const imgEl = document.getElementById('lightbox-img');
+  const indEl = document.getElementById('lightbox-indicator');
+  
+  imgEl.style.opacity = 0; // Efecto fade out
+  
+  setTimeout(() => {
+    imgEl.src = galImgs[lightboxIndex];
+    if (galImgs.length > 1) {
+      indEl.innerText = `${lightboxIndex + 1} / ${galImgs.length}`;
+    } else {
+      indEl.innerText = '';
+    }
+    imgEl.style.opacity = 1; // Efecto fade in
+  }, 150);
+}
+
+function lightboxSiguiente() {
+  if (lightboxIndex < galImgs.length - 1) {
+    lightboxIndex++;
+    actualizarLightboxUI();
+  }
+}
+
+function lightboxAnterior() {
+  if (lightboxIndex > 0) {
+    lightboxIndex--;
+    actualizarLightboxUI();
+  }
+}
+
+// Eventos táctiles para deslizar en pantalla completa
+const lightboxCont = document.getElementById('lightbox');
+lightboxCont.addEventListener('touchstart', e => {
+  lbStartX = e.changedTouches[0].screenX;
+}, {passive: true});
+
+lightboxCont.addEventListener('touchend', e => {
+  lbEndX = e.changedTouches[0].screenX;
+  const dif = lbStartX - lbEndX;
+  if (dif > 50) {
+    lightboxSiguiente();
+  } else if (dif < -50) {
+    lightboxAnterior();
+  }
+}, {passive: true});
+
 
 /* ============ FAVORITOS ============ */
 function toggleFavorito(id){

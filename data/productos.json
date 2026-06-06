@@ -308,5 +308,37 @@
     ],
     "descripcion": "Compuesta por (1) sofá de 3 puestos (1) sofá de 2 puestos (1) mesa de centro (1) silla auxiliar Mesedora + cojines decorativos. Brazos enchapados en Flomorado",
     "acabados": []
+  },
+  {
+    "id": 1780771173523,
+    "categoria": "salas",
+    "nombre": "Sala Chanel",
+    "precio": 8900000,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771173525_7d45v.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771176698_nz0jr.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771177929_dxxf0.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771179123_2907v.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771180443_vd25n.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771181570_rxl75.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Microfibra",
+      "espuma": "Espuma penta",
+      "pintura": "Enchapes con acabados en pintura poliuretano"
+    },
+    "certificados": [
+      "antifluido",
+      "mascotas"
+    ],
+    "descripcion": "Compuesta por: (1) sofá de 3 puestos (1) sofá de 2 puestos, mesa de centro + silla auxiliar. Un lujoso enchape en madera flormorado alrededor de su estructura.",
+    "acabados": []
   }
 ]

@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>Maderarte | Catálogo</title>
@@ -50,7 +50,7 @@ body{
 }
 body.modal-abierto {
   overflow: hidden; 
-  touch-action: none; 
+  /* CIRUGÍA 2: Se eliminó touch-action: none; para permitir el zoom pellizcando */
 }
 
 /* ---------- DISPOSITIVO ---------- */
@@ -182,7 +182,7 @@ body.modal-abierto {
 .junior-word{font-family:'Baloo 2','Inter',sans-serif;font-weight:800;font-size:2.3rem;line-height:.9;letter-spacing:1px;margin-bottom:.35rem;}
 .junior-word span{display:inline-block;text-shadow:0 2px 6px rgba(0,0,0,.4);}
 
-/* ---------- GRID PRODUCTOS ---------- */
+/* ---------- CIRUGÍA 3: GRID PRODUCTOS (ESTILO MASONRY/PINTEREST) ---------- */
 .back-link{
   display:inline-flex;align-items:center;gap:8px;margin:1.2rem 0 .2rem;cursor:pointer;color:var(--muted);
   font-size:.74rem;text-transform:uppercase;letter-spacing:1.5px;
@@ -190,18 +190,47 @@ body.modal-abierto {
 .back-link svg{width:16px;height:16px;}
 .sort-bar{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;margin-bottom:.8rem;}
 .sort-select{padding:.6rem .8rem;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:.75rem;outline:none;font-family:inherit;color:var(--dark);cursor:pointer;}
-.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+/* Nueva cuadrícula dinámica fluida sin recortes */
+.products-grid{
+  column-count: 2;
+  column-gap: 14px;
+  width: 100%;
+}
 .product-item-card{
   background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05);
-  display:flex;flex-direction:column;cursor:pointer;transition:transform .2s,box-shadow .2s;
+  display:inline-block; /* Evita que la tarjeta se rompa entre columnas */
+  width: 100%;
+  margin-bottom: 14px;
+  cursor:pointer;transition:transform .2s,box-shadow .2s;
 }
 .product-item-card:active{transform:scale(.97);}
-.product-img-holder{width:100%;aspect-ratio:1/1;background-size:contain;background-position:center center;background:#F0EBE1;position:relative;}
-.product-img-holder .ph-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--serif);font-size:1.4rem;}
+
+/* Ajuste de imagen natural */
+.product-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #F0EBE1; /* Fondo para fotos transparentes */
+}
+.ph-empty {
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  background: #F0EBE1;
+}
+
 .product-info-box{padding:.7rem .8rem .9rem;display:flex;flex-direction:column;gap:.25rem;}
 .product-info-box h4{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--dark);line-height:1.1;}
 .product-price{font-size:.85rem;font-weight:600;color:var(--brand-deep);}
-.empty-msg{grid-column:span 2;text-align:center;color:var(--muted);padding:3rem 1rem;font-size:.85rem;font-weight:300;line-height:1.6;}
+.empty-msg{
+  column-span: all; /* Importante para el layout en columnas */
+  text-align:center;color:var(--muted);padding:3rem 1rem;font-size:.85rem;font-weight:300;line-height:1.6;
+}
 
 /* ---------- DETALLE PRODUCTO ---------- */
 .detail-top{display:flex;justify-content:space-between;align-items:center;margin:1.1rem 0 1rem;}
@@ -277,17 +306,17 @@ body.modal-abierto {
 
 /* ---------- LIGHTBOX PANTALLA COMPLETA ---------- */
 .lightbox{
-  position:fixed;top:0;left:0;right:0;bottom:0; /* Anclaje estricto */
+  position:fixed;top:0;left:0;right:0;bottom:0; 
   background:rgba(12,9,6,0.96);z-index:9999;
   display:flex;align-items:center;justify-content:center;
   opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(5px);
-  touch-action: none; /* Bloquea el scroll de fondo cuando está abierto */
+  /* CIRUGÍA 4: Se eliminó touch-action: none para zoom libre en móvil */
 }
 .lightbox.open{opacity:1;pointer-events:auto;}
 .lightbox-img{
   max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px;
   box-shadow:0 10px 40px rgba(0,0,0,0.5);
-  transition: opacity 0.15s ease-in-out; /* Efecto suave al cambiar foto */
+  transition: opacity 0.15s ease-in-out; 
   -webkit-user-drag: none;
   user-select: none;
 }
@@ -297,7 +326,6 @@ body.modal-abierto {
   display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.3);
   z-index:10000;
 }
-/* Indicador de galería en el lightbox */
 .lightbox-indicator {
   position: absolute; bottom: 30px; left: 0; right: 0; text-align: center;
   color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 500; letter-spacing: 2px;
@@ -321,7 +349,7 @@ body.modal-abierto {
   position:absolute;bottom:0;left:0;width:100%;height:68px;background:#fff;
   border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:20;
   box-shadow:0 -4px 20px rgba(0,0,0,.04);
-  transform: translateZ(0); /* Aceleración por hardware */
+  transform: translateZ(0); 
 }
 .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;gap:4px;}
 .nav-item svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
@@ -336,8 +364,6 @@ body.modal-abierto {
     height:100dvh;
     border-radius:0;box-shadow:none;
   }
-  /* position:fixed ancla el menú a la pantalla real,
-     no al wrapper que cambia con la barra de Safari */
   .bottom-nav{
     position:fixed;
     bottom:0;left:0;right:0;
@@ -1245,7 +1271,7 @@ function renderizarListaAdmin(){
 
 function formatoCOP(n){return '$ '+Number(n).toLocaleString('es-CO')+' COP';}
 
-/* ============ LISTA POR CATEGORÍA Y FILTROS ============ */
+/* ============ CIRUGÍA 3: LISTA POR CATEGORÍA Y FILTROS (JS) ============ */
 function irACategoria(catKey, etiqueta){
   document.getElementById('current-view-title').innerText=etiqueta;
   document.getElementById('cat-title-label').innerText=etiqueta;
@@ -1269,17 +1295,21 @@ function aplicarFiltroPrecio(){
   pintarGrid(grid, lista, `Aún no hay productos en esta categoría.<br>Agrégalos desde el panel.`);
 }
 
+/* Modificado para que inyecte etiquetas <img> directas en lugar de fondos recortados */
 function pintarGrid(grid, lista, vacioMsg){
   grid.innerHTML='';
   if(lista.length===0){grid.innerHTML=`<p class="empty-msg">${vacioMsg}</p>`;return;}
   lista.forEach(p=>{
     const img=(p.imagenes&&p.imagenes[0])||'';
-    const tx = p.thumbPosX || 50; const ty = p.thumbPosY || 50;
-    const card=document.createElement('div');card.className='product-item-card';
+    const card=document.createElement('div');
+    card.className='product-item-card';
     card.onclick=()=>abrirDetalle(p.id);
+    
+    // Aquí está la magia: Usamos <img> para respetar la proporción real sin recortar
     const holder = img
-      ? `<div class="product-img-holder" style="background-image:url('${img}');background-position:${tx}% ${ty}%"></div>`
-      : `<div class="product-img-holder"><span class="ph-empty">Maderarte</span></div>`;
+      ? `<img src="${img}" class="product-img" alt="${p.nombre}">`
+      : `<div class="product-img ph-empty">Maderarte</div>`;
+      
     card.innerHTML=`${holder}
       <div class="product-info-box">
         <h4>${p.nombre}</h4>
@@ -1388,7 +1418,6 @@ function construirGaleria(imgs, ajuste){
   galImgs = imgs.slice();
   galIndex = 0;
   const multi = imgs.length>1;
-  // Llamamos a abrirLightbox pasando el índice, no la URL
   const slides = imgs.map((im, i) =>`<img src="${im}" draggable="false" alt="" onclick="abrirLightbox(${i})">`).join('');
   const navs = multi
     ? `<button class="gal-nav prev" onclick="galPrev()">‹</button><button class="gal-nav next" onclick="galNext()">›</button>`
@@ -1454,7 +1483,7 @@ function actualizarLightboxUI() {
   const imgEl = document.getElementById('lightbox-img');
   const indEl = document.getElementById('lightbox-indicator');
   
-  imgEl.style.opacity = 0; // Efecto fade out
+  imgEl.style.opacity = 0; 
   
   setTimeout(() => {
     imgEl.src = galImgs[lightboxIndex];
@@ -1463,7 +1492,7 @@ function actualizarLightboxUI() {
     } else {
       indEl.innerText = '';
     }
-    imgEl.style.opacity = 1; // Efecto fade in
+    imgEl.style.opacity = 1; 
   }, 150);
 }
 
@@ -1481,7 +1510,6 @@ function lightboxAnterior() {
   }
 }
 
-// Eventos táctiles para deslizar en pantalla completa
 const lightboxCont = document.getElementById('lightbox');
 lightboxCont.addEventListener('touchstart', e => {
   lbStartX = e.changedTouches[0].screenX;

@@ -196,7 +196,7 @@ body.modal-abierto {
   display:flex;flex-direction:column;cursor:pointer;transition:transform .2s,box-shadow .2s;
 }
 .product-item-card:active{transform:scale(.97);}
-.product-img-holder{width:100%;aspect-ratio:1/1;background-size:cover;background-position:center;background:#E7E2D8;position:relative;}
+.product-img-holder{width:100%;aspect-ratio:1/1;background-size:contain;background-position:center center;background:#F0EBE1;position:relative;}
 .product-img-holder .ph-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:var(--serif);font-size:1.4rem;}
 .product-info-box{padding:.7rem .8rem .9rem;display:flex;flex-direction:column;gap:.25rem;}
 .product-info-box h4{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--dark);line-height:1.1;}
@@ -336,9 +336,15 @@ body.modal-abierto {
     height:100dvh;
     border-radius:0;box-shadow:none;
   }
+  /* position:fixed ancla el menú a la pantalla real,
+     no al wrapper que cambia con la barra de Safari */
   .bottom-nav{
+    position:fixed;
+    bottom:0;left:0;right:0;
     height:calc(64px + env(safe-area-inset-bottom));
     padding-bottom:env(safe-area-inset-bottom);
+    border-radius:0;
+    z-index:100;
   }
   .pad{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom));}
   .pad-admin{padding-bottom:calc(14rem + env(safe-area-inset-bottom));}

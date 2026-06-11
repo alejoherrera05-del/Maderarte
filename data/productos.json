@@ -589,5 +589,39 @@
     ],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781199888979,
+    "categoria": "comedores",
+    "nombre": "Comedor Siena",
+    "precio": 7500000,
+    "variantesComedor": {
+      "p4": 7500000,
+      "p6": 8500000,
+      "p8": 10800000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199888980_dyyl6.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199890934_lc1fn.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199892366_7odsv.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199893482_jp7xs.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199894829_z3b06.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "madera": "Flormorado",
+      "tela": "Microfibra",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

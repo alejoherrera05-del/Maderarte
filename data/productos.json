@@ -487,5 +487,39 @@
     ],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781198872691,
+    "categoria": "comedores",
+    "nombre": "Comedor Audi",
+    "precio": 7900000,
+    "variantesComedor": {
+      "p4": 7900000,
+      "p6": 9500000,
+      "p8": 11900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198872693_rz4cl.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198874569_foyl9.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198875974_edg8g.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198877362_upnhk.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198879877_bd8iz.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flomorado",
+      "tela": "Microfibra",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

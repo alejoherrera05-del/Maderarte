@@ -418,5 +418,40 @@
       "#8a5a2b",
       "#d19d01"
     ]
+  },
+  {
+    "id": 1781198053375,
+    "categoria": "comedores",
+    "nombre": "Comedor Capry",
+    "precio": 5900000,
+    "variantesComedor": {
+      "p4": 5900000,
+      "p6": 7500000,
+      "p8": 9900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198053377_j7ixv.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198055217_f3lez.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198056444_37p8f.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198057568_r8isb.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198058698_4wc54.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Madera flormorado",
+      "madera": "Enchapes naturales en roble europeo",
+      "tela": "Tela de alta calidad",
+      "pintura": "Pintura poliuretano"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

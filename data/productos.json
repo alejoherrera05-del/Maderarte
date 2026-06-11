@@ -453,5 +453,39 @@
     ],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781198422699,
+    "categoria": "comedores",
+    "nombre": "Comedor media luna",
+    "precio": 5500000,
+    "variantesComedor": {
+      "p4": 5500000,
+      "p6": 6900000,
+      "p8": 9500000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198422701_j7myi.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198426450_8t0o0.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198429111_1w59k.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198431054_kzq33.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198432897_hrvis.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Madera cedro rosado",
+      "madera": "Enchapes naturales",
+      "pintura": "Pintura poliuretano"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

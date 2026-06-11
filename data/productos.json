@@ -374,5 +374,48 @@
     ],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781197670498,
+    "categoria": "comedores",
+    "nombre": "Comedor Holanda",
+    "precio": 3500000,
+    "variantesComedor": {
+      "p4": 3500000,
+      "p6": 4900000,
+      "p8": 7500000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197670500_e1ttc.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197672452_1403a.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197673776_fsq60.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197675006_5s54b.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197676337_tgmkl.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Madera cedro rosado",
+      "madera": "Enchapes naturales o efecto marmolizado",
+      "tela": "Tela importada de alta calidad",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": [
+      "#c4915c",
+      "#a9744f",
+      "#3b2417",
+      "#e8d4b5",
+      "#9a9388",
+      "#8a5a2b",
+      "#d19d01"
+    ]
   }
 ]

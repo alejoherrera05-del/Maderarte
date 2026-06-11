@@ -623,5 +623,41 @@
     ],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781200377824,
+    "categoria": "comedores",
+    "nombre": "Comedor Herradura",
+    "precio": 6900000,
+    "variantesComedor": {
+      "p4": 6900000,
+      "p6": 8500000,
+      "p8": 10900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200377825_v60um.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200379734_biyfu.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200380860_5ecvk.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200381884_zd9nn.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200382952_jz1l3.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200383999_0ut93.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200385058_71bcu.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Microfibra",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

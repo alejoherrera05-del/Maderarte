@@ -367,7 +367,8 @@
     "materialesData": {
       "estructura": "Flormorado",
       "madera": "Enchapes naturales",
-      "tela": "Telas importadas de alta calidad"
+      "tela": "Telas importadas de alta calidad",
+      "pintura": "Pintura poliuretano"
     },
     "certificados": [
       "mascotas"

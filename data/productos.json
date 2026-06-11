@@ -555,5 +555,39 @@
     ],
     "descripcion": "En presentación tapa redonda, ovalada o rectangular.",
     "acabados": []
+  },
+  {
+    "id": 1781199552618,
+    "categoria": "comedores",
+    "nombre": "Comedor Nordico",
+    "precio": 5900000,
+    "variantesComedor": {
+      "p4": 5900000,
+      "p6": 6900000,
+      "p8": 8900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199552619_qs27f.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199555818_rcito.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199557789_6ik13.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199559501_xue9e.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199560835_famy7.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "madera": "Flormorado",
+      "tela": "Microfibra",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

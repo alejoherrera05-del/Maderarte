@@ -521,5 +521,39 @@
     ],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781199219192,
+    "categoria": "comedores",
+    "nombre": "Comedor Milano",
+    "precio": 4900000,
+    "variantesComedor": {
+      "p4": 4900000,
+      "p6": 6500000,
+      "p8": 8900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199219193_9ai8z.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199221073_0eia3.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199222501_mq2yp.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199224138_wt4xi.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199225572_ydpvx.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "madera": "Flormorado",
+      "tela": "Microfibra",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "En presentación tapa redonda, ovalada o rectangular.",
+    "acabados": []
   }
 ]

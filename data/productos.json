@@ -340,5 +340,39 @@
     ],
     "descripcion": "Compuesta por: (1) sofá de 3 puestos (1) sofá de 2 puestos, mesa de centro + silla auxiliar. Un lujoso enchape en madera flormorado alrededor de su estructura.",
     "acabados": []
+  },
+  {
+    "id": 1781197237995,
+    "categoria": "comedores",
+    "nombre": "Comedor Alaska",
+    "precio": 7500000,
+    "variantesComedor": {
+      "p4": 6900000,
+      "p6": 8500000,
+      "p8": 10500000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197237996_yh8p2.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197239810_80vvl.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197241456_652it.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197242780_0us7x.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197244215_o3wqu.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "madera": "Enchapes naturales",
+      "tela": "Telas importadas de alta calidad"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

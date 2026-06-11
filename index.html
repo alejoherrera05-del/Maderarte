@@ -50,7 +50,6 @@ body{
 }
 body.modal-abierto {
   overflow: hidden; 
-  /* CIRUGÍA 2: Se eliminó touch-action: none; para permitir el zoom pellizcando */
 }
 
 /* ---------- DISPOSITIVO ---------- */
@@ -94,7 +93,7 @@ body.modal-abierto {
 .content-scroll{flex:1;overflow-y:auto;position:relative;-webkit-overflow-scrolling:touch; overscroll-behavior-y: contain;}
 .content-scroll::-webkit-scrollbar{width:0;}
 .pad{padding:0 1.1rem 7rem 1.1rem;}
-.pad-admin{padding-bottom: 12rem;} /* Margen extra para que el scroll finalice cómodamente sobre el menú */
+.pad-admin{padding-bottom: 12rem;} 
 .view-panel{display:none;}
 .view-panel.active{display:block;animation:fade .4s ease;}
 @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
@@ -182,7 +181,7 @@ body.modal-abierto {
 .junior-word{font-family:'Baloo 2','Inter',sans-serif;font-weight:800;font-size:2.3rem;line-height:.9;letter-spacing:1px;margin-bottom:.35rem;}
 .junior-word span{display:inline-block;text-shadow:0 2px 6px rgba(0,0,0,.4);}
 
-/* ---------- CIRUGÍA 3: GRID PRODUCTOS (ESTILO MASONRY/PINTEREST) ---------- */
+/* ---------- GRID PRODUCTOS ---------- */
 .back-link{
   display:inline-flex;align-items:center;gap:8px;margin:1.2rem 0 .2rem;cursor:pointer;color:var(--muted);
   font-size:.74rem;text-transform:uppercase;letter-spacing:1.5px;
@@ -191,7 +190,6 @@ body.modal-abierto {
 .sort-bar{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;margin-bottom:.8rem;}
 .sort-select{padding:.6rem .8rem;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:.75rem;outline:none;font-family:inherit;color:var(--dark);cursor:pointer;}
 
-/* Nueva cuadrícula dinámica fluida sin recortes */
 .products-grid{
   column-count: 2;
   column-gap: 14px;
@@ -199,19 +197,18 @@ body.modal-abierto {
 }
 .product-item-card{
   background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05);
-  display:inline-block; /* Evita que la tarjeta se rompa entre columnas */
+  display:inline-block; 
   width: 100%;
   margin-bottom: 14px;
   cursor:pointer;transition:transform .2s,box-shadow .2s;
 }
 .product-item-card:active{transform:scale(.97);}
 
-/* Ajuste de imagen natural */
 .product-img {
   width: 100%;
   height: auto;
   display: block;
-  background: #F0EBE1; /* Fondo para fotos transparentes */
+  background: #F0EBE1; 
 }
 .ph-empty {
   aspect-ratio: 1/1;
@@ -228,7 +225,7 @@ body.modal-abierto {
 .product-info-box h4{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--dark);line-height:1.1;}
 .product-price{font-size:.85rem;font-weight:600;color:var(--brand-deep);}
 .empty-msg{
-  column-span: all; /* Importante para el layout en columnas */
+  column-span: all; 
   text-align:center;color:var(--muted);padding:3rem 1rem;font-size:.85rem;font-weight:300;line-height:1.6;
 }
 
@@ -304,13 +301,17 @@ body.modal-abierto {
 .btn-wa{background:var(--bg-soft);color:var(--dark);border:1px solid var(--line);}
 .btn-wa .wa{color:#25D366;}
 
+/* ---------- OPCIONES DE TAMAÑO COMEDORES ---------- */
+.size-options{display:flex;gap:10px;margin-top:.4rem;flex-wrap:wrap;}
+.size-btn{padding:.65rem 1rem;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.82rem;font-family:inherit;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s;}
+.size-btn.active{border-color:var(--orange);background:var(--orange);color:#fff;}
+
 /* ---------- LIGHTBOX PANTALLA COMPLETA ---------- */
 .lightbox{
   position:fixed;top:0;left:0;right:0;bottom:0; 
   background:rgba(12,9,6,0.96);z-index:9999;
   display:flex;align-items:center;justify-content:center;
   opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(5px);
-  /* CIRUGÍA 4: Se eliminó touch-action: none para zoom libre en móvil */
 }
 .lightbox.open{opacity:1;pointer-events:auto;}
 .lightbox-img{
@@ -658,8 +659,17 @@ body.modal-abierto {
             <input type="text" id="prod-nombre" class="admin-input" placeholder="Ej: Bufet Nórdico">
           </div>
           <div class="admin-form-group">
-            <label>Precio (COP)</label>
+            <label>Precio Base (COP)</label>
             <input type="number" id="prod-precio" class="admin-input" placeholder="Ej: 6250000" inputmode="numeric">
+          </div>
+
+          <div class="admin-form-group" id="admin-variantes-comedor" style="display:none; background:var(--bg-soft); padding:1rem; border-radius:10px; margin-bottom:1.1rem;">
+            <label style="color:var(--dark);">Precios por tamaño de comedor <span class="opt-tag">(Rellena los que apliquen)</span></label>
+            <div class="dim-row" style="margin-top:0.6rem">
+              <input type="number" id="prod-p4" placeholder="$ 4 Puestos">
+              <input type="number" id="prod-p6" placeholder="$ 6 Puestos">
+              <input type="number" id="prod-p8" placeholder="$ 8 Puestos">
+            </div>
           </div>
 
           <div class="admin-form-group">
@@ -802,6 +812,10 @@ let paletaColores = [...PALETA_BASE];
 let editandoId = null;        
 let productoActual = null;    
 let listaCategoriaActual = []; 
+
+// Variables para variante de comedor
+let currentVarianteText = '';
+let currentVariantePrice = 0;
 
 /* ============ CONEXIÓN EN LÍNEA (GITHUB) ============ */
 const GH_API='https://api.github.com';
@@ -1032,7 +1046,6 @@ function renderizarPreviews(){
     d.className='preview-item'+(i===0?' is-main':'');
     d.style.backgroundImage=`url('${img}')`;
     
-    // Listeners Drag & Drop
     d.draggable = true;
     d.addEventListener('dragstart', (e) => handleDragStart(e, i));
     d.addEventListener('dragover', handleDragOver);
@@ -1051,7 +1064,6 @@ function quitarImagen(i){
   gestionarAjusteThumb();
 }
 
-/* Ajustador de miniatura */
 function gestionarAjusteThumb(){
   const adj = document.getElementById('thumb-adjuster');
   if(formImagenes.length > 0){
@@ -1139,11 +1151,16 @@ function toggleCert(key){
   renderizarCerts();
 }
 
+/* Evento para mostrar/ocultar variantes de comedores */
+document.getElementById('prod-categoria').addEventListener('change', function(e) {
+  document.getElementById('admin-variantes-comedor').style.display = e.target.value === 'comedores' ? 'block' : 'none';
+});
+
 /* ============ ADMIN: GUARDAR / EDITAR / ELIMINAR ============ */
 async function registrarNuevoProducto(){
   const nombre=document.getElementById('prod-nombre').value.trim();
   const precio=document.getElementById('prod-precio').value;
-  if(!nombre||!precio){alert('Escribe al menos el nombre y el precio.');return;}
+  if(!nombre){alert('Por favor escribe el nombre del producto.');return;}
 
   const materialesData={};
   MATERIAL_FIELDS.forEach(f=>{
@@ -1151,11 +1168,25 @@ async function registrarNuevoProducto(){
     if(v) materialesData[f.key]=v;
   });
 
+  const cat = document.getElementById('prod-categoria').value;
+  
+  // Procesar opciones especiales si es comedor
+  const variantesComedor = {};
+  if (cat === 'comedores') {
+    const p4 = document.getElementById('prod-p4').value;
+    const p6 = document.getElementById('prod-p6').value;
+    const p8 = document.getElementById('prod-p8').value;
+    if (p4) variantesComedor.p4 = parseFloat(p4);
+    if (p6) variantesComedor.p6 = parseFloat(p6);
+    if (p8) variantesComedor.p8 = parseFloat(p8);
+  }
+
   const prod={
     id: editandoId || Date.now(),
-    categoria: document.getElementById('prod-categoria').value,
+    categoria: cat,
     nombre,
-    precio: parseFloat(precio),
+    precio: precio ? parseFloat(precio) : 0,
+    variantesComedor: Object.keys(variantesComedor).length > 0 ? variantesComedor : null,
     imagenes: [...formImagenes],
     thumbPosX: formThumbX,
     thumbPosY: formThumbY,
@@ -1199,8 +1230,10 @@ async function registrarNuevoProducto(){
 
 function resetFormulario(){
   editandoId=null;
-  ['prod-nombre','prod-precio','prod-ancho','prod-alto','prod-fondo','prod-descripcion'].forEach(id=>document.getElementById(id).value='');
+  ['prod-nombre','prod-precio','prod-ancho','prod-alto','prod-fondo','prod-descripcion','prod-p4','prod-p6','prod-p8'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('prod-categoria').value='salas';
+  document.getElementById('admin-variantes-comedor').style.display='none';
+  
   formImagenes=[]; formAcabados=[]; formCerts=[]; 
   formThumbX=50; formThumbY=50;
   document.getElementById('thumb-x').value=50; document.getElementById('thumb-y').value=50;
@@ -1215,11 +1248,17 @@ function editarProducto(id){
   editandoId=id;
   document.getElementById('prod-categoria').value=p.categoria;
   document.getElementById('prod-nombre').value=p.nombre;
-  document.getElementById('prod-precio').value=p.precio;
+  document.getElementById('prod-precio').value=p.precio || '';
   document.getElementById('prod-ancho').value=p.ancho||'';
   document.getElementById('prod-alto').value=p.alto||'';
   document.getElementById('prod-fondo').value=p.fondo||'';
   document.getElementById('prod-descripcion').value=p.descripcion||'';
+  
+  document.getElementById('admin-variantes-comedor').style.display = p.categoria === 'comedores' ? 'block' : 'none';
+  document.getElementById('prod-p4').value = p.variantesComedor?.p4 || '';
+  document.getElementById('prod-p6').value = p.variantesComedor?.p6 || '';
+  document.getElementById('prod-p8').value = p.variantesComedor?.p8 || '';
+
   formImagenes=[...(p.imagenes||[])];
   formAcabados=[...(p.acabados||[])];
   formCerts=[...(p.certificados||[])];
@@ -1259,7 +1298,7 @@ function renderizarListaAdmin(){
       <div class="thumb-sm" style="background-image:url('${img}');background-position:${tx}% ${ty}%"></div>
       <div class="info">
         <strong>${p.nombre}</strong>
-        <div class="meta">${CAT_LABELS[p.categoria]} · ${formatoCOP(p.precio)}</div>
+        <div class="meta">${CAT_LABELS[p.categoria]} · ${p.precio ? formatoCOP(p.precio) : 'Múltiples precios'}</div>
       </div>
       <div class="row-actions">
         <button class="btn-edit" onclick="editarProducto(${p.id})">Editar</button>
@@ -1271,7 +1310,7 @@ function renderizarListaAdmin(){
 
 function formatoCOP(n){return '$ '+Number(n).toLocaleString('es-CO')+' COP';}
 
-/* ============ CIRUGÍA 3: LISTA POR CATEGORÍA Y FILTROS (JS) ============ */
+/* ============ LISTA POR CATEGORÍA Y FILTROS ============ */
 function irACategoria(catKey, etiqueta){
   document.getElementById('current-view-title').innerText=etiqueta;
   document.getElementById('cat-title-label').innerText=etiqueta;
@@ -1286,16 +1325,15 @@ function aplicarFiltroPrecio(){
   let lista = [...listaCategoriaActual];
   
   if (modo === 'asc') {
-    lista.sort((a,b) => a.precio - b.precio);
+    lista.sort((a,b) => (a.precio||0) - (b.precio||0));
   } else if (modo === 'desc') {
-    lista.sort((a,b) => b.precio - a.precio);
+    lista.sort((a,b) => (b.precio||0) - (a.precio||0));
   } 
 
   const grid = document.getElementById('grid-productos-dinamicos');
   pintarGrid(grid, lista, `Aún no hay productos en esta categoría.<br>Agrégalos desde el panel.`);
 }
 
-/* Modificado para que inyecte etiquetas <img> directas en lugar de fondos recortados */
 function pintarGrid(grid, lista, vacioMsg){
   grid.innerHTML='';
   if(lista.length===0){grid.innerHTML=`<p class="empty-msg">${vacioMsg}</p>`;return;}
@@ -1305,21 +1343,37 @@ function pintarGrid(grid, lista, vacioMsg){
     card.className='product-item-card';
     card.onclick=()=>abrirDetalle(p.id);
     
-    // Aquí está la magia: Usamos <img> para respetar la proporción real sin recortar
     const holder = img
       ? `<img src="${img}" class="product-img" alt="${p.nombre}">`
       : `<div class="product-img ph-empty">Maderarte</div>`;
-      
+    
+    // Si no tiene precio base pero tiene variantes de comedor, mostrar un texto alternativo o el menor precio
+    let txtPrecio = formatoCOP(p.precio);
+    if (!p.precio && p.categoria === 'comedores' && p.variantesComedor) {
+       const v = p.variantesComedor;
+       const minP = Math.min(...[v.p4, v.p6, v.p8].filter(x=>x));
+       txtPrecio = minP !== Infinity ? `Desde ${formatoCOP(minP)}` : '';
+    }
+
     card.innerHTML=`${holder}
       <div class="product-info-box">
         <h4>${p.nombre}</h4>
-        <div class="product-price">${formatoCOP(p.precio)}</div>
+        <div class="product-price">${txtPrecio}</div>
       </div>`;
     grid.appendChild(card);
   });
 }
 
 /* ============ DETALLE DE PRODUCTO ============ */
+function seleccionarVariante(puestos, precio, btnEl) {
+  currentVarianteText = puestos + ' Puestos';
+  currentVariantePrice = precio;
+  document.getElementById('detail-price-display').innerText = formatoCOP(precio);
+  
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  if(btnEl) btnEl.classList.add('active');
+}
+
 function abrirDetalle(id){
   const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
   const activa=document.querySelector('.view-panel.active');
@@ -1361,6 +1415,31 @@ function abrirDetalle(id){
       <div class="acabados-row">${p.acabados.map(c=>`<div class="acabado-dot" style="background:${c}"></div>`).join('')}</div></div>`;
   }
 
+  // Lógica para variantes de Comedores
+  let variantsHTML = '';
+  let hasVariants = false;
+  if (p.categoria === 'comedores' && p.variantesComedor) {
+    const v = p.variantesComedor;
+    if (v.p4 || v.p6 || v.p8) {
+      hasVariants = true;
+      variantsHTML = `
+        <div class="detail-block">
+          <div class="lbl">Tamaño del Comedor</div>
+          <div class="size-options">
+            ${v.p4 ? `<button class="size-btn" onclick="seleccionarVariante(4, ${v.p4}, this)">4 Puestos</button>` : ''}
+            ${v.p6 ? `<button class="size-btn" onclick="seleccionarVariante(6, ${v.p6}, this)">6 Puestos</button>` : ''}
+            ${v.p8 ? `<button class="size-btn" onclick="seleccionarVariante(8, ${v.p8}, this)">8 Puestos</button>` : ''}
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // Determinar precio inicial a mostrar
+  let displayPrice = p.precio ? formatoCOP(p.precio) : 'Selecciona un tamaño';
+  currentVarianteText = '';
+  currentVariantePrice = p.precio || 0;
+
   document.getElementById('detalle-contenido').innerHTML=`
     <div class="detail-top">
       <div class="detail-back" onclick="volverDeDetalle()">
@@ -1379,7 +1458,8 @@ function abrirDetalle(id){
     ${galleryHtml}
 
     <h2 class="detail-name">${p.nombre}</h2>
-    <div class="detail-price">${formatoCOP(p.precio)}</div>
+    <div class="detail-price" id="detail-price-display">${displayPrice}</div>
+    ${variantsHTML}
     ${descripcion}
     ${medidas}
     ${materiales}
@@ -1399,15 +1479,23 @@ function abrirDetalle(id){
   `;
   cambiarPantalla('detalle', null);
   iniciarCarrusel();
+
+  // Auto-seleccionar la primera variante si existen
+  if (hasVariants) {
+    const firstBtn = document.querySelector('.size-options .size-btn');
+    if (firstBtn) firstBtn.click();
+  }
 }
 
 let pantallaAnterior='categorias';
 function volverDeDetalle(){
-  const navMap={categorias:'nav-btn-cats',favoritos:2,buscar:3};
+  const navMap={categorias:'nav-btn-cats',favoritos:2,buscar:3,inicio:'nav-btn-inicio'};
   let menuEl=null;
   if(pantallaAnterior==='categorias') menuEl=document.getElementById('nav-btn-cats');
   else if(pantallaAnterior==='favoritos') menuEl=document.querySelectorAll('.nav-item')[2];
   else if(pantallaAnterior==='buscar') menuEl=document.querySelectorAll('.nav-item')[3];
+  else if(pantallaAnterior==='inicio') menuEl=document.getElementById('nav-btn-inicio');
+  
   cambiarPantalla(pantallaAnterior, menuEl);
 }
 
@@ -1525,7 +1613,6 @@ lightboxCont.addEventListener('touchend', e => {
   }
 }, {passive: true});
 
-
 /* ============ FAVORITOS ============ */
 function toggleFavorito(id){
   if(favoritos.includes(id)) favoritos=favoritos.filter(f=>f!==id);
@@ -1559,17 +1646,35 @@ function ejecutarBusqueda(){
 /* ============ WHATSAPP / COMPARTIR ============ */
 function solicitarInfo(id){
   const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
-  let msg=`Hola Maderarte 👋 Estoy interesado(a) en este producto del catálogo:\n\n*${p.nombre}*\nPrecio: ${formatoCOP(p.precio)}\nCategoría: ${CAT_LABELS[p.categoria]}\n`;
+  
+  let precioMostrar = currentVarianteText ? currentVariantePrice : p.precio;
+  let infoExtra = currentVarianteText ? ` (Tamaño: ${currentVarianteText})` : '';
+  
+  // URL directa
+  const urlBase = window.location.origin + window.location.pathname;
+  const linkProducto = urlBase + '?prod=' + id;
+
+  let msg=`Hola Maderarte 👋 Estoy interesado(a) en este producto del catálogo:\n\n*${p.nombre}*${infoExtra}\nPrecio: ${formatoCOP(precioMostrar)}\nCategoría: ${CAT_LABELS[p.categoria]}\n`;
   const dims=[];if(p.ancho)dims.push(`Ancho ${p.ancho}cm`);if(p.alto)dims.push(`Alto ${p.alto}cm`);if(p.fondo)dims.push(`Fondo ${p.fondo}cm`);
   if(dims.length) msg+=`Medidas: ${dims.join(' · ')}\n`;
-  msg+=`\n¿Me podrían dar más información?`;
+  msg+=`\nEnlace: ${linkProducto}\n\n¿Me podrían dar más información?`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank');
 }
+
 async function compartirProducto(id){
   const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
-  const texto=`Mira este mueble de Maderarte: ${p.nombre} — ${formatoCOP(p.precio)}. Más info: https://wa.me/${WHATSAPP}`;
-  if(navigator.share){ try{ await navigator.share({title:`Maderarte · ${p.nombre}`, text:texto}); }catch(e){}
-  } else { try{ await navigator.clipboard.writeText(texto); mostrarToast('Enlace copiado'); }catch(e){ prompt('Copia y comparte este texto:', texto); } }
+  
+  const urlBase = window.location.origin + window.location.pathname;
+  const linkProducto = urlBase + '?prod=' + id;
+  
+  const texto=`Mira este mueble de Maderarte: ${p.nombre}. Más info aquí:\n\n${linkProducto}`;
+  
+  if(navigator.share){ 
+    try{ await navigator.share({title:`Maderarte · ${p.nombre}`, text:texto}); }catch(e){}
+  } else { 
+    try{ await navigator.clipboard.writeText(texto); mostrarToast('Enlace copiado'); }
+    catch(e){ prompt('Copia y comparte este texto:', texto); } 
+  }
 }
 
 /* ============ TOAST ============ */
@@ -1585,7 +1690,17 @@ function mostrarToast(txt){
   await cargarCatalogo();
   const portada=await dbGet('portada');
   if(portada) aplicarPortada(portada);
-  cambiarPantalla('inicio', document.getElementById('nav-btn-inicio'));
+  
+  // Detectar enlaces directos (?prod=ID)
+  const params = new URLSearchParams(window.location.search);
+  const prodId = params.get('prod');
+  
+  if (prodId && catalogoProductos.find(p => p.id == prodId)) {
+    pantallaAnterior = 'inicio';
+    abrirDetalle(parseInt(prodId));
+  } else {
+    cambiarPantalla('inicio', document.getElementById('nav-btn-inicio'));
+  }
 })();
 </script>
 </body>

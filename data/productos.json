@@ -659,5 +659,39 @@
     ],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781302828117,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Majestic",
+    "precio": 9200000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 9200000,
+      "a160": 10500000,
+      "a200": 12800000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781302828118_m341t.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781302829836_g8nf3.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781302830963_2fnab.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781302832189_1z7t5.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "madera": "Enchape natural",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

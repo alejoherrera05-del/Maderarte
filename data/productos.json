@@ -693,5 +693,37 @@
     ],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781303098691,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Lluvia",
+    "precio": 9500000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 9500000,
+      "a160": 11500000,
+      "a200": 13900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303098692_1okoi.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303100687_sqicj.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303101840_jgbdq.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303102841_uqlop.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303103960_6s6w3.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [],
+    "descripcion": "",
+    "acabados": []
   }
 ]

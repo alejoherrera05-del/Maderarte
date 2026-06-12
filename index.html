@@ -301,7 +301,7 @@ body.modal-abierto {
 .btn-wa{background:var(--bg-soft);color:var(--dark);border:1px solid var(--line);}
 .btn-wa .wa{color:#25D366;}
 
-/* ---------- OPCIONES DE TAMAÑO COMEDORES ---------- */
+/* ---------- OPCIONES DE TAMAÑO ---------- */
 .size-options{display:flex;gap:10px;margin-top:.4rem;flex-wrap:wrap;}
 .size-btn{padding:.65rem 1rem;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.82rem;font-family:inherit;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s;}
 .size-btn.active{border-color:var(--orange);background:var(--orange);color:#fff;}
@@ -460,6 +460,13 @@ body.modal-abierto {
 /* toast */
 .toast{position:absolute;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:.8rem 1.4rem;border-radius:30px;font-size:.8rem;opacity:0;pointer-events:none;transition:.3s;z-index:200;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* Stats Grid */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.4rem; }
+.stat-card { background: #fff; padding: 1.2rem 1rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.05); text-align: center; }
+.stat-card b { display: block; font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: .5rem; }
+.stat-card span { display: block; font-size: 1.6rem; font-family: var(--serif); font-weight: 600; color: var(--brand-deep); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.stat-card-full { grid-column: span 2; }
 </style>
 </head>
 <body>
@@ -613,6 +620,23 @@ body.modal-abierto {
     <div id="view-admin" class="view-panel">
       <div class="pad pad-admin">
 
+        <div class="admin-section-title" style="font-size:1.4rem;">Estadísticas de Uso (Demo Local)</div>
+        <p class="admin-hint">Métricas capturadas en este dispositivo. Para métricas globales y rastreo total de clientes, se requiere integrar una base de datos externa.</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <b>Vistas Generales</b>
+            <span id="stat-views">0</span>
+          </div>
+          <div class="stat-card">
+            <b>Tus Favoritos</b>
+            <span id="stat-favs">0</span>
+          </div>
+          <div class="stat-card stat-card-full">
+            <b>Producto Más Visto</b>
+            <span id="stat-top-prod">-</span>
+          </div>
+        </div>
+
         <div class="admin-section-title" style="font-size:1.4rem;">Conexión en línea</div>
         <p class="admin-hint">Conecta tu repositorio de GitHub para que los productos se publiquen en internet y todos los vean con el link. El token se guarda <b>solo en este dispositivo</b>, nunca se comparte.</p>
         <div class="admin-card">
@@ -669,6 +693,15 @@ body.modal-abierto {
               <input type="number" id="prod-p4" placeholder="$ 4 Puestos">
               <input type="number" id="prod-p6" placeholder="$ 6 Puestos">
               <input type="number" id="prod-p8" placeholder="$ 8 Puestos">
+            </div>
+          </div>
+
+          <div class="admin-form-group" id="admin-variantes-alcoba" style="display:none; background:var(--bg-soft); padding:1rem; border-radius:10px; margin-bottom:1.1rem;">
+            <label style="color:var(--dark);">Precios por tamaño de cama <span class="opt-tag">(Rellena los que apliquen)</span></label>
+            <div class="dim-row" style="margin-top:0.6rem">
+              <input type="number" id="prod-a140" placeholder="$ 1.40 m">
+              <input type="number" id="prod-a160" placeholder="$ 1.60 m">
+              <input type="number" id="prod-a200" placeholder="$ 2x2 m">
             </div>
           </div>
 
@@ -813,9 +846,33 @@ let editandoId = null;
 let productoActual = null;    
 let listaCategoriaActual = []; 
 
-// Variables para variante de comedor
+// Variables para variante
 let currentVarianteText = '';
 let currentVariantePrice = 0;
+
+/* ============ ESTADÍSTICAS LOCALES ============ */
+function registrarVistaGeneral() {
+  let views = parseInt(localStorage.getItem('maderarte_stats_views') || '0');
+  localStorage.setItem('maderarte_stats_views', views + 1);
+}
+function registrarVistaProducto(id) {
+  let prodViews = JSON.parse(localStorage.getItem('maderarte_stats_prod_views') || '{}');
+  prodViews[id] = (prodViews[id] || 0) + 1;
+  localStorage.setItem('maderarte_stats_prod_views', JSON.stringify(prodViews));
+}
+function renderizarEstadisticas() {
+  document.getElementById('stat-views').innerText = localStorage.getItem('maderarte_stats_views') || '0';
+  document.getElementById('stat-favs').innerText = favoritos.length;
+  
+  let prodViews = JSON.parse(localStorage.getItem('maderarte_stats_prod_views') || '{}');
+  let topIds = Object.keys(prodViews).sort((a,b) => prodViews[b] - prodViews[a]);
+  let topName = '-';
+  if (topIds.length > 0) {
+    let topProd = catalogoProductos.find(p => p.id == topIds[0]);
+    if (topProd) topName = topProd.nombre + ' (' + prodViews[topIds[0]] + ' vistas)';
+  }
+  document.getElementById('stat-top-prod').innerText = topName;
+}
 
 /* ============ CONEXIÓN EN LÍNEA (GITHUB) ============ */
 const GH_API='https://api.github.com';
@@ -971,7 +1028,7 @@ function cambiarPantalla(id, menuEl){
 
   const t = document.getElementById('current-view-title');
   if(id==='inicio'){ t.innerText=''; document.getElementById('nav-btn-inicio').classList.add('active'); }
-  else if(id==='admin'){ t.innerText='Panel'; }
+  else if(id==='admin'){ t.innerText='Panel'; renderizarEstadisticas(); }
   else if(id==='detalle' || id==='productos-ver'){ /* fijado por la categoria */ }
   else { t.innerText = CAT_LABELS[id] || id; }
 
@@ -1151,9 +1208,10 @@ function toggleCert(key){
   renderizarCerts();
 }
 
-/* Evento para mostrar/ocultar variantes de comedores */
+/* Evento para mostrar/ocultar variantes de comedores y alcobas */
 document.getElementById('prod-categoria').addEventListener('change', function(e) {
   document.getElementById('admin-variantes-comedor').style.display = e.target.value === 'comedores' ? 'block' : 'none';
+  document.getElementById('admin-variantes-alcoba').style.display = e.target.value === 'alcobas' ? 'block' : 'none';
 });
 
 /* ============ ADMIN: GUARDAR / EDITAR / ELIMINAR ============ */
@@ -1181,12 +1239,24 @@ async function registrarNuevoProducto(){
     if (p8) variantesComedor.p8 = parseFloat(p8);
   }
 
+  // Procesar opciones especiales si es alcoba
+  const variantesAlcoba = {};
+  if (cat === 'alcobas') {
+    const a140 = document.getElementById('prod-a140').value;
+    const a160 = document.getElementById('prod-a160').value;
+    const a200 = document.getElementById('prod-a200').value;
+    if (a140) variantesAlcoba.a140 = parseFloat(a140);
+    if (a160) variantesAlcoba.a160 = parseFloat(a160);
+    if (a200) variantesAlcoba.a200 = parseFloat(a200);
+  }
+
   const prod={
     id: editandoId || Date.now(),
     categoria: cat,
     nombre,
     precio: precio ? parseFloat(precio) : 0,
     variantesComedor: Object.keys(variantesComedor).length > 0 ? variantesComedor : null,
+    variantesAlcoba: Object.keys(variantesAlcoba).length > 0 ? variantesAlcoba : null,
     imagenes: [...formImagenes],
     thumbPosX: formThumbX,
     thumbPosY: formThumbY,
@@ -1230,9 +1300,11 @@ async function registrarNuevoProducto(){
 
 function resetFormulario(){
   editandoId=null;
-  ['prod-nombre','prod-precio','prod-ancho','prod-alto','prod-fondo','prod-descripcion','prod-p4','prod-p6','prod-p8'].forEach(id=>document.getElementById(id).value='');
+  ['prod-nombre','prod-precio','prod-ancho','prod-alto','prod-fondo','prod-descripcion',
+   'prod-p4','prod-p6','prod-p8','prod-a140','prod-a160','prod-a200'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('prod-categoria').value='salas';
   document.getElementById('admin-variantes-comedor').style.display='none';
+  document.getElementById('admin-variantes-alcoba').style.display='none';
   
   formImagenes=[]; formAcabados=[]; formCerts=[]; 
   formThumbX=50; formThumbY=50;
@@ -1258,6 +1330,11 @@ function editarProducto(id){
   document.getElementById('prod-p4').value = p.variantesComedor?.p4 || '';
   document.getElementById('prod-p6').value = p.variantesComedor?.p6 || '';
   document.getElementById('prod-p8').value = p.variantesComedor?.p8 || '';
+
+  document.getElementById('admin-variantes-alcoba').style.display = p.categoria === 'alcobas' ? 'block' : 'none';
+  document.getElementById('prod-a140').value = p.variantesAlcoba?.a140 || '';
+  document.getElementById('prod-a160').value = p.variantesAlcoba?.a160 || '';
+  document.getElementById('prod-a200').value = p.variantesAlcoba?.a200 || '';
 
   formImagenes=[...(p.imagenes||[])];
   formAcabados=[...(p.acabados||[])];
@@ -1347,12 +1424,18 @@ function pintarGrid(grid, lista, vacioMsg){
       ? `<img src="${img}" class="product-img" alt="${p.nombre}">`
       : `<div class="product-img ph-empty">Maderarte</div>`;
     
-    // Si no tiene precio base pero tiene variantes de comedor, mostrar un texto alternativo o el menor precio
+    // Si no tiene precio base pero tiene variantes (Comedor o Alcoba), mostrar el menor precio
     let txtPrecio = formatoCOP(p.precio);
-    if (!p.precio && p.categoria === 'comedores' && p.variantesComedor) {
-       const v = p.variantesComedor;
-       const minP = Math.min(...[v.p4, v.p6, v.p8].filter(x=>x));
-       txtPrecio = minP !== Infinity ? `Desde ${formatoCOP(minP)}` : '';
+    if (!p.precio) {
+      if (p.categoria === 'comedores' && p.variantesComedor) {
+         const v = p.variantesComedor;
+         const minP = Math.min(...[v.p4, v.p6, v.p8].filter(x=>x));
+         txtPrecio = minP !== Infinity ? `Desde ${formatoCOP(minP)}` : '';
+      } else if (p.categoria === 'alcobas' && p.variantesAlcoba) {
+         const v = p.variantesAlcoba;
+         const minP = Math.min(...[v.a140, v.a160, v.a200].filter(x=>x));
+         txtPrecio = minP !== Infinity ? `Desde ${formatoCOP(minP)}` : '';
+      }
     }
 
     card.innerHTML=`${holder}
@@ -1365,8 +1448,8 @@ function pintarGrid(grid, lista, vacioMsg){
 }
 
 /* ============ DETALLE DE PRODUCTO ============ */
-function seleccionarVariante(puestos, precio, btnEl) {
-  currentVarianteText = puestos + ' Puestos';
+function seleccionarVariante(tamanoTexto, precio, btnEl) {
+  currentVarianteText = tamanoTexto;
   currentVariantePrice = precio;
   document.getElementById('detail-price-display').innerText = formatoCOP(precio);
   
@@ -1376,6 +1459,8 @@ function seleccionarVariante(puestos, precio, btnEl) {
 
 function abrirDetalle(id){
   const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
+  registrarVistaProducto(id); // Analytics
+
   const activa=document.querySelector('.view-panel.active');
   if(activa){ const vid=activa.id.replace('view-',''); if(vid!=='detalle') pantallaAnterior=vid; }
   productoActual=p;
@@ -1415,9 +1500,10 @@ function abrirDetalle(id){
       <div class="acabados-row">${p.acabados.map(c=>`<div class="acabado-dot" style="background:${c}"></div>`).join('')}</div></div>`;
   }
 
-  // Lógica para variantes de Comedores
+  // Lógica para variantes de Comedores y Alcobas
   let variantsHTML = '';
   let hasVariants = false;
+
   if (p.categoria === 'comedores' && p.variantesComedor) {
     const v = p.variantesComedor;
     if (v.p4 || v.p6 || v.p8) {
@@ -1426,9 +1512,24 @@ function abrirDetalle(id){
         <div class="detail-block">
           <div class="lbl">Tamaño del Comedor</div>
           <div class="size-options">
-            ${v.p4 ? `<button class="size-btn" onclick="seleccionarVariante(4, ${v.p4}, this)">4 Puestos</button>` : ''}
-            ${v.p6 ? `<button class="size-btn" onclick="seleccionarVariante(6, ${v.p6}, this)">6 Puestos</button>` : ''}
-            ${v.p8 ? `<button class="size-btn" onclick="seleccionarVariante(8, ${v.p8}, this)">8 Puestos</button>` : ''}
+            ${v.p4 ? `<button class="size-btn" onclick="seleccionarVariante('4 Puestos', ${v.p4}, this)">4 Puestos</button>` : ''}
+            ${v.p6 ? `<button class="size-btn" onclick="seleccionarVariante('6 Puestos', ${v.p6}, this)">6 Puestos</button>` : ''}
+            ${v.p8 ? `<button class="size-btn" onclick="seleccionarVariante('8 Puestos', ${v.p8}, this)">8 Puestos</button>` : ''}
+          </div>
+        </div>
+      `;
+    }
+  } else if (p.categoria === 'alcobas' && p.variantesAlcoba) {
+    const v = p.variantesAlcoba;
+    if (v.a140 || v.a160 || v.a200) {
+      hasVariants = true;
+      variantsHTML = `
+        <div class="detail-block">
+          <div class="lbl">Tamaño de la Cama</div>
+          <div class="size-options">
+            ${v.a140 ? `<button class="size-btn" onclick="seleccionarVariante('1.40 m', ${v.a140}, this)">1.40 m</button>` : ''}
+            ${v.a160 ? `<button class="size-btn" onclick="seleccionarVariante('1.60 m', ${v.a160}, this)">1.60 m</button>` : ''}
+            ${v.a200 ? `<button class="size-btn" onclick="seleccionarVariante('2x2 m', ${v.a200}, this)">2.00 x 2.00 m</button>` : ''}
           </div>
         </div>
       `;
@@ -1686,6 +1787,8 @@ function mostrarToast(txt){
 
 /* ============ INICIO ============ */
 (async function init(){
+  registrarVistaGeneral(); // Analytics On Load
+  
   ghCargarConfig();
   await cargarCatalogo();
   const portada=await dbGet('portada');

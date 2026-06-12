@@ -725,5 +725,37 @@
     "certificados": [],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781303326021,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Poro abierto",
+    "precio": 0,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 7500000,
+      "a160": 8500000,
+      "a200": 10500000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303326023_4w60j.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303327803_6zksv.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303328929_rck5c.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303329953_fu4x4.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303330979_oje39.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "madera": "Técnica vintage"
+    },
+    "certificados": [],
+    "descripcion": "",
+    "acabados": []
   }
 ]

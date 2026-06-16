@@ -959,5 +959,31 @@
     "certificados": [],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781644855516,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Armonía",
+    "precio": 5900000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 5900000,
+      "a160": 6900000,
+      "a200": 8900000
+    },
+    "imagenes": [],
+    "thumbPosX": 50,
+    "thumbPosY": 50,
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "espuma": "Poliuretano mate"
+    },
+    "certificados": [],
+    "descripcion": "Cama, colchón súper pillow + (2) mesas de noche",
+    "acabados": []
   }
 ]

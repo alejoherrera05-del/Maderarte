@@ -790,5 +790,36 @@
     "certificados": [],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781633277189,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Temesis",
+    "precio": 7500000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 7500000,
+      "a160": 8500000,
+      "a200": 10900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633277190_3sht8.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633280474_hcflb.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633283856_u2ueb.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633285801_6agfg.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "pintura": "Poliuretano mate"
+    },
+    "certificados": [],
+    "descripcion": "",
+    "acabados": []
   }
 ]

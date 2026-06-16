@@ -757,5 +757,38 @@
     "certificados": [],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781632970094,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Esplendor",
+    "precio": 9500000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 9500000,
+      "a160": 10900000,
+      "a200": 12900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632970095_cmhnb.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632971949_m5m3o.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632973398_6btsl.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632976152_izo6i.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632978609_hrfbm.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "madera": "Enchape natural",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [],
+    "descripcion": "",
+    "acabados": []
   }
 ]

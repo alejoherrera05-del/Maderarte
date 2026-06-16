@@ -821,5 +821,44 @@
     "certificados": [],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781633523908,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Bosel",
+    "precio": 6900000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 6900000,
+      "a160": 7900000,
+      "a200": 10900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633523909_69rxo.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633526213_3e1t1.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633527975_ro2t7.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633529436_05fwg.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633530935_4c0s1.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "pintura": "Poliuretano mate"
+    },
+    "certificados": [],
+    "descripcion": "",
+    "acabados": [
+      "#3b2417",
+      "#a9744f",
+      "#c4915c",
+      "#5e4023",
+      "#8a5a2b",
+      "#d8b08c"
+    ]
   }
 ]

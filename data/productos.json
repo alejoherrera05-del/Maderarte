@@ -928,5 +928,36 @@
     ],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781644083519,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Portofino",
+    "precio": 5900000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 5900000,
+      "a160": 6900000,
+      "a200": 8900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644083521_8ntqa.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644087578_yywb9.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644090441_dq49m.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644092250_y5uqe.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "pintura": "Poliuretano mate"
+    },
+    "certificados": [],
+    "descripcion": "",
+    "acabados": []
   }
 ]

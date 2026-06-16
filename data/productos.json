@@ -990,5 +990,41 @@
     "certificados": [],
     "descripcion": "Cama, colchón súper pillow + (2) mesas de noche",
     "acabados": []
+  },
+  {
+    "id": 1781649466686,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Roma",
+    "precio": 7900000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 7900000,
+      "a160": 8900000,
+      "a200": 11500000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649466687_vhaqd.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649469044_yv0l4.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649470375_1n1d5.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649471502_xp8up.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649472630_mylz6.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Microfibra",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "Cama, colchón súper pillow + (2) mesas de noche",
+    "acabados": []
   }
 ]

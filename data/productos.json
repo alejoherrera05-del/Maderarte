@@ -971,9 +971,14 @@
       "a160": 6900000,
       "a200": 8900000
     },
-    "imagenes": [],
-    "thumbPosX": 50,
-    "thumbPosY": 50,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644972998_muuez.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644975002_i4dxf.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644976896_ypulp.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644978438_fib3x.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
     "ajuste": "cover",
     "ancho": "",
     "alto": "",

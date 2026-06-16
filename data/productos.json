@@ -860,5 +860,38 @@
       "#8a5a2b",
       "#d8b08c"
     ]
+  },
+  {
+    "id": 1781633842037,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Turqueza",
+    "precio": 9500000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 9500000,
+      "a160": 10900000,
+      "a200": 12900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633842038_md8u4.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633844081_tsc8m.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633845307_n58uz.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633847151_36wrj.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633848891_9k7t5.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "madera": "Enchape natural",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [],
+    "descripcion": "",
+    "acabados": []
   }
 ]

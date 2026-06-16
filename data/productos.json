@@ -893,5 +893,40 @@
     "certificados": [],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781643707186,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Fantasía",
+    "precio": 7500000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 7500000,
+      "a160": 8900000,
+      "a200": 11900000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781643707187_u5fyg.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781643709530_90zux.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781643711048_1sq9a.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781643712384_4gad4.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Microfibra",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

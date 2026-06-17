@@ -1026,5 +1026,36 @@
     ],
     "descripcion": "Cama, colchón súper pillow + (2) mesas de noche",
     "acabados": []
+  },
+  {
+    "id": 1781719116470,
+    "categoria": "alcobas",
+    "nombre": "Alcoba Milan",
+    "precio": 8200000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 8200000,
+      "a160": 9500000,
+      "a200": 12500000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781719116471_vx8yr.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781719119386_pr260.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781719120809_zy0qu.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781719123001_rv5ag.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [],
+    "descripcion": "",
+    "acabados": []
   }
 ]

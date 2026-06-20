@@ -1057,5 +1057,37 @@
     "certificados": [],
     "descripcion": "",
     "acabados": []
+  },
+  {
+    "id": 1781980321806,
+    "categoria": "junior",
+    "subcategoria": "cama_cunas",
+    "nombre": "Cama cuna modular",
+    "precio": 5900000,
+    "variantesComedor": null,
+    "variantesAlcoba": null,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781980321807_e20xf.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781980323435_x5z52.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781980324560_k9usv.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781980325578_jihpm.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781980326710_3befd.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781980327735_udvyi.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781980328758_0u4qy.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781980329725_dki3x.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "pintura": "Colores personalizados"
+    },
+    "certificados": [],
+    "descripcion": "Cama de 1.0 Mt x 1.90 Mt \n(2) mesas de noche \n(1) Colchón semi ortopédico \n(1) Lencería completa",
+    "acabados": []
   }
 ]

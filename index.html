@@ -217,85 +217,51 @@ body.modal-abierto {
 #group-subcategory { animation: fadeInAdmin 0.3s ease; }
 @keyframes fadeInAdmin { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ===== NUEVA GALERÍA JUNIOR PROTAGONISTA ===== */
-/* Sin height:100% ni flex para no romper el content-scroll padre */
-#view-junior-reel { display: block; }
-
-.jr-scroll { display: block; }
-.jr-scroll::-webkit-scrollbar { width: 0; }
-
-/* Barra superior */
-.jr-topbar {
-  display: flex; align-items: center; gap: 10px;
-  padding: 0.85rem 1.1rem 0.7rem;
-  background: var(--bg-canvas); border-bottom: 1px solid var(--line);
+/* Galería protagonista Junior */
+.jr-hero-wrap {
+  position: relative; width: 100%; background: #1a120a;
+  border-radius: 14px; overflow: hidden; margin-top: 1rem;
 }
-.jr-back {
-  display: flex; align-items: center; gap: 6px; cursor: pointer;
-  color: var(--muted); font-size: .73rem; text-transform: uppercase;
-  letter-spacing: 1.5px; font-weight: 500; flex-shrink: 0;
-}
-.jr-back svg { width: 15px; height: 15px; }
-.jr-cat-name {
-  font-family: var(--serif); font-size: 1.25rem; font-weight: 600;
-  color: var(--dark); line-height: 1; flex: 1; text-align: center;
-}
-.jr-count { font-size: .72rem; color: var(--muted); font-weight: 500; flex-shrink: 0; min-width: 32px; text-align: right; }
-
-/* Imagen protagonista */
-.jr-hero-wrap { position: relative; width: 100%; background: #1a120a; overflow: hidden; }
 .jr-hero-img {
-  width: 100%;
-  height: 420px;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  transition: opacity 0.28s ease;
-  cursor: zoom-in;
-  background: #1a120a;
+  width: 100%; height: 360px;
+  object-fit: contain; object-position: center;
+  display: block; background: #1a120a;
+  transition: opacity 0.25s ease; cursor: zoom-in;
 }
 .jr-hero-img.fading { opacity: 0; }
 .jr-hero-overlay {
   position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(180deg, transparent 30%, rgba(10,7,4,.78) 100%);
-  padding: 2rem 1.2rem 1rem; pointer-events: none;
+  background: linear-gradient(180deg, transparent 25%, rgba(10,7,4,.82) 100%);
+  padding: 2rem 1rem 1rem; pointer-events: none;
 }
 .jr-hero-name {
-  font-family: var(--serif); font-size: 1.7rem; font-weight: 600;
-  color: #fff; line-height: 1.05; text-shadow: 0 2px 14px rgba(0,0,0,.7); margin-bottom: 3px;
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 600;
+  color: #fff; line-height: 1.05; text-shadow: 0 2px 12px rgba(0,0,0,.7); margin-bottom: 3px;
 }
-.jr-hero-price { font-size: .9rem; font-weight: 600; color: var(--gold); text-shadow: 0 1px 8px rgba(0,0,0,.8); }
-
-/* Flechas navegación */
+.jr-hero-price { font-size: .88rem; font-weight: 600; color: var(--gold); text-shadow: 0 1px 8px rgba(0,0,0,.8); }
 .jr-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
-  width: 40px; height: 40px; border-radius: 50%;
+  width: 38px; height: 38px; border-radius: 50%;
   background: rgba(255,255,255,.9); border: none;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.35rem; color: var(--dark); cursor: pointer;
-  box-shadow: 0 2px 14px rgba(0,0,0,.25); z-index: 3;
-  transition: .2s; line-height: 0; padding-bottom: 2px;
+  font-size: 1.3rem; color: var(--dark); cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,.22); z-index: 3; line-height: 0; padding-bottom: 2px; transition: .2s;
 }
 .jr-nav:active { background: var(--orange); color: #fff; }
 .jr-nav.prev { left: 10px; } .jr-nav.next { right: 10px; }
 .jr-nav.hidden { display: none; }
-
-/* Contador */
 .jr-indicator {
-  position: absolute; top: 12px; right: 12px;
+  position: absolute; top: 10px; right: 10px;
   background: rgba(10,7,4,.55); backdrop-filter: blur(4px);
-  color: rgba(255,255,255,.9); font-size: .7rem; font-weight: 600;
-  letter-spacing: 1.5px; padding: 4px 10px; border-radius: 20px; z-index: 3;
+  color: rgba(255,255,255,.9); font-size: .68rem; font-weight: 600;
+  letter-spacing: 1.5px; padding: 4px 9px; border-radius: 20px; z-index: 3;
 }
 
-/* Acciones */
-.jr-actions {
-  display: flex; gap: 10px; padding: 0.85rem 1.1rem 0.65rem;
-  background: var(--bg-canvas); border-bottom: 1px solid var(--line);
-}
+/* Acciones bajo imagen */
+.jr-actions { display: flex; gap: 10px; margin-top: 0.85rem; }
 .jr-btn-wa {
   flex: 1; background: var(--dark); color: #fff; border: none;
-  border-radius: 11px; padding: .8rem .6rem;
+  border-radius: 11px; padding: .82rem .6rem;
   font-size: .72rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
   display: flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer; transition: .2s;
 }
@@ -309,10 +275,10 @@ body.modal-abierto {
 .jr-btn-fav svg { width: 19px; height: 19px; }
 .jr-btn-fav.on { background: var(--orange); border-color: var(--orange); color: #fff; }
 
-/* Botón ver detalle */
+/* Ver ficha completa */
 .jr-btn-detail {
   display: flex; align-items: center; justify-content: center; gap: 7px;
-  width: calc(100% - 2.2rem); margin: 0.5rem 1.1rem 0;
+  width: 100%; margin-top: 0.6rem;
   background: var(--bg-soft); color: var(--brand-deep);
   border: 1px solid var(--line); border-radius: 11px; padding: .72rem;
   font-size: .72rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; cursor: pointer; transition: .2s;
@@ -321,17 +287,19 @@ body.modal-abierto {
 .jr-btn-detail svg { width: 14px; height: 14px; }
 
 /* Descripción */
-.jr-desc-box { padding: 0.85rem 1.1rem 0.6rem; border-bottom: 1px solid var(--line); }
-.jr-desc-text { font-size: .82rem; color: var(--muted); line-height: 1.55; font-weight: 300; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.jr-desc-text {
+  font-size: .83rem; color: var(--muted); line-height: 1.55; font-weight: 300;
+  margin-top: 0.8rem;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
 
 /* Strip miniaturas */
-.jr-thumbs-section { padding: 0.65rem 0 0.6rem; background: var(--bg-canvas); }
-.jr-thumbs-label { font-size: .64rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; padding: 0 1.1rem; margin-bottom: 0.5rem; display: block; }
-.jr-thumbs-scroll { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 3px 1.1rem 10px; scrollbar-width: none; }
+.jr-thumbs-label { font-size: .65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin-top: 1.2rem; margin-bottom: 0.5rem; display: block; }
+.jr-thumbs-scroll { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; scrollbar-width: none; }
 .jr-thumbs-scroll::-webkit-scrollbar { display: none; }
 .jr-thumb {
   flex: 0 0 auto; scroll-snap-align: start;
-  width: 72px; height: 72px; border-radius: 12px;
+  width: 70px; height: 70px; border-radius: 11px;
   background-size: cover; background-position: center;
   border: 2.5px solid transparent; opacity: .5;
   cursor: pointer; transition: .2s; box-shadow: 0 2px 8px rgba(0,0,0,.08);
@@ -340,8 +308,7 @@ body.modal-abierto {
 .jr-thumb:active { transform: scale(.93); }
 
 /* Estado vacío */
-.jr-empty { padding: 3.5rem 1.5rem; text-align: center; color: var(--muted); font-size: .88rem; line-height: 1.6; }
-.jr-empty-icon { font-size: 2.5rem; margin-bottom: .8rem; }
+.jr-empty { padding: 3rem 1rem; text-align: center; color: var(--muted); font-size: .88rem; line-height: 1.6; }
 
 /* ---------- GRID PRODUCTOS ---------- */
 .back-link{
@@ -665,63 +632,58 @@ body.modal-abierto {
     </div>
 
     <div id="view-junior-reel" class="view-panel">
-      <!-- Barra superior fija -->
-      <div class="jr-topbar">
-        <div class="jr-back" onclick="mostrarSubcategoriasJunior()">
+      <div class="pad">
+        <div class="back-link" onclick="mostrarSubcategoriasJunior()">
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-          Volver
+          Volver a Subcategorías
         </div>
-        <div class="jr-cat-name" id="junior-reel-title"></div>
-        <div class="jr-count" id="jr-count-label"></div>
-      </div>
 
-      <!-- Imagen protagonista -->
-      <div class="jr-hero-wrap" id="jr-hero-wrap">
-        <img class="jr-hero-img" id="jr-hero-img" src="" alt="" onclick="jrAbrirLightbox()">
-        <div class="jr-indicator" id="jr-indicator"></div>
-        <button class="jr-nav prev" id="jr-nav-prev" onclick="jrNavegar(-1)">‹</button>
-        <button class="jr-nav next" id="jr-nav-next" onclick="jrNavegar(1)">›</button>
-        <div class="jr-hero-overlay">
-          <div class="jr-hero-name" id="jr-hero-name"></div>
-          <div class="jr-hero-price" id="jr-hero-price"></div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:1rem;">
+          <h2 id="junior-reel-title" style="font-family:var(--serif);font-size:1.9rem;font-weight:600;color:var(--dark);line-height:1;"></h2>
+          <span id="jr-count-label" style="font-size:.75rem;color:var(--muted);font-weight:500;"></span>
         </div>
-      </div>
 
-      <!-- Acciones del producto activo -->
-      <div class="jr-actions" id="jr-actions">
-        <button class="jr-btn-fav" id="jr-btn-fav" onclick="jrToggleFav()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        <!-- Imagen protagonista -->
+        <div class="jr-hero-wrap" id="jr-hero-wrap">
+          <img class="jr-hero-img" id="jr-hero-img" src="" alt="" onclick="jrAbrirLightbox()">
+          <div class="jr-indicator" id="jr-indicator"></div>
+          <button class="jr-nav prev" id="jr-nav-prev" onclick="jrNavegar(-1)">‹</button>
+          <button class="jr-nav next" id="jr-nav-next" onclick="jrNavegar(1)">›</button>
+          <div class="jr-hero-overlay">
+            <div class="jr-hero-name" id="jr-hero-name"></div>
+            <div class="jr-hero-price" id="jr-hero-price"></div>
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="jr-actions" id="jr-actions">
+          <button class="jr-btn-fav" id="jr-btn-fav" onclick="jrToggleFav()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </button>
+          <button class="jr-btn-wa" onclick="jrSolicitarInfo()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+            Solicitar información
+          </button>
+        </div>
+
+        <!-- Ver ficha completa -->
+        <button class="jr-btn-detail" id="jr-btn-detail" onclick="jrVerDetalle()">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
+          Ver ficha completa
         </button>
-        <button class="jr-btn-wa" onclick="jrSolicitarInfo()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-          Solicitar información
-        </button>
-      </div>
 
-      <!-- Ver ficha completa -->
-      <button class="jr-btn-detail" id="jr-btn-detail" onclick="jrVerDetalle()">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
-        Ver ficha completa
-      </button>
-
-      <!-- Descripción -->
-      <div class="jr-desc-box" id="jr-desc-box">
+        <!-- Descripción -->
         <div class="jr-desc-text" id="jr-desc-text"></div>
-      </div>
 
-      <!-- Strip de miniaturas -->
-      <div class="jr-thumbs-section" id="jr-thumbs-section">
-        <span class="jr-thumbs-label">Modelos disponibles</span>
+        <!-- Strip de miniaturas -->
+        <span class="jr-thumbs-label" id="jr-thumbs-label" style="display:none;">Modelos disponibles</span>
         <div class="jr-thumbs-scroll" id="jr-thumbs-scroll"></div>
-      </div>
 
-      <!-- Estado vacío -->
-      <div class="jr-empty" id="jr-empty" style="display:none;">
-        <div class="jr-empty-icon">🪵</div>
-        Muy pronto aquí encontrarás<br>todos los modelos de esta colección.
+        <!-- Estado vacío -->
+        <div class="jr-empty" id="jr-empty" style="display:none;">
+          🪵 Muy pronto aquí encontrarás todos los modelos de esta colección.
+        </div>
       </div>
-
-      <div style="height: calc(5rem + env(safe-area-inset-bottom, 0px));"></div>
     </div>
 
     <div id="view-productos-ver" class="view-panel">
@@ -1102,51 +1064,37 @@ function cambiarPantalla(id, menuEl){
 function mostrarSubcategoriasJunior() { cambiarPantalla('junior-subcats', null); }
 
 /* ============ JUNIOR GALERÍA PROTAGONISTA ============ */
-let jrProductos = [];   // productos de la subcategoría activa
-let jrIndex = 0;        // índice del producto activo
-let jrSubcatKey = '';   // clave de subcategoría activa
+let jrProductos = [], jrIndex = 0;
 
 function irASubcategoriaJunior(subcatKey, nombreSubcat) {
-  jrSubcatKey = subcatKey;
   jrIndex = 0;
   jrProductos = catalogoProductos.filter(p => p.categoria === 'junior' && p.subcategoria === subcatKey);
 
   document.getElementById('junior-reel-title').innerText = nombreSubcat;
   document.getElementById('jr-count-label').innerText = jrProductos.length > 0 ? jrProductos.length + (jrProductos.length === 1 ? ' modelo' : ' modelos') : '';
 
-  const empty = document.getElementById('jr-empty');
-  const heroWrap = document.getElementById('jr-hero-wrap');
-  const actions = document.getElementById('jr-actions');
-  const descBox = document.getElementById('jr-desc-box');
-  const thumbsSec = document.getElementById('jr-thumbs-section');
-  const btnDetail = document.getElementById('jr-btn-detail');
+  const sinProductos = jrProductos.length === 0;
+  document.getElementById('jr-hero-wrap').style.display   = sinProductos ? 'none' : 'block';
+  document.getElementById('jr-actions').style.display     = sinProductos ? 'none' : 'flex';
+  document.getElementById('jr-btn-detail').style.display  = sinProductos ? 'none' : 'flex';
+  document.getElementById('jr-desc-text').style.display   = sinProductos ? 'none' : 'block';
+  document.getElementById('jr-empty').style.display       = sinProductos ? 'block' : 'none';
+  document.getElementById('jr-thumbs-label').style.display = (jrProductos.length > 1) ? 'block' : 'none';
 
-  if (jrProductos.length === 0) {
-    empty.style.display = 'block';
-    heroWrap.style.display = 'none';
-    actions.style.display = 'none';
-    descBox.style.display = 'none';
-    thumbsSec.style.display = 'none';
-    btnDetail.style.display = 'none';
-  } else {
-    empty.style.display = 'none';
-    heroWrap.style.display = 'block';
-    actions.style.display = 'flex';
-    descBox.style.display = 'block';
-    thumbsSec.style.display = 'block';
-    btnDetail.style.display = 'flex';
+  if (!sinProductos) {
     jrRenderThumbs();
     jrActualizarHero(false);
+    jrIniciarSwipe();
   }
 
   cambiarPantalla('junior-reel', null);
   document.getElementById('main-scroll-container').scrollTop = 0;
-  jrIniciarSwipe();
 }
 
 function jrRenderThumbs() {
   const strip = document.getElementById('jr-thumbs-scroll');
   strip.innerHTML = '';
+  if (jrProductos.length <= 1) return;
   jrProductos.forEach((p, i) => {
     const img = (p.imagenes && p.imagenes[0]) || '';
     const div = document.createElement('div');
@@ -1158,34 +1106,25 @@ function jrRenderThumbs() {
   });
 }
 
-function jrActualizarHero(animar = true) {
-  const p = jrProductos[jrIndex];
-  if (!p) return;
-
+function jrActualizarHero(animar) {
+  const p = jrProductos[jrIndex]; if (!p) return;
   const imgEl = document.getElementById('jr-hero-img');
-  const nameEl = document.getElementById('jr-hero-name');
-  const priceEl = document.getElementById('jr-hero-price');
-  const indEl = document.getElementById('jr-indicator');
-  const descEl = document.getElementById('jr-desc-text');
 
   if (animar) {
     imgEl.classList.add('fading');
-    setTimeout(() => {
-      imgEl.src = (p.imagenes && p.imagenes[0]) || '';
-      imgEl.classList.remove('fading');
-    }, 150);
+    setTimeout(() => { imgEl.src = (p.imagenes && p.imagenes[0]) || ''; imgEl.classList.remove('fading'); }, 140);
   } else {
     imgEl.src = (p.imagenes && p.imagenes[0]) || '';
   }
 
-  nameEl.innerText = p.nombre;
-  priceEl.innerText = p.precio ? formatoCOP(p.precio) : 'Precio a consultar';
-  descEl.innerText = p.descripcion || 'Acabados y medidas personalizables bajo los más altos estándares de calidad.';
-  indEl.innerText = jrProductos.length > 1 ? `${jrIndex + 1} / ${jrProductos.length}` : '';
+  document.getElementById('jr-hero-name').innerText  = p.nombre;
+  document.getElementById('jr-hero-price').innerText = p.precio ? formatoCOP(p.precio) : 'Precio a consultar';
+  document.getElementById('jr-desc-text').innerText  = p.descripcion || 'Acabados y medidas personalizables bajo los más altos estándares de calidad.';
+  document.getElementById('jr-indicator').innerText  = jrProductos.length > 1 ? `${jrIndex + 1} / ${jrProductos.length}` : '';
 
-  // Botón favorito
-  const favBtn = document.getElementById('jr-btn-fav');
+  // Favorito
   const esFav = favoritos.includes(p.id);
+  const favBtn = document.getElementById('jr-btn-fav');
   favBtn.classList.toggle('on', esFav);
   favBtn.querySelector('svg').setAttribute('fill', esFav ? 'currentColor' : 'none');
 
@@ -1193,22 +1132,15 @@ function jrActualizarHero(animar = true) {
   document.getElementById('jr-nav-prev').classList.toggle('hidden', jrIndex === 0);
   document.getElementById('jr-nav-next').classList.toggle('hidden', jrIndex === jrProductos.length - 1);
 
-  // Actualizar miniaturas
+  // Miniaturas activas
   document.querySelectorAll('.jr-thumb').forEach((t, i) => {
     t.classList.toggle('active', i === jrIndex);
     if (i === jrIndex) t.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
   });
 }
 
-function jrIrA(i) {
-  if (i < 0 || i >= jrProductos.length) return;
-  jrIndex = i;
-  jrActualizarHero(true);
-}
-
-function jrNavegar(dir) {
-  jrIrA(jrIndex + dir);
-}
+function jrIrA(i) { if (i < 0 || i >= jrProductos.length) return; jrIndex = i; jrActualizarHero(true); }
+function jrNavegar(dir) { jrIrA(jrIndex + dir); }
 
 function jrToggleFav() {
   const p = jrProductos[jrIndex]; if (!p) return;
@@ -1222,7 +1154,7 @@ function jrToggleFav() {
 function jrSolicitarInfo() {
   const p = jrProductos[jrIndex]; if (!p) return;
   const link = window.location.origin + window.location.pathname + '?prod=' + p.id;
-  let msg = `Hola Maderarte 👋 Estoy interesado(a) en este producto de la línea Junior:\n\n*${p.nombre}*\nSubcategoría: ${p.subcategoria}\nPrecio: ${p.precio ? formatoCOP(p.precio) : 'A consultar'}\n\nEnlace: ${link}\n\n¿Me podrían brindar más especificaciones?`;
+  let msg = `Hola Maderarte 👋 Estoy interesado(a) en este producto de la línea Junior:\n\n*${p.nombre}*\nPrecio: ${p.precio ? formatoCOP(p.precio) : 'A consultar'}\n\nEnlace: ${link}\n\n¿Me podrían brindar más especificaciones?`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
@@ -1232,26 +1164,24 @@ function jrVerDetalle() {
   abrirDetalle(p.id);
 }
 
-// Swipe táctil en la imagen protagonista
+function jrAbrirLightbox() {
+  const p = jrProductos[jrIndex]; if (!p) return;
+  galImgs = (p.imagenes && p.imagenes.length) ? p.imagenes.slice() : [];
+  if (!galImgs.length) return;
+  lightboxIndex = 0;
+  actualizarLightboxUI();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.classList.add('modal-abierto');
+}
+
 function jrIniciarSwipe() {
   const hero = document.getElementById('jr-hero-wrap');
   if (!hero || hero._swipeReady) return;
   hero._swipeReady = true;
   let sx = 0, sy = 0, dx = 0, dy = 0, activo = false;
   hero.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; dx = 0; dy = 0; activo = true; }, { passive: true });
-  hero.addEventListener('touchmove', e => { if (!activo) return; dx = e.touches[0].clientX - sx; dy = e.touches[0].clientY - sy; }, { passive: true });
-  hero.addEventListener('touchend', () => { if (!activo) return; activo = false; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? jrNavegar(1) : jrNavegar(-1); } });
-}
-
-function jrAbrirLightbox() {
-  const p = jrProductos[jrIndex]; if (!p) return;
-  // Reutilizar el lightbox existente con las imágenes del producto actual
-  galImgs = p.imagenes && p.imagenes.length ? p.imagenes.slice() : [];
-  if (!galImgs.length) return;
-  lightboxIndex = 0;
-  actualizarLightboxUI();
-  document.getElementById('lightbox').classList.add('open');
-  document.body.classList.add('modal-abierto');
+  hero.addEventListener('touchmove',  e => { if (!activo) return; dx = e.touches[0].clientX - sx; dy = e.touches[0].clientY - sy; }, { passive: true });
+  hero.addEventListener('touchend',   () => { if (!activo) return; activo = false; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? jrNavegar(1) : jrNavegar(-1); } });
 }
 
 function solicitarInfoDirecto(id){
@@ -1587,11 +1517,7 @@ function mostrarToast(txt){ const t=document.getElementById('toast');t.innerText
   if (prodId && catalogoProductos.find(p => p.id == prodId)) {
     const prd = catalogoProductos.find(p => p.id == prodId);
     if(prd.categoria === 'junior') {
-      const subLabels = { cama_cunas:'Cama Cunas', cunas_convertibles:'Cunas Convertibles', montessori:'Montessori', alcobas_juveniles:'Alcobas Juveniles', armarios_cambiadores:'Armarios y Cambiadores', lencerias:'Lencerías' };
-      irASubcategoriaJunior(prd.subcategoria, subLabels[prd.subcategoria] || prd.subcategoria);
-      // ir al producto específico
-      const idx = jrProductos.findIndex(p => p.id == prodId);
-      if (idx >= 0) { jrIndex = idx; jrActualizarHero(false); }
+      irASubcategoriaJunior(prd.subcategoria, prd.subcategoria);
     } else {
       pantallaAnterior = 'inicio'; abrirDetalle(parseInt(prodId));
     }

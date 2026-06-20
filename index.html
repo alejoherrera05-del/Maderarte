@@ -181,6 +181,56 @@ body.modal-abierto {
 .junior-word{font-family:'Baloo 2','Inter',sans-serif;font-weight:800;font-size:2.3rem;line-height:.9;letter-spacing:1px;margin-bottom:.35rem;}
 .junior-word span{display:inline-block;text-shadow:0 2px 6px rgba(0,0,0,.4);}
 
+/* ---------- ESTILOS JUNIOR (SUBCATEGORIAS Y REEL) ---------- */
+.subcats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 1rem;
+}
+.subcat-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(33,29,24,0.04);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.subcat-card:active {
+  transform: scale(0.96);
+  background-color: var(--bg-soft);
+  border-color: var(--brand);
+}
+.subcat-card h4 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.2;
+}
+#group-subcategory { animation: fadeInAdmin 0.3s ease; }
+@keyframes fadeInAdmin { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Reel Horizontal Junior */
+.junior-reel-card {
+  flex: 0 0 280px; scroll-snap-align: start; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column;
+}
+.junior-reel-img { width: 100%; height: 280px; object-fit: cover; background: var(--bg-soft); }
+.junior-reel-info { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex-grow: 1; }
+.junior-reel-title { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--dark); line-height: 1.1; }
+.junior-reel-price { font-weight: 600; color: var(--brand-deep); font-size: 1rem; }
+.junior-reel-specs { font-size: 0.8rem; color: var(--muted); line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.junior-reel-actions { display: flex; gap: 8px; margin-top: auto; }
+.btn-j-info { flex-grow: 1; background: var(--dark); color: #fff; text-align: center; padding: 10px; border-radius: 10px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; border:none; cursor:pointer;}
+.btn-j-fav { width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; background: #fff; color: var(--dark); transition: .2s; cursor:pointer;}
+.btn-j-fav.on { background: var(--orange); border-color: var(--orange); color: #fff; }
+
 /* ---------- GRID PRODUCTOS ---------- */
 .back-link{
   display:inline-flex;align-items:center;gap:8px;margin:1.2rem 0 .2rem;cursor:pointer;color:var(--muted);
@@ -190,44 +240,15 @@ body.modal-abierto {
 .sort-bar{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;margin-bottom:.8rem;}
 .sort-select{padding:.6rem .8rem;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:.75rem;outline:none;font-family:inherit;color:var(--dark);cursor:pointer;}
 
-.products-grid{
-  column-count: 2;
-  column-gap: 14px;
-  width: 100%;
-}
-.product-item-card{
-  background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05);
-  display:inline-block; 
-  width: 100%;
-  margin-bottom: 14px;
-  cursor:pointer;transition:transform .2s,box-shadow .2s;
-}
+.products-grid{ column-count: 2; column-gap: 14px; width: 100%; }
+.product-item-card{ background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.05); display:inline-block; width: 100%; margin-bottom: 14px; cursor:pointer;transition:transform .2s,box-shadow .2s; }
 .product-item-card:active{transform:scale(.97);}
-
-.product-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  background: #F0EBE1; 
-}
-.ph-empty {
-  aspect-ratio: 1/1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  font-family: var(--serif);
-  font-size: 1.4rem;
-  background: #F0EBE1;
-}
-
+.product-img { width: 100%; height: auto; display: block; background: #F0EBE1; }
+.ph-empty { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; color: var(--muted); font-family: var(--serif); font-size: 1.4rem; background: #F0EBE1; }
 .product-info-box{padding:.7rem .8rem .9rem;display:flex;flex-direction:column;gap:.25rem;}
 .product-info-box h4{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--dark);line-height:1.1;}
 .product-price{font-size:.85rem;font-weight:600;color:var(--brand-deep);}
-.empty-msg{
-  column-span: all; 
-  text-align:center;color:var(--muted);padding:3rem 1rem;font-size:.85rem;font-weight:300;line-height:1.6;
-}
+.empty-msg{ column-span: all; text-align:center;color:var(--muted);padding:3rem 1rem;font-size:.85rem;font-weight:300;line-height:1.6; }
 
 /* ---------- DETALLE PRODUCTO ---------- */
 .detail-top{display:flex;justify-content:space-between;align-items:center;margin:1.1rem 0 1rem;}
@@ -241,18 +262,10 @@ body.modal-abierto {
 
 /* Galería */
 .gallery{margin-top:.2rem;}
-.gallery-viewport{
-  position:relative;width:100%;aspect-ratio:1/1;border-radius:16px;overflow:hidden;
-  background:#E7E2D8;touch-action:pan-y;
-}
+.gallery-viewport{ position:relative;width:100%;aspect-ratio:1/1;border-radius:16px;overflow:hidden; background:#E7E2D8;touch-action:pan-y; }
 .gallery-track{display:flex;height:100%;transition:transform .35s cubic-bezier(.4,0,.2,1);}
 .gallery-track img{min-width:100%;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none;cursor:zoom-in;}
-.gal-nav{
-  position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;
-  background:rgba(255,255,255,.92);border:none;display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;line-height:0;color:var(--dark);cursor:pointer;z-index:3;box-shadow:0 2px 10px rgba(0,0,0,.18);
-  padding-bottom:3px;transition:.2s;
-}
+.gal-nav{ position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%; background:rgba(255,255,255,.92);border:none;display:flex;align-items:center;justify-content:center; font-size:1.4rem;line-height:0;color:var(--dark);cursor:pointer;z-index:3;box-shadow:0 2px 10px rgba(0,0,0,.18); padding-bottom:3px;transition:.2s; }
 .gal-nav:active{background:var(--orange);color:#fff;}
 .gal-nav.prev{left:10px;} .gal-nav.next{right:10px;}
 .gal-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:3;}
@@ -260,10 +273,7 @@ body.modal-abierto {
 .gal-dots .dot.active{background:#fff;width:18px;border-radius:4px;}
 .gallery-thumbs-row{display:flex;gap:9px;margin-top:11px;overflow-x:auto;padding-bottom:3px;scrollbar-width:none;}
 .gallery-thumbs-row::-webkit-scrollbar{height:0;}
-.thumb-h{
-  flex:0 0 auto;width:64px;height:64px;border-radius:12px;overflow:hidden;cursor:pointer;
-  background-size:cover;background-position:center;border:2px solid transparent;opacity:.55;transition:.2s;
-}
+.thumb-h{ flex:0 0 auto;width:64px;height:64px;border-radius:12px;overflow:hidden;cursor:pointer; background-size:cover;background-position:center;border:2px solid transparent;opacity:.55;transition:.2s; }
 .thumb-h.active{border-color:var(--orange);opacity:1;}
 
 .detail-name{font-family:var(--serif);font-size:2rem;font-weight:600;letter-spacing:.5px;margin:1.4rem 0 .2rem;text-transform:uppercase;line-height:1;}
@@ -274,7 +284,6 @@ body.modal-abierto {
 .detail-block .val{font-size:.88rem;font-weight:300;color:#4a443c;line-height:1.5;}
 .acabados-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:.2rem;}
 .acabado-dot{width:30px;height:30px;border-radius:50%;border:1px solid rgba(0,0,0,.12);box-shadow:inset 0 0 6px rgba(0,0,0,.15);}
-
 .mat-list{display:flex;flex-direction:column;gap:.7rem;margin-top:.3rem;}
 .mat-item{display:flex;align-items:center;gap:11px;}
 .mat-ic{width:36px;height:36px;border-radius:10px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;color:var(--brand-deep);flex-shrink:0;}
@@ -287,13 +296,8 @@ body.modal-abierto {
 .cert-badge svg{width:16px;height:16px;}
 .cert-pet{background:#E7F3EA;color:#2E7D4F;}
 .cert-fluid{background:#E7F0FB;color:#2A6FB0;}
-
 .detail-buttons{display:flex;gap:12px;margin-top:1.8rem;}
-.btn-fav,.btn-wa{
-  flex:1;padding:1rem .6rem;border:none;border-radius:12px;cursor:pointer;
-  font-size:.7rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;
-  display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;
-}
+.btn-fav,.btn-wa{ flex:1;padding:1rem .6rem;border:none;border-radius:12px;cursor:pointer; font-size:.7rem;text-transform:uppercase;letter-spacing:1px;font-weight:600; display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s; }
 .btn-fav{background:var(--dark);color:#fff;}
 .btn-fav:hover,.btn-fav:active{background:var(--orange);}
 .btn-fav.on{background:var(--orange);}
@@ -307,30 +311,11 @@ body.modal-abierto {
 .size-btn.active{border-color:var(--orange);background:var(--orange);color:#fff;}
 
 /* ---------- LIGHTBOX PANTALLA COMPLETA ---------- */
-.lightbox{
-  position:fixed;top:0;left:0;right:0;bottom:0; 
-  background:rgba(12,9,6,0.96);z-index:9999;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(5px);
-}
+.lightbox{ position:fixed;top:0;left:0;right:0;bottom:0; background:rgba(12,9,6,0.96);z-index:9999; display:flex;align-items:center;justify-content:center; opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(5px); }
 .lightbox.open{opacity:1;pointer-events:auto;}
-.lightbox-img{
-  max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.5);
-  transition: opacity 0.15s ease-in-out; 
-  -webkit-user-drag: none;
-  user-select: none;
-}
-.lightbox-close{
-  position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;
-  background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.3);
-  z-index:10000;
-}
-.lightbox-indicator {
-  position: absolute; bottom: 30px; left: 0; right: 0; text-align: center;
-  color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 500; letter-spacing: 2px;
-}
+.lightbox-img{ max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5); transition: opacity 0.15s ease-in-out; -webkit-user-drag: none; user-select: none; }
+.lightbox-close{ position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%; background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem; display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.3); z-index:10000; }
+.lightbox-indicator { position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 500; letter-spacing: 2px; }
 
 /* ---------- FAVORITOS / BUSCAR / CONTACTO ---------- */
 .simple-pad{padding-top:1.4rem;}
@@ -346,12 +331,7 @@ body.modal-abierto {
 .contact-actions svg{width:18px;height:18px;}
 
 /* ---------- BOTTOM NAV ---------- */
-.bottom-nav{
-  position:absolute;bottom:0;left:0;width:100%;height:68px;background:#fff;
-  border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:20;
-  box-shadow:0 -4px 20px rgba(0,0,0,.04);
-  transform: translateZ(0); 
-}
+.bottom-nav{ position:absolute;bottom:0;left:0;width:100%;height:68px;background:#fff; border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:20; box-shadow:0 -4px 20px rgba(0,0,0,.04); transform: translateZ(0); }
 .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;gap:4px;}
 .nav-item svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 .nav-item span{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;font-weight:500;}
@@ -360,19 +340,8 @@ body.modal-abierto {
 /* ---------- AJUSTES MÓVIL ---------- */
 @media (max-width:520px){
   body{display:block;background:var(--bg-canvas);}
-  .phone-wrapper{
-    max-width:100%;width:100%;min-height:0;
-    height:100dvh;
-    border-radius:0;box-shadow:none;
-  }
-  .bottom-nav{
-    position:fixed;
-    bottom:0;left:0;right:0;
-    height:calc(64px + env(safe-area-inset-bottom));
-    padding-bottom:env(safe-area-inset-bottom);
-    border-radius:0;
-    z-index:100;
-  }
+  .phone-wrapper{ max-width:100%;width:100%;min-height:0; height:100dvh; border-radius:0;box-shadow:none; }
+  .bottom-nav{ position:fixed; bottom:0;left:0;right:0; height:calc(64px + env(safe-area-inset-bottom)); padding-bottom:env(safe-area-inset-bottom); border-radius:0; z-index:100; }
   .pad{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom));}
   .pad-admin{padding-bottom:calc(14rem + env(safe-area-inset-bottom));}
   .hero-inner{padding-bottom:calc(2rem + env(safe-area-inset-bottom));}
@@ -402,7 +371,6 @@ body.modal-abierto {
 .dim-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .dim-row input{width:100%;padding:.75rem .5rem;border-radius:10px;border:1px solid #E2DDD3;background:var(--bg-canvas);font-family:inherit;font-size:.9rem;outline:none;text-align:center;}
 
-/* upload de imagenes */
 .upload-area{border:1.5px dashed #CFC6B6;border-radius:12px;padding:1.3rem;text-align:center;cursor:pointer;color:var(--muted);transition:.2s;background:var(--bg-canvas);}
 .upload-area:hover{border-color:var(--brand);color:var(--brand);}
 .upload-area svg{width:26px;height:26px;margin-bottom:.4rem;}
@@ -416,7 +384,6 @@ body.modal-abierto {
 .preview-item .rm{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#CC3B3B;color:#fff;font-size:.8rem;display:flex;align-items:center;justify-content:center;border:2px solid #fff;cursor:pointer;z-index:5;}
 .preview-item .main-tag{position:absolute;bottom:0;left:0;right:0;background:var(--brand-deep);color:#fff;font-size:.52rem;text-align:center;padding:1px;text-transform:uppercase;letter-spacing:.5px;pointer-events:none;}
 
-/* Ajuste de miniatura */
 .thumb-adjuster{margin-top:1rem;background:var(--bg-canvas);padding:1rem;border-radius:12px;display:none;border:1px solid #E2DDD3;}
 .thumb-adjuster.active{display:block;}
 .thumb-preview-box{width:120px;height:120px;border-radius:10px;background-size:cover;background-position:center;transition:background-position 0.1s ease-out;margin:0 auto 1rem;border:2px solid var(--brand-deep);box-shadow:0 4px 12px rgba(0,0,0,0.1);}
@@ -424,7 +391,6 @@ body.modal-abierto {
 .range-group label{font-size:.7rem;width:60px;margin-bottom:0;flex-shrink:0;}
 .range-group input[type=range]{flex:1;accent-color:var(--brand-deep);}
 
-/* paleta colores */
 .palette{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:.7rem;}
 .swatch{width:34px;height:34px;border-radius:50%;cursor:pointer;border:2px solid transparent;position:relative;box-shadow:inset 0 0 6px rgba(0,0,0,.15);transition:.15s;}
 .swatch.sel{border-color:var(--dark);transform:scale(1.08);}
@@ -433,7 +399,6 @@ body.modal-abierto {
 .custom-color input[type=color]{width:42px;height:36px;border:1px solid #DDD;border-radius:8px;background:none;cursor:pointer;}
 .mini-btn{padding:.55rem .9rem;border:none;border-radius:8px;background:var(--brand-deep);color:#fff;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;cursor:pointer;font-weight:600;}
 
-/* Campos de materiales en admin */
 .mat-field{display:flex;align-items:center;gap:10px;margin-bottom:.6rem;}
 .mat-field .mat-ic{width:38px;height:38px;}
 .mat-field input{flex:1;padding:.75rem;border-radius:10px;border:1px solid #E2DDD3;background:var(--bg-canvas);font-family:inherit;font-size:.88rem;outline:none;transition:.2s;}
@@ -457,11 +422,9 @@ body.modal-abierto {
 .btn-edit{background:var(--bg-soft);color:var(--dark);}
 .btn-delete{background:#CC3B3B;color:#fff;}
 
-/* toast */
 .toast{position:absolute;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:.8rem 1.4rem;border-radius:30px;font-size:.8rem;opacity:0;pointer-events:none;transition:.3s;z-index:200;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* Stats Grid */
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.4rem; }
 .stat-card { background: #fff; padding: 1.2rem 1rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.05); text-align: center; }
 .stat-card b { display: block; font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: .5rem; }
@@ -543,15 +506,67 @@ body.modal-abierto {
           <div class="card-details"><h3>Sofá Camas</h3><p>Descanso y funcionalidad en cada detalle.</p></div>
           <div class="card-arrow">›</div>
         </div>
-        <div class="category-card card-junior" style="background-image:url('junior.png');" onclick="irACategoria('junior','Maderarte Junior')">
+        <div class="category-card card-junior" style="background-image:url('junior.png');" onclick="mostrarSubcategoriasJunior()">
           <div class="card-details">
-            <p class="junior-eyebrow">Maderarte</p>
+            <p class="junior-eyebrow">Colección Infantil</p>
             <h3 class="junior-word">
               <span style="color:#FF4E4E;transform:rotate(-6deg)">J</span><span style="color:#2E9BFF;transform:rotate(4deg)">U</span><span style="color:#FFC400;transform:rotate(-3deg)">N</span><span style="color:#3FBF4F;transform:rotate(5deg)">I</span><span style="color:#FF8A1E;transform:rotate(-4deg)">O</span><span style="color:#A24BE0;transform:rotate(5deg)">R</span>
             </h3>
-            <p>Detalles que transforman sus espacios.</p>
+            <p>Diseños mágicos, seguros y funcionales.</p>
           </div>
           <div class="card-arrow">›</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="view-junior-subcats" class="view-panel">
+      <div class="pad">
+        <div class="back-link" onclick="cambiarPantalla('categorias', document.getElementById('nav-btn-cats'))">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          Regresar a Categorías
+        </div>
+        <div class="section-head">
+          <h2>Maderarte Junior</h2>
+          <p>Explora nuestras líneas de diseño infantil y juvenil</p>
+        </div>
+        <div class="subcats-grid">
+          <div class="subcat-card" onclick="irASubcategoriaJunior('cama_cunas', 'Cama Cunas')">
+            <h4>Cama Cunas</h4>
+          </div>
+          <div class="subcat-card" onclick="irASubcategoriaJunior('cunas_convertibles', 'Cunas Convertibles')">
+            <h4>Cunas Convertibles</h4>
+          </div>
+          <div class="subcat-card" onclick="irASubcategoriaJunior('montessori', 'Montessori')">
+            <h4>Montessori</h4>
+          </div>
+          <div class="subcat-card" onclick="irASubcategoriaJunior('alcobas_juveniles', 'Alcobas Juveniles')">
+            <h4>Alcobas Juveniles</h4>
+          </div>
+          <div class="subcat-card" onclick="irASubcategoriaJunior('armarios_cambiadores', 'Armarios y Cambiadores')">
+            <h4>Armarios y Cambiadores</h4>
+          </div>
+          <div class="subcat-card" onclick="irASubcategoriaJunior('lencerias', 'Lencerías')">
+            <h4>Lencerías</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="view-junior-reel" class="view-panel">
+      <div class="pad">
+        <div class="back-link" onclick="mostrarSubcategoriasJunior()">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          Volver a Subcategorías
+        </div>
+        
+        <div style="margin: 1.5rem 0 2rem; border-left: 3px solid var(--orange); padding-left: 12px;">
+          <h2 id="junior-reel-title" style="font-family:var(--serif); font-size: 2.2rem; color: var(--dark); line-height: 1;"></h2>
+          <p id="junior-reel-desc" style="font-size: 0.95rem; color: var(--muted); margin-top: 8px; line-height: 1.5;"></p>
+        </div>
+
+        <div style="width: 100vw; margin-left: -1.1rem; padding-left: 1.1rem; padding-right: 1.1rem; overflow: hidden;">
+          <div id="junior-reel-track" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; padding-bottom: 25px; scrollbar-width: none;">
+            </div>
         </div>
       </div>
     </div>
@@ -562,7 +577,6 @@ body.modal-abierto {
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           Volver a categorías
         </div>
-        
         <div class="sort-bar">
           <span style="font-size:1.3rem;font-family:var(--serif);font-weight:600;color:var(--dark);" id="cat-title-label"></span>
           <select class="sort-select" id="sort-select" onchange="aplicarFiltroPrecio()">
@@ -571,7 +585,6 @@ body.modal-abierto {
             <option value="desc">Mayor precio</option>
           </select>
         </div>
-
         <div class="products-grid" id="grid-productos-dinamicos"></div>
       </div>
     </div>
@@ -621,55 +634,32 @@ body.modal-abierto {
       <div class="pad pad-admin">
 
         <div class="admin-section-title" style="font-size:1.4rem;">Estadísticas de Uso (Demo Local)</div>
-        <p class="admin-hint">Métricas capturadas en este dispositivo. Para métricas globales y rastreo total de clientes, se requiere integrar una base de datos externa.</p>
+        <p class="admin-hint">Métricas capturadas en este dispositivo.</p>
         <div class="stats-grid">
-          <div class="stat-card">
-            <b>Vistas Generales</b>
-            <span id="stat-views">0</span>
-          </div>
-          <div class="stat-card">
-            <b>Tus Favoritos</b>
-            <span id="stat-favs">0</span>
-          </div>
-          <div class="stat-card stat-card-full">
-            <b>Producto Más Visto</b>
-            <span id="stat-top-prod">-</span>
-          </div>
+          <div class="stat-card"><b>Vistas Generales</b><span id="stat-views">0</span></div>
+          <div class="stat-card"><b>Tus Favoritos</b><span id="stat-favs">0</span></div>
+          <div class="stat-card stat-card-full"><b>Producto Más Visto</b><span id="stat-top-prod">-</span></div>
         </div>
 
         <div class="admin-section-title" style="font-size:1.4rem;">Conexión en línea</div>
-        <p class="admin-hint">Conecta tu repositorio de GitHub para que los productos se publiquen en internet y todos los vean con el link. El token se guarda <b>solo en este dispositivo</b>, nunca se comparte.</p>
+        <p class="admin-hint">Conecta tu repositorio de GitHub para que los productos se publiquen en internet.</p>
         <div class="admin-card">
           <div id="gh-status" style="font-size:.82rem;font-weight:600;margin-bottom:1rem;">⚪ Sin conexión configurada</div>
-          <div class="admin-form-group">
-            <label>Usuario de GitHub</label>
-            <input type="text" id="gh-owner" class="admin-input" placeholder="ej: maderartepopayan">
-          </div>
-          <div class="admin-form-group">
-            <label>Repositorio</label>
-            <input type="text" id="gh-repo" class="admin-input" placeholder="ej: catalogo">
-          </div>
-          <div class="admin-form-group">
-            <label>Rama <span class="opt-tag">(normalmente main)</span></label>
-            <input type="text" id="gh-branch" class="admin-input" placeholder="main">
-          </div>
-          <div class="admin-form-group">
-            <label>Token de acceso <span class="opt-tag">(secreto · solo en tu dispositivo)</span></label>
-            <input type="password" id="gh-token" class="admin-input" placeholder="github_pat_...">
-          </div>
+          <div class="admin-form-group"><label>Usuario de GitHub</label><input type="text" id="gh-owner" class="admin-input"></div>
+          <div class="admin-form-group"><label>Repositorio</label><input type="text" id="gh-repo" class="admin-input"></div>
+          <div class="admin-form-group"><label>Rama</label><input type="text" id="gh-branch" class="admin-input" placeholder="main"></div>
+          <div class="admin-form-group"><label>Token de acceso</label><input type="password" id="gh-token" class="admin-input"></div>
           <div style="display:flex;gap:10px;">
-            <button class="mini-btn" style="flex:1;padding:.85rem;" onclick="ghProbarConexion()">Probar conexión</button>
-            <button class="btn-block" style="flex:1;margin-top:0;" onclick="ghGuardarConfigDesdeForm()">Guardar conexión</button>
+            <button class="mini-btn" style="flex:1;padding:.85rem;" onclick="ghProbarConexion()">Probar</button>
+            <button class="btn-block" style="flex:1;margin-top:0;" onclick="ghGuardarConfigDesdeForm()">Guardar</button>
           </div>
-          <button class="btn-block" id="gh-publish-all" style="margin-top:10px;background:var(--gold);" onclick="ghPublicarTodo()">Publicar todo el catálogo en línea</button>
+          <button class="btn-block" id="gh-publish-all" style="margin-top:10px;background:var(--gold);" onclick="ghPublicarTodo()">Publicar todo el catálogo</button>
         </div>
 
         <div class="admin-section-title">Alimentar catálogo</div>
-        <p class="admin-hint">Sube las fotos desde tu celular o computador. Los campos marcados como opcionales solo aparecerán en el catálogo si los llenas.</p>
-
         <div class="admin-card">
           <div class="admin-form-group">
-            <label>Categoría</label>
+            <label>Categoría Principal</label>
             <select id="prod-categoria" class="admin-select">
               <option value="salas">Salas</option>
               <option value="comedores">Comedores</option>
@@ -678,6 +668,19 @@ body.modal-abierto {
               <option value="junior">Maderarte Junior</option>
             </select>
           </div>
+          
+          <div class="admin-form-group" id="group-subcategory" style="display:none; background:var(--bg-soft); padding:1rem; border-radius:10px; margin-bottom:1.1rem;">
+            <label style="color:var(--dark);">Subcategoría Junior</label>
+            <select id="prod-subcategoria" class="admin-select" style="margin-top:0.6rem">
+              <option value="cama_cunas">Cama Cunas</option>
+              <option value="cunas_convertibles">Cunas Convertibles</option>
+              <option value="montessori">Montessori</option>
+              <option value="alcobas_juveniles">Alcobas Juveniles</option>
+              <option value="armarios_cambiadores">Armarios y Cambiadores</option>
+              <option value="lencerias">Lencerías</option>
+            </select>
+          </div>
+
           <div class="admin-form-group">
             <label>Nombre del producto</label>
             <input type="text" id="prod-nombre" class="admin-input" placeholder="Ej: Bufet Nórdico">
@@ -688,7 +691,7 @@ body.modal-abierto {
           </div>
 
           <div class="admin-form-group" id="admin-variantes-comedor" style="display:none; background:var(--bg-soft); padding:1rem; border-radius:10px; margin-bottom:1.1rem;">
-            <label style="color:var(--dark);">Precios por tamaño de comedor <span class="opt-tag">(Rellena los que apliquen)</span></label>
+            <label style="color:var(--dark);">Precios por tamaño de comedor</label>
             <div class="dim-row" style="margin-top:0.6rem">
               <input type="number" id="prod-p4" placeholder="$ 4 Puestos">
               <input type="number" id="prod-p6" placeholder="$ 6 Puestos">
@@ -697,7 +700,7 @@ body.modal-abierto {
           </div>
 
           <div class="admin-form-group" id="admin-variantes-alcoba" style="display:none; background:var(--bg-soft); padding:1rem; border-radius:10px; margin-bottom:1.1rem;">
-            <label style="color:var(--dark);">Precios por tamaño de cama <span class="opt-tag">(Rellena los que apliquen)</span></label>
+            <label style="color:var(--dark);">Precios por tamaño de cama</label>
             <div class="dim-row" style="margin-top:0.6rem">
               <input type="number" id="prod-a140" placeholder="$ 1.40 m">
               <input type="number" id="prod-a160" placeholder="$ 1.60 m">
@@ -706,11 +709,10 @@ body.modal-abierto {
           </div>
 
           <div class="admin-form-group">
-            <label>Fotos del producto <span class="opt-tag">(Mantén presionada y arrastra para reordenar)</span></label>
+            <label>Fotos del producto</label>
             <div class="upload-area" onclick="document.getElementById('prod-imagenes').click()">
               <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               <b>Toca para subir fotos</b>
-              <small>La primera será la principal · puedes subir varias</small>
             </div>
             <input type="file" id="prod-imagenes" accept="image/*" multiple style="display:none" onchange="agregarImagenes(event)">
             <div class="preview-grid" id="preview-grid"></div>
@@ -718,19 +720,13 @@ body.modal-abierto {
             <div class="thumb-adjuster" id="thumb-adjuster">
               <label style="text-align:center;margin-bottom:.8rem;">Ajuste de la miniatura principal</label>
               <div class="thumb-preview-box" id="thumb-preview-box"></div>
-              <div class="range-group">
-                <label>Horizontal</label>
-                <input type="range" id="thumb-x" min="0" max="100" value="50" oninput="actualizarThumbPreview()">
-              </div>
-              <div class="range-group">
-                <label>Vertical</label>
-                <input type="range" id="thumb-y" min="0" max="100" value="50" oninput="actualizarThumbPreview()">
-              </div>
+              <div class="range-group"><label>H</label><input type="range" id="thumb-x" min="0" max="100" value="50" oninput="actualizarThumbPreview()"></div>
+              <div class="range-group"><label>V</label><input type="range" id="thumb-y" min="0" max="100" value="50" oninput="actualizarThumbPreview()"></div>
             </div>
           </div>
 
           <div class="admin-form-group">
-            <label>Medidas <span class="opt-tag">(opcional · en cm)</span></label>
+            <label>Medidas</label>
             <div class="dim-row">
               <input type="number" id="prod-ancho" placeholder="Ancho">
               <input type="number" id="prod-alto" placeholder="Alto">
@@ -738,27 +734,15 @@ body.modal-abierto {
             </div>
           </div>
 
+          <div class="admin-form-group"><label>Materiales</label><div id="mat-fields"></div></div>
+          <div class="admin-form-group"><label>Características</label><div class="cert-toggles" id="cert-toggles"></div></div>
+          <div class="admin-form-group"><label>Descripción / Especificaciones</label><textarea id="prod-descripcion" class="admin-textarea"></textarea></div>
           <div class="admin-form-group">
-            <label>Materiales <span class="opt-tag">(rellena solo los que apliquen)</span></label>
-            <div id="mat-fields"></div>
-          </div>
-
-          <div class="admin-form-group">
-            <label>Características <span class="opt-tag">(toca para activar si aplican)</span></label>
-            <div class="cert-toggles" id="cert-toggles"></div>
-          </div>
-
-          <div class="admin-form-group">
-            <label>Descripción <span class="opt-tag">(opcional)</span></label>
-            <textarea id="prod-descripcion" class="admin-textarea" placeholder="Ej: Elaborado en madera sólida con acabado natural..."></textarea>
-          </div>
-
-          <div class="admin-form-group">
-            <label>Acabados disponibles <span class="opt-tag">(opcional · toca para elegir)</span></label>
+            <label>Acabados disponibles</label>
             <div class="palette" id="palette"></div>
             <div class="custom-color">
               <input type="color" id="custom-color" value="#8a5a2b">
-              <button class="mini-btn" onclick="agregarColorCustom()">+ Añadir color</button>
+              <button class="mini-btn" onclick="agregarColorCustom()">+ Añadir</button>
             </div>
           </div>
 
@@ -766,7 +750,6 @@ body.modal-abierto {
         </div>
 
         <div class="admin-section-title" style="font-size:1.4rem;">Imagen de portada</div>
-        <p class="admin-hint">La foto grande que se ve al abrir la app (la pantalla de inicio).</p>
         <div class="admin-card">
           <div class="upload-area" onclick="document.getElementById('cover-input').click()">
             <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -811,9 +794,16 @@ body.modal-abierto {
 <script>
 const WHATSAPP = '573117476465';
 const CAT_LABELS = {salas:'Salas',comedores:'Comedores',alcobas:'Alcobas',sofacamas:'Sofá Camas',junior:'Maderarte Junior'};
-const PALETA_BASE = ['#3b2417','#5e4023','#8a5a2b','#a9744f','#c4915c','#d8b08c','#e8d4b5','#2a2622','#9a9388','#1f140d'];
+const INFO_JUNIOR = {
+  "cama_cunas": "Diseños multifuncionales y seguros que acompañan el crecimiento de tu bebé, optimizando el espacio con elegancia y maderas de alta calidad.",
+  "cunas_convertibles": "Evolución y versatilidad premium. Muebles diseñados estructuralmente para transformarse de una cuna a una habitación completa.",
+  "montessori": "Espacios creados para fomentar la autonomía, la libertad de movimiento y la seguridad absoluta, bajo acabados naturales e impecables.",
+  "alcobas_juveniles": "Habitaciones modernas y sofisticadas que reflejan la personalidad de los jóvenes, garantizando máximo confort y durabilidad.",
+  "armarios_cambiadores": "Soluciones de almacenamiento inteligente y cambiadores ergonómicos integrados con herrajes de alta gama.",
+  "lencerias": "Complementos textiles exclusivos confeccionados con las fibras más delicadas para vestir un descanso ideal."
+};
 
-// Iconos (SVG) para materiales y características
+const PALETA_BASE = ['#3b2417','#5e4023','#8a5a2b','#a9744f','#c4915c','#d8b08c','#e8d4b5','#2a2622','#9a9388','#1f140d'];
 const IC_ESTRUCTURA='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="10" rx="1.5"/><path d="M6 14v6M18 14v6"/></svg>';
 const IC_MADERA='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="5" rx="1.2"/><rect x="3" y="13" width="18" height="5" rx="1.2"/><path d="M8 6.5v4M14 6.5v4M11 13.5v4"/></svg>';
 const IC_TELA='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7c3-2 6 2 9 0s6-2 9 0M3 12c3-2 6 2 9 0s6-2 9 0M3 17c3-2 6 2 9 0s6-2 9 0"/></svg>';
@@ -823,15 +813,15 @@ const IC_PAW='<svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="
 const IC_DROP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9.5 14.5a2.6 2.6 0 0 0 2.5 2.2"/></svg>';
 
 const MATERIAL_FIELDS = [
-  {key:'estructura', label:'Estructura', ph:'Ej: Madera de pino',     icon:IC_ESTRUCTURA},
-  {key:'madera',     label:'Madera',     ph:'Ej: Encino macizo',      icon:IC_MADERA},
-  {key:'tela',       label:'Tela / Tapizado', ph:'Ej: Lino',          icon:IC_TELA},
-  {key:'espuma',     label:'Espuma',     ph:'Ej: Alta densidad',      icon:IC_ESPUMA},
-  {key:'pintura',    label:'Pintura / Acabado', ph:'Ej: Poliuretano mate', icon:IC_PINTURA},
+  {key:'estructura', label:'Estructura', ph:'Ej: Madera de pino', icon:IC_ESTRUCTURA},
+  {key:'madera', label:'Madera', ph:'Ej: Encino macizo', icon:IC_MADERA},
+  {key:'tela', label:'Tela / Tapizado', ph:'Ej: Lino', icon:IC_TELA},
+  {key:'espuma', label:'Espuma', ph:'Ej: Alta densidad', icon:IC_ESPUMA},
+  {key:'pintura', label:'Pintura / Acabado', ph:'Ej: Poliuretano mate', icon:IC_PINTURA},
 ];
 const CERT_FIELDS = [
-  {key:'mascotas',   label:'Amigable con mascotas', icon:IC_PAW,  cls:'cert-pet'},
-  {key:'antifluido', label:'Antifluido',            icon:IC_DROP, cls:'cert-fluid'},
+  {key:'mascotas', label:'Amigable con mascotas', icon:IC_PAW, cls:'cert-pet'},
+  {key:'antifluido', label:'Antifluido', icon:IC_DROP, cls:'cert-fluid'},
 ];
 
 let catalogoProductos = [];
@@ -840,57 +830,34 @@ let formImagenes = [];
 let formThumbX = 50, formThumbY = 50; 
 let formAcabados = [];        
 let formCerts = [];           
-let formAjuste = 'cover';     
 let paletaColores = [...PALETA_BASE];
 let editandoId = null;        
 let productoActual = null;    
 let listaCategoriaActual = []; 
-
-// Variables para variante
 let currentVarianteText = '';
 let currentVariantePrice = 0;
 
 /* ============ ESTADÍSTICAS LOCALES ============ */
-function registrarVistaGeneral() {
-  let views = parseInt(localStorage.getItem('maderarte_stats_views') || '0');
-  localStorage.setItem('maderarte_stats_views', views + 1);
-}
-function registrarVistaProducto(id) {
-  let prodViews = JSON.parse(localStorage.getItem('maderarte_stats_prod_views') || '{}');
-  prodViews[id] = (prodViews[id] || 0) + 1;
-  localStorage.setItem('maderarte_stats_prod_views', JSON.stringify(prodViews));
-}
+function registrarVistaGeneral() { let views=parseInt(localStorage.getItem('maderarte_stats_views')||'0'); localStorage.setItem('maderarte_stats_views',views+1); }
+function registrarVistaProducto(id) { let prodViews=JSON.parse(localStorage.getItem('maderarte_stats_prod_views')||'{}'); prodViews[id]=(prodViews[id]||0)+1; localStorage.setItem('maderarte_stats_prod_views',JSON.stringify(prodViews)); }
 function renderizarEstadisticas() {
   document.getElementById('stat-views').innerText = localStorage.getItem('maderarte_stats_views') || '0';
   document.getElementById('stat-favs').innerText = favoritos.length;
-  
   let prodViews = JSON.parse(localStorage.getItem('maderarte_stats_prod_views') || '{}');
   let topIds = Object.keys(prodViews).sort((a,b) => prodViews[b] - prodViews[a]);
   let topName = '-';
-  if (topIds.length > 0) {
-    let topProd = catalogoProductos.find(p => p.id == topIds[0]);
-    if (topProd) topName = topProd.nombre + ' (' + prodViews[topIds[0]] + ' vistas)';
-  }
+  if (topIds.length > 0) { let topProd = catalogoProductos.find(p => p.id == topIds[0]); if (topProd) topName = topProd.nombre; }
   document.getElementById('stat-top-prod').innerText = topName;
 }
 
 /* ============ CONEXIÓN EN LÍNEA (GITHUB) ============ */
-const GH_API='https://api.github.com';
-let cfg = {branch:'main'};
-function ghCargarConfig(){
-  const auto = ghAutoDetect() || {};
-  const guardado = JSON.parse(localStorage.getItem('maderarte_gh')||'{}');
-  cfg = Object.assign({branch:'main'}, auto, guardado);
-}
+const GH_API='https://api.github.com'; let cfg = {branch:'main'};
+function ghCargarConfig(){ const auto=ghAutoDetect()||{}; const guardado=JSON.parse(localStorage.getItem('maderarte_gh')||'{}'); cfg=Object.assign({branch:'main'},auto,guardado); }
 function ghAutoDetect(){
-  const h=location.hostname;
-  if(h.endsWith('.github.io')){
-    const owner=h.replace('.github.io','');
-    const parts=location.pathname.split('/').filter(Boolean);
-    const repo=parts.length ? parts[0] : (owner+'.github.io');
-    return {owner, repo, branch:'main'};
-  }
-  return null;
+  const h=location.hostname; if(h.endsWith('.github.io')){
+    const owner=h.replace('.github.io',''); const parts=location.pathname.split('/').filter(Boolean);
+    const repo=parts.length?parts[0]:(owner+'.github.io'); return {owner, repo, branch:'main'};
+  } return null;
 }
 function ghBranch(){ return cfg.branch || 'main'; }
 function ghHeaders(){ return {Authorization:'token '+cfg.token, Accept:'application/vnd.github+json'}; }
@@ -898,86 +865,46 @@ function ghRawUrl(path){ return `https://raw.githubusercontent.com/${cfg.owner}/
 function ghContentsUrl(path){ return `${GH_API}/repos/${cfg.owner}/${cfg.repo}/contents/${path}`; }
 function ghPuedeLeer(){ return !!(cfg.owner && cfg.repo); }
 function ghPuedeEscribir(){ return !!(cfg.owner && cfg.repo && cfg.token); }
-
 function b64(str){ return btoa(unescape(encodeURIComponent(str))); }
 function b64d(str){ return decodeURIComponent(escape(atob((str||'').replace(/\s/g,'')))); }
 
 async function ghPutFile(path, base64content, mensaje, sha){
-  const body={message:mensaje, content:base64content, branch:ghBranch()};
-  if(sha) body.sha=sha;
+  const body={message:mensaje, content:base64content, branch:ghBranch()}; if(sha) body.sha=sha;
   const r=await fetch(ghContentsUrl(path),{method:'PUT',headers:ghHeaders(),body:JSON.stringify(body)});
-  if(!r.ok) throw new Error((r.status)+' '+(await r.text()).slice(0,120));
-  return r.json();
+  if(!r.ok) throw new Error((r.status)+' '+(await r.text()).slice(0,120)); return r.json();
 }
-async function ghGetSha(path){
-  try{
-    const r=await fetch(ghContentsUrl(path)+'?ref='+ghBranch()+'&t='+Date.now(),{headers:cfg.token?ghHeaders():{}});
-    if(r.ok){ return (await r.json()).sha; }
-  }catch(e){}
-  return null;
-}
+async function ghGetSha(path){ try{ const r=await fetch(ghContentsUrl(path)+'?ref='+ghBranch()+'&t='+Date.now(),{headers:cfg.token?ghHeaders():{}}); if(r.ok){ return (await r.json()).sha; } }catch(e){} return null; }
 async function ghSubirImagen(dataURL){
-  const base64=dataURL.split(',')[1];
-  let ext=(dataURL.substring(11,dataURL.indexOf(';'))||'jpeg');
-  if(ext==='jpeg') ext='jpg';
+  const base64=dataURL.split(',')[1]; let ext=(dataURL.substring(11,dataURL.indexOf(';'))||'jpeg'); if(ext==='jpeg') ext='jpg';
   const name='p_'+Date.now()+'_'+Math.random().toString(36).slice(2,7)+'.'+ext;
-  await ghPutFile('img/'+name, base64, 'Subir foto '+name);
-  return ghRawUrl('img/'+name);
+  await ghPutFile('img/'+name, base64, 'Subir foto '+name); return ghRawUrl('img/'+name);
 }
-async function ghGuardarProductos(){
-  const sha=await ghGetSha('data/productos.json');
-  await ghPutFile('data/productos.json', b64(JSON.stringify(catalogoProductos,null,2)), 'Actualizar catálogo', sha);
-}
+async function ghGuardarProductos(){ const sha=await ghGetSha('data/productos.json'); await ghPutFile('data/productos.json', b64(JSON.stringify(catalogoProductos,null,2)), 'Actualizar catálogo', sha); }
 async function ghPublicarTodo(){
   if(!ghPuedeEscribir()){ alert('Primero guarda la conexión (usuario, repositorio y token).'); return; }
   if(!catalogoProductos.length){ alert('Todavía no hay productos para publicar.'); return; }
-  const btn=document.getElementById('gh-publish-all'); const t=btn.innerText;
-  btn.innerText='Publicando catálogo...'; btn.disabled=true;
+  const btn=document.getElementById('gh-publish-all'); const t=btn.innerText; btn.innerText='Publicando...'; btn.disabled=true;
   try{
-    for(const p of catalogoProductos){
-      const fin=[];
-      for(const im of (p.imagenes||[])){ fin.push(im.startsWith('data:') ? await ghSubirImagen(im) : im); }
-      p.imagenes=fin;
-    }
-    await ghGuardarProductos();
-    await dbSet('productos', catalogoProductos);
-    ghEstado(true,'Catálogo publicado en línea ✓');
-    mostrarToast('Catálogo publicado ✓');
-  }catch(e){ alert('No se pudo publicar todo:\n'+e.message); }
-  btn.innerText=t; btn.disabled=false;
+    for(const p of catalogoProductos){ const fin=[]; for(const im of (p.imagenes||[])){ fin.push(im.startsWith('data:') ? await ghSubirImagen(im) : im); } p.imagenes=fin; }
+    await ghGuardarProductos(); await dbSet('productos', catalogoProductos);
+    ghEstado(true,'Catálogo publicado en línea ✓'); mostrarToast('Catálogo publicado ✓');
+  }catch(e){ alert('No se pudo publicar todo:\n'+e.message); } btn.innerText=t; btn.disabled=false;
 }
 async function ghProbarConexion(){
   if(!ghPuedeEscribir()){ alert('Completa usuario, repositorio y token primero.'); return; }
-  try{
-    const r=await fetch(`${GH_API}/repos/${cfg.owner}/${cfg.repo}`,{headers:ghHeaders()});
-    if(r.ok){ const d=await r.json(); ghEstado(true, 'Conectado a '+d.full_name); }
-    else { ghEstado(false, 'Error '+r.status+'. Revisa usuario, repo y token.'); }
-  }catch(e){ ghEstado(false, 'No se pudo conectar: '+e.message); }
+  try{ const r=await fetch(`${GH_API}/repos/${cfg.owner}/${cfg.repo}`,{headers:ghHeaders()}); if(r.ok){ const d=await r.json(); ghEstado(true, 'Conectado a '+d.full_name); } else { ghEstado(false, 'Error '+r.status+'.'); } }catch(e){ ghEstado(false, 'No se pudo conectar: '+e.message); }
 }
 function ghGuardarConfigDesdeForm(){
-  cfg.owner=document.getElementById('gh-owner').value.trim();
-  cfg.repo=document.getElementById('gh-repo').value.trim();
-  cfg.branch=(document.getElementById('gh-branch').value.trim()||'main');
-  const tk=document.getElementById('gh-token').value.trim();
-  if(tk) cfg.token=tk;
+  cfg.owner=document.getElementById('gh-owner').value.trim(); cfg.repo=document.getElementById('gh-repo').value.trim(); cfg.branch=(document.getElementById('gh-branch').value.trim()||'main');
+  const tk=document.getElementById('gh-token').value.trim(); if(tk) cfg.token=tk;
   localStorage.setItem('maderarte_gh', JSON.stringify({owner:cfg.owner,repo:cfg.repo,branch:cfg.branch,token:cfg.token}));
-  ghEstado(ghPuedeEscribir(), ghPuedeEscribir()?'Conexión guardada en este dispositivo':'Faltan datos para escribir');
-  mostrarToast('Conexión guardada');
+  ghEstado(ghPuedeEscribir(), ghPuedeEscribir()?'Conexión guardada':'Faltan datos para escribir'); mostrarToast('Conexión guardada');
 }
-function ghEstado(ok, msg){
-  const el=document.getElementById('gh-status'); if(!el)return;
-  el.innerHTML = (ok?'🟢 ':'⚪ ')+msg;
-  el.style.color = ok ? '#2E7D4F' : 'var(--muted)';
-}
+function ghEstado(ok, msg){ const el=document.getElementById('gh-status'); if(!el)return; el.innerHTML=(ok?'🟢 ':'⚪ ')+msg; el.style.color=ok?'#2E7D4F':'var(--muted)'; }
 function ghRellenarForm(){
   if(!document.getElementById('gh-owner'))return;
-  document.getElementById('gh-owner').value=cfg.owner||'';
-  document.getElementById('gh-repo').value=cfg.repo||'';
-  document.getElementById('gh-branch').value=cfg.branch||'main';
-  document.getElementById('gh-token').value=cfg.token||'';
-  if(ghPuedeEscribir()) ghEstado(true,'Listo para subir productos en línea');
-  else if(ghPuedeLeer()) ghEstado(false,'Modo solo lectura (falta el token para subir)');
-  else ghEstado(false,'Sin conexión configurada (modo local)');
+  document.getElementById('gh-owner').value=cfg.owner||''; document.getElementById('gh-repo').value=cfg.repo||''; document.getElementById('gh-branch').value=cfg.branch||'main'; document.getElementById('gh-token').value=cfg.token||'';
+  if(ghPuedeEscribir()) ghEstado(true,'Listo para subir productos en línea'); else if(ghPuedeLeer()) ghEstado(false,'Modo solo lectura'); else ghEstado(false,'Sin conexión configurada');
 }
 
 /* ============ INDEXEDDB ============ */
@@ -988,35 +915,16 @@ async function dbSet(k,v){try{const db=await openDB();await new Promise((res,rej
 
 async function guardarCatalogo(){
   await dbSet('productos', catalogoProductos);
-  if(ghPuedeEscribir()){
-    try{ await ghGuardarProductos(); }
-    catch(e){ alert('Se guardó localmente, pero falló al subir a GitHub:\n'+e.message); }
-  }
+  if(ghPuedeEscribir()){ try{ await ghGuardarProductos(); } catch(e){ alert('Guardado localmente, falló subir a GitHub:\n'+e.message); } }
 }
 async function cargarCatalogo(){
-  if(ghPuedeEscribir()){
-    try{
-      const r=await fetch(ghContentsUrl('data/productos.json')+'?ref='+ghBranch()+'&t='+Date.now(), {headers:ghHeaders(), cache:'no-store'});
-      if(r.status===200){ const d=await r.json(); catalogoProductos=JSON.parse(b64d(d.content)); await dbSet('productos',catalogoProductos); return; }
-      if(r.status===404){ const local=await dbGet('productos'); catalogoProductos = local || []; return; }
-    }catch(e){}
-  }
-  try{
-    const r=await fetch('data/productos.json?t='+Date.now(), {cache:'no-store'});
-    if(r.ok){ catalogoProductos=await r.json(); await dbSet('productos',catalogoProductos); return; }
-  }catch(e){}
-  if(ghPuedeLeer()){
-    try{
-      const r=await fetch(ghRawUrl('data/productos.json')+'?t='+Date.now(), {cache:'no-store'});
-      if(r.ok){ catalogoProductos=await r.json(); await dbSet('productos',catalogoProductos); return; }
-    }catch(e){}
-  }
-  let data = await dbGet('productos');
-  if(!data){ const viejo=localStorage.getItem('maderarte_db'); if(viejo) data=JSON.parse(viejo); }
-  catalogoProductos = data || [];
+  if(ghPuedeEscribir()){ try{ const r=await fetch(ghContentsUrl('data/productos.json')+'?ref='+ghBranch()+'&t='+Date.now(), {headers:ghHeaders(), cache:'no-store'}); if(r.status===200){ const d=await r.json(); catalogoProductos=JSON.parse(b64d(d.content)); await dbSet('productos',catalogoProductos); return; } if(r.status===404){ const local=await dbGet('productos'); catalogoProductos=local||[]; return; } }catch(e){} }
+  try{ const r=await fetch('data/productos.json?t='+Date.now(), {cache:'no-store'}); if(r.ok){ catalogoProductos=await r.json(); await dbSet('productos',catalogoProductos); return; } }catch(e){}
+  if(ghPuedeLeer()){ try{ const r=await fetch(ghRawUrl('data/productos.json')+'?t='+Date.now(), {cache:'no-store'}); if(r.ok){ catalogoProductos=await r.json(); await dbSet('productos',catalogoProductos); return; } }catch(e){} }
+  let data = await dbGet('productos'); if(!data){ const viejo=localStorage.getItem('maderarte_db'); if(viejo) data=JSON.parse(viejo); } catalogoProductos = data || [];
 }
 
-/* ============ NAVEGACIÓN ============ */
+/* ============ NAVEGACIÓN Y JUNIOR LÓGICA ============ */
 function cambiarPantalla(id, menuEl){
   document.querySelectorAll('.view-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
@@ -1029,6 +937,8 @@ function cambiarPantalla(id, menuEl){
   const t = document.getElementById('current-view-title');
   if(id==='inicio'){ t.innerText=''; document.getElementById('nav-btn-inicio').classList.add('active'); }
   else if(id==='admin'){ t.innerText='Panel'; renderizarEstadisticas(); }
+  else if(id==='junior-subcats'){ t.innerText='Maderarte Junior'; }
+  else if(id==='junior-reel'){ t.innerText='Junior Reel'; }
   else if(id==='detalle' || id==='productos-ver'){ /* fijado por la categoria */ }
   else { t.innerText = CAT_LABELS[id] || id; }
 
@@ -1036,690 +946,334 @@ function cambiarPantalla(id, menuEl){
   document.getElementById('main-scroll-container').scrollTop = 0;
 }
 
-/* ============ ADMIN: ACCESO ============ */
+function mostrarSubcategoriasJunior() { cambiarPantalla('junior-subcats', null); }
+
+function irASubcategoriaJunior(subcatKey, nombreSubcat) {
+  document.getElementById('junior-reel-title').innerText = nombreSubcat;
+  document.getElementById('junior-reel-desc').innerText = INFO_JUNIOR[subcatKey] || "";
+  
+  const filtrados = catalogoProductos.filter(p => p.categoria === 'junior' && p.subcategoria === subcatKey);
+  const reel = document.getElementById('junior-reel-track');
+  reel.innerHTML = '';
+
+  if(filtrados.length === 0) {
+    reel.innerHTML = `<div style="width:100%;text-align:center;color:var(--muted);padding:3rem 1rem;font-size:0.9rem;">Muy pronto la galería completa de ${nombreSubcat} aquí.</div>`;
+  } else {
+    filtrados.forEach(p => {
+      const esFav = favoritos.includes(p.id) ? 'on' : '';
+      const img = (p.imagenes && p.imagenes[0]) || '';
+      const precioTxt = p.precio ? formatoCOP(p.precio) : 'A consultar';
+      const specs = p.descripcion || 'Acabados y medidas personalizables bajo los más altos estándares de calidad.';
+      
+      reel.innerHTML += `
+        <div class="junior-reel-card">
+          <img src="${img}" class="junior-reel-img" alt="${p.nombre}">
+          <div class="junior-reel-info">
+            <h3 class="junior-reel-title">${p.nombre}</h3>
+            <span class="junior-reel-price">${precioTxt}</span>
+            <p class="junior-reel-specs">${specs}</p>
+            <div class="junior-reel-actions">
+              <button class="btn-j-fav ${esFav}" onclick="toggleFavDirecto(${p.id}, this)">
+                <svg viewBox="0 0 24 24" fill="${esFav?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7" style="width:18px;height:18px;"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+              </button>
+              <button class="btn-j-info" onclick="solicitarInfoDirecto(${p.id})">Solicitar Info</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+  cambiarPantalla('junior-reel', null);
+}
+
+function solicitarInfoDirecto(id){
+  const p = catalogoProductos.find(x => x.id === id); if(!p) return;
+  const linkProducto = window.location.origin + window.location.pathname + '?prod=' + id;
+  let msg=`Hola Maderarte 👋 Estoy interesado(a) en este producto de la línea Junior:\n\n*${p.nombre}*\nSubcategoría: ${p.subcategoria}\nPrecio: ${p.precio ? formatoCOP(p.precio) : 'A consultar'}\n\nEnlace: ${linkProducto}\n\n¿Me podrían brindar más especificaciones?`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+function toggleFavDirecto(id, btnEl) {
+  toggleFavorito(id);
+  const esFav = favoritos.includes(id);
+  if(esFav) {
+    btnEl.classList.add('on');
+    btnEl.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" style="width:18px;height:18px;"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
+  } else {
+    btnEl.classList.remove('on');
+    btnEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="width:18px;height:18px;"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
+  }
+}
+
+/* ============ ADMIN: ACCESO Y LÓGICA ============ */
 function abrirModalAdmin(){document.getElementById('admin-pass-input').value='';document.getElementById('modal-admin-auth').classList.add('open');setTimeout(()=>document.getElementById('admin-pass-input').focus(),100);}
 function cerrarModalAdmin(){document.getElementById('modal-admin-auth').classList.remove('open');}
-function procesarAutenticacion(){
-  if(document.getElementById('admin-pass-input').value==='271064'){
-    cerrarModalAdmin(); resetFormulario(); renderizarPaleta(); renderizarListaAdmin(); ghRellenarForm();
-    cambiarPantalla('admin', null);
-  } else { alert('Contraseña incorrecta.'); }
-}
+function procesarAutenticacion(){ if(document.getElementById('admin-pass-input').value==='271064'){ cerrarModalAdmin(); resetFormulario(); renderizarPaleta(); renderizarListaAdmin(); ghRellenarForm(); cambiarPantalla('admin', null); } else { alert('Contraseña incorrecta.'); } }
 document.getElementById('admin-pass-input').addEventListener('keyup',e=>{if(e.key==='Enter')procesarAutenticacion();});
 
-/* ============ ADMIN: IMÁGENES Y DRAG & DROP ============ */
+// Mostrar/Ocultar campos según categoría
+document.getElementById('prod-categoria').addEventListener('change', function(e) {
+  const v = e.target.value;
+  document.getElementById('admin-variantes-comedor').style.display = v === 'comedores' ? 'block' : 'none';
+  document.getElementById('admin-variantes-alcoba').style.display = v === 'alcobas' ? 'block' : 'none';
+  document.getElementById('group-subcategory').style.display = v === 'junior' ? 'block' : 'none';
+});
+
 function fileToDataURL(file, max=1100, q=0.82){
   return new Promise((resolve,reject)=>{
     const reader=new FileReader();
     reader.onload=e=>{
       const img=new Image();
       img.onload=()=>{
-        let w=img.width,h=img.height;
-        if(w>h && w>max){h=h*max/w;w=max;}
-        else if(h>=w && h>max){w=w*max/h;h=max;}
-        const c=document.createElement('canvas');c.width=w;c.height=h;
-        c.getContext('2d').drawImage(img,0,0,w,h);
-        resolve(c.toDataURL('image/jpeg',q));
-      };
-      img.onerror=reject; img.src=e.target.result;
-    };
-    reader.onerror=reject; reader.readAsDataURL(file);
+        let w=img.width,h=img.height; if(w>h && w>max){h=h*max/w;w=max;} else if(h>=w && h>max){w=w*max/h;h=max;}
+        const c=document.createElement('canvas');c.width=w;c.height=h; c.getContext('2d').drawImage(img,0,0,w,h); resolve(c.toDataURL('image/jpeg',q));
+      }; img.onerror=reject; img.src=e.target.result;
+    }; reader.onerror=reject; reader.readAsDataURL(file);
   });
 }
-async function agregarImagenes(ev){
-  const files=[...ev.target.files];
-  for(const f of files){ try{ formImagenes.push(await fileToDataURL(f)); }catch(e){} }
-  ev.target.value='';
-  renderizarPreviews();
-  gestionarAjusteThumb();
-}
-
+async function agregarImagenes(ev){ const files=[...ev.target.files]; for(const f of files){ try{ formImagenes.push(await fileToDataURL(f)); }catch(e){} } ev.target.value=''; renderizarPreviews(); gestionarAjusteThumb(); }
 let dragSrcIndex = null;
-function handleDragStart(e, i) {
-  dragSrcIndex = i;
-  e.currentTarget.classList.add('dragging');
-  e.dataTransfer.effectAllowed = 'move';
-}
+function handleDragStart(e, i) { dragSrcIndex = i; e.currentTarget.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; }
 function handleDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; return false; }
 function handleDragEnter(e) { e.currentTarget.style.transform = 'scale(1.05)'; }
 function handleDragLeave(e) { e.currentTarget.style.transform = 'none'; }
-function handleDrop(e, targetIndex) {
-  e.stopPropagation();
-  e.currentTarget.style.transform = 'none';
-  if (dragSrcIndex !== targetIndex && dragSrcIndex !== null) {
-    const item = formImagenes.splice(dragSrcIndex, 1)[0];
-    formImagenes.splice(targetIndex, 0, item);
-    renderizarPreviews();
-    gestionarAjusteThumb();
-  }
-  return false;
-}
+function handleDrop(e, targetIndex) { e.stopPropagation(); e.currentTarget.style.transform = 'none'; if (dragSrcIndex !== targetIndex && dragSrcIndex !== null) { const item = formImagenes.splice(dragSrcIndex, 1)[0]; formImagenes.splice(targetIndex, 0, item); renderizarPreviews(); gestionarAjusteThumb(); } return false; }
 function handleDragEnd(e) { e.currentTarget.classList.remove('dragging'); }
-
 function renderizarPreviews(){
   const grid=document.getElementById('preview-grid');grid.innerHTML='';
   formImagenes.forEach((img,i)=>{
-    const d=document.createElement('div');
-    d.className='preview-item'+(i===0?' is-main':'');
-    d.style.backgroundImage=`url('${img}')`;
-    
-    d.draggable = true;
-    d.addEventListener('dragstart', (e) => handleDragStart(e, i));
-    d.addEventListener('dragover', handleDragOver);
-    d.addEventListener('dragenter', handleDragEnter);
-    d.addEventListener('dragleave', handleDragLeave);
-    d.addEventListener('drop', (e) => handleDrop(e, i));
-    d.addEventListener('dragend', handleDragEnd);
-
-    d.innerHTML=`<span class="rm" onclick="event.stopPropagation();quitarImagen(${i})">×</span>${i===0?'<span class="main-tag">Principal</span>':''}`;
-    grid.appendChild(d);
+    const d=document.createElement('div'); d.className='preview-item'+(i===0?' is-main':''); d.style.backgroundImage=`url('${img}')`; d.draggable = true;
+    d.addEventListener('dragstart', (e) => handleDragStart(e, i)); d.addEventListener('dragover', handleDragOver); d.addEventListener('dragenter', handleDragEnter); d.addEventListener('dragleave', handleDragLeave); d.addEventListener('drop', (e) => handleDrop(e, i)); d.addEventListener('dragend', handleDragEnd);
+    d.innerHTML=`<span class="rm" onclick="event.stopPropagation();quitarImagen(${i})">×</span>${i===0?'<span class="main-tag">Principal</span>':''}`; grid.appendChild(d);
   });
 }
-function quitarImagen(i){
-  formImagenes.splice(i,1);
-  renderizarPreviews();
-  gestionarAjusteThumb();
-}
-
-function gestionarAjusteThumb(){
-  const adj = document.getElementById('thumb-adjuster');
-  if(formImagenes.length > 0){
-    adj.classList.add('active');
-    actualizarThumbPreview();
-  } else {
-    adj.classList.remove('active');
-  }
-}
-function actualizarThumbPreview(){
-  const box = document.getElementById('thumb-preview-box');
-  formThumbX = document.getElementById('thumb-x').value;
-  formThumbY = document.getElementById('thumb-y').value;
-  if(formImagenes.length > 0){
-    box.style.backgroundImage = `url('${formImagenes[0]}')`;
-    box.style.backgroundPosition = `${formThumbX}% ${formThumbY}%`;
-  }
-}
+function quitarImagen(i){ formImagenes.splice(i,1); renderizarPreviews(); gestionarAjusteThumb(); }
+function gestionarAjusteThumb(){ const adj = document.getElementById('thumb-adjuster'); if(formImagenes.length > 0){ adj.classList.add('active'); actualizarThumbPreview(); } else { adj.classList.remove('active'); } }
+function actualizarThumbPreview(){ const box = document.getElementById('thumb-preview-box'); formThumbX = document.getElementById('thumb-x').value; formThumbY = document.getElementById('thumb-y').value; if(formImagenes.length > 0){ box.style.backgroundImage = `url('${formImagenes[0]}')`; box.style.backgroundPosition = `${formThumbX}% ${formThumbY}%`; } }
 
 async function cambiarPortada(ev){
-  const f=ev.target.files[0]; if(!f)return;
-  const data=await fileToDataURL(f,1400,0.85);
-  await dbSet('portada', data);
-  aplicarPortada(data);
+  const f=ev.target.files[0]; if(!f)return; const data=await fileToDataURL(f,1400,0.85); await dbSet('portada', data); aplicarPortada(data);
   if(ghPuedeEscribir()){
-    mostrarToast('Subiendo portada...');
-    try{
-      const sha=await ghGetSha('Portada.png');
-      await ghPutFile('Portada.png', data.split(',')[1], 'Actualizar portada', sha);
-      mostrarToast('Portada publicada en línea ✓');
-    }catch(e){ alert('Error en GitHub:\n'+e.message); }
+    mostrarToast('Subiendo portada...'); try{ const sha=await ghGetSha('Portada.png'); await ghPutFile('Portada.png', data.split(',')[1], 'Actualizar portada', sha); mostrarToast('Portada publicada en línea ✓'); }catch(e){ alert('Error en GitHub:\n'+e.message); }
   } else { mostrarToast('Portada actualizada'); }
 }
-function aplicarPortada(data){
-  const hero=document.getElementById('hero-bg');
-  if(data) hero.style.backgroundImage=`url('${data}')`;
-}
+function aplicarPortada(data){ const hero=document.getElementById('hero-bg'); if(data) hero.style.backgroundImage=`url('${data}')`; }
+function renderizarPaleta(){ const cont=document.getElementById('palette');cont.innerHTML=''; paletaColores.forEach(c=>{ const s=document.createElement('div'); s.className='swatch'+(formAcabados.includes(c)?' sel':''); s.style.background=c; s.onclick=()=>toggleAcabado(c); cont.appendChild(s); }); }
+function toggleAcabado(c){ if(formAcabados.includes(c)) formAcabados=formAcabados.filter(x=>x!==c); else formAcabados.push(c); renderizarPaleta(); }
+function agregarColorCustom(){ const c=document.getElementById('custom-color').value; if(!paletaColores.includes(c)) paletaColores.push(c); if(!formAcabados.includes(c)) formAcabados.push(c); renderizarPaleta(); }
+function renderizarMateriales(valores){ const cont=document.getElementById('mat-fields');cont.innerHTML=''; MATERIAL_FIELDS.forEach(f=>{ const row=document.createElement('div');row.className='mat-field'; row.innerHTML=`<span class="mat-ic">${f.icon}</span><input type="text" id="mat-${f.key}" placeholder="${f.label} — ${f.ph}">`; cont.appendChild(row); if(valores && valores[f.key]) document.getElementById('mat-'+f.key).value=valores[f.key]; }); }
+function renderizarCerts(){ const cont=document.getElementById('cert-toggles');cont.innerHTML=''; CERT_FIELDS.forEach(c=>{ const chip=document.createElement('div'); chip.className='cert-chip'+(formCerts.includes(c.key)?' on':''); chip.innerHTML=`${c.icon}${c.label}`; chip.onclick=()=>toggleCert(c.key); cont.appendChild(chip); }); }
+function toggleCert(key){ formCerts = formCerts.includes(key) ? formCerts.filter(k=>k!==key) : [...formCerts,key]; renderizarCerts(); }
 
-/* ============ ADMIN: PALETA DE COLORES ============ */
-function renderizarPaleta(){
-  const cont=document.getElementById('palette');cont.innerHTML='';
-  paletaColores.forEach(c=>{
-    const s=document.createElement('div');
-    s.className='swatch'+(formAcabados.includes(c)?' sel':'');
-    s.style.background=c;
-    s.onclick=()=>toggleAcabado(c);
-    cont.appendChild(s);
-  });
-}
-function toggleAcabado(c){
-  if(formAcabados.includes(c)) formAcabados=formAcabados.filter(x=>x!==c);
-  else formAcabados.push(c);
-  renderizarPaleta();
-}
-function agregarColorCustom(){
-  const c=document.getElementById('custom-color').value;
-  if(!paletaColores.includes(c)) paletaColores.push(c);
-  if(!formAcabados.includes(c)) formAcabados.push(c);
-  renderizarPaleta();
-}
-
-/* ============ ADMIN: MATERIALES Y CARACTERÍSTICAS ============ */
-function renderizarMateriales(valores){
-  const cont=document.getElementById('mat-fields');cont.innerHTML='';
-  MATERIAL_FIELDS.forEach(f=>{
-    const row=document.createElement('div');row.className='mat-field';
-    row.innerHTML=`<span class="mat-ic">${f.icon}</span>
-      <input type="text" id="mat-${f.key}" placeholder="${f.label} — ${f.ph}">`;
-    cont.appendChild(row);
-    if(valores && valores[f.key]) document.getElementById('mat-'+f.key).value=valores[f.key];
-  });
-}
-function renderizarCerts(){
-  const cont=document.getElementById('cert-toggles');cont.innerHTML='';
-  CERT_FIELDS.forEach(c=>{
-    const chip=document.createElement('div');
-    chip.className='cert-chip'+(formCerts.includes(c.key)?' on':'');
-    chip.innerHTML=`${c.icon}${c.label}`;
-    chip.onclick=()=>toggleCert(c.key);
-    cont.appendChild(chip);
-  });
-}
-function toggleCert(key){
-  formCerts = formCerts.includes(key) ? formCerts.filter(k=>k!==key) : [...formCerts,key];
-  renderizarCerts();
-}
-
-/* Evento para mostrar/ocultar variantes de comedores y alcobas */
-document.getElementById('prod-categoria').addEventListener('change', function(e) {
-  document.getElementById('admin-variantes-comedor').style.display = e.target.value === 'comedores' ? 'block' : 'none';
-  document.getElementById('admin-variantes-alcoba').style.display = e.target.value === 'alcobas' ? 'block' : 'none';
-});
-
-/* ============ ADMIN: GUARDAR / EDITAR / ELIMINAR ============ */
 async function registrarNuevoProducto(){
-  const nombre=document.getElementById('prod-nombre').value.trim();
-  const precio=document.getElementById('prod-precio').value;
+  const nombre=document.getElementById('prod-nombre').value.trim(); const precio=document.getElementById('prod-precio').value;
   if(!nombre){alert('Por favor escribe el nombre del producto.');return;}
 
-  const materialesData={};
-  MATERIAL_FIELDS.forEach(f=>{
-    const v=document.getElementById('mat-'+f.key).value.trim();
-    if(v) materialesData[f.key]=v;
-  });
-
+  const materialesData={}; MATERIAL_FIELDS.forEach(f=>{ const v=document.getElementById('mat-'+f.key).value.trim(); if(v) materialesData[f.key]=v; });
   const cat = document.getElementById('prod-categoria').value;
+  const subcat = (cat === 'junior') ? document.getElementById('prod-subcategoria').value : null;
   
-  // Procesar opciones especiales si es comedor
-  const variantesComedor = {};
-  if (cat === 'comedores') {
-    const p4 = document.getElementById('prod-p4').value;
-    const p6 = document.getElementById('prod-p6').value;
-    const p8 = document.getElementById('prod-p8').value;
-    if (p4) variantesComedor.p4 = parseFloat(p4);
-    if (p6) variantesComedor.p6 = parseFloat(p6);
-    if (p8) variantesComedor.p8 = parseFloat(p8);
-  }
-
-  // Procesar opciones especiales si es alcoba
-  const variantesAlcoba = {};
-  if (cat === 'alcobas') {
-    const a140 = document.getElementById('prod-a140').value;
-    const a160 = document.getElementById('prod-a160').value;
-    const a200 = document.getElementById('prod-a200').value;
-    if (a140) variantesAlcoba.a140 = parseFloat(a140);
-    if (a160) variantesAlcoba.a160 = parseFloat(a160);
-    if (a200) variantesAlcoba.a200 = parseFloat(a200);
-  }
+  const variantesComedor = {}; if (cat === 'comedores') { const p4 = document.getElementById('prod-p4').value; const p6 = document.getElementById('prod-p6').value; const p8 = document.getElementById('prod-p8').value; if (p4) variantesComedor.p4 = parseFloat(p4); if (p6) variantesComedor.p6 = parseFloat(p6); if (p8) variantesComedor.p8 = parseFloat(p8); }
+  const variantesAlcoba = {}; if (cat === 'alcobas') { const a140 = document.getElementById('prod-a140').value; const a160 = document.getElementById('prod-a160').value; const a200 = document.getElementById('prod-a200').value; if (a140) variantesAlcoba.a140 = parseFloat(a140); if (a160) variantesAlcoba.a160 = parseFloat(a160); if (a200) variantesAlcoba.a200 = parseFloat(a200); }
 
   const prod={
     id: editandoId || Date.now(),
-    categoria: cat,
-    nombre,
+    categoria: cat, subcategoria: subcat, nombre,
     precio: precio ? parseFloat(precio) : 0,
     variantesComedor: Object.keys(variantesComedor).length > 0 ? variantesComedor : null,
     variantesAlcoba: Object.keys(variantesAlcoba).length > 0 ? variantesAlcoba : null,
-    imagenes: [...formImagenes],
-    thumbPosX: formThumbX,
-    thumbPosY: formThumbY,
-    ajuste: 'cover', 
-    ancho: document.getElementById('prod-ancho').value.trim(),
-    alto: document.getElementById('prod-alto').value.trim(),
-    fondo: document.getElementById('prod-fondo').value.trim(),
-    materialesData,
-    certificados: [...formCerts],
-    descripcion: document.getElementById('prod-descripcion').value.trim(),
-    acabados: [...formAcabados]
+    imagenes: [...formImagenes], thumbPosX: formThumbX, thumbPosY: formThumbY, ajuste: 'cover',
+    ancho: document.getElementById('prod-ancho').value.trim(), alto: document.getElementById('prod-alto').value.trim(), fondo: document.getElementById('prod-fondo').value.trim(),
+    materialesData, certificados: [...formCerts], descripcion: document.getElementById('prod-descripcion').value.trim(), acabados: [...formAcabados]
   };
 
   if(ghPuedeEscribir()){
-    const btn=document.getElementById('btn-guardar');
-    const txt=btn.innerText; btn.innerText='Subiendo a internet...'; btn.disabled=true;
-    try{
-      const finales=[];
-      for(const im of prod.imagenes){
-        finales.push(im.startsWith('data:') ? await ghSubirImagen(im) : im);
-      }
-      prod.imagenes=finales;
-    }catch(e){
-      btn.innerText=txt; btn.disabled=false;
-      alert('Error en fotos GitHub:\n'+e.message); return;
-    }
-    btn.innerText=txt; btn.disabled=false;
+    const btn=document.getElementById('btn-guardar'); const txt=btn.innerText; btn.innerText='Subiendo a internet...'; btn.disabled=true;
+    try{ const finales=[]; for(const im of prod.imagenes){ finales.push(im.startsWith('data:') ? await ghSubirImagen(im) : im); } prod.imagenes=finales; }catch(e){ btn.innerText=txt; btn.disabled=false; alert('Error en fotos GitHub:\n'+e.message); return; } btn.innerText=txt; btn.disabled=false;
   }
-
-  if(editandoId){
-    const i=catalogoProductos.findIndex(p=>p.id===editandoId);
-    catalogoProductos[i]=prod;
-  } else {
-    catalogoProductos.push(prod);
-  }
-  await guardarCatalogo();
-  resetFormulario();
-  renderizarListaAdmin();
-  mostrarToast(ghPuedeEscribir() ? (editandoId?'Actualizado en línea ✓':'Publicado en línea ✓') : (editandoId?'Producto actualizado':'Producto agregado'));
+  if(editandoId){ const i=catalogoProductos.findIndex(p=>p.id===editandoId); catalogoProductos[i]=prod; } else { catalogoProductos.push(prod); }
+  await guardarCatalogo(); resetFormulario(); renderizarListaAdmin(); mostrarToast(ghPuedeEscribir() ? (editandoId?'Actualizado en línea ✓':'Publicado en línea ✓') : (editandoId?'Producto actualizado':'Producto agregado'));
 }
 
 function resetFormulario(){
   editandoId=null;
-  ['prod-nombre','prod-precio','prod-ancho','prod-alto','prod-fondo','prod-descripcion',
-   'prod-p4','prod-p6','prod-p8','prod-a140','prod-a160','prod-a200'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('prod-categoria').value='salas';
-  document.getElementById('admin-variantes-comedor').style.display='none';
-  document.getElementById('admin-variantes-alcoba').style.display='none';
-  
-  formImagenes=[]; formAcabados=[]; formCerts=[]; 
-  formThumbX=50; formThumbY=50;
+  ['prod-nombre','prod-precio','prod-ancho','prod-alto','prod-fondo','prod-descripcion','prod-p4','prod-p6','prod-p8','prod-a140','prod-a160','prod-a200'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('prod-categoria').value='salas'; document.getElementById('admin-variantes-comedor').style.display='none'; document.getElementById('admin-variantes-alcoba').style.display='none'; document.getElementById('group-subcategory').style.display='none';
+  formImagenes=[]; formAcabados=[]; formCerts=[]; formThumbX=50; formThumbY=50;
   document.getElementById('thumb-x').value=50; document.getElementById('thumb-y').value=50;
-  paletaColores=[...PALETA_BASE];
-  renderizarPreviews(); renderizarPaleta(); renderizarMateriales({}); renderizarCerts();
-  gestionarAjusteThumb();
+  paletaColores=[...PALETA_BASE]; renderizarPreviews(); renderizarPaleta(); renderizarMateriales({}); renderizarCerts(); gestionarAjusteThumb();
   const b=document.getElementById('btn-guardar');b.innerText='Guardar en catálogo';b.classList.remove('editing');
 }
 
 function editarProducto(id){
-  const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
-  editandoId=id;
+  const p=catalogoProductos.find(x=>x.id===id); if(!p)return; editandoId=id;
   document.getElementById('prod-categoria').value=p.categoria;
-  document.getElementById('prod-nombre').value=p.nombre;
-  document.getElementById('prod-precio').value=p.precio || '';
-  document.getElementById('prod-ancho').value=p.ancho||'';
-  document.getElementById('prod-alto').value=p.alto||'';
-  document.getElementById('prod-fondo').value=p.fondo||'';
-  document.getElementById('prod-descripcion').value=p.descripcion||'';
+  document.getElementById('group-subcategory').style.display = p.categoria === 'junior' ? 'block' : 'none';
+  if(p.categoria === 'junior' && p.subcategoria) document.getElementById('prod-subcategoria').value = p.subcategoria;
+  
+  document.getElementById('prod-nombre').value=p.nombre; document.getElementById('prod-precio').value=p.precio || '';
+  document.getElementById('prod-ancho').value=p.ancho||''; document.getElementById('prod-alto').value=p.alto||''; document.getElementById('prod-fondo').value=p.fondo||''; document.getElementById('prod-descripcion').value=p.descripcion||'';
   
   document.getElementById('admin-variantes-comedor').style.display = p.categoria === 'comedores' ? 'block' : 'none';
-  document.getElementById('prod-p4').value = p.variantesComedor?.p4 || '';
-  document.getElementById('prod-p6').value = p.variantesComedor?.p6 || '';
-  document.getElementById('prod-p8').value = p.variantesComedor?.p8 || '';
+  document.getElementById('prod-p4').value = p.variantesComedor?.p4 || ''; document.getElementById('prod-p6').value = p.variantesComedor?.p6 || ''; document.getElementById('prod-p8').value = p.variantesComedor?.p8 || '';
 
   document.getElementById('admin-variantes-alcoba').style.display = p.categoria === 'alcobas' ? 'block' : 'none';
-  document.getElementById('prod-a140').value = p.variantesAlcoba?.a140 || '';
-  document.getElementById('prod-a160').value = p.variantesAlcoba?.a160 || '';
-  document.getElementById('prod-a200').value = p.variantesAlcoba?.a200 || '';
+  document.getElementById('prod-a140').value = p.variantesAlcoba?.a140 || ''; document.getElementById('prod-a160').value = p.variantesAlcoba?.a160 || ''; document.getElementById('prod-a200').value = p.variantesAlcoba?.a200 || '';
 
-  formImagenes=[...(p.imagenes||[])];
-  formAcabados=[...(p.acabados||[])];
-  formCerts=[...(p.certificados||[])];
+  formImagenes=[...(p.imagenes||[])]; formAcabados=[...(p.acabados||[])]; formCerts=[...(p.certificados||[])];
+  formThumbX = p.thumbPosX || 50; formThumbY = p.thumbPosY || 50; document.getElementById('thumb-x').value = formThumbX; document.getElementById('thumb-y').value = formThumbY;
   
-  formThumbX = p.thumbPosX || 50; formThumbY = p.thumbPosY || 50;
-  document.getElementById('thumb-x').value = formThumbX;
-  document.getElementById('thumb-y').value = formThumbY;
-  
-  paletaColores=[...new Set([...PALETA_BASE,...formAcabados])];
-  renderizarPreviews(); renderizarPaleta();
-  renderizarMateriales(p.materialesData||{}); renderizarCerts();
-  gestionarAjusteThumb();
-  
-  const b=document.getElementById('btn-guardar');b.innerText='Actualizar producto';b.classList.add('editing');
-  document.getElementById('main-scroll-container').scrollTop=0;
+  paletaColores=[...new Set([...PALETA_BASE,...formAcabados])]; renderizarPreviews(); renderizarPaleta(); renderizarMateriales(p.materialesData||{}); renderizarCerts(); gestionarAjusteThumb();
+  const b=document.getElementById('btn-guardar');b.innerText='Actualizar producto';b.classList.add('editing'); document.getElementById('main-scroll-container').scrollTop=0;
 }
 
-async function eliminarProducto(id){
-  if(confirm('¿Eliminar este producto del catálogo?')){
-    catalogoProductos=catalogoProductos.filter(p=>p.id!==id);
-    await guardarCatalogo();
-    renderizarListaAdmin();
-    mostrarToast('Producto eliminado');
-  }
-}
+async function eliminarProducto(id){ if(confirm('¿Eliminar este producto del catálogo?')){ catalogoProductos=catalogoProductos.filter(p=>p.id!==id); await guardarCatalogo(); renderizarListaAdmin(); mostrarToast('Producto eliminado'); } }
 
 function renderizarListaAdmin(){
   const cont=document.getElementById('admin-lista-existentes');cont.innerHTML='';
-  if(catalogoProductos.length===0){
-    cont.innerHTML='<p style="font-size:.82rem;color:var(--muted);font-weight:300;">Aún no hay productos cargados.</p>';return;
-  }
+  if(catalogoProductos.length===0){ cont.innerHTML='<p style="font-size:.82rem;color:var(--muted);font-weight:300;">Aún no hay productos cargados.</p>';return; }
   catalogoProductos.slice().reverse().forEach(p=>{
-    const img=(p.imagenes&&p.imagenes[0])||'';
-    const tx = p.thumbPosX || 50; const ty = p.thumbPosY || 50;
+    const img=(p.imagenes&&p.imagenes[0])||''; const tx = p.thumbPosX || 50; const ty = p.thumbPosY || 50;
+    const subLabel = p.categoria === 'junior' && p.subcategoria ? ` · ${p.subcategoria}` : '';
     const fila=document.createElement('div');fila.className='admin-prod-row';
     fila.innerHTML=`
       <div class="thumb-sm" style="background-image:url('${img}');background-position:${tx}% ${ty}%"></div>
       <div class="info">
         <strong>${p.nombre}</strong>
-        <div class="meta">${CAT_LABELS[p.categoria]} · ${p.precio ? formatoCOP(p.precio) : 'Múltiples precios'}</div>
+        <div class="meta">${CAT_LABELS[p.categoria] || p.categoria}${subLabel} · ${p.precio ? formatoCOP(p.precio) : 'Múltiples precios'}</div>
       </div>
-      <div class="row-actions">
-        <button class="btn-edit" onclick="editarProducto(${p.id})">Editar</button>
-        <button class="btn-delete" onclick="eliminarProducto(${p.id})">Borrar</button>
-      </div>`;
+      <div class="row-actions"><button class="btn-edit" onclick="editarProducto(${p.id})">Editar</button><button class="btn-delete" onclick="eliminarProducto(${p.id})">Borrar</button></div>`;
     cont.appendChild(fila);
   });
 }
-
 function formatoCOP(n){return '$ '+Number(n).toLocaleString('es-CO')+' COP';}
 
 /* ============ LISTA POR CATEGORÍA Y FILTROS ============ */
 function irACategoria(catKey, etiqueta){
-  document.getElementById('current-view-title').innerText=etiqueta;
-  document.getElementById('cat-title-label').innerText=etiqueta;
-  document.getElementById('sort-select').value='default';
-  listaCategoriaActual = catalogoProductos.filter(p=>p.categoria===catKey);
-  aplicarFiltroPrecio(); 
-  cambiarPantalla('productos-ver', null);
+  document.getElementById('current-view-title').innerText=etiqueta; document.getElementById('cat-title-label').innerText=etiqueta; document.getElementById('sort-select').value='default';
+  listaCategoriaActual = catalogoProductos.filter(p=>p.categoria===catKey); aplicarFiltroPrecio(); cambiarPantalla('productos-ver', null);
 }
-
 function aplicarFiltroPrecio(){
-  const modo = document.getElementById('sort-select').value;
-  let lista = [...listaCategoriaActual];
-  
-  if (modo === 'asc') {
-    lista.sort((a,b) => (a.precio||0) - (b.precio||0));
-  } else if (modo === 'desc') {
-    lista.sort((a,b) => (b.precio||0) - (a.precio||0));
-  } 
-
-  const grid = document.getElementById('grid-productos-dinamicos');
-  pintarGrid(grid, lista, `Aún no hay productos en esta categoría.<br>Agrégalos desde el panel.`);
+  const modo = document.getElementById('sort-select').value; let lista = [...listaCategoriaActual];
+  if (modo === 'asc') { lista.sort((a,b) => (a.precio||0) - (b.precio||0)); } else if (modo === 'desc') { lista.sort((a,b) => (b.precio||0) - (a.precio||0)); } 
+  pintarGrid(document.getElementById('grid-productos-dinamicos'), lista, `Aún no hay productos en esta categoría.`);
 }
-
 function pintarGrid(grid, lista, vacioMsg){
-  grid.innerHTML='';
-  if(lista.length===0){grid.innerHTML=`<p class="empty-msg">${vacioMsg}</p>`;return;}
+  grid.innerHTML=''; if(lista.length===0){grid.innerHTML=`<p class="empty-msg">${vacioMsg}</p>`;return;}
   lista.forEach(p=>{
-    const img=(p.imagenes&&p.imagenes[0])||'';
-    const card=document.createElement('div');
-    card.className='product-item-card';
-    card.onclick=()=>abrirDetalle(p.id);
-    
-    const holder = img
-      ? `<img src="${img}" class="product-img" alt="${p.nombre}">`
-      : `<div class="product-img ph-empty">Maderarte</div>`;
-    
-    // Si no tiene precio base pero tiene variantes (Comedor o Alcoba), mostrar el menor precio
+    const img=(p.imagenes&&p.imagenes[0])||''; const card=document.createElement('div'); card.className='product-item-card'; card.onclick=()=>abrirDetalle(p.id);
+    const holder = img ? `<img src="${img}" class="product-img" alt="${p.nombre}">` : `<div class="product-img ph-empty">Maderarte</div>`;
     let txtPrecio = formatoCOP(p.precio);
     if (!p.precio) {
-      if (p.categoria === 'comedores' && p.variantesComedor) {
-         const v = p.variantesComedor;
-         const minP = Math.min(...[v.p4, v.p6, v.p8].filter(x=>x));
-         txtPrecio = minP !== Infinity ? `Desde ${formatoCOP(minP)}` : '';
-      } else if (p.categoria === 'alcobas' && p.variantesAlcoba) {
-         const v = p.variantesAlcoba;
-         const minP = Math.min(...[v.a140, v.a160, v.a200].filter(x=>x));
-         txtPrecio = minP !== Infinity ? `Desde ${formatoCOP(minP)}` : '';
-      }
+      if (p.categoria === 'comedores' && p.variantesComedor) { const v = p.variantesComedor; const minP = Math.min(...[v.p4, v.p6, v.p8].filter(x=>x)); txtPrecio = minP !== Infinity ? `Desde ${formatoCOP(minP)}` : ''; }
+      else if (p.categoria === 'alcobas' && p.variantesAlcoba) { const v = p.variantesAlcoba; const minP = Math.min(...[v.a140, v.a160, v.a200].filter(x=>x)); txtPrecio = minP !== Infinity ? `Desde ${formatoCOP(minP)}` : ''; }
     }
-
-    card.innerHTML=`${holder}
-      <div class="product-info-box">
-        <h4>${p.nombre}</h4>
-        <div class="product-price">${txtPrecio}</div>
-      </div>`;
-    grid.appendChild(card);
+    card.innerHTML=`${holder}<div class="product-info-box"><h4>${p.nombre}</h4><div class="product-price">${txtPrecio}</div></div>`; grid.appendChild(card);
   });
 }
 
-/* ============ DETALLE DE PRODUCTO ============ */
+/* ============ DETALLE DE PRODUCTO NORMAL ============ */
 function seleccionarVariante(tamanoTexto, precio, btnEl) {
-  currentVarianteText = tamanoTexto;
-  currentVariantePrice = precio;
-  document.getElementById('detail-price-display').innerText = formatoCOP(precio);
-  
-  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-  if(btnEl) btnEl.classList.add('active');
+  currentVarianteText = tamanoTexto; currentVariantePrice = precio; document.getElementById('detail-price-display').innerText = formatoCOP(precio);
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active')); if(btnEl) btnEl.classList.add('active');
 }
-
 function abrirDetalle(id){
-  const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
-  registrarVistaProducto(id); // Analytics
-
-  const activa=document.querySelector('.view-panel.active');
-  if(activa){ const vid=activa.id.replace('view-',''); if(vid!=='detalle') pantallaAnterior=vid; }
-  productoActual=p;
-  const imgs=(p.imagenes&&p.imagenes.length)?p.imagenes:[''];
-  const esFav=favoritos.includes(p.id);
-
+  const p=catalogoProductos.find(x=>x.id===id); if(!p)return; registrarVistaProducto(id);
+  const activa=document.querySelector('.view-panel.active'); if(activa){ const vid=activa.id.replace('view-',''); if(vid!=='detalle') pantallaAnterior=vid; }
+  productoActual=p; const imgs=(p.imagenes&&p.imagenes.length)?p.imagenes:['']; const esFav=favoritos.includes(p.id);
   const galleryHtml = construirGaleria(imgs, p.ajuste);
-
-  let medidas='';
-  const dims=[];
-  if(p.ancho) dims.push(`Ancho: ${p.ancho} cm`);
-  if(p.alto) dims.push(`Alto: ${p.alto} cm`);
-  if(p.fondo) dims.push(`Fondo: ${p.fondo} cm`);
-  if(dims.length) medidas=`<div class="detail-block"><div class="lbl">Medidas</div><div class="val">${dims.join(' · ')}</div></div>`;
-
-  let materiales='';
-  const matItems = MATERIAL_FIELDS.filter(f => p.materialesData && p.materialesData[f.key]);
-  const certItems = (p.certificados||[]).map(k => CERT_FIELDS.find(c=>c.key===k)).filter(Boolean);
+  let medidas=''; const dims=[]; if(p.ancho) dims.push(`Ancho: ${p.ancho} cm`); if(p.alto) dims.push(`Alto: ${p.alto} cm`); if(p.fondo) dims.push(`Fondo: ${p.fondo} cm`); if(dims.length) medidas=`<div class="detail-block"><div class="lbl">Medidas</div><div class="val">${dims.join(' · ')}</div></div>`;
+  let materiales=''; const matItems = MATERIAL_FIELDS.filter(f => p.materialesData && p.materialesData[f.key]); const certItems = (p.certificados||[]).map(k => CERT_FIELDS.find(c=>c.key===k)).filter(Boolean);
   let matInner='';
-  if(matItems.length){
-    matInner += '<div class="mat-list">'+matItems.map(f=>
-      `<div class="mat-item"><span class="mat-ic">${f.icon}</span>
-        <div class="mat-tx"><b>${f.label}</b><span>${p.materialesData[f.key]}</span></div></div>`).join('')+'</div>';
-  }
-  if(certItems.length){
-    matInner += '<div class="cert-row">'+certItems.map(c=>
-      `<span class="cert-badge ${c.cls}">${c.icon}${c.label}</span>`).join('')+'</div>';
-  }
+  if(matItems.length){ matInner += '<div class="mat-list">'+matItems.map(f=>`<div class="mat-item"><span class="mat-ic">${f.icon}</span><div class="mat-tx"><b>${f.label}</b><span>${p.materialesData[f.key]}</span></div></div>`).join('')+'</div>'; }
+  if(certItems.length){ matInner += '<div class="cert-row">'+certItems.map(c=>`<span class="cert-badge ${c.cls}">${c.icon}${c.label}</span>`).join('')+'</div>'; }
   if(matInner) materiales=`<div class="detail-block"><div class="lbl">Materiales</div>${matInner}</div>`;
-
-  let descripcion='';
-  if(p.descripcion) descripcion=`<p class="detail-desc">${p.descripcion}</p>`;
-
-  let acabados='';
-  if(p.acabados&&p.acabados.length){
-    acabados=`<div class="detail-block"><div class="lbl">Acabados disponibles</div>
-      <div class="acabados-row">${p.acabados.map(c=>`<div class="acabado-dot" style="background:${c}"></div>`).join('')}</div></div>`;
-  }
-
-  // Lógica para variantes de Comedores y Alcobas
-  let variantsHTML = '';
-  let hasVariants = false;
-
+  let descripcion=''; if(p.descripcion) descripcion=`<p class="detail-desc">${p.descripcion}</p>`;
+  let acabados=''; if(p.acabados&&p.acabados.length){ acabados=`<div class="detail-block"><div class="lbl">Acabados disponibles</div><div class="acabados-row">${p.acabados.map(c=>`<div class="acabado-dot" style="background:${c}"></div>`).join('')}</div></div>`; }
+  
+  let variantsHTML = ''; let hasVariants = false;
   if (p.categoria === 'comedores' && p.variantesComedor) {
     const v = p.variantesComedor;
-    if (v.p4 || v.p6 || v.p8) {
-      hasVariants = true;
-      variantsHTML = `
-        <div class="detail-block">
-          <div class="lbl">Tamaño del Comedor</div>
-          <div class="size-options">
-            ${v.p4 ? `<button class="size-btn" onclick="seleccionarVariante('4 Puestos', ${v.p4}, this)">4 Puestos</button>` : ''}
-            ${v.p6 ? `<button class="size-btn" onclick="seleccionarVariante('6 Puestos', ${v.p6}, this)">6 Puestos</button>` : ''}
-            ${v.p8 ? `<button class="size-btn" onclick="seleccionarVariante('8 Puestos', ${v.p8}, this)">8 Puestos</button>` : ''}
-          </div>
-        </div>
-      `;
-    }
+    if (v.p4 || v.p6 || v.p8) { hasVariants = true; variantsHTML = `<div class="detail-block"><div class="lbl">Tamaño del Comedor</div><div class="size-options">${v.p4 ? `<button class="size-btn" onclick="seleccionarVariante('4 Puestos', ${v.p4}, this)">4 Puestos</button>` : ''}${v.p6 ? `<button class="size-btn" onclick="seleccionarVariante('6 Puestos', ${v.p6}, this)">6 Puestos</button>` : ''}${v.p8 ? `<button class="size-btn" onclick="seleccionarVariante('8 Puestos', ${v.p8}, this)">8 Puestos</button>` : ''}</div></div>`; }
   } else if (p.categoria === 'alcobas' && p.variantesAlcoba) {
     const v = p.variantesAlcoba;
-    if (v.a140 || v.a160 || v.a200) {
-      hasVariants = true;
-      variantsHTML = `
-        <div class="detail-block">
-          <div class="lbl">Tamaño de la Cama</div>
-          <div class="size-options">
-            ${v.a140 ? `<button class="size-btn" onclick="seleccionarVariante('1.40 m', ${v.a140}, this)">1.40 m</button>` : ''}
-            ${v.a160 ? `<button class="size-btn" onclick="seleccionarVariante('1.60 m', ${v.a160}, this)">1.60 m</button>` : ''}
-            ${v.a200 ? `<button class="size-btn" onclick="seleccionarVariante('2x2 m', ${v.a200}, this)">2.00 x 2.00 m</button>` : ''}
-          </div>
-        </div>
-      `;
-    }
+    if (v.a140 || v.a160 || v.a200) { hasVariants = true; variantsHTML = `<div class="detail-block"><div class="lbl">Tamaño de la Cama</div><div class="size-options">${v.a140 ? `<button class="size-btn" onclick="seleccionarVariante('1.40 m', ${v.a140}, this)">1.40 m</button>` : ''}${v.a160 ? `<button class="size-btn" onclick="seleccionarVariante('1.60 m', ${v.a160}, this)">1.60 m</button>` : ''}${v.a200 ? `<button class="size-btn" onclick="seleccionarVariante('2x2 m', ${v.a200}, this)">2.00 x 2.00 m</button>` : ''}</div></div>`; }
   }
 
-  // Determinar precio inicial a mostrar
-  let displayPrice = p.precio ? formatoCOP(p.precio) : 'Selecciona un tamaño';
-  currentVarianteText = '';
-  currentVariantePrice = p.precio || 0;
-
+  let displayPrice = p.precio ? formatoCOP(p.precio) : 'Selecciona un tamaño'; currentVarianteText = ''; currentVariantePrice = p.precio || 0;
   document.getElementById('detalle-contenido').innerHTML=`
     <div class="detail-top">
-      <div class="detail-back" onclick="volverDeDetalle()">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Volver
-      </div>
+      <div class="detail-back" onclick="volverDeDetalle()"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Volver</div>
       <div class="detail-actions">
-        <div class="icon-btn ${esFav?'fav-on':''}" id="fav-icon" onclick="toggleFavorito(${p.id})">
-          <svg viewBox="0 0 24 24" fill="${esFav?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
-        </div>
-        <div class="icon-btn" onclick="compartirProducto(${p.id})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
-        </div>
+        <div class="icon-btn ${esFav?'fav-on':''}" id="fav-icon" onclick="toggleFavorito(${p.id})"><svg viewBox="0 0 24 24" fill="${esFav?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <div class="icon-btn" onclick="compartirProducto(${p.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></div>
       </div>
     </div>
-
     ${galleryHtml}
-
     <h2 class="detail-name">${p.nombre}</h2>
     <div class="detail-price" id="detail-price-display">${displayPrice}</div>
-    ${variantsHTML}
-    ${descripcion}
-    ${medidas}
-    ${materiales}
-    ${acabados}
-
+    ${variantsHTML}${descripcion}${medidas}${materiales}${acabados}
     <div class="detail-buttons">
-      <button class="btn-fav ${esFav?'on':''}" id="fav-btn" onclick="toggleFavorito(${p.id})">
-        <svg viewBox="0 0 24 24" fill="${esFav?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
-        <span id="fav-text">${esFav?'En favoritos':'Agregar a favoritos'}</span>
-      </button>
-      <button class="btn-wa" onclick="solicitarInfo(${p.id})">
-        <svg class="wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-        Solicitar información
-      </button>
+      <button class="btn-fav ${esFav?'on':''}" id="fav-btn" onclick="toggleFavorito(${p.id})"><svg viewBox="0 0 24 24" fill="${esFav?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg><span id="fav-text">${esFav?'En favoritos':'Agregar a favoritos'}</span></button>
+      <button class="btn-wa" onclick="solicitarInfo(${p.id})"><svg class="wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg> Solicitar información</button>
     </div>
-    <div style="height:1rem;"></div>
-  `;
-  cambiarPantalla('detalle', null);
-  iniciarCarrusel();
-
-  // Auto-seleccionar la primera variante si existen
-  if (hasVariants) {
-    const firstBtn = document.querySelector('.size-options .size-btn');
-    if (firstBtn) firstBtn.click();
-  }
+    <div style="height:1rem;"></div>`;
+  cambiarPantalla('detalle', null); iniciarCarrusel();
+  if (hasVariants) { const firstBtn = document.querySelector('.size-options .size-btn'); if (firstBtn) firstBtn.click(); }
 }
-
 let pantallaAnterior='categorias';
 function volverDeDetalle(){
-  const navMap={categorias:'nav-btn-cats',favoritos:2,buscar:3,inicio:'nav-btn-inicio'};
   let menuEl=null;
   if(pantallaAnterior==='categorias') menuEl=document.getElementById('nav-btn-cats');
   else if(pantallaAnterior==='favoritos') menuEl=document.querySelectorAll('.nav-item')[2];
   else if(pantallaAnterior==='buscar') menuEl=document.querySelectorAll('.nav-item')[3];
   else if(pantallaAnterior==='inicio') menuEl=document.getElementById('nav-btn-inicio');
-  
+  else if(pantallaAnterior==='junior-reel') menuEl=null;
   cambiarPantalla(pantallaAnterior, menuEl);
 }
 
 /* ============ CARRUSEL ============ */
 let galImgs=[], galIndex=0;
-
 function construirGaleria(imgs, ajuste){
-  galImgs = imgs.slice();
-  galIndex = 0;
-  const multi = imgs.length>1;
+  galImgs = imgs.slice(); galIndex = 0; const multi = imgs.length>1;
   const slides = imgs.map((im, i) =>`<img src="${im}" draggable="false" alt="" onclick="abrirLightbox(${i})">`).join('');
-  const navs = multi
-    ? `<button class="gal-nav prev" onclick="galPrev()">‹</button><button class="gal-nav next" onclick="galNext()">›</button>`
-    : '';
-  const dots = multi
-    ? `<div class="gal-dots" id="gal-dots">${imgs.map((_,i)=>`<span class="dot${i===0?' active':''}"></span>`).join('')}</div>`
-    : '';
-  const thumbs = multi
-    ? `<div class="gallery-thumbs-row" id="gal-thumbs">${imgs.map((im,i)=>`<div class="thumb-h${i===0?' active':''}" style="background-image:url('${im}')" onclick="galGo(${i})"></div>`).join('')}</div>`
-    : '';
-  return `
-    <div class="gallery">
-      <div class="gallery-viewport" id="gal-viewport">
-        <div class="gallery-track" id="gal-track">${slides}</div>
-        ${navs}${dots}
-      </div>
-      ${thumbs}
-    </div>`;
+  const navs = multi ? `<button class="gal-nav prev" onclick="galPrev()">‹</button><button class="gal-nav next" onclick="galNext()">›</button>` : '';
+  const dots = multi ? `<div class="gal-dots" id="gal-dots">${imgs.map((_,i)=>`<span class="dot${i===0?' active':''}"></span>`).join('')}</div>` : '';
+  const thumbs = multi ? `<div class="gallery-thumbs-row" id="gal-thumbs">${imgs.map((im,i)=>`<div class="thumb-h${i===0?' active':''}" style="background-image:url('${im}')" onclick="galGo(${i})"></div>`).join('')}</div>` : '';
+  return `<div class="gallery"><div class="gallery-viewport" id="gal-viewport"><div class="gallery-track" id="gal-track">${slides}</div>${navs}${dots}</div>${thumbs}</div>`;
 }
-
 function galUpdate(){
-  const track=document.getElementById('gal-track');
-  if(track) track.style.transform=`translateX(${-galIndex*100}%)`;
-  const dots=document.querySelectorAll('#gal-dots .dot');
-  dots.forEach((d,i)=>d.classList.toggle('active', i===galIndex));
-  const ths=document.querySelectorAll('#gal-thumbs .thumb-h');
-  ths.forEach((t,i)=>{
-    t.classList.toggle('active', i===galIndex);
-    if(i===galIndex) t.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
-  });
+  const track=document.getElementById('gal-track'); if(track) track.style.transform=`translateX(${-galIndex*100}%)`;
+  const dots=document.querySelectorAll('#gal-dots .dot'); dots.forEach((d,i)=>d.classList.toggle('active', i===galIndex));
+  const ths=document.querySelectorAll('#gal-thumbs .thumb-h'); ths.forEach((t,i)=>{ t.classList.toggle('active', i===galIndex); if(i===galIndex) t.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'}); });
 }
 function galGo(i){ galIndex=Math.max(0, Math.min(galImgs.length-1, i)); galUpdate(); }
-function galNext(){ galGo(galIndex+1); }
-function galPrev(){ galGo(galIndex-1); }
-
+function galNext(){ galGo(galIndex+1); } function galPrev(){ galGo(galIndex-1); }
 function iniciarCarrusel(){
-  const vp=document.getElementById('gal-viewport');
-  if(!vp) return;
-  let startX=0, startY=0, dx=0, dy=0, active=false;
+  const vp=document.getElementById('gal-viewport'); if(!vp) return; let startX=0, startY=0, dx=0, dy=0, active=false;
   vp.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;startY=e.touches[0].clientY;dx=0;dy=0;active=true;},{passive:true});
   vp.addEventListener('touchmove',e=>{if(!active)return;dx=e.touches[0].clientX-startX;dy=e.touches[0].clientY-startY;},{passive:true});
   vp.addEventListener('touchend',()=>{if(!active)return;active=false;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){dx<0?galNext():galPrev();}});
 }
 
-/* ============ LIGHTBOX Y DESLIZAMIENTO (SWIPE) ============ */
-let lightboxIndex = 0;
-let lbStartX = 0;
-let lbEndX = 0;
-
-function abrirLightbox(index) {
-  lightboxIndex = index;
-  actualizarLightboxUI();
-  document.getElementById('lightbox').classList.add('open');
-  document.body.classList.add('modal-abierto');
-}
-
-function cerrarLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.classList.remove('modal-abierto');
-}
-
+/* ============ LIGHTBOX ============ */
+let lightboxIndex = 0; let lbStartX = 0; let lbEndX = 0;
+function abrirLightbox(index) { lightboxIndex = index; actualizarLightboxUI(); document.getElementById('lightbox').classList.add('open'); document.body.classList.add('modal-abierto'); }
+function cerrarLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.classList.remove('modal-abierto'); }
 function actualizarLightboxUI() {
-  const imgEl = document.getElementById('lightbox-img');
-  const indEl = document.getElementById('lightbox-indicator');
-  
-  imgEl.style.opacity = 0; 
-  
-  setTimeout(() => {
-    imgEl.src = galImgs[lightboxIndex];
-    if (galImgs.length > 1) {
-      indEl.innerText = `${lightboxIndex + 1} / ${galImgs.length}`;
-    } else {
-      indEl.innerText = '';
-    }
-    imgEl.style.opacity = 1; 
-  }, 150);
+  const imgEl = document.getElementById('lightbox-img'); const indEl = document.getElementById('lightbox-indicator'); imgEl.style.opacity = 0; 
+  setTimeout(() => { imgEl.src = galImgs[lightboxIndex]; if (galImgs.length > 1) { indEl.innerText = `${lightboxIndex + 1} / ${galImgs.length}`; } else { indEl.innerText = ''; } imgEl.style.opacity = 1; }, 150);
 }
-
-function lightboxSiguiente() {
-  if (lightboxIndex < galImgs.length - 1) {
-    lightboxIndex++;
-    actualizarLightboxUI();
-  }
-}
-
-function lightboxAnterior() {
-  if (lightboxIndex > 0) {
-    lightboxIndex--;
-    actualizarLightboxUI();
-  }
-}
-
+function lightboxSiguiente() { if (lightboxIndex < galImgs.length - 1) { lightboxIndex++; actualizarLightboxUI(); } }
+function lightboxAnterior() { if (lightboxIndex > 0) { lightboxIndex--; actualizarLightboxUI(); } }
 const lightboxCont = document.getElementById('lightbox');
-lightboxCont.addEventListener('touchstart', e => {
-  lbStartX = e.changedTouches[0].screenX;
-}, {passive: true});
-
-lightboxCont.addEventListener('touchend', e => {
-  lbEndX = e.changedTouches[0].screenX;
-  const dif = lbStartX - lbEndX;
-  if (dif > 50) {
-    lightboxSiguiente();
-  } else if (dif < -50) {
-    lightboxAnterior();
-  }
-}, {passive: true});
+lightboxCont.addEventListener('touchstart', e => { lbStartX = e.changedTouches[0].screenX; }, {passive: true});
+lightboxCont.addEventListener('touchend', e => { lbEndX = e.changedTouches[0].screenX; const dif = lbStartX - lbEndX; if (dif > 50) { lightboxSiguiente(); } else if (dif < -50) { lightboxAnterior(); } }, {passive: true});
 
 /* ============ FAVORITOS ============ */
 function toggleFavorito(id){
-  if(favoritos.includes(id)) favoritos=favoritos.filter(f=>f!==id);
-  else favoritos.push(id);
-  localStorage.setItem('maderarte_favs', JSON.stringify(favoritos));
-  const esFav=favoritos.includes(id);
+  if(favoritos.includes(id)) favoritos=favoritos.filter(f=>f!==id); else favoritos.push(id);
+  localStorage.setItem('maderarte_favs', JSON.stringify(favoritos)); const esFav=favoritos.includes(id);
   const ic=document.getElementById('fav-icon'), b=document.getElementById('fav-btn'), txt=document.getElementById('fav-text');
   if(ic){ic.classList.toggle('fav-on',esFav);ic.querySelector('svg').setAttribute('fill',esFav?'currentColor':'none');}
   if(b){b.classList.toggle('on',esFav);b.querySelector('svg').setAttribute('fill',esFav?'currentColor':'none');}
@@ -1728,82 +1282,48 @@ function toggleFavorito(id){
 }
 function renderizarFavoritos(){
   const grid=document.getElementById('grid-favoritos');
-  pintarGrid(grid, catalogoProductos.filter(p=>favoritos.includes(p.id)),
-    'Aún no tienes favoritos.<br>Toca el corazón en un producto para guardarlo.');
+  pintarGrid(grid, catalogoProductos.filter(p=>favoritos.includes(p.id)), 'Aún no tienes favoritos.<br>Toca el corazón en un producto para guardarlo.');
 }
 
 /* ============ BUSCAR ============ */
 function ejecutarBusqueda(){
-  const q=document.getElementById('buscar-input').value.toLowerCase().trim();
-  const grid=document.getElementById('grid-buscar');
-  if(!q){grid.innerHTML='';return;}
-  const res=catalogoProductos.filter(p=>
-    p.nombre.toLowerCase().includes(q) ||
-    (p.descripcion||'').toLowerCase().includes(q) ||
-    (CAT_LABELS[p.categoria]||'').toLowerCase().includes(q));
+  const q=document.getElementById('buscar-input').value.toLowerCase().trim(); const grid=document.getElementById('grid-buscar'); if(!q){grid.innerHTML='';return;}
+  const res=catalogoProductos.filter(p=> p.nombre.toLowerCase().includes(q) || (p.descripcion||'').toLowerCase().includes(q) || (CAT_LABELS[p.categoria]||'').toLowerCase().includes(q) || (p.subcategoria||'').toLowerCase().includes(q));
   pintarGrid(grid, res, 'Sin resultados para tu búsqueda.');
 }
 
 /* ============ WHATSAPP / COMPARTIR ============ */
 function solicitarInfo(id){
   const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
-  
-  let precioMostrar = currentVarianteText ? currentVariantePrice : p.precio;
-  let infoExtra = currentVarianteText ? ` (Tamaño: ${currentVarianteText})` : '';
-  
-  // URL directa
-  const urlBase = window.location.origin + window.location.pathname;
-  const linkProducto = urlBase + '?prod=' + id;
-
+  let precioMostrar = currentVarianteText ? currentVariantePrice : p.precio; let infoExtra = currentVarianteText ? ` (Tamaño: ${currentVarianteText})` : '';
+  const urlBase = window.location.origin + window.location.pathname; const linkProducto = urlBase + '?prod=' + id;
   let msg=`Hola Maderarte 👋 Estoy interesado(a) en este producto del catálogo:\n\n*${p.nombre}*${infoExtra}\nPrecio: ${formatoCOP(precioMostrar)}\nCategoría: ${CAT_LABELS[p.categoria]}\n`;
-  const dims=[];if(p.ancho)dims.push(`Ancho ${p.ancho}cm`);if(p.alto)dims.push(`Alto ${p.alto}cm`);if(p.fondo)dims.push(`Fondo ${p.fondo}cm`);
-  if(dims.length) msg+=`Medidas: ${dims.join(' · ')}\n`;
+  const dims=[];if(p.ancho)dims.push(`Ancho ${p.ancho}cm`);if(p.alto)dims.push(`Alto ${p.alto}cm`);if(p.fondo)dims.push(`Fondo ${p.fondo}cm`); if(dims.length) msg+=`Medidas: ${dims.join(' · ')}\n`;
   msg+=`\nEnlace: ${linkProducto}\n\n¿Me podrían dar más información?`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank');
 }
-
 async function compartirProducto(id){
-  const p=catalogoProductos.find(x=>x.id===id); if(!p)return;
-  
-  const urlBase = window.location.origin + window.location.pathname;
-  const linkProducto = urlBase + '?prod=' + id;
-  
-  const texto=`Mira este mueble de Maderarte: ${p.nombre}. Más info aquí:\n\n${linkProducto}`;
-  
-  if(navigator.share){ 
-    try{ await navigator.share({title:`Maderarte · ${p.nombre}`, text:texto}); }catch(e){}
-  } else { 
-    try{ await navigator.clipboard.writeText(texto); mostrarToast('Enlace copiado'); }
-    catch(e){ prompt('Copia y comparte este texto:', texto); } 
-  }
+  const p=catalogoProductos.find(x=>x.id===id); if(!p)return; const urlBase = window.location.origin + window.location.pathname; const linkProducto = urlBase + '?prod=' + id; const texto=`Mira este mueble de Maderarte: ${p.nombre}. Más info aquí:\n\n${linkProducto}`;
+  if(navigator.share){ try{ await navigator.share({title:`Maderarte · ${p.nombre}`, text:texto}); }catch(e){} } else { try{ await navigator.clipboard.writeText(texto); mostrarToast('Enlace copiado'); } catch(e){ prompt('Copia y comparte este texto:', texto); } }
 }
 
 /* ============ TOAST ============ */
 let toastTimer;
-function mostrarToast(txt){
-  const t=document.getElementById('toast');t.innerText=txt;t.classList.add('show');
-  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2000);
-}
+function mostrarToast(txt){ const t=document.getElementById('toast');t.innerText=txt;t.classList.add('show'); clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2000); }
 
 /* ============ INICIO ============ */
 (async function init(){
-  registrarVistaGeneral(); // Analytics On Load
-  
-  ghCargarConfig();
-  await cargarCatalogo();
-  const portada=await dbGet('portada');
-  if(portada) aplicarPortada(portada);
-  
-  // Detectar enlaces directos (?prod=ID)
-  const params = new URLSearchParams(window.location.search);
-  const prodId = params.get('prod');
-  
+  registrarVistaGeneral(); ghCargarConfig(); await cargarCatalogo();
+  const portada=await dbGet('portada'); if(portada) aplicarPortada(portada);
+  const params = new URLSearchParams(window.location.search); const prodId = params.get('prod');
   if (prodId && catalogoProductos.find(p => p.id == prodId)) {
-    pantallaAnterior = 'inicio';
-    abrirDetalle(parseInt(prodId));
-  } else {
-    cambiarPantalla('inicio', document.getElementById('nav-btn-inicio'));
-  }
+    const prd = catalogoProductos.find(p => p.id == prodId);
+    if(prd.categoria === 'junior') {
+      irASubcategoriaJunior(prd.subcategoria, prd.subcategoria);
+    } else {
+      pantallaAnterior = 'inicio'; abrirDetalle(parseInt(prodId));
+    }
+  } else { cambiarPantalla('inicio', document.getElementById('nav-btn-inicio')); }
 })();
 </script>
 </body>

@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>Maderarte | Catálogo</title>
@@ -25,10 +25,10 @@
   --bg-canvas:#F4F1EA;
   --bg-soft:#EFEAE0;
   --dark:#211D18;
-  --brand:#9A6B3F;        /* madera media */
-  --brand-deep:#5E4023;   /* madera oscura */
+  --brand:#9A6B3F;
+  --brand-deep:#5E4023;
   --gold:#C5A059;
-  --orange:#ED7D31;       /* color de marca / acento */
+  --orange:#ED7D31;
   --muted:#867E73;
   --line:rgba(33,29,24,0.10);
   --serif:'Cormorant Garamond',serif;
@@ -258,7 +258,7 @@ body.modal-abierto {
 }
 
 /* Acciones bajo imagen */
-.jr-actions { display: flex; gap: 10px; margin-top: 0.85rem; }
+.jr-actions { display: flex; gap: 10px; margin-top: 0.85rem; margin-bottom: 0.5rem; }
 .jr-btn-wa {
   flex: 1; background: var(--dark); color: #fff; border: none;
   border-radius: 11px; padding: .82rem .6rem;
@@ -275,27 +275,15 @@ body.modal-abierto {
 .jr-btn-fav svg { width: 19px; height: 19px; }
 .jr-btn-fav.on { background: var(--orange); border-color: var(--orange); color: #fff; }
 
-/* Ver ficha completa */
-.jr-btn-detail {
-  display: flex; align-items: center; justify-content: center; gap: 7px;
-  width: 100%; margin-top: 0.6rem;
-  background: var(--bg-soft); color: var(--brand-deep);
-  border: 1px solid var(--line); border-radius: 11px; padding: .72rem;
-  font-size: .72rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; cursor: pointer; transition: .2s;
-}
-.jr-btn-detail:active { background: var(--brand-deep); color: #fff; border-color: var(--brand-deep); }
-.jr-btn-detail svg { width: 14px; height: 14px; }
-
 /* Descripción */
 .jr-desc-text {
-  font-size: .83rem; color: var(--muted); line-height: 1.55; font-weight: 300;
-  margin-top: 0.8rem;
-  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: .88rem; color: var(--muted); line-height: 1.55; font-weight: 300;
+  margin-top: 0.8rem; display: block;
 }
 
 /* Strip miniaturas */
-.jr-thumbs-label { font-size: .65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin-top: 1.2rem; margin-bottom: 0.5rem; display: block; }
-.jr-thumbs-scroll { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; scrollbar-width: none; }
+.jr-thumbs-label { font-size: .65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; display: block; }
+.jr-thumbs-scroll { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; scrollbar-width: none; margin-bottom: 0.5rem; }
 .jr-thumbs-scroll::-webkit-scrollbar { display: none; }
 .jr-thumb {
   flex: 0 0 auto; scroll-snap-align: start;
@@ -390,11 +378,11 @@ body.modal-abierto {
 .size-btn.active{border-color:var(--orange);background:var(--orange);color:#fff;}
 
 /* ---------- LIGHTBOX PANTALLA COMPLETA ---------- */
-.lightbox{ position:fixed;top:0;left:0;right:0;bottom:0; background:rgba(12,9,6,0.96);z-index:9999; display:flex;align-items:center;justify-content:center; opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(5px); }
+.lightbox{ position:fixed;top:0;left:0;width:100vw;height:100dvh; background:#000;z-index:99999; display:flex;align-items:center;justify-content:center; opacity:0;pointer-events:none;transition:opacity .3s; }
 .lightbox.open{opacity:1;pointer-events:auto;}
-.lightbox-img{ max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5); transition: opacity 0.15s ease-in-out; -webkit-user-drag: none; user-select: none; }
-.lightbox-close{ position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%; background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem; display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.3); z-index:10000; }
-.lightbox-indicator { position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 500; letter-spacing: 2px; }
+.lightbox-img{ width:100%;height:100%;object-fit:contain; transition: opacity 0.15s ease-in-out; -webkit-user-drag: none; user-select: none; }
+.lightbox-close{ position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%; background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem; display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.3); z-index:10000; backdrop-filter:blur(4px);}
+.lightbox-indicator { position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 500; letter-spacing: 2px; text-shadow: 0 1px 4px rgba(0,0,0,0.8); z-index: 10000;}
 
 /* ---------- FAVORITOS / BUSCAR / CONTACTO ---------- */
 .simple-pad{padding-top:1.4rem;}
@@ -643,7 +631,6 @@ body.modal-abierto {
           <span id="jr-count-label" style="font-size:.75rem;color:var(--muted);font-weight:500;"></span>
         </div>
 
-        <!-- Imagen protagonista -->
         <div class="jr-hero-wrap" id="jr-hero-wrap">
           <img class="jr-hero-img" id="jr-hero-img" src="" alt="" onclick="jrAbrirLightbox()">
           <div class="jr-indicator" id="jr-indicator"></div>
@@ -655,7 +642,9 @@ body.modal-abierto {
           </div>
         </div>
 
-        <!-- Acciones -->
+        <span class="jr-thumbs-label" id="jr-thumbs-label" style="display:none;">Modelos disponibles</span>
+        <div class="jr-thumbs-scroll" id="jr-thumbs-scroll"></div>
+
         <div class="jr-actions" id="jr-actions">
           <button class="jr-btn-fav" id="jr-btn-fav" onclick="jrToggleFav()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
@@ -666,20 +655,10 @@ body.modal-abierto {
           </button>
         </div>
 
-        <!-- Ver ficha completa -->
-        <button class="jr-btn-detail" id="jr-btn-detail" onclick="jrVerDetalle()">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
-          Ver ficha completa
-        </button>
-
-        <!-- Descripción -->
         <div class="jr-desc-text" id="jr-desc-text"></div>
 
-        <!-- Strip de miniaturas -->
-        <span class="jr-thumbs-label" id="jr-thumbs-label" style="display:none;">Modelos disponibles</span>
-        <div class="jr-thumbs-scroll" id="jr-thumbs-scroll"></div>
+        <div id="jr-extra-details" style="margin-top:1rem; padding-bottom:1rem;"></div>
 
-        <!-- Estado vacío -->
         <div class="jr-empty" id="jr-empty" style="display:none;">
           🪵 Muy pronto aquí encontrarás todos los modelos de esta colección.
         </div>
@@ -1063,6 +1042,41 @@ function cambiarPantalla(id, menuEl){
 
 function mostrarSubcategoriasJunior() { cambiarPantalla('junior-subcats', null); }
 
+/* ============ COMPONENTES COMUNES (FICHAS) ============ */
+function generarHTMLFicha(p) {
+  let medidas=''; const dims=[]; if(p.ancho) dims.push(`Ancho: ${p.ancho} cm`); if(p.alto) dims.push(`Alto: ${p.alto} cm`); if(p.fondo) dims.push(`Fondo: ${p.fondo} cm`); if(dims.length) medidas=`<div class="detail-block"><div class="lbl">Medidas</div><div class="val">${dims.join(' · ')}</div></div>`;
+  let materiales=''; const matItems = MATERIAL_FIELDS.filter(f => p.materialesData && p.materialesData[f.key]); const certItems = (p.certificados||[]).map(k => CERT_FIELDS.find(c=>c.key===k)).filter(Boolean);
+  let matInner='';
+  if(matItems.length){ matInner += '<div class="mat-list">'+matItems.map(f=>`<div class="mat-item"><span class="mat-ic">${f.icon}</span><div class="mat-tx"><b>${f.label}</b><span>${p.materialesData[f.key]}</span></div></div>`).join('')+'</div>'; }
+  if(certItems.length){ matInner += '<div class="cert-row">'+certItems.map(c=>`<span class="cert-badge ${c.cls}">${c.icon}${c.label}</span>`).join('')+'</div>'; }
+  if(matInner) materiales=`<div class="detail-block"><div class="lbl">Materiales</div>${matInner}</div>`;
+  let acabados=''; if(p.acabados&&p.acabados.length){ acabados=`<div class="detail-block"><div class="lbl">Acabados disponibles</div><div class="acabados-row">${p.acabados.map(c=>`<div class="acabado-dot" style="background:${c}"></div>`).join('')}</div></div>`; }
+
+  let variantsHTML = '';
+  if (p.categoria === 'comedores' && p.variantesComedor) {
+    const v = p.variantesComedor;
+    if (v.p4 || v.p6 || v.p8) { variantsHTML = `<div class="detail-block"><div class="lbl">Tamaño del Comedor</div><div class="size-options">${v.p4 ? `<button class="size-btn" onclick="seleccionarVariante('4 Puestos', ${v.p4}, this)">4 Puestos</button>` : ''}${v.p6 ? `<button class="size-btn" onclick="seleccionarVariante('6 Puestos', ${v.p6}, this)">6 Puestos</button>` : ''}${v.p8 ? `<button class="size-btn" onclick="seleccionarVariante('8 Puestos', ${v.p8}, this)">8 Puestos</button>` : ''}</div></div>`; }
+  } else if (p.categoria === 'alcobas' && p.variantesAlcoba) {
+    const v = p.variantesAlcoba;
+    if (v.a140 || v.a160 || v.a200) { variantsHTML = `<div class="detail-block"><div class="lbl">Tamaño de la Cama</div><div class="size-options">${v.a140 ? `<button class="size-btn" onclick="seleccionarVariante('1.40 m', ${v.a140}, this)">1.40 m</button>` : ''}${v.a160 ? `<button class="size-btn" onclick="seleccionarVariante('1.60 m', ${v.a160}, this)">1.60 m</button>` : ''}${v.a200 ? `<button class="size-btn" onclick="seleccionarVariante('2x2 m', ${v.a200}, this)">2.00 x 2.00 m</button>` : ''}</div></div>`; }
+  }
+  return variantsHTML + medidas + materiales + acabados;
+}
+
+function seleccionarVariante(tamanoTexto, precio, btnEl) {
+  currentVarianteText = tamanoTexto; 
+  currentVariantePrice = precio; 
+  
+  const dp = document.getElementById('detail-price-display');
+  if(dp) dp.innerText = formatoCOP(precio);
+  
+  const jrp = document.getElementById('jr-hero-price');
+  if(jrp) jrp.innerText = formatoCOP(precio);
+
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active')); 
+  if(btnEl) btnEl.classList.add('active');
+}
+
 /* ============ JUNIOR GALERÍA PROTAGONISTA ============ */
 let jrProductos = [], jrIndex = 0;
 
@@ -1076,8 +1090,8 @@ function irASubcategoriaJunior(subcatKey, nombreSubcat) {
   const sinProductos = jrProductos.length === 0;
   document.getElementById('jr-hero-wrap').style.display   = sinProductos ? 'none' : 'block';
   document.getElementById('jr-actions').style.display     = sinProductos ? 'none' : 'flex';
-  document.getElementById('jr-btn-detail').style.display  = sinProductos ? 'none' : 'flex';
   document.getElementById('jr-desc-text').style.display   = sinProductos ? 'none' : 'block';
+  document.getElementById('jr-extra-details').style.display = sinProductos ? 'none' : 'block';
   document.getElementById('jr-empty').style.display       = sinProductos ? 'block' : 'none';
   document.getElementById('jr-thumbs-label').style.display = (jrProductos.length > 1) ? 'block' : 'none';
 
@@ -1109,6 +1123,8 @@ function jrRenderThumbs() {
 function jrActualizarHero(animar) {
   const p = jrProductos[jrIndex]; if (!p) return;
   const imgEl = document.getElementById('jr-hero-img');
+  
+  currentVarianteText = ''; currentVariantePrice = p.precio || 0;
 
   if (animar) {
     imgEl.classList.add('fading');
@@ -1119,8 +1135,15 @@ function jrActualizarHero(animar) {
 
   document.getElementById('jr-hero-name').innerText  = p.nombre;
   document.getElementById('jr-hero-price').innerText = p.precio ? formatoCOP(p.precio) : 'Precio a consultar';
-  document.getElementById('jr-desc-text').innerText  = p.descripcion || 'Acabados y medidas personalizables bajo los más altos estándares de calidad.';
+  document.getElementById('jr-desc-text').innerHTML  = p.descripcion ? p.descripcion.replace(/\n/g, '<br>') : 'Acabados y medidas personalizables bajo los más altos estándares de calidad.';
   document.getElementById('jr-indicator').innerText  = jrProductos.length > 1 ? `${jrIndex + 1} / ${jrProductos.length}` : '';
+
+  // Inyectar toda la info técnica directamente debajo de la descripción
+  document.getElementById('jr-extra-details').innerHTML = generarHTMLFicha(p);
+
+  // Auto-seleccionar primer variante de tamaño si existe
+  const firstBtn = document.querySelector('#jr-extra-details .size-btn');
+  if (firstBtn) firstBtn.click();
 
   // Favorito
   const esFav = favoritos.includes(p.id);
@@ -1154,24 +1177,17 @@ function jrToggleFav() {
 function jrSolicitarInfo() {
   const p = jrProductos[jrIndex]; if (!p) return;
   const link = window.location.origin + window.location.pathname + '?prod=' + p.id;
-  let msg = `Hola Maderarte 👋 Estoy interesado(a) en este producto de la línea Junior:\n\n*${p.nombre}*\nPrecio: ${p.precio ? formatoCOP(p.precio) : 'A consultar'}\n\nEnlace: ${link}\n\n¿Me podrían brindar más especificaciones?`;
+  let precioMostrar = currentVarianteText ? currentVariantePrice : (p.precio || 0);
+  let infoExtra = currentVarianteText ? ` (Tamaño: ${currentVarianteText})` : '';
+  let msg = `Hola Maderarte 👋 Estoy interesado(a) en este producto de la línea Junior:\n\n*${p.nombre}*${infoExtra}\nPrecio: ${precioMostrar ? formatoCOP(precioMostrar) : 'A consultar'}\n\nEnlace: ${link}\n\n¿Me podrían brindar más especificaciones?`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
-}
-
-function jrVerDetalle() {
-  const p = jrProductos[jrIndex]; if (!p) return;
-  pantallaAnterior = 'junior-reel';
-  abrirDetalle(p.id);
 }
 
 function jrAbrirLightbox() {
   const p = jrProductos[jrIndex]; if (!p) return;
   galImgs = (p.imagenes && p.imagenes.length) ? p.imagenes.slice() : [];
   if (!galImgs.length) return;
-  lightboxIndex = 0;
-  actualizarLightboxUI();
-  document.getElementById('lightbox').classList.add('open');
-  document.body.classList.add('modal-abierto');
+  abrirLightbox(0);
 }
 
 function jrIniciarSwipe() {
@@ -1182,25 +1198,6 @@ function jrIniciarSwipe() {
   hero.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; dx = 0; dy = 0; activo = true; }, { passive: true });
   hero.addEventListener('touchmove',  e => { if (!activo) return; dx = e.touches[0].clientX - sx; dy = e.touches[0].clientY - sy; }, { passive: true });
   hero.addEventListener('touchend',   () => { if (!activo) return; activo = false; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? jrNavegar(1) : jrNavegar(-1); } });
-}
-
-function solicitarInfoDirecto(id){
-  const p = catalogoProductos.find(x => x.id === id); if(!p) return;
-  const linkProducto = window.location.origin + window.location.pathname + '?prod=' + id;
-  let msg=`Hola Maderarte 👋 Estoy interesado(a) en este producto de la línea Junior:\n\n*${p.nombre}*\nSubcategoría: ${p.subcategoria}\nPrecio: ${p.precio ? formatoCOP(p.precio) : 'A consultar'}\n\nEnlace: ${linkProducto}\n\n¿Me podrían brindar más especificaciones?`;
-  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank');
-}
-
-function toggleFavDirecto(id, btnEl) {
-  toggleFavorito(id);
-  const esFav = favoritos.includes(id);
-  if(esFav) {
-    btnEl.classList.add('on');
-    btnEl.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" style="width:18px;height:18px;"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
-  } else {
-    btnEl.classList.remove('on');
-    btnEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="width:18px;height:18px;"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
-  }
 }
 
 /* ============ ADMIN: ACCESO Y LÓGICA ============ */
@@ -1371,34 +1368,15 @@ function pintarGrid(grid, lista, vacioMsg){
 }
 
 /* ============ DETALLE DE PRODUCTO NORMAL ============ */
-function seleccionarVariante(tamanoTexto, precio, btnEl) {
-  currentVarianteText = tamanoTexto; currentVariantePrice = precio; document.getElementById('detail-price-display').innerText = formatoCOP(precio);
-  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active')); if(btnEl) btnEl.classList.add('active');
-}
 function abrirDetalle(id){
   const p=catalogoProductos.find(x=>x.id===id); if(!p)return; registrarVistaProducto(id);
   const activa=document.querySelector('.view-panel.active'); if(activa){ const vid=activa.id.replace('view-',''); if(vid!=='detalle') pantallaAnterior=vid; }
   productoActual=p; const imgs=(p.imagenes&&p.imagenes.length)?p.imagenes:['']; const esFav=favoritos.includes(p.id);
   const galleryHtml = construirGaleria(imgs, p.ajuste);
-  let medidas=''; const dims=[]; if(p.ancho) dims.push(`Ancho: ${p.ancho} cm`); if(p.alto) dims.push(`Alto: ${p.alto} cm`); if(p.fondo) dims.push(`Fondo: ${p.fondo} cm`); if(dims.length) medidas=`<div class="detail-block"><div class="lbl">Medidas</div><div class="val">${dims.join(' · ')}</div></div>`;
-  let materiales=''; const matItems = MATERIAL_FIELDS.filter(f => p.materialesData && p.materialesData[f.key]); const certItems = (p.certificados||[]).map(k => CERT_FIELDS.find(c=>c.key===k)).filter(Boolean);
-  let matInner='';
-  if(matItems.length){ matInner += '<div class="mat-list">'+matItems.map(f=>`<div class="mat-item"><span class="mat-ic">${f.icon}</span><div class="mat-tx"><b>${f.label}</b><span>${p.materialesData[f.key]}</span></div></div>`).join('')+'</div>'; }
-  if(certItems.length){ matInner += '<div class="cert-row">'+certItems.map(c=>`<span class="cert-badge ${c.cls}">${c.icon}${c.label}</span>`).join('')+'</div>'; }
-  if(matInner) materiales=`<div class="detail-block"><div class="lbl">Materiales</div>${matInner}</div>`;
-  let descripcion=''; if(p.descripcion) descripcion=`<p class="detail-desc">${p.descripcion}</p>`;
-  let acabados=''; if(p.acabados&&p.acabados.length){ acabados=`<div class="detail-block"><div class="lbl">Acabados disponibles</div><div class="acabados-row">${p.acabados.map(c=>`<div class="acabado-dot" style="background:${c}"></div>`).join('')}</div></div>`; }
   
-  let variantsHTML = ''; let hasVariants = false;
-  if (p.categoria === 'comedores' && p.variantesComedor) {
-    const v = p.variantesComedor;
-    if (v.p4 || v.p6 || v.p8) { hasVariants = true; variantsHTML = `<div class="detail-block"><div class="lbl">Tamaño del Comedor</div><div class="size-options">${v.p4 ? `<button class="size-btn" onclick="seleccionarVariante('4 Puestos', ${v.p4}, this)">4 Puestos</button>` : ''}${v.p6 ? `<button class="size-btn" onclick="seleccionarVariante('6 Puestos', ${v.p6}, this)">6 Puestos</button>` : ''}${v.p8 ? `<button class="size-btn" onclick="seleccionarVariante('8 Puestos', ${v.p8}, this)">8 Puestos</button>` : ''}</div></div>`; }
-  } else if (p.categoria === 'alcobas' && p.variantesAlcoba) {
-    const v = p.variantesAlcoba;
-    if (v.a140 || v.a160 || v.a200) { hasVariants = true; variantsHTML = `<div class="detail-block"><div class="lbl">Tamaño de la Cama</div><div class="size-options">${v.a140 ? `<button class="size-btn" onclick="seleccionarVariante('1.40 m', ${v.a140}, this)">1.40 m</button>` : ''}${v.a160 ? `<button class="size-btn" onclick="seleccionarVariante('1.60 m', ${v.a160}, this)">1.60 m</button>` : ''}${v.a200 ? `<button class="size-btn" onclick="seleccionarVariante('2x2 m', ${v.a200}, this)">2.00 x 2.00 m</button>` : ''}</div></div>`; }
-  }
-
   let displayPrice = p.precio ? formatoCOP(p.precio) : 'Selecciona un tamaño'; currentVarianteText = ''; currentVariantePrice = p.precio || 0;
+  let descripcion=''; if(p.descripcion) descripcion=`<p class="detail-desc">${p.descripcion.replace(/\n/g, '<br>')}</p>`;
+
   document.getElementById('detalle-contenido').innerHTML=`
     <div class="detail-top">
       <div class="detail-back" onclick="volverDeDetalle()"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Volver</div>
@@ -1410,14 +1388,16 @@ function abrirDetalle(id){
     ${galleryHtml}
     <h2 class="detail-name">${p.nombre}</h2>
     <div class="detail-price" id="detail-price-display">${displayPrice}</div>
-    ${variantsHTML}${descripcion}${medidas}${materiales}${acabados}
+    ${descripcion}
+    ${generarHTMLFicha(p)}
     <div class="detail-buttons">
       <button class="btn-fav ${esFav?'on':''}" id="fav-btn" onclick="toggleFavorito(${p.id})"><svg viewBox="0 0 24 24" fill="${esFav?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg><span id="fav-text">${esFav?'En favoritos':'Agregar a favoritos'}</span></button>
       <button class="btn-wa" onclick="solicitarInfo(${p.id})"><svg class="wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg> Solicitar información</button>
     </div>
     <div style="height:1rem;"></div>`;
   cambiarPantalla('detalle', null); iniciarCarrusel();
-  if (hasVariants) { const firstBtn = document.querySelector('.size-options .size-btn'); if (firstBtn) firstBtn.click(); }
+  
+  const firstBtn = document.querySelector('.size-options .size-btn'); if (firstBtn) firstBtn.click();
 }
 let pantallaAnterior='categorias';
 function volverDeDetalle(){
@@ -1454,10 +1434,36 @@ function iniciarCarrusel(){
   vp.addEventListener('touchend',()=>{if(!active)return;active=false;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){dx<0?galNext():galPrev();}});
 }
 
-/* ============ LIGHTBOX ============ */
+/* ============ LIGHTBOX (PANTALLA COMPLETA) ============ */
 let lightboxIndex = 0; let lbStartX = 0; let lbEndX = 0;
-function abrirLightbox(index) { lightboxIndex = index; actualizarLightboxUI(); document.getElementById('lightbox').classList.add('open'); document.body.classList.add('modal-abierto'); }
-function cerrarLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.classList.remove('modal-abierto'); }
+function requestFullscreen(element) {
+  try {
+    if (element.requestFullscreen) { element.requestFullscreen(); }
+    else if (element.webkitRequestFullscreen) { element.webkitRequestFullscreen(); }
+  } catch(e) {}
+}
+function exitFullscreen() {
+  try {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) { document.exitFullscreen(); }
+      else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
+    }
+  } catch(e) {}
+}
+
+function abrirLightbox(index) { 
+  lightboxIndex = index; 
+  actualizarLightboxUI(); 
+  const lb = document.getElementById('lightbox');
+  lb.classList.add('open'); 
+  document.body.classList.add('modal-abierto'); 
+  requestFullscreen(lb);
+}
+function cerrarLightbox() { 
+  document.getElementById('lightbox').classList.remove('open'); 
+  document.body.classList.remove('modal-abierto'); 
+  exitFullscreen();
+}
 function actualizarLightboxUI() {
   const imgEl = document.getElementById('lightbox-img'); const indEl = document.getElementById('lightbox-indicator'); imgEl.style.opacity = 0; 
   setTimeout(() => { imgEl.src = galImgs[lightboxIndex]; if (galImgs.length > 1) { indEl.innerText = `${lightboxIndex + 1} / ${galImgs.length}`; } else { indEl.innerText = ''; } imgEl.style.opacity = 1; }, 150);

@@ -62,96 +62,113 @@ body.modal-abierto {
 
 /* ---------- MODO PC ---------- */
 body.is-desktop {
-  align-items: flex-start;
+  align-items: stretch;
   padding: 0;
-  background: #CFCABF;
+  background: var(--bg-canvas);
 }
 body.is-desktop .phone-wrapper {
   max-width: 100%;
+  width: 100%;
   height: 100dvh;
   border-radius: 0;
   box-shadow: none;
-  flex-direction: row;
+  flex-direction: column;
+  min-height: 0;
 }
+/* Header horizontal en PC */
 body.is-desktop .top-navbar {
-  width: 240px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  height: 100dvh;
-  border-right: 1px solid var(--line);
-  border-bottom: none;
-  padding: 2rem 1.5rem;
+  width: 100%;
+  height: 62px;
+  min-height: 62px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
   position: relative;
-  gap: 1.4rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-canvas);
   flex-shrink: 0;
+  z-index: 50;
 }
-body.is-desktop .brand-box { flex-direction: column; align-items: flex-start; gap: 6px; }
-body.is-desktop .brand-title { font-size: 1.05rem; }
-body.is-desktop .view-title { margin-top: auto; }
+body.is-desktop .phone-wrapper.is-cover .top-navbar {
+  position: absolute;
+  background: transparent;
+  border-bottom: none;
+  top: 0; left: 0; right: 0;
+  height: 62px;
+}
+body.is-desktop .phone-wrapper.is-cover .brand-title { color: #fff; }
+body.is-desktop .phone-wrapper.is-cover .monogram { border-color:rgba(255,255,255,.85);color:#fff; }
+body.is-desktop .phone-wrapper.is-cover .menu-icon span { background: #fff; }
+/* Ocultar hamburguesa en PC */
 body.is-desktop .menu-icon { display: none; }
-body.is-desktop .content-scroll { flex: 1; }
+body.is-desktop .brand-box { gap: 12px; }
+body.is-desktop .brand-title { font-size: 1.1rem; }
+/* Content scroll ocupa todo */
+body.is-desktop .content-scroll { flex: 1; min-height: 0; overflow-y: auto; }
+/* Bottom nav en PC = barra inferior igual que móvil */
 body.is-desktop .bottom-nav {
-  position: relative;
-  width: 240px;
-  height: 100dvh;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  padding-top: 4rem;
-  border-left: 1px solid var(--line);
-  border-top: none;
-  box-shadow: none;
+  position: relative !important;
+  width: 100%;
+  height: 64px;
+  display: grid !important;
+  grid-template-columns: repeat(5,1fr);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -2px 16px rgba(0,0,0,.06);
   background: #fff;
   flex-shrink: 0;
-  order: -1;
+  z-index: 20;
+  bottom: auto;
+  left: auto;
+  right: auto;
 }
+body.is-desktop .phone-wrapper.is-cover .bottom-nav { display: none !important; }
 body.is-desktop .nav-item {
   flex-direction: row;
-  justify-content: flex-start;
-  padding: 1rem 1.4rem;
-  gap: 14px;
-  height: auto;
-  border-radius: 10px;
-  margin: 2px 8px;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 1rem;
+  height: 64px;
+  border-radius: 0;
 }
-body.is-desktop .nav-item span { font-size: .78rem; letter-spacing: .5px; text-transform: none; font-weight: 500; }
-body.is-desktop .phone-wrapper.is-cover .top-navbar { position: relative; background: var(--bg-canvas); border-bottom: none; }
-body.is-desktop .phone-wrapper.is-cover .brand-title { color: var(--dark); }
-body.is-desktop .phone-wrapper.is-cover .monogram { border-color: var(--brand-deep); color: var(--brand-deep); }
-body.is-desktop .phone-wrapper.is-cover .bottom-nav { display: flex; }
-body.is-desktop #view-inicio { height: 100%; }
-body.is-desktop .hero { border-radius: 12px; margin: 1rem; height: calc(100% - 2rem); }
-body.is-desktop .gal-nav { width: 44px; height: 44px; font-size: 1.6rem; }
-body.is-desktop .gallery-viewport { cursor: default; }
+body.is-desktop .nav-item span { font-size: .72rem; text-transform: none; font-weight: 500; letter-spacing: 0; }
+body.is-desktop .nav-item:hover:not(.active) { background: var(--bg-soft); color: var(--brand-deep); }
+/* Hero en PC: ocupa todo el espacio disponible entre header y footer */
+body.is-desktop #view-inicio { height: 100%; display: flex; flex-direction: column; }
+body.is-desktop .hero {
+  flex: 1;
+  width: 100%;
+  border-radius: 0;
+  margin: 0;
+  height: 100%;
+}
+body.is-desktop .hero-inner {
+  padding: 2.5rem 4rem 3.5rem;
+  max-width: 620px;
+}
+body.is-desktop .hero h1 { font-size: 3.6rem; }
+body.is-desktop .hero .slogan { font-size: 1.05rem; max-width: 400px; }
+/* Galería en PC: flechas más grandes */
+body.is-desktop .gal-nav { width: 46px; height: 46px; font-size: 1.7rem; }
 body.is-desktop .gallery-track img { cursor: zoom-in; }
 body.is-desktop .jr-nav { width: 46px; height: 46px; font-size: 1.5rem; }
-body.is-desktop .toast { position: fixed; bottom: 30px; }
+body.is-desktop .toast { position: fixed; bottom: 80px; }
 body.is-desktop .admin-modal { position: fixed; }
 body.is-desktop .lightbox { position: fixed; }
-body.is-desktop .bottom-nav-desktop-label {
-  font-size: .6rem; text-transform: uppercase; letter-spacing: 2px;
-  color: var(--muted); font-weight: 600; padding: .6rem 1.4rem .3rem;
-  display: block;
-}
 /* Flechas lightbox siempre visibles en PC */
 body.is-desktop .lightbox-nav-btn { opacity: 1 !important; }
-/* Ocultar barra admin de hamburguesa en PC; se maneja por nav lateral */
-body.is-desktop .desktop-admin-link {
-  display: flex !important;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 1rem 1.4rem;
-  gap: 14px;
-  height: auto;
-  border-radius: 10px;
-  margin: 2px 8px;
-  cursor: pointer;
-  color: var(--muted);
-  font-size: .78rem;
-  font-weight: 500;
-  align-items: center;
-}
+/* Subcats grid en PC: 3 columnas */
+body.is-desktop .subcats-grid { grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+/* Subcat cards en PC: más elaboradas */
+body.is-desktop .subcat-card { padding: 2rem 1.2rem; min-height: 110px; }
+/* Category cards en PC: más altas */
+body.is-desktop .category-card { height: 220px; }
+/* Products grid en PC: 3 columnas */
+body.is-desktop .products-grid { column-count: 3; }
+body.is-desktop .view-title { font-size: .7rem; }
+/* Detalle en PC: galería más grande */
+body.is-desktop .gallery-viewport { aspect-ratio: 16/9; }
+body.is-desktop #desktop-admin-nav-item { display: flex !important; }
 
 /* ---------- TOP BAR ---------- */
 .top-navbar{
@@ -190,6 +207,20 @@ body.is-desktop .desktop-admin-link {
 .view-panel{display:none;}
 .view-panel.active{display:block;animation:fade .4s ease;}
 @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* Wrapper centrado para contenido en PC */
+.pc-center {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+body.is-desktop .pad {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* ---------- PORTADA / HERO ---------- */
 #view-inicio{height:100%;}
@@ -283,30 +314,67 @@ body.is-desktop .desktop-admin-link {
 }
 .subcat-card {
   background: #fff;
-  border-radius: 14px;
-  padding: 1.4rem 1rem;
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(33,29,24,0.04);
+  box-shadow: 0 4px 16px rgba(33,29,24,0.06);
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
-  border: 1px solid var(--line);
+  transition: transform 0.22s cubic-bezier(.4,0,.2,1), background-color 0.22s, border-color 0.22s, box-shadow 0.22s;
+  border: 1.5px solid var(--line);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.subcat-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--orange), var(--brand));
+  opacity: 0;
+  transition: opacity 0.25s;
+  z-index: 0;
+}
+.subcat-card:hover::before { opacity: 1; }
+.subcat-card:hover {
+  transform: translateY(-4px) scale(1.025);
+  box-shadow: 0 12px 32px rgba(237,125,49,0.22);
+  border-color: var(--orange);
 }
 .subcat-card:active {
   transform: scale(0.96);
-  background-color: var(--bg-soft);
-  border-color: var(--brand);
 }
+.subcat-card .sc-icon {
+  font-size: 1.7rem;
+  line-height: 1;
+  position: relative; z-index: 1;
+  transition: transform 0.22s;
+}
+.subcat-card:hover .sc-icon { transform: scale(1.18) rotate(-6deg); }
 .subcat-card h4 {
   font-family: var(--serif);
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--dark);
   line-height: 1.2;
+  position: relative; z-index: 1;
+  transition: color 0.22s;
 }
+.subcat-card:hover h4 { color: #fff; }
+.subcat-card .sc-arrow {
+  font-size: .7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  position: relative; z-index: 1;
+  transition: color 0.22s, opacity 0.22s;
+  opacity: 0;
+  margin-top: -4px;
+}
+.subcat-card:hover .sc-arrow { color: rgba(255,255,255,.85); opacity: 1; }
 #group-subcategory { animation: fadeInAdmin 0.3s ease; }
 @keyframes fadeInAdmin { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -499,11 +567,42 @@ body.is-desktop .desktop-admin-link {
 .size-btn.active{border-color:var(--orange);background:var(--orange);color:#fff;}
 
 /* ---------- LIGHTBOX PANTALLA COMPLETA ---------- */
-.lightbox{ position:fixed;top:0;left:0;width:100vw;height:100dvh; background:#000;z-index:99999; display:flex;align-items:center;justify-content:center; opacity:0;pointer-events:none;transition:opacity .3s; }
+.lightbox{ 
+  position:fixed;top:0;left:0;
+  width:100vw;height:100vh;
+  /* Cubre toda la pantalla incluyendo áreas seguras */
+  width:100svw; height:100svh;
+  background:#000;z-index:99999; 
+  display:flex;align-items:center;justify-content:center; 
+  opacity:0;pointer-events:none;transition:opacity .3s; 
+  /* Asegura que tape la barra del navegador en móvil */
+  inset: 0;
+  -webkit-overflow-scrolling: touch;
+}
 .lightbox.open{opacity:1;pointer-events:auto;}
-.lightbox-img{ width:100%;height:100%;object-fit:contain; transition: opacity 0.15s ease-in-out; -webkit-user-drag: none; user-select: none; }
-.lightbox-close{ position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%; background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem; display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.3); z-index:10000; backdrop-filter:blur(4px);}
-.lightbox-indicator { position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 500; letter-spacing: 2px; text-shadow: 0 1px 4px rgba(0,0,0,0.8); z-index: 10000;}
+.lightbox-img{ 
+  position:absolute; inset:0;
+  width:100%;height:100%;
+  object-fit:contain; 
+  transition: opacity 0.15s ease-in-out; 
+  -webkit-user-drag: none; 
+  user-select: none; 
+}
+.lightbox-close{ 
+  position:absolute;top:max(20px, env(safe-area-inset-top, 20px));right:20px;
+  width:44px;height:44px;border-radius:50%; 
+  background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem; 
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  border:1px solid rgba(255,255,255,.3); 
+  z-index:10000; backdrop-filter:blur(4px);
+}
+.lightbox-indicator { 
+  position: absolute;
+  bottom: max(30px, env(safe-area-inset-bottom, 30px)); 
+  left: 0; right: 0; text-align: center; 
+  color: rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 500; 
+  letter-spacing: 2px; text-shadow: 0 1px 4px rgba(0,0,0,0.8); z-index: 10000;
+}
 .lightbox-nav-btn {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 52px; height: 52px; border-radius: 50%;
@@ -541,20 +640,28 @@ body.is-desktop .desktop-admin-link {
 .nav-item.active{color:var(--brand-deep);}
 
 /* ---------- AJUSTES MÓVIL ---------- */
-@media (max-width:520px){
+@media (max-width:768px){
   body{display:block;background:var(--bg-canvas);}
   .phone-wrapper{ max-width:100%;width:100%;min-height:0; height:100dvh; border-radius:0;box-shadow:none; }
   .bottom-nav{ position:fixed; bottom:0;left:0;right:0; height:calc(64px + env(safe-area-inset-bottom)); padding-bottom:env(safe-area-inset-bottom); border-radius:0; z-index:100; }
   .pad{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom));}
   .pad-admin{padding-bottom:calc(14rem + env(safe-area-inset-bottom));}
   .hero-inner{padding-bottom:calc(2rem + env(safe-area-inset-bottom));}
-  /* Lightbox en móvil: forzar ocupar toda la pantalla incluyendo safe areas */
+}
+/* Lightbox móvil: ocupar absolutamente toda la pantalla */
+@media (max-width:768px){
   .lightbox {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 100%; height: 100%;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    inset: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100svh !important;
+    z-index: 999999;
     background: #000;
+  }
+  /* Ocultar elementos del wrapper para que el lightbox tenga toda la pantalla */
+  body.modal-abierto .phone-wrapper > *:not(.lightbox):not(.admin-modal) {
+    pointer-events: none;
   }
   .lightbox-nav-btn { width: 42px; height: 42px; font-size: 1.5rem; }
   .lightbox-nav-btn.lb-prev { left: 10px; }
@@ -747,22 +854,34 @@ body.is-desktop .desktop-admin-link {
         </div>
         <div class="subcats-grid">
           <div class="subcat-card" onclick="irASubcategoriaJunior('cama_cunas', 'Cama Cunas')">
+            <span class="sc-icon">🛏️</span>
             <h4>Cama Cunas</h4>
+            <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('cunas_convertibles', 'Cunas Convertibles')">
+            <span class="sc-icon">🔄</span>
             <h4>Cunas Convertibles</h4>
+            <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('montessori', 'Montessori')">
+            <span class="sc-icon">🌿</span>
             <h4>Montessori</h4>
+            <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('alcobas_juveniles', 'Alcobas Juveniles')">
+            <span class="sc-icon">🌙</span>
             <h4>Alcobas Juveniles</h4>
+            <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('armarios_cambiadores', 'Armarios y Cambiadores')">
+            <span class="sc-icon">🗄️</span>
             <h4>Armarios y Cambiadores</h4>
+            <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('lencerias', 'Lencerías')">
+            <span class="sc-icon">🧸</span>
             <h4>Lencerías</h4>
+            <span class="sc-arrow">Ver modelos →</span>
           </div>
         </div>
       </div>
@@ -1190,7 +1309,10 @@ function cambiarPantalla(id, menuEl){
   else { t.innerText = CAT_LABELS[id] || id; }
 
   if(id==='favoritos') renderizarFavoritos();
-  document.getElementById('main-scroll-container').scrollTop = 0;
+  // Resetear scroll tanto en el contenedor principal como en window (por PC)
+  const sc = document.getElementById('main-scroll-container');
+  if(sc) sc.scrollTop = 0;
+  window.scrollTo(0, 0);
 }
 
 function mostrarSubcategoriasJunior() { cambiarPantalla('junior-subcats', null); }
@@ -1704,15 +1826,32 @@ function abrirLightbox(index) {
   lb.classList.add('open'); 
   document.body.classList.add('modal-abierto');
   lbActualizarBotones();
-  // En móvil: usar fullscreen nativo para ocultar barra del navegador
-  if (!document.body.classList.contains('is-desktop')) {
+  if (document.body.classList.contains('is-desktop')) {
+    // En PC: fullscreen nativo del elemento
     requestFullscreen(lb);
+  } else {
+    // En móvil: requestFullscreen del documento para ocultar barra del navegador
+    try {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(()=>{});
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen();
+      }
+    } catch(e) {}
+    // Fallback: scroll trick para ocultar barra del navegador en iOS/Chrome
+    setTimeout(() => { window.scrollTo(0, 1); }, 50);
   }
 }
 function cerrarLightbox() { 
   document.getElementById('lightbox').classList.remove('open'); 
   document.body.classList.remove('modal-abierto'); 
   exitFullscreen();
+  if (!document.body.classList.contains('is-desktop')) {
+    try {
+      if (document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    } catch(e) {}
+  }
 }
 function actualizarLightboxUI() {
   const imgEl = document.getElementById('lightbox-img'); 
@@ -1804,23 +1943,9 @@ function mostrarToast(txt){ const t=document.getElementById('toast');t.innerText
 /* ============ DETECCIÓN PC / MÓVIL ============ */
 function detectarDispositivo() {
   const isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  const anchoEstrecho = window.innerWidth <= 700;
+  const anchoEstrecho = window.innerWidth <= 768;
   if (!isMobile && !anchoEstrecho) {
     document.body.classList.add('is-desktop');
-    // Agregar enlace Admin al nav lateral en PC
-    const nav = document.querySelector('.bottom-nav');
-    if (nav && !document.getElementById('desktop-admin-btn')) {
-      const sep = document.createElement('div');
-      sep.style.cssText = 'flex:1;';
-      nav.appendChild(sep);
-      const adminLink = document.createElement('div');
-      adminLink.id = 'desktop-admin-btn';
-      adminLink.className = 'nav-item';
-      adminLink.style.cssText = 'border-top:1px solid var(--line);margin:0;border-radius:0;';
-      adminLink.innerHTML = `<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Admin</span>`;
-      adminLink.onclick = () => abrirModalAdmin();
-      nav.appendChild(adminLink);
-    }
   }
 }
 

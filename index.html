@@ -60,6 +60,99 @@ body.modal-abierto {
   overscroll-behavior: none;
 }
 
+/* ---------- MODO PC ---------- */
+body.is-desktop {
+  align-items: flex-start;
+  padding: 0;
+  background: #CFCABF;
+}
+body.is-desktop .phone-wrapper {
+  max-width: 100%;
+  height: 100dvh;
+  border-radius: 0;
+  box-shadow: none;
+  flex-direction: row;
+}
+body.is-desktop .top-navbar {
+  width: 240px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 100dvh;
+  border-right: 1px solid var(--line);
+  border-bottom: none;
+  padding: 2rem 1.5rem;
+  position: relative;
+  gap: 1.4rem;
+  flex-shrink: 0;
+}
+body.is-desktop .brand-box { flex-direction: column; align-items: flex-start; gap: 6px; }
+body.is-desktop .brand-title { font-size: 1.05rem; }
+body.is-desktop .view-title { margin-top: auto; }
+body.is-desktop .menu-icon { display: none; }
+body.is-desktop .content-scroll { flex: 1; }
+body.is-desktop .bottom-nav {
+  position: relative;
+  width: 240px;
+  height: 100dvh;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-top: 4rem;
+  border-left: 1px solid var(--line);
+  border-top: none;
+  box-shadow: none;
+  background: #fff;
+  flex-shrink: 0;
+  order: -1;
+}
+body.is-desktop .nav-item {
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 1rem 1.4rem;
+  gap: 14px;
+  height: auto;
+  border-radius: 10px;
+  margin: 2px 8px;
+}
+body.is-desktop .nav-item span { font-size: .78rem; letter-spacing: .5px; text-transform: none; font-weight: 500; }
+body.is-desktop .phone-wrapper.is-cover .top-navbar { position: relative; background: var(--bg-canvas); border-bottom: none; }
+body.is-desktop .phone-wrapper.is-cover .brand-title { color: var(--dark); }
+body.is-desktop .phone-wrapper.is-cover .monogram { border-color: var(--brand-deep); color: var(--brand-deep); }
+body.is-desktop .phone-wrapper.is-cover .bottom-nav { display: flex; }
+body.is-desktop #view-inicio { height: 100%; }
+body.is-desktop .hero { border-radius: 12px; margin: 1rem; height: calc(100% - 2rem); }
+body.is-desktop .gal-nav { width: 44px; height: 44px; font-size: 1.6rem; }
+body.is-desktop .gallery-viewport { cursor: default; }
+body.is-desktop .gallery-track img { cursor: zoom-in; }
+body.is-desktop .jr-nav { width: 46px; height: 46px; font-size: 1.5rem; }
+body.is-desktop .toast { position: fixed; bottom: 30px; }
+body.is-desktop .admin-modal { position: fixed; }
+body.is-desktop .lightbox { position: fixed; }
+body.is-desktop .bottom-nav-desktop-label {
+  font-size: .6rem; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--muted); font-weight: 600; padding: .6rem 1.4rem .3rem;
+  display: block;
+}
+/* Flechas lightbox siempre visibles en PC */
+body.is-desktop .lightbox-nav-btn { opacity: 1 !important; }
+/* Ocultar barra admin de hamburguesa en PC; se maneja por nav lateral */
+body.is-desktop .desktop-admin-link {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 1rem 1.4rem;
+  gap: 14px;
+  height: auto;
+  border-radius: 10px;
+  margin: 2px 8px;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 500;
+  align-items: center;
+}
+
 /* ---------- TOP BAR ---------- */
 .top-navbar{
   display:flex;justify-content:space-between;align-items:center;
@@ -298,6 +391,34 @@ body.modal-abierto {
 /* Estado vacío */
 .jr-empty { padding: 3rem 1rem; text-align: center; color: var(--muted); font-size: .88rem; line-height: 1.6; }
 
+/* Puntos / miniaturas de fotos del producto actual en reel */
+.jr-foto-dots {
+  position: absolute; bottom: 58px; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 6px; z-index: 4; pointer-events: none;
+}
+.jr-foto-dots .jr-fdot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,.5); transition: .25s; pointer-events: auto; cursor: pointer;
+}
+.jr-foto-dots .jr-fdot.active { background: #fff; width: 18px; border-radius: 4px; }
+
+/* Strip miniaturas de fotos dentro del producto Junior */
+.jr-photo-strip {
+  display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding-bottom: 4px; scrollbar-width: none; margin-top: 0.6rem; margin-bottom: 0.4rem;
+}
+.jr-photo-strip::-webkit-scrollbar { display: none; }
+.jr-photo-thumb {
+  flex: 0 0 auto; scroll-snap-align: start;
+  width: 62px; height: 62px; border-radius: 10px;
+  background-size: cover; background-position: center;
+  border: 2.5px solid transparent; opacity: .5;
+  cursor: pointer; transition: .2s; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.jr-photo-thumb.active { border-color: var(--orange); opacity: 1; }
+.jr-photo-thumb:active { transform: scale(.93); }
+.jr-fotos-label { font-size: .65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin-top: 0.85rem; margin-bottom: 0.3rem; display: block; }
+
 /* ---------- GRID PRODUCTOS ---------- */
 .back-link{
   display:inline-flex;align-items:center;gap:8px;margin:1.2rem 0 .2rem;cursor:pointer;color:var(--muted);
@@ -383,6 +504,21 @@ body.modal-abierto {
 .lightbox-img{ width:100%;height:100%;object-fit:contain; transition: opacity 0.15s ease-in-out; -webkit-user-drag: none; user-select: none; }
 .lightbox-close{ position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%; background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem; display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.3); z-index:10000; backdrop-filter:blur(4px);}
 .lightbox-indicator { position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 500; letter-spacing: 2px; text-shadow: 0 1px 4px rgba(0,0,0,0.8); z-index: 10000;}
+.lightbox-nav-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+  color: #fff; font-size: 2rem; line-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 10000;
+  backdrop-filter: blur(4px);
+  transition: .2s; padding-bottom: 3px;
+  opacity: 0.7;
+}
+.lightbox-nav-btn:hover { opacity: 1; background: rgba(255,255,255,.28); }
+.lightbox-nav-btn.lb-prev { left: 20px; }
+.lightbox-nav-btn.lb-next { right: 20px; }
+.lightbox-nav-btn.hidden { display: none; }
 
 /* ---------- FAVORITOS / BUSCAR / CONTACTO ---------- */
 .simple-pad{padding-top:1.4rem;}
@@ -412,6 +548,17 @@ body.modal-abierto {
   .pad{padding-bottom:calc(7.5rem + env(safe-area-inset-bottom));}
   .pad-admin{padding-bottom:calc(14rem + env(safe-area-inset-bottom));}
   .hero-inner{padding-bottom:calc(2rem + env(safe-area-inset-bottom));}
+  /* Lightbox en móvil: forzar ocupar toda la pantalla incluyendo safe areas */
+  .lightbox {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    background: #000;
+  }
+  .lightbox-nav-btn { width: 42px; height: 42px; font-size: 1.5rem; }
+  .lightbox-nav-btn.lb-prev { left: 10px; }
+  .lightbox-nav-btn.lb-next { right: 10px; }
 }
 
 /* ---------- MODAL ADMIN ---------- */
@@ -516,7 +663,9 @@ body.modal-abierto {
 
   <div class="lightbox" id="lightbox">
     <div class="lightbox-close" onclick="cerrarLightbox()">×</div>
+    <button class="lightbox-nav-btn lb-prev hidden" id="lb-prev" onclick="lightboxAnterior()">‹</button>
     <img class="lightbox-img" id="lightbox-img" src="">
+    <button class="lightbox-nav-btn lb-next hidden" id="lb-next" onclick="lightboxSiguiente()">›</button>
     <div class="lightbox-indicator" id="lightbox-indicator"></div>
   </div>
 
@@ -634,6 +783,7 @@ body.modal-abierto {
         <div class="jr-hero-wrap" id="jr-hero-wrap">
           <img class="jr-hero-img" id="jr-hero-img" src="" alt="" onclick="jrAbrirLightbox()">
           <div class="jr-indicator" id="jr-indicator"></div>
+          <div class="jr-foto-dots" id="jr-foto-dots"></div>
           <button class="jr-nav prev" id="jr-nav-prev" onclick="jrNavegar(-1)">‹</button>
           <button class="jr-nav next" id="jr-nav-next" onclick="jrNavegar(1)">›</button>
           <div class="jr-hero-overlay">
@@ -644,6 +794,9 @@ body.modal-abierto {
 
         <span class="jr-thumbs-label" id="jr-thumbs-label" style="display:none;">Modelos disponibles</span>
         <div class="jr-thumbs-scroll" id="jr-thumbs-scroll"></div>
+
+        <span class="jr-fotos-label" id="jr-fotos-label" style="display:none;">Fotos del modelo</span>
+        <div class="jr-photo-strip" id="jr-photo-strip"></div>
 
         <div class="jr-actions" id="jr-actions">
           <button class="jr-btn-fav" id="jr-btn-fav" onclick="jrToggleFav()">
@@ -1078,10 +1231,10 @@ function seleccionarVariante(tamanoTexto, precio, btnEl) {
 }
 
 /* ============ JUNIOR GALERÍA PROTAGONISTA ============ */
-let jrProductos = [], jrIndex = 0;
+let jrProductos = [], jrIndex = 0, jrFotoIndex = 0;
 
 function irASubcategoriaJunior(subcatKey, nombreSubcat) {
-  jrIndex = 0;
+  jrIndex = 0; jrFotoIndex = 0;
   jrProductos = catalogoProductos.filter(p => p.categoria === 'junior' && p.subcategoria === subcatKey);
 
   document.getElementById('junior-reel-title').innerText = nombreSubcat;
@@ -1120,17 +1273,77 @@ function jrRenderThumbs() {
   });
 }
 
+function jrRenderFotoStrip(fotos) {
+  // Puntos sobre la imagen
+  const dotsEl = document.getElementById('jr-foto-dots');
+  dotsEl.innerHTML = '';
+  if (fotos.length > 1) {
+    fotos.forEach((_, i) => {
+      const d = document.createElement('span');
+      d.className = 'jr-fdot' + (i === 0 ? ' active' : '');
+      d.onclick = () => jrIrAFoto(i);
+      dotsEl.appendChild(d);
+    });
+  }
+
+  // Strip de miniaturas bajo la imagen
+  const stripEl = document.getElementById('jr-photo-strip');
+  const labelEl = document.getElementById('jr-fotos-label');
+  stripEl.innerHTML = '';
+  if (fotos.length > 1) {
+    labelEl.style.display = 'block';
+    fotos.forEach((img, i) => {
+      const div = document.createElement('div');
+      div.className = 'jr-photo-thumb' + (i === 0 ? ' active' : '');
+      if (img) div.style.backgroundImage = `url('${img}')`;
+      else div.style.background = 'var(--bg-soft)';
+      div.onclick = () => jrIrAFoto(i);
+      stripEl.appendChild(div);
+    });
+  } else {
+    labelEl.style.display = 'none';
+  }
+}
+
+function jrActualizarFoto(fotos, idx, animar) {
+  jrFotoIndex = idx;
+  const imgEl = document.getElementById('jr-hero-img');
+  const src = fotos[idx] || '';
+  if (animar) {
+    imgEl.classList.add('fading');
+    setTimeout(() => { imgEl.src = src; imgEl.classList.remove('fading'); }, 140);
+  } else {
+    imgEl.src = src;
+  }
+  // Actualizar dots
+  document.querySelectorAll('#jr-foto-dots .jr-fdot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  // Actualizar strip thumbs
+  document.querySelectorAll('#jr-photo-strip .jr-photo-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+    if (i === idx) t.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+  });
+}
+
+function jrIrAFoto(idx) {
+  const p = jrProductos[jrIndex]; if (!p) return;
+  const fotos = (p.imagenes && p.imagenes.length) ? p.imagenes : [''];
+  if (idx < 0 || idx >= fotos.length) return;
+  jrActualizarFoto(fotos, idx, true);
+}
+
 function jrActualizarHero(animar) {
   const p = jrProductos[jrIndex]; if (!p) return;
-  const imgEl = document.getElementById('jr-hero-img');
+  jrFotoIndex = 0;
+  const fotos = (p.imagenes && p.imagenes.length) ? p.imagenes : [''];
   
   currentVarianteText = ''; currentVariantePrice = p.precio || 0;
 
   if (animar) {
+    const imgEl = document.getElementById('jr-hero-img');
     imgEl.classList.add('fading');
-    setTimeout(() => { imgEl.src = (p.imagenes && p.imagenes[0]) || ''; imgEl.classList.remove('fading'); }, 140);
+    setTimeout(() => { imgEl.src = fotos[0] || ''; imgEl.classList.remove('fading'); }, 140);
   } else {
-    imgEl.src = (p.imagenes && p.imagenes[0]) || '';
+    document.getElementById('jr-hero-img').src = fotos[0] || '';
   }
 
   document.getElementById('jr-hero-name').innerText  = p.nombre;
@@ -1138,10 +1351,13 @@ function jrActualizarHero(animar) {
   document.getElementById('jr-desc-text').innerHTML  = p.descripcion ? p.descripcion.replace(/\n/g, '<br>') : 'Acabados y medidas personalizables bajo los más altos estándares de calidad.';
   document.getElementById('jr-indicator').innerText  = jrProductos.length > 1 ? `${jrIndex + 1} / ${jrProductos.length}` : '';
 
-  // Inyectar toda la info técnica directamente debajo de la descripción
+  // Render strip de fotos del producto actual
+  jrRenderFotoStrip(fotos);
+
+  // Info técnica
   document.getElementById('jr-extra-details').innerHTML = generarHTMLFicha(p);
 
-  // Auto-seleccionar primer variante de tamaño si existe
+  // Auto-seleccionar primer variante
   const firstBtn = document.querySelector('#jr-extra-details .size-btn');
   if (firstBtn) firstBtn.click();
 
@@ -1151,11 +1367,11 @@ function jrActualizarHero(animar) {
   favBtn.classList.toggle('on', esFav);
   favBtn.querySelector('svg').setAttribute('fill', esFav ? 'currentColor' : 'none');
 
-  // Flechas
+  // Flechas de modelos
   document.getElementById('jr-nav-prev').classList.toggle('hidden', jrIndex === 0);
   document.getElementById('jr-nav-next').classList.toggle('hidden', jrIndex === jrProductos.length - 1);
 
-  // Miniaturas activas
+  // Miniaturas de modelos activas
   document.querySelectorAll('.jr-thumb').forEach((t, i) => {
     t.classList.toggle('active', i === jrIndex);
     if (i === jrIndex) t.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
@@ -1187,7 +1403,7 @@ function jrAbrirLightbox() {
   const p = jrProductos[jrIndex]; if (!p) return;
   galImgs = (p.imagenes && p.imagenes.length) ? p.imagenes.slice() : [];
   if (!galImgs.length) return;
-  abrirLightbox(0);
+  abrirLightbox(jrFotoIndex);
 }
 
 function jrIniciarSwipe() {
@@ -1197,7 +1413,20 @@ function jrIniciarSwipe() {
   let sx = 0, sy = 0, dx = 0, dy = 0, activo = false;
   hero.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; dx = 0; dy = 0; activo = true; }, { passive: true });
   hero.addEventListener('touchmove',  e => { if (!activo) return; dx = e.touches[0].clientX - sx; dy = e.touches[0].clientY - sy; }, { passive: true });
-  hero.addEventListener('touchend',   () => { if (!activo) return; activo = false; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? jrNavegar(1) : jrNavegar(-1); } });
+  hero.addEventListener('touchend',   () => { 
+    if (!activo) return; activo = false; 
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { 
+      // Si hay más de una foto en el producto actual, navegar entre fotos
+      const p = jrProductos[jrIndex];
+      const fotos = (p && p.imagenes && p.imagenes.length > 1) ? p.imagenes : null;
+      if (fotos) {
+        dx < 0 ? jrIrAFoto(jrFotoIndex + 1) : jrIrAFoto(jrFotoIndex - 1);
+      } else {
+        // Si no hay más fotos, navegar entre modelos
+        dx < 0 ? jrNavegar(1) : jrNavegar(-1);
+      }
+    } 
+  });
 }
 
 /* ============ ADMIN: ACCESO Y LÓGICA ============ */
@@ -1436,19 +1665,36 @@ function iniciarCarrusel(){
 
 /* ============ LIGHTBOX (PANTALLA COMPLETA) ============ */
 let lightboxIndex = 0; let lbStartX = 0; let lbEndX = 0;
+
 function requestFullscreen(element) {
   try {
     if (element.requestFullscreen) { element.requestFullscreen(); }
-    else if (element.webkitRequestFullscreen) { element.webkitRequestFullscreen(); }
+    else if (element.webkitRequestFullscreen) { element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT); }
+    else if (element.mozRequestFullScreen) { element.mozRequestFullScreen(); }
+    else if (element.msRequestFullscreen) { element.msRequestFullscreen(); }
   } catch(e) {}
 }
 function exitFullscreen() {
   try {
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
       if (document.exitFullscreen) { document.exitFullscreen(); }
       else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
+      else if (document.mozCancelFullScreen) { document.mozCancelFullScreen(); }
     }
   } catch(e) {}
+}
+
+function lbActualizarBotones() {
+  const prev = document.getElementById('lb-prev');
+  const next = document.getElementById('lb-next');
+  if (!prev || !next) return;
+  if (galImgs.length <= 1) {
+    prev.classList.add('hidden');
+    next.classList.add('hidden');
+  } else {
+    prev.classList.toggle('hidden', lightboxIndex === 0);
+    next.classList.toggle('hidden', lightboxIndex === galImgs.length - 1);
+  }
 }
 
 function abrirLightbox(index) { 
@@ -1456,8 +1702,12 @@ function abrirLightbox(index) {
   actualizarLightboxUI(); 
   const lb = document.getElementById('lightbox');
   lb.classList.add('open'); 
-  document.body.classList.add('modal-abierto'); 
-  requestFullscreen(lb);
+  document.body.classList.add('modal-abierto');
+  lbActualizarBotones();
+  // En móvil: usar fullscreen nativo para ocultar barra del navegador
+  if (!document.body.classList.contains('is-desktop')) {
+    requestFullscreen(lb);
+  }
 }
 function cerrarLightbox() { 
   document.getElementById('lightbox').classList.remove('open'); 
@@ -1465,14 +1715,50 @@ function cerrarLightbox() {
   exitFullscreen();
 }
 function actualizarLightboxUI() {
-  const imgEl = document.getElementById('lightbox-img'); const indEl = document.getElementById('lightbox-indicator'); imgEl.style.opacity = 0; 
-  setTimeout(() => { imgEl.src = galImgs[lightboxIndex]; if (galImgs.length > 1) { indEl.innerText = `${lightboxIndex + 1} / ${galImgs.length}`; } else { indEl.innerText = ''; } imgEl.style.opacity = 1; }, 150);
+  const imgEl = document.getElementById('lightbox-img'); 
+  const indEl = document.getElementById('lightbox-indicator'); 
+  imgEl.style.opacity = 0; 
+  setTimeout(() => { 
+    imgEl.src = galImgs[lightboxIndex]; 
+    if (galImgs.length > 1) { 
+      indEl.innerText = `${lightboxIndex + 1} / ${galImgs.length}`; 
+    } else { 
+      indEl.innerText = ''; 
+    } 
+    imgEl.style.opacity = 1; 
+  }, 150);
+  lbActualizarBotones();
 }
-function lightboxSiguiente() { if (lightboxIndex < galImgs.length - 1) { lightboxIndex++; actualizarLightboxUI(); } }
-function lightboxAnterior() { if (lightboxIndex > 0) { lightboxIndex--; actualizarLightboxUI(); } }
+function lightboxSiguiente() { 
+  if (lightboxIndex < galImgs.length - 1) { 
+    lightboxIndex++; 
+    actualizarLightboxUI(); 
+  } 
+}
+function lightboxAnterior() { 
+  if (lightboxIndex > 0) { 
+    lightboxIndex--; 
+    actualizarLightboxUI(); 
+  } 
+}
+
+// Teclado para PC
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lightboxSiguiente();
+  else if (e.key === 'ArrowLeft') lightboxAnterior();
+  else if (e.key === 'Escape') cerrarLightbox();
+});
+
 const lightboxCont = document.getElementById('lightbox');
 lightboxCont.addEventListener('touchstart', e => { lbStartX = e.changedTouches[0].screenX; }, {passive: true});
-lightboxCont.addEventListener('touchend', e => { lbEndX = e.changedTouches[0].screenX; const dif = lbStartX - lbEndX; if (dif > 50) { lightboxSiguiente(); } else if (dif < -50) { lightboxAnterior(); } }, {passive: true});
+lightboxCont.addEventListener('touchend', e => { 
+  lbEndX = e.changedTouches[0].screenX; 
+  const dif = lbStartX - lbEndX; 
+  if (dif > 50) { lightboxSiguiente(); } 
+  else if (dif < -50) { lightboxAnterior(); } 
+}, {passive: true});
 
 /* ============ FAVORITOS ============ */
 function toggleFavorito(id){
@@ -1515,8 +1801,32 @@ async function compartirProducto(id){
 let toastTimer;
 function mostrarToast(txt){ const t=document.getElementById('toast');t.innerText=txt;t.classList.add('show'); clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2000); }
 
+/* ============ DETECCIÓN PC / MÓVIL ============ */
+function detectarDispositivo() {
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const anchoEstrecho = window.innerWidth <= 700;
+  if (!isMobile && !anchoEstrecho) {
+    document.body.classList.add('is-desktop');
+    // Agregar enlace Admin al nav lateral en PC
+    const nav = document.querySelector('.bottom-nav');
+    if (nav && !document.getElementById('desktop-admin-btn')) {
+      const sep = document.createElement('div');
+      sep.style.cssText = 'flex:1;';
+      nav.appendChild(sep);
+      const adminLink = document.createElement('div');
+      adminLink.id = 'desktop-admin-btn';
+      adminLink.className = 'nav-item';
+      adminLink.style.cssText = 'border-top:1px solid var(--line);margin:0;border-radius:0;';
+      adminLink.innerHTML = `<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Admin</span>`;
+      adminLink.onclick = () => abrirModalAdmin();
+      nav.appendChild(adminLink);
+    }
+  }
+}
+
 /* ============ INICIO ============ */
 (async function init(){
+  detectarDispositivo();
   registrarVistaGeneral(); ghCargarConfig(); await cargarCatalogo();
   const portada=await dbGet('portada'); if(portada) aplicarPortada(portada);
   const params = new URLSearchParams(window.location.search); const prodId = params.get('prod');

@@ -133,8 +133,9 @@ body.is-desktop .nav-item {
 }
 body.is-desktop .nav-item span { font-size: .72rem; text-transform: none; font-weight: 500; letter-spacing: 0; }
 body.is-desktop .nav-item:hover:not(.active) { background: var(--bg-soft); color: var(--brand-deep); }
-/* Hero en PC: ocupa todo el espacio disponible entre header y footer */
-body.is-desktop #view-inicio { height: 100%; display: flex; flex-direction: column; }
+
+/* CORRECCIÓN PC: Solo mostrar flexible cuando está activo */
+body.is-desktop #view-inicio.active { height: 100%; display: flex; flex-direction: column; }
 body.is-desktop .hero {
   flex: 1;
   width: 100%;
@@ -346,13 +347,14 @@ body.is-desktop .pad {
 .subcat-card:active {
   transform: scale(0.96);
 }
-.subcat-card .sc-icon {
-  font-size: 1.7rem;
-  line-height: 1;
+.subcat-card .sc-svg {
+  width: 38px; height: 38px;
+  margin-bottom: 4px;
+  color: var(--brand-deep);
   position: relative; z-index: 1;
-  transition: transform 0.22s;
+  transition: transform 0.22s, color 0.22s;
 }
-.subcat-card:hover .sc-icon { transform: scale(1.18) rotate(-6deg); }
+.subcat-card:hover .sc-svg { transform: scale(1.18) rotate(-6deg); color: #fff; }
 .subcat-card h4 {
   font-family: var(--serif);
   font-size: 1.1rem;
@@ -568,31 +570,26 @@ body.is-desktop .pad {
 
 /* ---------- LIGHTBOX PANTALLA COMPLETA ---------- */
 .lightbox{ 
-  position:fixed;top:0;left:0;
-  width:100vw;height:100vh;
-  /* Cubre toda la pantalla incluyendo áreas seguras */
-  width:100svw; height:100svh;
-  background:#000;z-index:99999; 
-  display:flex;align-items:center;justify-content:center; 
-  opacity:0;pointer-events:none;transition:opacity .3s; 
-  /* Asegura que tape la barra del navegador en móvil */
-  inset: 0;
+  position:fixed; inset:0;
+  width:100%; height:100%;
+  background:#000; z-index:999999; 
+  display:flex; align-items:center; justify-content:center; 
+  opacity:0; pointer-events:none; transition:opacity .3s; 
   -webkit-overflow-scrolling: touch;
 }
-.lightbox.open{opacity:1;pointer-events:auto;}
+.lightbox.open{opacity:1; pointer-events:auto;}
 .lightbox-img{ 
   position:absolute; inset:0;
-  width:100%;height:100%;
+  width:100%; height:100%;
   object-fit:contain; 
   transition: opacity 0.15s ease-in-out; 
   -webkit-user-drag: none; 
-  user-select: none; 
 }
 .lightbox-close{ 
-  position:absolute;top:max(20px, env(safe-area-inset-top, 20px));right:20px;
-  width:44px;height:44px;border-radius:50%; 
-  background:rgba(255,255,255,.15);color:#fff;font-size:1.8rem; 
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  position:absolute; top:max(20px, env(safe-area-inset-top, 20px)); right:20px;
+  width:44px; height:44px; border-radius:50%; 
+  background:rgba(255,255,255,.15); color:#fff; font-size:1.8rem; 
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
   border:1px solid rgba(255,255,255,.3); 
   z-index:10000; backdrop-filter:blur(4px);
 }
@@ -648,21 +645,10 @@ body.is-desktop .pad {
   .pad-admin{padding-bottom:calc(14rem + env(safe-area-inset-bottom));}
   .hero-inner{padding-bottom:calc(2rem + env(safe-area-inset-bottom));}
 }
-/* Lightbox móvil: ocupar absolutamente toda la pantalla */
+/* Lightbox móvil */
 @media (max-width:768px){
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    width: 100vw !important;
-    height: 100vh !important;
-    height: 100svh !important;
-    z-index: 999999;
-    background: #000;
-  }
   /* Ocultar elementos del wrapper para que el lightbox tenga toda la pantalla */
-  body.modal-abierto .phone-wrapper > *:not(.lightbox):not(.admin-modal) {
-    pointer-events: none;
-  }
+  body.modal-abierto .phone-wrapper > *:not(.lightbox):not(.admin-modal) { pointer-events: none; }
   .lightbox-nav-btn { width: 42px; height: 42px; font-size: 1.5rem; }
   .lightbox-nav-btn.lb-prev { left: 10px; }
   .lightbox-nav-btn.lb-next { right: 10px; }
@@ -854,32 +840,32 @@ body.is-desktop .pad {
         </div>
         <div class="subcats-grid">
           <div class="subcat-card" onclick="irASubcategoriaJunior('cama_cunas', 'Cama Cunas')">
-            <span class="sc-icon">🛏️</span>
+            <svg class="sc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9M4 15v4M20 15v4M4 15h16M8 15v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3M4 10h16"/></svg>
             <h4>Cama Cunas</h4>
             <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('cunas_convertibles', 'Cunas Convertibles')">
-            <span class="sc-icon">🔄</span>
+            <svg class="sc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14M4 19h16M4 12h16M8 12v7M12 12v7M16 12v7M4 8h16"/></svg>
             <h4>Cunas Convertibles</h4>
             <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('montessori', 'Montessori')">
-            <span class="sc-icon">🌿</span>
+            <svg class="sc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L2 12h3v8h14v-8h3L12 3zM12 3v17M7 12v8M17 12v8"/></svg>
             <h4>Montessori</h4>
             <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('alcobas_juveniles', 'Alcobas Juveniles')">
-            <span class="sc-icon">🌙</span>
+            <svg class="sc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M3 14v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4M7 8v2M17 8v2M7 11h10"/></svg>
             <h4>Alcobas Juveniles</h4>
             <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('armarios_cambiadores', 'Armarios y Cambiadores')">
-            <span class="sc-icon">🗄️</span>
+            <svg class="sc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 3v18M8 12v2M16 12v2M4 8h16M4 16h16"/></svg>
             <h4>Armarios y Cambiadores</h4>
             <span class="sc-arrow">Ver modelos →</span>
           </div>
           <div class="subcat-card" onclick="irASubcategoriaJunior('lencerias', 'Lencerías')">
-            <span class="sc-icon">🧸</span>
+            <svg class="sc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12c0-3.3 2.7-6 6-6h6c3.3 0 6 2.7 6 6s-2.7 6-6 6H9c-3.3 0-6-2.7-6-6z"/><path d="M9 6v12M15 6v12"/></svg>
             <h4>Lencerías</h4>
             <span class="sc-arrow">Ver modelos →</span>
           </div>
@@ -1309,7 +1295,6 @@ function cambiarPantalla(id, menuEl){
   else { t.innerText = CAT_LABELS[id] || id; }
 
   if(id==='favoritos') renderizarFavoritos();
-  // Resetear scroll tanto en el contenedor principal como en window (por PC)
   const sc = document.getElementById('main-scroll-container');
   if(sc) sc.scrollTop = 0;
   window.scrollTo(0, 0);
@@ -1396,7 +1381,6 @@ function jrRenderThumbs() {
 }
 
 function jrRenderFotoStrip(fotos) {
-  // Puntos sobre la imagen
   const dotsEl = document.getElementById('jr-foto-dots');
   dotsEl.innerHTML = '';
   if (fotos.length > 1) {
@@ -1408,7 +1392,6 @@ function jrRenderFotoStrip(fotos) {
     });
   }
 
-  // Strip de miniaturas bajo la imagen
   const stripEl = document.getElementById('jr-photo-strip');
   const labelEl = document.getElementById('jr-fotos-label');
   stripEl.innerHTML = '';
@@ -1437,9 +1420,7 @@ function jrActualizarFoto(fotos, idx, animar) {
   } else {
     imgEl.src = src;
   }
-  // Actualizar dots
   document.querySelectorAll('#jr-foto-dots .jr-fdot').forEach((d, i) => d.classList.toggle('active', i === idx));
-  // Actualizar strip thumbs
   document.querySelectorAll('#jr-photo-strip .jr-photo-thumb').forEach((t, i) => {
     t.classList.toggle('active', i === idx);
     if (i === idx) t.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
@@ -1473,27 +1454,20 @@ function jrActualizarHero(animar) {
   document.getElementById('jr-desc-text').innerHTML  = p.descripcion ? p.descripcion.replace(/\n/g, '<br>') : 'Acabados y medidas personalizables bajo los más altos estándares de calidad.';
   document.getElementById('jr-indicator').innerText  = jrProductos.length > 1 ? `${jrIndex + 1} / ${jrProductos.length}` : '';
 
-  // Render strip de fotos del producto actual
   jrRenderFotoStrip(fotos);
-
-  // Info técnica
   document.getElementById('jr-extra-details').innerHTML = generarHTMLFicha(p);
 
-  // Auto-seleccionar primer variante
   const firstBtn = document.querySelector('#jr-extra-details .size-btn');
   if (firstBtn) firstBtn.click();
 
-  // Favorito
   const esFav = favoritos.includes(p.id);
   const favBtn = document.getElementById('jr-btn-fav');
   favBtn.classList.toggle('on', esFav);
   favBtn.querySelector('svg').setAttribute('fill', esFav ? 'currentColor' : 'none');
 
-  // Flechas de modelos
   document.getElementById('jr-nav-prev').classList.toggle('hidden', jrIndex === 0);
   document.getElementById('jr-nav-next').classList.toggle('hidden', jrIndex === jrProductos.length - 1);
 
-  // Miniaturas de modelos activas
   document.querySelectorAll('.jr-thumb').forEach((t, i) => {
     t.classList.toggle('active', i === jrIndex);
     if (i === jrIndex) t.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
@@ -1538,15 +1512,10 @@ function jrIniciarSwipe() {
   hero.addEventListener('touchend',   () => { 
     if (!activo) return; activo = false; 
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { 
-      // Si hay más de una foto en el producto actual, navegar entre fotos
       const p = jrProductos[jrIndex];
       const fotos = (p && p.imagenes && p.imagenes.length > 1) ? p.imagenes : null;
-      if (fotos) {
-        dx < 0 ? jrIrAFoto(jrFotoIndex + 1) : jrIrAFoto(jrFotoIndex - 1);
-      } else {
-        // Si no hay más fotos, navegar entre modelos
-        dx < 0 ? jrNavegar(1) : jrNavegar(-1);
-      }
+      if (fotos) { dx < 0 ? jrIrAFoto(jrFotoIndex + 1) : jrIrAFoto(jrFotoIndex - 1); } 
+      else { dx < 0 ? jrNavegar(1) : jrNavegar(-1); }
     } 
   });
 }
@@ -1557,7 +1526,6 @@ function cerrarModalAdmin(){document.getElementById('modal-admin-auth').classLis
 function procesarAutenticacion(){ if(document.getElementById('admin-pass-input').value==='271064'){ cerrarModalAdmin(); resetFormulario(); renderizarPaleta(); renderizarListaAdmin(); ghRellenarForm(); cambiarPantalla('admin', null); } else { alert('Contraseña incorrecta.'); } }
 document.getElementById('admin-pass-input').addEventListener('keyup',e=>{if(e.key==='Enter')procesarAutenticacion();});
 
-// Mostrar/Ocultar campos según categoría
 document.getElementById('prod-categoria').addEventListener('change', function(e) {
   const v = e.target.value;
   document.getElementById('admin-variantes-comedor').style.display = v === 'comedores' ? 'block' : 'none';
@@ -1788,24 +1756,6 @@ function iniciarCarrusel(){
 /* ============ LIGHTBOX (PANTALLA COMPLETA) ============ */
 let lightboxIndex = 0; let lbStartX = 0; let lbEndX = 0;
 
-function requestFullscreen(element) {
-  try {
-    if (element.requestFullscreen) { element.requestFullscreen(); }
-    else if (element.webkitRequestFullscreen) { element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT); }
-    else if (element.mozRequestFullScreen) { element.mozRequestFullScreen(); }
-    else if (element.msRequestFullscreen) { element.msRequestFullscreen(); }
-  } catch(e) {}
-}
-function exitFullscreen() {
-  try {
-    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
-      if (document.exitFullscreen) { document.exitFullscreen(); }
-      else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
-      else if (document.mozCancelFullScreen) { document.mozCancelFullScreen(); }
-    }
-  } catch(e) {}
-}
-
 function lbActualizarBotones() {
   const prev = document.getElementById('lb-prev');
   const next = document.getElementById('lb-next');
@@ -1823,36 +1773,24 @@ function abrirLightbox(index) {
   lightboxIndex = index; 
   actualizarLightboxUI(); 
   const lb = document.getElementById('lightbox');
+  lb.style.height = window.innerHeight + 'px';
   lb.classList.add('open'); 
   document.body.classList.add('modal-abierto');
   lbActualizarBotones();
-  if (document.body.classList.contains('is-desktop')) {
-    // En PC: fullscreen nativo del elemento
-    requestFullscreen(lb);
-  } else {
-    // En móvil: requestFullscreen del documento para ocultar barra del navegador
-    try {
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen().catch(()=>{});
-      } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen();
-      }
-    } catch(e) {}
-    // Fallback: scroll trick para ocultar barra del navegador en iOS/Chrome
-    setTimeout(() => { window.scrollTo(0, 1); }, 50);
-  }
 }
+
+window.addEventListener('resize', () => {
+  const lb = document.getElementById('lightbox');
+  if (lb && lb.classList.contains('open')) {
+    lb.style.height = window.innerHeight + 'px';
+  }
+});
+
 function cerrarLightbox() { 
   document.getElementById('lightbox').classList.remove('open'); 
   document.body.classList.remove('modal-abierto'); 
-  exitFullscreen();
-  if (!document.body.classList.contains('is-desktop')) {
-    try {
-      if (document.exitFullscreen) document.exitFullscreen().catch(()=>{});
-      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    } catch(e) {}
-  }
 }
+
 function actualizarLightboxUI() {
   const imgEl = document.getElementById('lightbox-img'); 
   const indEl = document.getElementById('lightbox-indicator'); 
@@ -1881,7 +1819,6 @@ function lightboxAnterior() {
   } 
 }
 
-// Teclado para PC
 document.addEventListener('keydown', e => {
   const lb = document.getElementById('lightbox');
   if (!lb.classList.contains('open')) return;
@@ -1890,9 +1827,21 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'Escape') cerrarLightbox();
 });
 
+let lbTouches = 0;
 const lightboxCont = document.getElementById('lightbox');
-lightboxCont.addEventListener('touchstart', e => { lbStartX = e.changedTouches[0].screenX; }, {passive: true});
+lightboxCont.addEventListener('touchstart', e => { 
+  lbTouches = e.touches.length;
+  if(lbTouches === 1) lbStartX = e.changedTouches[0].screenX; 
+}, {passive: true});
+
+lightboxCont.addEventListener('touchmove', e => {
+  if (e.touches.length > 1) lbTouches = e.touches.length;
+}, {passive: true});
+
 lightboxCont.addEventListener('touchend', e => { 
+  if (window.visualViewport && window.visualViewport.scale > 1.05) return; 
+  if (lbTouches > 1) return;
+  
   lbEndX = e.changedTouches[0].screenX; 
   const dif = lbStartX - lbEndX; 
   if (dif > 50) { lightboxSiguiente(); } 

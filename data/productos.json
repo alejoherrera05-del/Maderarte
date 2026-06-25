@@ -1090,5 +1090,32 @@
     "certificados": [],
     "descripcion": "Cama de 1.0 Mt x 1.90 Mt \n(2) mesas de noche \n(1) Colchón semi ortopédico \n(1) Lencería completa",
     "acabados": []
+  },
+  {
+    "id": 1782419403925,
+    "categoria": "junior",
+    "subcategoria": "cunas_convertibles",
+    "nombre": "Cuna convertible",
+    "precio": 3500000,
+    "variantesComedor": null,
+    "variantesAlcoba": null,
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419403930_p8ehv.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419406033_im274.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419407381_lyn9a.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419408676_gj2dp.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419410211_05onp.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419411604_6w6dl.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {},
+    "certificados": [],
+    "descripcion": "Incluye: Colchoneta, lencería completa, largueros de 1.90 Mt. Tablado de 1.0 m",
+    "acabados": []
   }
 ]

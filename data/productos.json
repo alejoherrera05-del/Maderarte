@@ -1117,5 +1117,39 @@
     "certificados": [],
     "descripcion": "Incluye: Colchoneta, lencería completa, largueros de 1.90 Mt. Tablado de 1.0 m",
     "acabados": []
+  },
+  {
+    "id": 1783613269339,
+    "categoria": "alcobas",
+    "subcategoria": null,
+    "nombre": "Alcoba buclé",
+    "precio": 6500000,
+    "variantesComedor": null,
+    "variantesAlcoba": {
+      "a140": 6500000,
+      "a160": 6800000,
+      "a200": 8000000
+    },
+    "imagenes": [
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1783613269339_ey3sz.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1783613272895_jgo93.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1783613275248_cchnx.jpg",
+      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1783613277498_81v0j.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "materialesData": {
+      "estructura": "Flormorado",
+      "tela": "Tela buclé"
+    },
+    "certificados": [
+      "mascotas"
+    ],
+    "descripcion": "",
+    "acabados": []
   }
 ]

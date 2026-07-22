@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Maderarte</title>
-<meta name="description" content="Maderarte es un showroom boutique de muebles en Popayán: salas, comedores, alcobas, sofá camas, mobiliario junior, decoración y asesoría personalizada.">
+<meta name="description" content="Maderarte es un showroom boutique de muebles y decoración en Popayán: salas, comedores, alcobas, sofá camas, mobiliario junior y asesoría personalizada.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="keywords" content="muebles Popayán, mueblería Popayán, salas Popayán, comedores Popayán, alcobas Popayán, sofás Popayán, Maderarte Popayán, mobiliario de lujo Popayán">
 <link rel="canonical" href="https://maderartepopayan.com/">
@@ -209,6 +209,7 @@ body:not(.at-hero) .site-header{
   background:linear-gradient(90deg, var(--orange-soft), var(--orange-hot));
 }
 .menu-toggle{display:none}
+.mobile-scroll-hint{display:none}
 
 .hero{
   min-height:100vh;
@@ -473,6 +474,7 @@ h1{
   margin:0 auto;
   background:transparent;
 }
+.collection-flow-wrap{position:relative}
 .collection-scene{
   display:grid;
   grid-template-rows:1fr;
@@ -645,6 +647,14 @@ h1{
   border-radius:50%;
   background:#66d99b;
   box-shadow:0 0 18px rgba(102,217,155,.5);
+}
+.catalog-mode.online::before{
+  background:#4ade80;
+  box-shadow:0 0 18px rgba(74,222,128,.6);
+}
+.catalog-mode.offline::before{
+  background:#ffb45e;
+  box-shadow:0 0 18px rgba(255,180,94,.5);
 }
 .catalog-mode.private{
   color:var(--ink);
@@ -865,6 +875,51 @@ h1{
   background:linear-gradient(135deg, #f5efe5, #eee4d6);
   cursor:zoom-in;
 }
+.dialog-media-hint{
+  position:absolute;
+  left:50%;
+  bottom:14px;
+  transform:translateX(-50%);
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:30px;
+  padding:0 12px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  background:rgba(12,10,8,.42);
+  color:rgba(255,255,255,.78);
+  font-size:.62rem;
+  font-weight:650;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  backdrop-filter:blur(14px);
+  pointer-events:none;
+}
+.dialog-dots{
+  position:absolute;
+  left:50%;
+  bottom:52px;
+  transform:translateX(-50%);
+  z-index:3;
+  display:flex;
+  gap:7px;
+  padding:7px 9px;
+  border-radius:999px;
+  background:rgba(12,10,8,.38);
+  backdrop-filter:blur(14px);
+}
+.dialog-dots button{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:rgba(255,255,255,.38);
+}
+.dialog-dots button.active{
+  width:19px;
+  background:linear-gradient(90deg, #ffd39a, #ff7a18);
+}
 .catalog-dialog-media img{
   width:100%;
   max-width:100%;
@@ -879,6 +934,7 @@ h1{
   max-height:min(86vh, 820px);
   overflow:auto;
   padding:38px 34px 34px;
+  -webkit-overflow-scrolling:touch;
 }
 .catalog-close{
   position:absolute;
@@ -1491,11 +1547,37 @@ h1{
   place-items:center;
   background:#14110e;
 }
-.story-media img{
+.story-zoom{
+  position:relative;
+  display:block;
+  width:100%;
+  overflow:hidden;
+  cursor:zoom-in;
+}
+.story-media img,
+.story-zoom img{
   width:100%;
   height:auto;
   max-height:560px;
   object-fit:contain;
+}
+.story-zoom span{
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  min-height:34px;
+  display:inline-flex;
+  align-items:center;
+  padding:0 13px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  background:rgba(12,10,8,.48);
+  color:#fff;
+  font-size:.64rem;
+  font-weight:720;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  backdrop-filter:blur(14px);
 }
 .metrics{
   display:grid;
@@ -1766,7 +1848,7 @@ h1{
   .brand{gap:10px}
   .brand img{width:38px;height:38px}
   .brand-text > span{font-size:1.18rem;letter-spacing:.075em}
-  .brand-text small{font-size:.5rem;letter-spacing:.13em}
+  .brand-text small{font-size:.47rem;letter-spacing:.105em}
   .menu-toggle{
     width:42px;
     height:42px;
@@ -1859,13 +1941,48 @@ h1{
     scrollbar-width:none;
   }
   .collection-flow::-webkit-scrollbar{display:none}
+  .mobile-scroll-hint{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin:-10px 0 16px;
+    padding:10px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:999px;
+    background:rgba(255,255,255,.055);
+    color:rgba(255,255,255,.78);
+    font-size:.68rem;
+    font-weight:720;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+  .mobile-scroll-hint b{color:#ffb45e;font-size:1rem}
   .catalog-toolbar{margin-top:-18px}
   .catalog-share{width:100%}
+  .catalog-share{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    padding-bottom:4px;
+    scrollbar-width:none;
+  }
+  .catalog-share::-webkit-scrollbar{display:none}
   .catalog-chip{
-    flex:1 1 auto;
-    min-height:38px;
-    padding:0 12px;
-    font-size:.64rem;
+    flex:0 0 auto;
+    min-height:36px;
+    padding:0 15px;
+    font-size:.62rem;
+    font-weight:680;
+    letter-spacing:.085em;
+  }
+  .catalog-mode{
+    width:100%;
+    justify-content:center;
+    min-height:46px;
+    text-align:center;
+    white-space:normal;
+    line-height:1.35;
+    padding:0 14px;
   }
   .catalog-grid{
     gap:12px;
@@ -1920,13 +2037,53 @@ h1{
     border-radius:22px;
   }
   .catalog-dialog-media{
-    height:38svh;
-    min-height:230px;
+    height:34svh;
+    min-height:210px;
     margin:14px 14px 0;
     border-radius:20px;
   }
-  .catalog-dialog-copy{padding:24px 20px calc(env(safe-area-inset-bottom) + 28px)}
-  .catalog-dialog-copy h3{font-size:clamp(2.25rem, 11vw, 3.35rem)}
+  .catalog-dialog-copy{
+    padding:20px 20px calc(env(safe-area-inset-bottom) + 112px);
+    max-height:calc(66svh - 18px);
+  }
+  .catalog-dialog-copy h3{font-size:clamp(2rem, 9.4vw, 3rem)}
+  .catalog-dialog-copy p{font-size:.96rem;line-height:1.56;margin-top:14px}
+  .dialog-price{margin-top:16px;padding:14px 15px;border-radius:20px}
+  .dialog-price strong{font-size:1.35rem}
+  .dialog-options{padding:14px;border-radius:18px}
+  .size-options{grid-template-columns:1fr}
+  .size-btn{min-height:58px}
+  .dialog-materials{margin-top:16px;padding-top:16px;gap:10px}
+  .mat-list{grid-template-columns:1fr 1fr;gap:8px}
+  .mat-item{
+    grid-template-columns:34px minmax(0,1fr);
+    gap:9px;
+    padding:10px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;
+    background:rgba(255,255,255,.045);
+  }
+  .mat-ic{width:34px;height:34px;border-radius:12px}
+  .mat-ic img{width:21px;height:21px}
+  .mat-tx b{font-size:.75rem}
+  .mat-tx span,
+  .dialog-materials span{font-size:.8rem;line-height:1.32}
+  .cert-row{margin-top:8px}
+  .cert-badge{min-height:30px;font-size:.68rem}
+  .dialog-gallery{margin-top:14px;padding-bottom:8px}
+  .dialog-gallery button{width:58px;height:48px;border-radius:10px}
+  .dialog-actions{
+    position:sticky;
+    bottom:0;
+    z-index:5;
+    margin:18px -20px calc(-1 * (env(safe-area-inset-bottom) + 112px));
+    padding:14px 20px calc(env(safe-area-inset-bottom) + 16px);
+    background:linear-gradient(180deg, rgba(47,43,37,0), rgba(47,43,37,.98) 28%);
+  }
+  .dialog-actions .btn{min-height:48px}
+  .dialog-actions .btn-light{display:none}
+  .dialog-dots{bottom:44px}
+  .dialog-media-hint{bottom:10px;font-size:.54rem;min-height:26px}
   .catalog-close{
     top:14px;
     right:14px;
@@ -1948,9 +2105,10 @@ h1{
   .collection-icon{
     width:150px;
     height:86px;
-    margin:0 0 18px;
-    object-position:left center;
+    margin:0 auto 18px;
+    object-position:center;
   }
+  .collection-copy{text-align:center;align-items:center}
   .collection-copy small{font-size:.62rem;letter-spacing:.14em}
   .collection-copy h3{font-size:2.35rem}
   .collection-copy p{
@@ -1973,8 +2131,8 @@ h1{
     border:0;
   }
   .metric{
-    min-height:112px;
-    padding:18px;
+    min-height:104px;
+    padding:16px;
     border:1px solid rgba(255,255,255,.16);
     border-radius:18px;
     background:rgba(255,255,255,.035);
@@ -1987,6 +2145,7 @@ h1{
   }
   .story h2{font-size:clamp(3rem, 12vw, 4.25rem)}
   .story-media img{max-height:none}
+  .story-zoom span{font-size:.56rem;right:10px;bottom:10px}
   .warranty-item{grid-template-columns:1fr;gap:8px}
   .footer-inner{display:grid}
   .image-lightbox{
@@ -2048,7 +2207,7 @@ h1{
   <header class="site-header" id="site-header">
     <a class="brand" href="#inicio" aria-label="Ir al inicio">
       <img src="logomaderarte2026.png" alt="">
-      <span class="brand-text"><span>MADERARTE</span><small>Muebles en Popayán</small></span>
+      <span class="brand-text"><span>MADERARTE</span><small>Muebles y decoración en Popayán</small></span>
     </a>
     <nav class="nav" id="main-nav" aria-label="Navegación principal">
       <a href="#inicio">Inicio</a>
@@ -2067,8 +2226,8 @@ h1{
       <div class="hero-content">
         <div class="reveal visible">
           <span class="hero-kicker">Lujo urbano · diseño boutique</span>
-          <h1>Diseño sereno para casas con carácter.</h1>
-          <p class="hero-lead">Mobiliario a medida en Popayán, texturas cálidas e inspiración italiana, acompañado uno a uno por un equipo local que entiende cómo quieres vivir tu casa.</p>
+          <h1>Muebles con oficio para casas que se sienten tuyas.</h1>
+          <p class="hero-lead">En Maderarte cuidamos acabados limpios, técnicas hechas a mano y procesos guiados con criterio. Más de 20 años acompañando hogares en Popayán con mobiliario, decoración y asesoría profesional.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#colecciones">Ver ambientes</a>
             <a class="btn btn-light" href="https://wa.me/573117476465?text=Hola,%20MADERARTE.%20Quiero%20agendar%20una%20asesor%C3%ADa%20de%20dise%C3%B1o." target="_blank" rel="noopener">Hablar con asesor</a>
@@ -2082,7 +2241,7 @@ h1{
         <div class="brand-statement reveal">
           <span class="section-kicker">ADN Maderarte</span>
           <h2 id="adn-title">Lujo cálido, pensado para hogares reales.</h2>
-          <p>La elegancia no se impone: se nota en una proporción correcta, una tela bien elegida y una pieza que parece haber nacido para ese lugar. Así diseñamos cada ambiente.</p>
+          <p>Creemos en los acabados limpios, las técnicas hechas a mano y una asesoría que no improvisa. Maderarte ha construido en Popayán una experiencia boutique confiable: procesos cuidados, materiales bien elegidos y servicio cercano antes, durante y después de cada entrega.</p>
         </div>
         <div class="signature-board reveal">
           <article class="signature-item">
@@ -2108,8 +2267,10 @@ h1{
             <span class="section-kicker">Colecciones</span>
             <h2 id="collections-title">Elige el ambiente; luego mira las piezas reales.</h2>
           </div>
-          <p>Elige primero el ambiente que quieres crear en tu casa. Abajo encuentras el catálogo vivo con productos reales de Maderarte en Popayán, listos para asesoría personalizada.</p>
+          <p>Elige primero el ambiente que quieres crear en tu casa. Desliza las líneas y toca una categoría; abajo verás productos reales de Maderarte en Popayán con asesoría lista para acompañarte.</p>
         </div>
+        <div class="collection-flow-wrap">
+        <div class="mobile-scroll-hint" aria-hidden="true"><span>Desliza para ver más ambientes</span><b>→</b></div>
         <div class="collection-flow">
           <article class="collection-scene reveal" data-open-catalog-card="salas" tabindex="0" role="button" aria-label="Ver productos de salas">
             <div class="collection-image"><img src="Sala.png" alt="Sala Maderarte con mobiliario claro y acentos dorados" loading="lazy" decoding="async"></div>
@@ -2162,6 +2323,7 @@ h1{
             </div>
           </article>
         </div>
+        </div>
       </div>
     </section>
 
@@ -2171,7 +2333,7 @@ h1{
           <span class="section-kicker">Catálogo vivo</span>
           <h2 id="catalog-title">Piezas reales para componer tu ambiente.</h2>
         </div>
-        <p>Toca una línea para filtrar el catálogo vivo. Primero eliges el ambiente de la casa; luego ves productos reales disponibles dentro de esa categoría.</p>
+        <p>Un asesor Maderarte está disponible de 8:00 a.m. a 7:00 p.m. hora Colombia para responder dudas, revisar medidas y ayudarte a elegir la pieza correcta para tu espacio.</p>
       </div>
       <div class="catalog-toolbar reveal">
         <div class="catalog-mode" id="catalog-mode">Asesoría personalizada</div>
@@ -2191,8 +2353,10 @@ h1{
 
     <div class="catalog-modal" id="catalog-modal" aria-hidden="true">
       <div class="catalog-dialog" role="dialog" aria-modal="true" aria-labelledby="catalog-dialog-title">
-        <div class="catalog-dialog-media">
+        <div class="catalog-dialog-media" id="catalog-dialog-media">
           <img id="dialog-image" src="" alt="">
+          <div class="dialog-dots" id="dialog-dots" aria-label="Más fotos del producto"></div>
+          <div class="dialog-media-hint">Toca para ampliar · desliza fotos</div>
         </div>
         <div class="catalog-dialog-copy">
           <button class="catalog-close" type="button" id="catalog-close" aria-label="Cerrar detalle">×</button>
@@ -2274,14 +2438,17 @@ h1{
             <p>Hoy esa experiencia se convierte en ambientes completos: mobiliario, decoración y asesoría para casas que buscan calidez, presencia y una elegancia sin esfuerzo.</p>
           </div>
           <div class="story-media reveal">
-            <img src="origen.png" alt="Historia y evolución de Maderarte" loading="lazy" decoding="async">
+            <button class="story-zoom" type="button" id="story-zoom" aria-label="Ver imagen de historia en grande">
+              <img src="origen.png" alt="Historia y evolución de Maderarte" loading="lazy" decoding="async">
+              <span>Ver imagen completa</span>
+            </button>
           </div>
         </div>
         <div class="metrics reveal" aria-label="Cifras Maderarte">
           <div class="metric"><strong class="counter" data-count="25" data-suffix="+">0</strong><span>Años en el mercado</span></div>
           <div class="metric"><strong class="counter" data-count="1800" data-suffix="+">0</strong><span>Clientes acompañados</span></div>
           <div class="metric"><strong class="counter" data-count="2">0</strong><span>Sedes en Popayán</span></div>
-          <div class="metric"><strong class="counter" data-count="1">0</strong><span>Fábrica principal</span></div>
+          <div class="metric"><strong class="counter" data-count="1">0</strong><span>Fábrica principal en Bogotá</span></div>
         </div>
       </div>
     </section>
@@ -2400,13 +2567,14 @@ const navObserver = new IntersectionObserver(entries => {
 }, { rootMargin:"-45% 0px -45% 0px", threshold:0 });
 sections.forEach(section => navObserver.observe(section));
 
-function animateCounter(el){
-  if(el.dataset.done) return;
+function animateCounter(el, force = false){
+  if(el.dataset.done && !force) return;
   el.dataset.done = "true";
   const target = Number(el.dataset.count || 0);
   const suffix = el.dataset.suffix || "";
   const start = performance.now();
-  const duration = 1200;
+  const duration = 2200;
+  el.textContent = "0" + suffix;
   function tick(now){
     const progress = Math.min(1, (now - start) / duration);
     const eased = 1 - Math.pow(1 - progress, 3);
@@ -2466,6 +2634,7 @@ let activeVariantLabel = "";
 let activeVariantPrice = 0;
 let favoriteProducts = JSON.parse(localStorage.getItem("maderarte_favs") || "[]").map(String);
 let lightboxTouchStart = 0;
+let dialogTouchStart = 0;
 
 const materialLabels = {
   estructura:"Estructura",
@@ -2722,7 +2891,19 @@ function setCatalogMode(){
   const mode = document.getElementById("catalog-mode");
   if(!mode) return;
   mode.classList.toggle("private", showPrices);
-  mode.textContent = showPrices ? "Enlace asesor · precios visibles" : "Asesoría personalizada";
+  const hour = Number(new Intl.DateTimeFormat("en-US", {
+    timeZone:"America/Bogota",
+    hour:"2-digit",
+    hour12:false
+  }).format(new Date()));
+  const online = hour >= 8 && hour < 19;
+  mode.classList.toggle("online", online);
+  mode.classList.toggle("offline", !online);
+  mode.textContent = showPrices
+    ? "Enlace asesor · precios visibles"
+    : online
+      ? "Asesor en línea ahora · 8 a.m. a 7 p.m."
+      : "Asesoría por WhatsApp · respondemos desde las 8 a.m.";
 }
 
 function setDialogImage(src, index){
@@ -2737,6 +2918,9 @@ function setDialogImage(src, index){
     image.dataset.full = normalizeImage(src);
   }
   document.querySelectorAll(".dialog-gallery button").forEach((button, i) => {
+    button.classList.toggle("active", i === index);
+  });
+  document.querySelectorAll(".dialog-dots button").forEach((button, i) => {
     button.classList.toggle("active", i === index);
   });
 }
@@ -2771,6 +2955,15 @@ function openProduct(id){
   `).join("");
   document.querySelectorAll(".dialog-gallery button").forEach((button, index) => {
     button.addEventListener("click", () => setDialogImage(images[index], index));
+  });
+  document.getElementById("dialog-dots").innerHTML = images.map((src, index) => `
+    <button type="button" class="${index === 0 ? "active" : ""}" aria-label="Ver foto ${index + 1}"></button>
+  `).join("");
+  document.querySelectorAll(".dialog-dots button").forEach((button, index) => {
+    button.addEventListener("click", event => {
+      event.stopPropagation();
+      setDialogImage(images[index], index);
+    });
   });
   document.querySelectorAll("#dialog-options .size-btn").forEach(button => {
     button.addEventListener("click", () => selectVariant(button.dataset.variantLabel, Number(button.dataset.variantPrice), button));
@@ -2942,6 +3135,22 @@ async function initCatalog(){
   });
   document.getElementById("dialog-image")?.addEventListener("click", () => {
     openImageLightbox(activeDialogImageIndex);
+  });
+  document.getElementById("catalog-dialog-media")?.addEventListener("touchstart", event => {
+    dialogTouchStart = event.changedTouches[0]?.clientX || 0;
+  }, { passive:true });
+  document.getElementById("catalog-dialog-media")?.addEventListener("touchend", event => {
+    const end = event.changedTouches[0]?.clientX || 0;
+    const delta = end - dialogTouchStart;
+    if(Math.abs(delta) > 38){
+      event.preventDefault?.();
+      moveLightbox(delta > 0 ? -1 : 1);
+    }
+  }, { passive:false });
+  document.getElementById("story-zoom")?.addEventListener("click", () => {
+    activeDialogImages = ["origen.png"];
+    activeDialogImageIndex = 0;
+    openImageLightbox(0);
   });
   document.getElementById("image-lightbox-img")?.addEventListener("click", toggleImageZoom);
   document.getElementById("image-lightbox-close")?.addEventListener("click", closeImageLightbox);

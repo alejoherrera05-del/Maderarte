@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Maderarte</title>
+<title>Maderarte Popayán | Muebles &amp; decoración</title>
 <meta name="description" content="Maderarte es un showroom boutique de muebles y decoración en Popayán: salas, comedores, alcobas, sofá camas, mobiliario junior y asesoría personalizada.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="keywords" content="muebles Popayán, mueblería Popayán, salas Popayán, comedores Popayán, alcobas Popayán, sofás Popayán, Maderarte Popayán, mobiliario de lujo Popayán">
 <link rel="canonical" href="https://maderartepopayan.com/">
-<link rel="icon" type="image/png" href="https://maderartepopayan.com/logomaderarte2026.png">
-<link rel="apple-touch-icon" href="https://maderartepopayan.com/logomaderarte2026.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://maderartepopayan.com/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://maderartepopayan.com/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://maderartepopayan.com/apple-touch-icon.png">
 <meta name="theme-color" content="#181512">
-<meta property="og:title" content="Maderarte | Muebles en Popayán">
+<meta property="og:title" content="Maderarte Popayán | Muebles &amp; decoración">
 <meta property="og:description" content="Showroom boutique de mobiliario, diseño cálido y asesoría personalizada en Popayán. Salas, comedores, alcobas, sofá camas y decoración.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maderartepopayan.com/">
@@ -19,7 +20,7 @@
 <meta property="og:locale" content="es_CO">
 <meta property="og:image" content="https://maderartepopayan.com/Portada.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Maderarte | Muebles en Popayán">
+<meta name="twitter:title" content="Maderarte Popayán | Muebles &amp; decoración">
 <meta name="twitter:description" content="Muebles, decoración y asesoría boutique para hogares en Popayán.">
 <meta name="twitter:image" content="https://maderartepopayan.com/Portada.png">
 <meta name="geo.region" content="CO-CAU">
@@ -210,6 +211,8 @@ body:not(.at-hero) .site-header{
 }
 .menu-toggle{display:none}
 .mobile-scroll-hint{display:none}
+.mobile-hero-title{display:none}
+.dialog-gallery-mobile{display:none}
 
 .hero{
   min-height:100vh;
@@ -874,51 +877,6 @@ h1{
   padding:0;
   background:linear-gradient(135deg, #f5efe5, #eee4d6);
   cursor:zoom-in;
-}
-.dialog-media-hint{
-  position:absolute;
-  left:50%;
-  bottom:14px;
-  transform:translateX(-50%);
-  z-index:2;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  min-height:30px;
-  padding:0 12px;
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:999px;
-  background:rgba(12,10,8,.42);
-  color:rgba(255,255,255,.78);
-  font-size:.62rem;
-  font-weight:650;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  backdrop-filter:blur(14px);
-  pointer-events:none;
-}
-.dialog-dots{
-  position:absolute;
-  left:50%;
-  bottom:52px;
-  transform:translateX(-50%);
-  z-index:3;
-  display:flex;
-  gap:7px;
-  padding:7px 9px;
-  border-radius:999px;
-  background:rgba(12,10,8,.38);
-  backdrop-filter:blur(14px);
-}
-.dialog-dots button{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:rgba(255,255,255,.38);
-}
-.dialog-dots button.active{
-  width:19px;
-  background:linear-gradient(90deg, #ffd39a, #ff7a18);
 }
 .catalog-dialog-media img{
   width:100%;
@@ -1891,29 +1849,42 @@ h1{
     font-size:.76rem;
   }
   .nav a:last-child{border-bottom:0}
-  .hero{min-height:94svh}
+  .hero{min-height:100svh}
   .hero-media{
-    background-image:url("Portada-mobile.png");
+    background-image:url("Portada-mobile.jpg");
     background-position:center;
     transform:scale(1);
   }
   .hero::after{
     background:
-      linear-gradient(90deg, rgba(13,10,8,.72), rgba(13,10,8,.32) 64%, rgba(13,10,8,.08)),
-      linear-gradient(0deg, rgba(13,10,8,.66), transparent 64%);
+      linear-gradient(0deg, rgba(13,10,8,.82), rgba(13,10,8,.28) 50%, rgba(13,10,8,.06)),
+      linear-gradient(90deg, rgba(13,10,8,.28), rgba(13,10,8,.02) 64%);
   }
   .hero-content{
-    min-height:94svh;
+    min-height:100svh;
     align-items:end;
-    padding:104px 18px max(32px, calc(env(safe-area-inset-bottom) + 24px));
+    padding:104px 18px max(34px, calc(env(safe-area-inset-bottom) + 26px));
   }
   .hero-kicker{font-size:.62rem;letter-spacing:.16em}
-  h1{font-size:clamp(2.92rem, 12.2vw, 4.15rem);line-height:.94;max-width:92vw}
-  .hero-lead{margin-top:18px;font-size:.94rem;line-height:1.54;max-width:92vw}
+  .desktop-hero-title{display:none}
+  .mobile-hero-title{
+    display:block;
+    font-size:clamp(3.15rem, 13.4vw, 4.5rem);
+    line-height:.92;
+    max-width:88vw;
+  }
+  .hero-lead{margin-top:15px;font-size:.92rem;line-height:1.5;max-width:88vw}
   .hero-actions{
     display:grid;
     gap:10px;
     margin-top:22px;
+  }
+  .hero-actions .btn-light{display:none}
+  .hero-actions .btn-primary{
+    background:linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.07));
+    border-color:rgba(255,255,255,.54);
+    color:#fff;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.24), 0 22px 46px rgba(0,0,0,.2);
   }
   .btn{width:100%;min-height:50px;padding-inline:18px;text-align:center}
   .section{padding:68px 18px}
@@ -1984,18 +1955,19 @@ h1{
     padding:0 14px;
   }
   .catalog-grid{
-    gap:12px;
+    gap:16px;
   }
   .product-card{
-    grid-template-columns:124px minmax(0,1fr);
-    align-items:stretch;
-    min-height:154px;
-    border-radius:18px;
+    grid-template-columns:1fr;
+    align-items:start;
+    min-height:0;
+    border-radius:22px;
+    overflow:hidden;
   }
   .product-media{
-    aspect-ratio:auto;
-    height:100%;
-    min-height:154px;
+    aspect-ratio:4/3;
+    height:auto;
+    min-height:0;
   }
   .product-media img{object-fit:cover}
   .product-count{
@@ -2012,14 +1984,14 @@ h1{
     height:28px;
     font-size:.88rem;
   }
-  .product-body{padding:14px 14px 12px}
+  .product-body{padding:16px 16px 15px}
   .product-eyebrow{font-size:.58rem;letter-spacing:.13em}
-  .product-body h3{font-size:1.55rem;line-height:1.02;margin-top:6px}
+  .product-body h3{font-size:1.72rem;line-height:1.02;margin-top:7px}
   .product-body p{
     -webkit-line-clamp:2;
     min-height:auto;
     margin-top:8px;
-    font-size:.84rem;
+    font-size:.88rem;
     line-height:1.45;
   }
   .product-meta{display:none}
@@ -2044,11 +2016,50 @@ h1{
     overflow:hidden;
   }
   .catalog-dialog-media{
-    height:39svh;
-    min-height:238px;
+    display:block;
+    height:auto;
+    min-height:0;
     margin:0;
     border-radius:0;
     box-shadow:none;
+    background:#1f1b17;
+  }
+  .catalog-dialog-media > img{
+    width:100%;
+    height:min(48svh, 410px);
+    max-height:none;
+    object-fit:contain;
+    display:block;
+    background:#1f1b17;
+    cursor:zoom-in;
+  }
+  .dialog-gallery-mobile{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:10px 14px 14px;
+    background:linear-gradient(180deg, #1f1b17, #2a251f);
+    scrollbar-width:none;
+  }
+  .dialog-gallery-mobile::-webkit-scrollbar{display:none}
+  .dialog-gallery-mobile button{
+    width:70px;
+    height:54px;
+    flex:0 0 auto;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:12px;
+    background:rgba(255,255,255,.06);
+    padding:0;
+  }
+  .dialog-gallery-mobile button.active{
+    border-color:#ff9b38;
+    box-shadow:0 0 0 2px rgba(255,126,24,.2);
+  }
+  .dialog-gallery-mobile img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
   }
   .catalog-dialog-copy{
     max-height:none;
@@ -2081,24 +2092,23 @@ h1{
   .dialog-materials span{font-size:.86rem;line-height:1.35}
   .cert-row{margin-top:8px}
   .cert-badge{min-height:30px;font-size:.68rem}
-  .dialog-gallery{margin-top:14px;padding-bottom:8px}
-  .dialog-gallery button{width:58px;height:48px;border-radius:10px}
+  .dialog-gallery{display:none}
   .dialog-actions{
     position:static;
     display:grid;
-    grid-template-columns:minmax(0,1fr) 44px 44px;
-    gap:8px;
-    margin:16px 0 0;
+    grid-template-columns:minmax(0,1fr) 48px 48px;
+    gap:10px;
+    margin:18px 0 0;
     padding:0;
     background:none;
   }
   .dialog-actions .btn{
     width:auto;
-    min-height:44px;
+    min-height:48px;
     padding:0 14px;
     border-radius:999px;
-    font-size:.62rem;
-    letter-spacing:.1em;
+    font-size:.64rem;
+    letter-spacing:.12em;
   }
   .dialog-actions .btn-primary{justify-content:center}
   .dialog-actions .btn-light{
@@ -2106,19 +2116,27 @@ h1{
     place-items:center;
     padding:0;
     font-size:0;
+    color:#fff;
+    background:rgba(255,255,255,.08);
+    border-color:rgba(255,255,255,.2);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 14px 28px rgba(0,0,0,.18);
   }
-  #dialog-favorite::before{content:"♡";font-size:1rem}
-  #dialog-favorite.saved::before{content:"♥"}
-  #dialog-copy-link::before{content:"↗";font-size:1rem}
-  .dialog-dots{bottom:46px}
-  .dialog-media-hint{bottom:12px;font-size:.54rem;min-height:26px}
+  #dialog-favorite::before{content:"♡";font-size:1.24rem;line-height:1}
+  #dialog-favorite.saved::before{content:"♥";color:#ffb45e}
+  #dialog-copy-link::before{
+    content:"";
+    width:20px;
+    height:20px;
+    background:currentColor;
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3.25 6.7 8.55l1.42 1.41L11 7.09V16h2V7.09l2.88 2.87 1.42-1.41L12 3.25ZM5 13h2v5h10v-5h2v7H5v-7Z'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3.25 6.7 8.55l1.42 1.41L11 7.09V16h2V7.09l2.88 2.87 1.42-1.41L12 3.25ZM5 13h2v5h10v-5h2v7H5v-7Z'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
   .catalog-close{
     top:14px;
     right:14px;
     width:40px;
     height:40px;
   }
-  .dialog-gallery{grid-template-columns:repeat(4, 1fr)}
   .collection-scene{
     flex:0 0 min(82vw, 340px);
     min-height:274px;
@@ -2235,7 +2253,7 @@ h1{
   <header class="site-header" id="site-header">
     <a class="brand" href="#inicio" aria-label="Ir al inicio">
       <img src="logomaderarte2026.png" alt="">
-      <span class="brand-text"><span>MADERARTE</span><small>Muebles y decoración en Popayán</small></span>
+      <span class="brand-text"><span>MADERARTE</span><small>Muebles &amp; decoración en Popayán</small></span>
     </a>
     <nav class="nav" id="main-nav" aria-label="Navegación principal">
       <a href="#inicio">Inicio</a>
@@ -2254,8 +2272,9 @@ h1{
       <div class="hero-content">
         <div class="reveal visible">
           <span class="hero-kicker">Lujo urbano · diseño boutique</span>
-          <h1>Diseño sereno para casas con carácter.</h1>
-          <p class="hero-lead">Muebles y decoración en Popayán con acabados limpios, técnicas hechas a mano y asesoría profesional. Más de 20 años acompañando hogares con procesos cuidados y servicio cercano.</p>
+          <h1 class="desktop-hero-title">Diseño sereno para casas con carácter.</h1>
+          <h1 class="mobile-hero-title">Más de 20 años de experiencia.</h1>
+          <p class="hero-lead">Más de 20 años acompañando hogares en Popayán con muebles, decoración, acabados limpios y asesoría profesional.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#colecciones">Ver ambientes</a>
             <a class="btn btn-light" href="https://wa.me/573117476465?text=Hola,%20MADERARTE.%20Quiero%20agendar%20una%20asesor%C3%ADa%20de%20dise%C3%B1o." target="_blank" rel="noopener">Hablar con asesor</a>
@@ -2383,8 +2402,7 @@ h1{
       <div class="catalog-dialog" role="dialog" aria-modal="true" aria-labelledby="catalog-dialog-title">
         <div class="catalog-dialog-media" id="catalog-dialog-media">
           <img id="dialog-image" src="" alt="">
-          <div class="dialog-dots" id="dialog-dots" aria-label="Más fotos del producto"></div>
-          <div class="dialog-media-hint">Toca para ampliar · desliza fotos</div>
+          <div class="dialog-gallery-mobile" id="dialog-gallery-mobile" aria-label="Fotos del producto"></div>
         </div>
         <div class="catalog-dialog-copy">
           <button class="catalog-close" type="button" id="catalog-close" aria-label="Cerrar detalle">×</button>
@@ -2397,8 +2415,8 @@ h1{
           <div class="dialog-gallery" id="dialog-gallery"></div>
           <div class="dialog-actions">
             <a class="btn btn-primary" id="dialog-whatsapp" href="#" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <button class="btn btn-light dialog-favorite" type="button" id="dialog-favorite">Agregar a favoritos</button>
-            <button class="btn btn-light" type="button" id="dialog-copy-link">Copiar enlace</button>
+            <button class="btn btn-light dialog-favorite" type="button" id="dialog-favorite" aria-label="Guardar en favoritos"><span>Guardar</span></button>
+            <button class="btn btn-light dialog-share" type="button" id="dialog-copy-link" aria-label="Compartir producto"><span>Compartir</span></button>
           </div>
         </div>
       </div>
@@ -2945,11 +2963,9 @@ function setDialogImage(src, index){
     image.src = normalizeImage(src);
     image.dataset.full = normalizeImage(src);
   }
-  document.querySelectorAll(".dialog-gallery button").forEach((button, i) => {
-    button.classList.toggle("active", i === index);
-  });
-  document.querySelectorAll(".dialog-dots button").forEach((button, i) => {
-    button.classList.toggle("active", i === index);
+  document.querySelectorAll(".dialog-gallery button, .dialog-gallery-mobile button").forEach((button) => {
+    const imageIndex = Number(button.dataset.imageIndex || 0);
+    button.classList.toggle("active", imageIndex === index);
   });
 }
 
@@ -2976,20 +2992,17 @@ function openProduct(id){
   document.getElementById("dialog-materials").innerHTML = productMaterials(product) || "<span>Te ayudamos a revisar materiales, medidas y acabados según tu espacio.</span>";
   document.getElementById("dialog-whatsapp").href = whatsappLink(product);
   updateFavoriteButton();
-  document.getElementById("dialog-gallery").innerHTML = images.map((src, index) => `
-    <button type="button" class="${index === 0 ? "active" : ""}" aria-label="Ver imagen ${index + 1}">
+  const galleryMarkup = images.map((src, index) => `
+    <button type="button" data-image-index="${index}" class="${index === 0 ? "active" : ""}" aria-label="Ver imagen ${index + 1}">
       <img src="${escapeHTML(src)}" alt="" onerror="this.onerror=null;this.src='${escapeHTML(fallbackImage(product.categoria))}';">
     </button>
   `).join("");
-  document.querySelectorAll(".dialog-gallery button").forEach((button, index) => {
-    button.addEventListener("click", () => setDialogImage(images[index], index));
-  });
-  document.getElementById("dialog-dots").innerHTML = images.map((src, index) => `
-    <button type="button" class="${index === 0 ? "active" : ""}" aria-label="Ver foto ${index + 1}"></button>
-  `).join("");
-  document.querySelectorAll(".dialog-dots button").forEach((button, index) => {
+  document.getElementById("dialog-gallery").innerHTML = galleryMarkup;
+  document.getElementById("dialog-gallery-mobile").innerHTML = galleryMarkup;
+  document.querySelectorAll(".dialog-gallery button, .dialog-gallery-mobile button").forEach((button) => {
     button.addEventListener("click", event => {
       event.stopPropagation();
+      const index = Number(button.dataset.imageIndex || 0);
       setDialogImage(images[index], index);
     });
   });
@@ -3031,7 +3044,9 @@ function updateFavoriteButton(){
   if(!button || !activeDialogProduct) return;
   const saved = favoriteProducts.includes(String(activeDialogProduct.id));
   button.classList.toggle("saved", saved);
-  button.textContent = saved ? "En favoritos" : "Agregar a favoritos";
+  button.setAttribute("aria-label", saved ? "Producto guardado en favoritos" : "Guardar en favoritos");
+  const label = button.querySelector("span");
+  if(label) label.textContent = saved ? "Guardado" : "Guardar";
 }
 
 function toggleFavorite(){
@@ -3094,8 +3109,11 @@ async function copyProductLink(){
   const url = productShareUrl(activeDialogProduct);
   try{
     await navigator.clipboard.writeText(url.toString());
-    document.getElementById("dialog-copy-link").textContent = "Enlace copiado";
-    setTimeout(() => document.getElementById("dialog-copy-link").textContent = "Copiar enlace", 1500);
+    const label = document.querySelector("#dialog-copy-link span");
+    if(label){
+      label.textContent = "Copiado";
+      setTimeout(() => { label.textContent = "Compartir"; }, 1500);
+    }
   }catch(error){
     window.prompt("Copia este enlace:", url.toString());
   }

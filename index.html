@@ -71,10 +71,10 @@
   --ink:#181512;
   --graphite:#242321;
   --graphite-soft:#34312c;
-  --paper:#f0ece4;
-  --paper-deep:#d8d0c4;
-  --cream:#fbf7f0;
-  --linen:#e9e1d6;
+  --paper:#f4f5f7;
+  --paper-deep:#d9dcdf;
+  --cream:#f4f5f7;
+  --linen:#e8e9eb;
   --olive:#25352f;
   --olive-soft:#dde6df;
   --brass:#9f7a48;
@@ -213,6 +213,7 @@ body:not(.at-hero) .site-header{
 .mobile-scroll-hint{display:none}
 .mobile-hero-title{display:none}
 .dialog-gallery-mobile{display:none}
+.dialog-mobile-topbar{display:none}
 .mobile-whatsapp-float{display:none}
 
 .hero{
@@ -1812,18 +1813,20 @@ h1{
     width:42px;
     height:42px;
     flex:0 0 42px;
-    border-radius:50%;
+    border-radius:16px;
     font-size:0;
-    background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08));
+    border-color:rgba(255,255,255,.44);
+    background:linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.07));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.28), 0 12px 28px rgba(0,0,0,.08);
   }
   .menu-toggle::before,
   .menu-toggle::after{
     content:"";
-    width:18px;
+    width:17px;
     height:1.5px;
     background:currentColor;
     border-radius:999px;
-    box-shadow:0 6px 0 currentColor;
+    box-shadow:0 5px 0 currentColor;
     transition:transform .24s var(--ease), box-shadow .24s var(--ease);
   }
   .menu-toggle::after{display:none}
@@ -2021,6 +2024,7 @@ h1{
     grid-template-rows:auto minmax(0, 1fr);
     border-radius:24px;
     overflow:hidden;
+    background:#f4f5f7;
   }
   .catalog-dialog-media{
     display:block;
@@ -2029,7 +2033,7 @@ h1{
     margin:0;
     border-radius:0;
     box-shadow:none;
-    background:#1f1b17;
+    background:#f4f5f7;
   }
   .catalog-dialog-media > img{
     width:100%;
@@ -2037,7 +2041,7 @@ h1{
     max-height:none;
     object-fit:contain;
     display:block;
-    background:#1f1b17;
+    background:#f4f5f7;
     cursor:zoom-in;
   }
   .dialog-gallery-mobile{
@@ -2045,7 +2049,7 @@ h1{
     gap:8px;
     overflow-x:auto;
     padding:10px 14px 14px;
-    background:linear-gradient(180deg, #1f1b17, #2a251f);
+    background:#f4f5f7;
     scrollbar-width:none;
   }
   .dialog-gallery-mobile::-webkit-scrollbar{display:none}
@@ -2054,9 +2058,9 @@ h1{
     height:58px;
     flex:0 0 auto;
     overflow:hidden;
-    border:1px solid rgba(255,255,255,.14);
+    border:1px solid rgba(24,21,18,.1);
     border-radius:12px;
-    background:rgba(255,255,255,.06);
+    background:#eceef0;
     padding:0;
   }
   .dialog-gallery-mobile button.active{
@@ -2067,24 +2071,100 @@ h1{
     width:100%;
     height:100%;
     object-fit:contain;
-    background:#171411;
+    background:#f4f5f7;
   }
   .catalog-dialog-copy{
     max-height:none;
     overflow:auto;
     padding:18px 18px calc(env(safe-area-inset-bottom) + 22px);
+    background:#f4f5f7;
+    color:#181512;
   }
+  .catalog-close{display:none}
+  .dialog-mobile-topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    margin-bottom:18px;
+  }
+  .dialog-back{
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    color:#25211d;
+    font-size:.73rem;
+    font-weight:760;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+  .dialog-back::before{
+    content:"";
+    width:13px;
+    height:13px;
+    border-left:2px solid currentColor;
+    border-bottom:2px solid currentColor;
+    transform:rotate(45deg);
+  }
+  .dialog-mobile-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .dialog-mobile-favorite,
+  .dialog-mobile-share{
+    width:52px;
+    height:52px;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(24,21,18,.12);
+    border-radius:50%;
+    background:rgba(255,255,255,.72);
+    color:#201b16;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.82), 0 14px 34px rgba(24,21,18,.08);
+  }
+  .dialog-mobile-favorite{
+    border-color:rgba(255,122,24,.42);
+    background:linear-gradient(135deg, #ff9d34 0%, #f06b19 100%);
+    color:#fff;
+    box-shadow:0 16px 34px rgba(255,122,24,.22), inset 0 1px 0 rgba(255,255,255,.24);
+  }
+  .dialog-mobile-favorite::before{
+    content:"♡";
+    font-size:1.35rem;
+    line-height:1;
+  }
+  .dialog-mobile-favorite.saved::before{content:"♥"}
+  .dialog-mobile-share::before{
+    content:"";
+    width:23px;
+    height:23px;
+    background:currentColor;
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81a3 3 0 1 0 0 4.38l7.12 4.18c-.04.2-.06.41-.06.63a2.9 2.9 0 1 0 2.9-2.92Z'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81a3 3 0 1 0 0 4.38l7.12 4.18c-.04.2-.06.41-.06.63a2.9 2.9 0 1 0 2.9-2.92Z'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .dialog-mobile-share.copied{
+    border-color:rgba(46,125,79,.28);
+    color:#2e7d4f;
+    background:#eef7f2;
+  }
+  .catalog-dialog-copy small{color:#ff6f17}
   .catalog-dialog-copy h3{font-size:clamp(2.05rem, 9.8vw, 3.05rem)}
-  .catalog-dialog-copy p{font-size:.96rem;line-height:1.56;margin-top:14px}
+  .catalog-dialog-copy h3{
+    color:#181512;
+    text-shadow:none;
+  }
+  .catalog-dialog-copy p{font-size:.96rem;line-height:1.56;margin-top:14px;color:#625a53}
   .dialog-price{
     margin-top:16px;
     padding:0 0 16px;
     border:0;
-    border-bottom:1px solid rgba(255,255,255,.11);
+    border-bottom:1px solid rgba(24,21,18,.12);
     border-radius:0;
     background:transparent;
     box-shadow:none;
-    color:rgba(255,250,241,.66);
+    color:#746b61;
   }
   .dialog-price .price-caption{
     justify-content:flex-start;
@@ -2103,10 +2183,31 @@ h1{
     margin-top:7px;
     font-size:.76rem;
     line-height:1.45;
+    color:#6d645c;
   }
-  .dialog-options{padding:14px;border-radius:18px}
+  .dialog-options{
+    padding:14px;
+    border-radius:18px;
+    border-color:rgba(24,21,18,.12);
+    background:rgba(255,255,255,.56);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.8), 0 14px 34px rgba(24,21,18,.055);
+  }
+  .detail-block .lbl{color:#776d63}
+  .variant-hint,
+  .detail-block .val{color:#675f57}
   .size-options{grid-template-columns:1fr}
-  .size-btn{min-height:58px}
+  .size-btn{
+    min-height:58px;
+    border-color:rgba(24,21,18,.12);
+    background:rgba(255,255,255,.7);
+    color:#675f57;
+  }
+  .size-btn span{color:#181512}
+  .size-btn.active,
+  .size-btn:hover{
+    background:linear-gradient(135deg, rgba(255,173,70,.18), rgba(255,255,255,.74));
+    color:#181512;
+  }
   .dialog-materials{margin-top:16px;padding-top:16px;gap:8px}
   .mat-list{grid-template-columns:1fr;gap:0}
   .mat-item{
@@ -2114,34 +2215,45 @@ h1{
     gap:10px;
     padding:10px 0;
     border:0;
-    border-bottom:1px solid rgba(255,255,255,.09);
+    border-bottom:1px solid rgba(24,21,18,.09);
     border-radius:0;
     background:transparent;
   }
   .mat-item:last-child{border-bottom:0}
-  .mat-ic{width:30px;height:30px;border-radius:10px}
+  .mat-ic{
+    width:30px;
+    height:30px;
+    border-radius:10px;
+    background:#eceef0;
+    border-color:rgba(255,122,24,.18);
+    box-shadow:none;
+  }
   .mat-ic img{width:18px;height:18px}
+  .mat-tx b,
+  .dialog-materials b{color:#1f1a16}
   .mat-tx b{font-size:.76rem}
   .mat-tx span,
-  .dialog-materials span{font-size:.86rem;line-height:1.35}
+  .dialog-materials span{font-size:.86rem;line-height:1.35;color:#6d645c}
   .cert-row{margin-top:8px}
   .cert-badge{min-height:30px;font-size:.68rem}
   .dialog-gallery{display:none}
   .dialog-actions{
     position:static;
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+    grid-template-columns:1fr;
+    gap:0;
     margin:18px 0 0;
     padding:0;
     background:none;
   }
   .dialog-actions .btn-primary{
-    grid-column:1 / -1;
+    grid-column:auto;
     justify-content:center;
-    min-height:50px;
+    min-height:54px;
+    border-radius:20px;
     font-size:.63rem;
     letter-spacing:.11em;
+    box-shadow:0 18px 34px rgba(255,122,24,.22), inset 0 1px 0 rgba(255,255,255,.28);
   }
   .dialog-actions .btn-primary::after{display:none}
   .dialog-actions .btn{
@@ -2153,17 +2265,7 @@ h1{
     letter-spacing:.12em;
   }
   .dialog-actions .btn-light{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    padding:0 12px;
-    font-size:.62rem;
-    letter-spacing:.1em;
-    color:#fff;
-    background:rgba(255,255,255,.08);
-    border-color:rgba(255,255,255,.2);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 14px 28px rgba(0,0,0,.18);
+    display:none;
   }
   #dialog-favorite::before{content:"♡";font-size:1.08rem;line-height:1}
   #dialog-favorite.saved::before{content:"♥";color:#ffb45e}
@@ -2469,6 +2571,13 @@ h1{
         </div>
         <div class="catalog-dialog-copy">
           <button class="catalog-close" type="button" id="catalog-close" aria-label="Cerrar detalle">×</button>
+          <div class="dialog-mobile-topbar" aria-label="Acciones del producto">
+            <button class="dialog-back" type="button" id="catalog-mobile-back" aria-label="Volver al catálogo"><span>Volver</span></button>
+            <div class="dialog-mobile-actions">
+              <button class="dialog-mobile-favorite" type="button" id="dialog-mobile-favorite" aria-label="Guardar en favoritos"></button>
+              <button class="dialog-mobile-share" type="button" id="dialog-mobile-share" aria-label="Compartir producto"></button>
+            </div>
+          </div>
           <small id="dialog-category">Catálogo</small>
           <h3 id="catalog-dialog-title"></h3>
           <div class="dialog-price" id="dialog-price"></div>
@@ -3110,13 +3219,16 @@ function selectVariant(label, price, button){
 }
 
 function updateFavoriteButton(){
-  const button = document.getElementById("dialog-favorite");
-  if(!button || !activeDialogProduct) return;
+  if(!activeDialogProduct) return;
   const saved = favoriteProducts.includes(String(activeDialogProduct.id));
-  button.classList.toggle("saved", saved);
-  button.setAttribute("aria-label", saved ? "Producto guardado en favoritos" : "Guardar en favoritos");
-  const label = button.querySelector("span");
-  if(label) label.textContent = saved ? "Guardado" : "Guardar";
+  ["dialog-favorite", "dialog-mobile-favorite"].forEach((id) => {
+    const button = document.getElementById(id);
+    if(!button) return;
+    button.classList.toggle("saved", saved);
+    button.setAttribute("aria-label", saved ? "Producto guardado en favoritos" : "Guardar en favoritos");
+    const label = button.querySelector("span");
+    if(label) label.textContent = saved ? "Guardado" : "Guardar";
+  });
 }
 
 function toggleFavorite(){
@@ -3179,6 +3291,11 @@ async function copyProductLink(){
   const url = productShareUrl(activeDialogProduct);
   try{
     await navigator.clipboard.writeText(url.toString());
+    const mobileButton = document.getElementById("dialog-mobile-share");
+    if(mobileButton){
+      mobileButton.classList.add("copied");
+      setTimeout(() => mobileButton.classList.remove("copied"), 1500);
+    }
     const label = document.querySelector("#dialog-copy-link span");
     if(label){
       label.textContent = "Copiado";
@@ -3246,6 +3363,7 @@ async function initCatalog(){
     });
   });
   document.getElementById("catalog-close")?.addEventListener("click", closeProduct);
+  document.getElementById("catalog-mobile-back")?.addEventListener("click", closeProduct);
   document.getElementById("catalog-modal")?.addEventListener("click", event => {
     if(event.target.id === "catalog-modal") closeProduct();
   });
@@ -3284,7 +3402,9 @@ async function initCatalog(){
     if(Math.abs(delta) > 42) moveLightbox(delta > 0 ? -1 : 1);
   }, { passive:true });
   document.getElementById("dialog-favorite")?.addEventListener("click", toggleFavorite);
+  document.getElementById("dialog-mobile-favorite")?.addEventListener("click", toggleFavorite);
   document.getElementById("dialog-copy-link")?.addEventListener("click", copyProductLink);
+  document.getElementById("dialog-mobile-share")?.addEventListener("click", copyProductLink);
   window.addEventListener("keydown", event => {
     if(event.key === "Escape"){
       if(document.getElementById("image-lightbox")?.classList.contains("open")) closeImageLightbox();

@@ -1891,26 +1891,25 @@ h1{
     font-size:.76rem;
   }
   .nav a:last-child{border-bottom:0}
-  .hero{
-    min-height:92svh;
-  }
+  .hero{min-height:94svh}
   .hero-media{
-    background-position:60% center;
-    transform:scale(1.015);
+    background-image:url("Portada-mobile.png");
+    background-position:center;
+    transform:scale(1);
   }
   .hero::after{
     background:
-      linear-gradient(90deg, rgba(13,10,8,.58), rgba(13,10,8,.22) 60%, transparent),
-      linear-gradient(0deg, rgba(13,10,8,.58), transparent 58%);
+      linear-gradient(90deg, rgba(13,10,8,.72), rgba(13,10,8,.32) 64%, rgba(13,10,8,.08)),
+      linear-gradient(0deg, rgba(13,10,8,.66), transparent 64%);
   }
   .hero-content{
-    min-height:92svh;
+    min-height:94svh;
     align-items:end;
-    padding:96px 18px max(30px, calc(env(safe-area-inset-bottom) + 24px));
+    padding:104px 18px max(32px, calc(env(safe-area-inset-bottom) + 24px));
   }
   .hero-kicker{font-size:.62rem;letter-spacing:.16em}
-  h1{font-size:clamp(3rem, 13vw, 4.45rem);line-height:.94;max-width:94vw}
-  .hero-lead{margin-top:18px;font-size:.98rem;line-height:1.58;max-width:92vw}
+  h1{font-size:clamp(2.92rem, 12.2vw, 4.15rem);line-height:.94;max-width:92vw}
+  .hero-lead{margin-top:18px;font-size:.94rem;line-height:1.54;max-width:92vw}
   .hero-actions{
     display:grid;
     gap:10px;
@@ -2031,59 +2030,88 @@ h1{
     font-size:.54rem;
   }
   .product-price strong{font-size:.82rem;margin-top:4px}
+  .catalog-modal{
+    align-items:flex-start;
+    padding:8px;
+    background:rgba(11,10,9,.72);
+  }
   .catalog-dialog{
     width:100%;
-    max-height:calc(100svh - 18px);
-    border-radius:22px;
+    height:calc(100svh - 16px);
+    max-height:calc(100svh - 16px);
+    grid-template-rows:auto minmax(0, 1fr);
+    border-radius:24px;
+    overflow:hidden;
   }
   .catalog-dialog-media{
-    height:34svh;
-    min-height:210px;
-    margin:14px 14px 0;
-    border-radius:20px;
+    height:39svh;
+    min-height:238px;
+    margin:0;
+    border-radius:0;
+    box-shadow:none;
   }
   .catalog-dialog-copy{
-    padding:20px 20px calc(env(safe-area-inset-bottom) + 112px);
-    max-height:calc(66svh - 18px);
+    max-height:none;
+    overflow:auto;
+    padding:18px 18px calc(env(safe-area-inset-bottom) + 22px);
   }
-  .catalog-dialog-copy h3{font-size:clamp(2rem, 9.4vw, 3rem)}
+  .catalog-dialog-copy h3{font-size:clamp(2.05rem, 9.8vw, 3.05rem)}
   .catalog-dialog-copy p{font-size:.96rem;line-height:1.56;margin-top:14px}
   .dialog-price{margin-top:16px;padding:14px 15px;border-radius:20px}
   .dialog-price strong{font-size:1.35rem}
   .dialog-options{padding:14px;border-radius:18px}
   .size-options{grid-template-columns:1fr}
   .size-btn{min-height:58px}
-  .dialog-materials{margin-top:16px;padding-top:16px;gap:10px}
-  .mat-list{grid-template-columns:1fr 1fr;gap:8px}
+  .dialog-materials{margin-top:16px;padding-top:16px;gap:8px}
+  .mat-list{grid-template-columns:1fr;gap:0}
   .mat-item{
-    grid-template-columns:34px minmax(0,1fr);
-    gap:9px;
-    padding:10px;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:16px;
-    background:rgba(255,255,255,.045);
+    grid-template-columns:30px minmax(0,1fr);
+    gap:10px;
+    padding:10px 0;
+    border:0;
+    border-bottom:1px solid rgba(255,255,255,.09);
+    border-radius:0;
+    background:transparent;
   }
-  .mat-ic{width:34px;height:34px;border-radius:12px}
-  .mat-ic img{width:21px;height:21px}
-  .mat-tx b{font-size:.75rem}
+  .mat-item:last-child{border-bottom:0}
+  .mat-ic{width:30px;height:30px;border-radius:10px}
+  .mat-ic img{width:18px;height:18px}
+  .mat-tx b{font-size:.76rem}
   .mat-tx span,
-  .dialog-materials span{font-size:.8rem;line-height:1.32}
+  .dialog-materials span{font-size:.86rem;line-height:1.35}
   .cert-row{margin-top:8px}
   .cert-badge{min-height:30px;font-size:.68rem}
   .dialog-gallery{margin-top:14px;padding-bottom:8px}
   .dialog-gallery button{width:58px;height:48px;border-radius:10px}
   .dialog-actions{
-    position:sticky;
-    bottom:0;
-    z-index:5;
-    margin:18px -20px calc(-1 * (env(safe-area-inset-bottom) + 112px));
-    padding:14px 20px calc(env(safe-area-inset-bottom) + 16px);
-    background:linear-gradient(180deg, rgba(47,43,37,0), rgba(47,43,37,.98) 28%);
+    position:static;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 44px 44px;
+    gap:8px;
+    margin:16px 0 0;
+    padding:0;
+    background:none;
   }
-  .dialog-actions .btn{min-height:48px}
-  .dialog-actions .btn-light{display:none}
-  .dialog-dots{bottom:44px}
-  .dialog-media-hint{bottom:10px;font-size:.54rem;min-height:26px}
+  .dialog-actions .btn{
+    width:auto;
+    min-height:44px;
+    padding:0 14px;
+    border-radius:999px;
+    font-size:.62rem;
+    letter-spacing:.1em;
+  }
+  .dialog-actions .btn-primary{justify-content:center}
+  .dialog-actions .btn-light{
+    display:grid;
+    place-items:center;
+    padding:0;
+    font-size:0;
+  }
+  #dialog-favorite::before{content:"♡";font-size:1rem}
+  #dialog-favorite.saved::before{content:"♥"}
+  #dialog-copy-link::before{content:"↗";font-size:1rem}
+  .dialog-dots{bottom:46px}
+  .dialog-media-hint{bottom:12px;font-size:.54rem;min-height:26px}
   .catalog-close{
     top:14px;
     right:14px;
@@ -2226,8 +2254,8 @@ h1{
       <div class="hero-content">
         <div class="reveal visible">
           <span class="hero-kicker">Lujo urbano · diseño boutique</span>
-          <h1>Muebles con oficio para casas que se sienten tuyas.</h1>
-          <p class="hero-lead">En Maderarte cuidamos acabados limpios, técnicas hechas a mano y procesos guiados con criterio. Más de 20 años acompañando hogares en Popayán con mobiliario, decoración y asesoría profesional.</p>
+          <h1>Diseño sereno para casas con carácter.</h1>
+          <p class="hero-lead">Muebles y decoración en Popayán con acabados limpios, técnicas hechas a mano y asesoría profesional. Más de 20 años acompañando hogares con procesos cuidados y servicio cercano.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#colecciones">Ver ambientes</a>
             <a class="btn btn-light" href="https://wa.me/573117476465?text=Hola,%20MADERARTE.%20Quiero%20agendar%20una%20asesor%C3%ADa%20de%20dise%C3%B1o." target="_blank" rel="noopener">Hablar con asesor</a>

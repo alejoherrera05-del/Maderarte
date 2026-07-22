@@ -418,30 +418,74 @@ h1{
 }
 .signature-board{
   display:grid;
-  gap:1px;
-  background:var(--line);
-  border:1px solid var(--line);
+  gap:14px;
+  background:transparent;
+  border:0;
+  perspective:1200px;
 }
 .signature-item{
+  position:relative;
   display:grid;
-  grid-template-columns:76px minmax(0, 1fr);
-  gap:22px;
+  grid-template-columns:96px minmax(0, 1fr);
+  gap:26px;
   align-items:center;
-  min-height:142px;
-  padding:24px;
-  background:rgba(251,247,240,.58);
+  min-height:156px;
+  padding:26px 28px;
+  overflow:hidden;
+  border:1px solid rgba(47,64,59,.13);
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,122,24,.12), transparent 34%),
+    linear-gradient(135deg, rgba(255,255,255,.82), rgba(232,233,235,.54));
+  box-shadow:0 24px 70px rgba(24,21,18,.075), inset 0 1px 0 rgba(255,255,255,.72);
+  opacity:0;
+  transform:translate3d(0, 24px, 0) rotateX(5deg);
+  filter:blur(8px);
+  transition:opacity .86s var(--ease-lux), transform .86s var(--ease-lux), filter .86s var(--ease-lux), border-color .35s ease, background .35s ease;
+  transition-delay:var(--signature-delay, 0ms);
+}
+.signature-board.visible .signature-item{
+  opacity:1;
+  transform:none;
+  filter:none;
+}
+.signature-item:nth-child(2){--signature-delay:90ms}
+.signature-item:nth-child(3){--signature-delay:180ms}
+.signature-item::after{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border:1px solid rgba(255,255,255,.48);
+  border-radius:20px;
+  pointer-events:none;
+}
+.signature-item:hover{
+  border-color:rgba(255,122,24,.28);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,122,24,.18), transparent 36%),
+    linear-gradient(135deg, rgba(255,255,255,.9), rgba(232,233,235,.66));
 }
 .signature-item img{
-  width:64px;
-  height:64px;
+  position:relative;
+  z-index:1;
+  width:92px;
+  height:92px;
+  object-fit:contain;
+  filter:drop-shadow(0 18px 18px rgba(24,21,18,.14));
 }
 .signature-item strong{
+  position:relative;
+  z-index:1;
   display:block;
   font-family:var(--serif);
-  font-size:1.85rem;
+  font-size:clamp(1.75rem, 2.25vw, 2.25rem);
   font-weight:400;
+  color:var(--ink);
+  letter-spacing:-.01em;
 }
 .signature-item span{
+  position:relative;
+  z-index:1;
   display:block;
   margin-top:6px;
   color:var(--muted);
@@ -1453,10 +1497,11 @@ h1{
   backdrop-filter:blur(18px) saturate(1.2);
 }
 .process-step img{
-  width:58px;
-  height:58px;
+  width:72px;
+  height:72px;
   margin-bottom:34px;
-  filter:drop-shadow(0 12px 20px rgba(32,48,42,.12));
+  object-fit:contain;
+  filter:drop-shadow(0 16px 16px rgba(24,21,18,.12));
 }
 .process-step span{
   color:var(--copper);
@@ -1730,12 +1775,43 @@ h1{
 
 .reveal{
   opacity:0;
-  transform:translateY(26px);
-  transition:opacity .75s var(--ease-lux), transform .75s var(--ease-lux);
+  transform:translate3d(0, 36px, 0) scale(.985);
+  filter:blur(10px);
+  transition:opacity .88s var(--ease-lux), transform .88s var(--ease-lux), filter .88s var(--ease-lux);
+  transition-delay:var(--reveal-delay, 0ms);
+  will-change:opacity, transform, filter;
 }
 .reveal.visible{
   opacity:1;
   transform:none;
+  filter:none;
+}
+.catalog-grid.visible .product-card{
+  animation:catalogCardReveal .72s var(--ease-lux) both;
+  animation-delay:calc(var(--product-index, 0) * 55ms);
+}
+@keyframes catalogCardReveal{
+  from{
+    opacity:0;
+    transform:translate3d(0, 28px, 0) scale(.982);
+    filter:blur(8px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .reveal,
+  .signature-item,
+  .catalog-grid.visible .product-card{
+    opacity:1;
+    transform:none;
+    filter:none;
+    animation:none;
+    transition:none;
+  }
 }
 
 @media (max-width:1050px){
@@ -1899,8 +1975,17 @@ h1{
     padding-bottom:28px;
     margin-bottom:34px;
   }
-  .signature-item{grid-template-columns:58px 1fr;padding:20px}
-  .signature-item img{width:50px;height:50px}
+  .signature-board{gap:12px}
+  .signature-item{
+    grid-template-columns:78px 1fr;
+    gap:18px;
+    min-height:138px;
+    padding:18px;
+    border-radius:22px;
+  }
+  .signature-item::after{inset:10px;border-radius:17px}
+  .signature-item img{width:76px;height:76px}
+  .signature-item strong{font-size:1.72rem}
   .process-grid,
   .locations,
   .catalog-grid{grid-template-columns:1fr}
@@ -2457,15 +2542,15 @@ h1{
         </div>
         <div class="signature-board reveal">
           <article class="signature-item">
-            <img src="icons/maderarte-measure.svg" alt="">
+            <img src="icons/maderarte-signature-proporcion.png" alt="">
             <span><strong>Proporción primero</strong><span>El mueble se piensa desde tu espacio, no desde una vitrina genérica.</span></span>
           </article>
           <article class="signature-item">
-            <img src="icons/maderarte-fabric.svg" alt="">
+            <img src="icons/maderarte-signature-textura.png" alt="">
             <span><strong>Textura con criterio</strong><span>Telas, brillos, madera y acentos se combinan para una atmósfera coherente.</span></span>
           </article>
           <article class="signature-item">
-            <img src="icons/maderarte-advisory.svg" alt="">
+            <img src="icons/maderarte-signature-asesoria.png" alt="">
             <span><strong>Asesoría boutique</strong><span>Te acompañamos para elegir piezas que funcionen y envejezcan con dignidad.</span></span>
           </article>
         </div>
@@ -2620,25 +2705,25 @@ h1{
       </div>
       <div class="process-grid">
         <article class="process-step reveal">
-          <img src="icons/maderarte-measure.svg" alt="">
+          <img src="icons/maderarte-signature-proporcion.png" alt="">
           <span>01</span>
           <h3>Medidas reales</h3>
           <p>Revisamos proporción, uso y circulación para que el mueble encaje con naturalidad.</p>
         </article>
         <article class="process-step reveal">
-          <img src="icons/maderarte-fabric.svg" alt="">
+          <img src="icons/maderarte-signature-textura.png" alt="">
           <span>02</span>
           <h3>Materiales</h3>
           <p>Elegimos telas, maderas y acentos según la atmósfera que quieres construir.</p>
         </article>
         <article class="process-step reveal">
-          <img src="icons/maderarte-advisory.svg" alt="">
+          <img src="icons/maderarte-signature-asesoria.png" alt="">
           <span>03</span>
           <h3>Asesoría</h3>
           <p>Te orientamos con criterio de diseño, no con respuestas genéricas.</p>
         </article>
         <article class="process-step reveal">
-          <img src="icons/maderarte-delivery.svg" alt="">
+          <img src="icons/maderarte-signature-entrega.png" alt="">
           <span>04</span>
           <h3>Entrega</h3>
           <p>Cuidamos la llegada, las recomendaciones de uso y el respaldo posterior.</p>
@@ -2780,7 +2865,12 @@ const revealObserver = new IntersectionObserver(entries => {
     }
   });
 }, { threshold:.14 });
-document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+document.querySelectorAll(".reveal").forEach((el, index) => {
+  const siblingRevealIndex = Array.from(el.parentElement?.children || []).filter(child => child.classList?.contains("reveal")).indexOf(el);
+  const delayIndex = siblingRevealIndex >= 0 ? siblingRevealIndex : index;
+  el.style.setProperty("--reveal-delay", `${Math.min(delayIndex, 5) * 70}ms`);
+  revealObserver.observe(el);
+});
 
 const navObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -3085,7 +3175,7 @@ function renderCatalog(){
       ? `<div class="product-price">Valor boutique desde <strong>${formatCOP(minPrice)}</strong></div>`
       : `<div class="product-price">Asesoría a medida <strong>Solicitar configuración</strong></div>`;
     return `
-      <article class="product-card" tabindex="0" role="button" aria-label="Ver ${escapeHTML(product.nombre)}" data-product-id="${product.id}">
+      <article class="product-card" tabindex="0" role="button" aria-label="Ver ${escapeHTML(product.nombre)}" data-product-id="${product.id}" style="--product-index:${index % 9}">
         <div class="product-media">
           <img src="${escapeHTML(img)}" alt="${escapeHTML(product.nombre)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${escapeHTML(fallback)}';">
           <span class="product-fav ${saved ? "saved" : ""}" aria-hidden="true">${saved ? "♥" : "♡"}</span>

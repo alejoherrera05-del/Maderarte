@@ -549,14 +549,14 @@ h1{
   --tape-rotate:-2deg;
   position:relative;
   display:grid;
-  grid-template-columns:minmax(260px, .75fr) minmax(0, 1.08fr);
-  gap:clamp(28px, 6vw, 84px);
+  grid-template-columns:minmax(300px, .78fr) minmax(0, 1.02fr);
+  gap:clamp(42px, 7vw, 118px);
   align-items:center;
   min-height:430px;
   isolation:isolate;
 }
 .focus-step:nth-child(even){
-  grid-template-columns:minmax(0, 1.08fr) minmax(260px, .75fr);
+  grid-template-columns:minmax(0, 1.02fr) minmax(300px, .78fr);
 }
 .focus-step:nth-child(even) .focus-copy{order:2}
 .focus-step:nth-child(even) .focus-visual{order:1}
@@ -571,7 +571,7 @@ h1{
 }
 .focus-copy{
   position:relative;
-  z-index:2;
+  z-index:4;
   max-width:440px;
 }
 .focus-number{
@@ -609,6 +609,7 @@ h1{
   pointer-events:none;
   transform:translateY(var(--focus-parallax));
   transition:transform .16s linear;
+  z-index:1;
 }
 .focus-visual img{
   display:block;
@@ -622,19 +623,19 @@ h1{
   display:block;
   max-width:none;
   opacity:0;
-  filter:drop-shadow(0 30px 36px rgba(24,21,18,.16));
+  filter:drop-shadow(0 24px 26px rgba(24,21,18,.11));
   transition:opacity .9s var(--ease-lux), transform .9s var(--ease-lux), filter .9s var(--ease-lux);
 }
 .focus-photo-mood{
-  width:min(620px, 54vw);
-  right:-2%;
-  top:-42px;
+  width:min(540px, 42vw);
+  right:5%;
+  top:-8px;
   transform:translate3d(22px, 32px, 0) rotate(-5deg) scale(.94);
 }
 .focus-photo-proposal{
-  width:min(660px, 58vw);
-  left:-2%;
-  top:10px;
+  width:min(610px, 45vw);
+  left:5%;
+  top:34px;
   transform:translate3d(-6px, 56px, 0) rotate(7deg) scale(.94);
 }
 .focus-step.is-visible .focus-photo-proposal{
@@ -670,7 +671,7 @@ h1{
 .mood-metal{width:128px;left:478px;top:392px;--piece-x:0px;--piece-y:0px;--piece-rotate:10deg;--piece-start-x:-34px;--piece-start-y:-44px;--piece-start-rotate:0deg;--piece-delay:450ms}
 .focus-tape-clip{
   position:absolute;
-  inset:0 -4% 0 -12%;
+  inset:0 -2% 0 -8%;
   clip-path:inset(0 0 0 var(--tape-cut));
   transform-origin:82% 42%;
   transform:translateX(var(--tape-x)) rotate(var(--tape-rotate));
@@ -678,14 +679,14 @@ h1{
   transition:clip-path .12s linear, opacity .12s linear, transform .12s linear;
 }
 .focus-tape-clip img{
-  width:min(760px, 124vw);
-  filter:drop-shadow(0 26px 34px rgba(24,21,18,.18));
+  width:min(700px, 58vw);
+  filter:none;
 }
 .focus-mood{
-  min-height:480px;
+  min-height:700px;
 }
 .focus-advisory{
-  min-height:460px;
+  min-height:560px;
 }
 .focus-closing{
   max-width:760px;
@@ -2248,10 +2249,10 @@ h1{
   .signature-item img{width:76px;height:76px}
   .signature-item strong{font-size:1.72rem}
   .focus-section{
-    padding:78px 22px 68px;
+    padding:76px 20px 66px;
     background:
-      radial-gradient(circle at 74% 12%, rgba(255,122,24,.075), transparent 220px),
-      linear-gradient(180deg, rgba(255,255,255,.38), rgba(255,255,255,0) 38%),
+      radial-gradient(circle at 80% 8%, rgba(255,122,24,.052), transparent 190px),
+      linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,0) 42%),
       var(--paper);
   }
   .focus-wrap{
@@ -2275,7 +2276,7 @@ h1{
   .focus-sequence{
     position:relative;
     display:block;
-    min-height:1120px;
+    min-height:1180px;
   }
   .focus-step,
   .focus-step:nth-child(even){
@@ -2290,11 +2291,12 @@ h1{
     order:initial;
   }
   .focus-copy{
-    max-width:220px;
+    max-width:190px;
+    z-index:5;
   }
   .focus-copy h3{
     margin-top:18px;
-    font-size:clamp(2.55rem, 11vw, 3.75rem);
+    font-size:clamp(2.35rem, 10.4vw, 3.35rem);
     line-height:.98;
     letter-spacing:-.026em;
   }
@@ -2309,56 +2311,59 @@ h1{
     position:absolute;
     min-height:0;
     margin:0;
+    z-index:1;
   }
   .focus-step::after{
     left:0;
     right:auto;
-    width:206px;
-    bottom:-34px;
-    background:rgba(24,21,18,.13);
+    width:164px;
+    bottom:-42px;
+    background:rgba(24,21,18,.09);
   }
-  .focus-step-tape{top:8px}
+  .focus-step-tape{top:4px}
   .focus-step-mood{top:392px}
-  .focus-step-proposal{top:760px}
+  .focus-step-proposal{top:800px}
   .focus-step-tape .focus-visual{
-    left:112px;
-    top:-34px;
-    width:570px;
-    height:302px;
+    left:30px;
+    top:148px;
+    width:348px;
+    height:160px;
   }
   .focus-tape-clip{
     inset:0;
     clip-path:inset(0 0 0 var(--tape-cut));
+    transform-origin:78% 44%;
+    transform:translateX(calc(var(--tape-x) * .35)) rotate(-4deg);
   }
   .focus-tape-clip img{
-    width:570px;
+    width:348px;
     max-width:none;
   }
   .focus-mood{
-    left:162px;
-    top:-34px;
-    width:350px;
-    height:460px;
+    left:176px;
+    top:-14px;
+    width:300px;
+    height:382px;
   }
   .focus-photo-mood{
-    width:315px;
+    width:278px;
     left:0;
     right:auto;
     top:0;
   }
   .focus-advisory{
-    left:144px;
-    top:-18px;
-    width:390px;
-    height:370px;
+    left:152px;
+    top:8px;
+    width:330px;
+    height:300px;
   }
   .focus-photo-proposal{
-    width:385px;
-    left:-8px;
+    width:318px;
+    left:0;
     top:0;
   }
   .focus-closing{
-    margin-top:24px;
+    margin-top:18px;
     text-align:center;
   }
   .focus-closing::after{
@@ -2937,7 +2942,7 @@ h1{
             </div>
             <div class="focus-visual focus-tape" aria-hidden="true">
               <div class="focus-tape-clip">
-                <img src="/icons/tape-measure.webp" alt="" loading="lazy" decoding="async">
+                <img src="/icons/tape-measure-clean.webp" srcset="/icons/tape-measure-mobile.webp 760w, /icons/tape-measure-clean.webp 1584w" sizes="(max-width:700px) 348px, 58vw" alt="" loading="lazy" decoding="async">
               </div>
             </div>
           </article>
@@ -2949,7 +2954,7 @@ h1{
               <p>Telas, brillos, madera y acentos se combinan para una atmósfera coherente.</p>
             </div>
             <div class="focus-visual focus-mood" aria-hidden="true">
-              <img class="focus-photo focus-photo-mood" src="/icons/material-moodboard.webp" alt="" loading="lazy" decoding="async">
+              <img class="focus-photo focus-photo-mood" src="/icons/material-moodboard-clean.webp" srcset="/icons/material-moodboard-mobile.webp 620w, /icons/material-moodboard-clean.webp 883w" sizes="(max-width:700px) 278px, 42vw" alt="" loading="lazy" decoding="async">
             </div>
           </article>
 
@@ -2960,7 +2965,7 @@ h1{
               <p>Te acompañamos para elegir piezas que funcionen y envejezcan con dignidad.</p>
             </div>
             <div class="focus-visual focus-advisory" aria-hidden="true">
-              <img class="focus-photo focus-photo-proposal" src="/icons/design-proposal.webp" alt="" loading="lazy" decoding="async">
+              <img class="focus-photo focus-photo-proposal" src="/icons/design-proposal-clean.webp" srcset="/icons/design-proposal-mobile.webp 700w, /icons/design-proposal-clean.webp 1319w" sizes="(max-width:700px) 318px, 45vw" alt="" loading="lazy" decoding="async">
             </div>
           </article>
         </div>

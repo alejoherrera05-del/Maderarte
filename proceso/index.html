@@ -111,6 +111,17 @@ button,input,textarea{font:inherit}
 button{border:0;background:transparent;color:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--copper);outline-offset:4px}
 main section[id]{scroll-margin-top:104px}
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
 
 .site-shell{
   min-height:100vh;
@@ -490,6 +501,205 @@ h1{
   margin-top:6px;
   color:var(--muted);
   line-height:1.55;
+}
+
+.focus-section{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 86% 10%, rgba(255,122,24,.08), transparent 290px),
+    radial-gradient(circle at 0% 58%, rgba(159,122,72,.08), transparent 260px),
+    var(--paper);
+}
+.focus-wrap{
+  width:min(100%, 1180px);
+  margin:0 auto;
+}
+.focus-intro{
+  max-width:720px;
+  margin-bottom:clamp(44px, 8vw, 104px);
+}
+.focus-intro h2{
+  margin-top:16px;
+  font-family:var(--serif);
+  font-size:clamp(3.35rem, 7vw, 7.2rem);
+  font-weight:400;
+  line-height:.92;
+  letter-spacing:-.024em;
+}
+.focus-intro p{
+  max-width:540px;
+  margin-top:22px;
+  color:var(--muted);
+  font-size:1.08rem;
+  line-height:1.78;
+}
+.focus-sequence{
+  display:grid;
+  gap:clamp(58px, 10vw, 128px);
+}
+.focus-step{
+  --focus-progress:.02;
+  --focus-parallax:0px;
+  --tape-cut:58%;
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(260px, .75fr) minmax(0, 1.08fr);
+  gap:clamp(28px, 6vw, 84px);
+  align-items:center;
+  min-height:430px;
+  isolation:isolate;
+}
+.focus-step:nth-child(even){
+  grid-template-columns:minmax(0, 1.08fr) minmax(260px, .75fr);
+}
+.focus-step:nth-child(even) .focus-copy{order:2}
+.focus-step:nth-child(even) .focus-visual{order:1}
+.focus-step::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:clamp(-38px, -4vw, -20px);
+  height:1px;
+  background:linear-gradient(90deg, rgba(24,21,18,.16), transparent 74%);
+}
+.focus-copy{
+  position:relative;
+  z-index:2;
+  max-width:440px;
+}
+.focus-number{
+  display:block;
+  color:var(--copper);
+  font-weight:780;
+  letter-spacing:.16em;
+  font-size:.9rem;
+}
+.focus-copy h3{
+  margin-top:20px;
+  font-family:var(--serif);
+  font-size:clamp(3rem, 5.8vw, 5.75rem);
+  font-weight:400;
+  line-height:.94;
+  letter-spacing:-.022em;
+}
+.focus-copy h3::after{
+  content:"";
+  display:block;
+  width:34px;
+  height:2px;
+  margin:22px 0 0;
+  background:var(--copper);
+}
+.focus-copy p{
+  margin-top:16px;
+  color:var(--muted);
+  font-size:1.06rem;
+  line-height:1.76;
+}
+.focus-visual{
+  position:relative;
+  min-height:340px;
+  pointer-events:none;
+  transform:translateY(var(--focus-parallax));
+  transition:transform .16s linear;
+}
+.focus-visual img{
+  display:block;
+  max-width:100%;
+  height:auto;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.focus-photo{
+  position:absolute;
+  display:block;
+  max-width:none;
+  opacity:0;
+  filter:drop-shadow(0 30px 36px rgba(24,21,18,.16));
+  transition:opacity .9s var(--ease-lux), transform .9s var(--ease-lux), filter .9s var(--ease-lux);
+}
+.focus-photo-mood{
+  width:min(620px, 54vw);
+  right:-2%;
+  top:-42px;
+  transform:translate3d(22px, 32px, 0) rotate(-5deg) scale(.94);
+}
+.focus-photo-proposal{
+  width:min(660px, 58vw);
+  left:-2%;
+  top:10px;
+  transform:translate3d(-6px, 56px, 0) rotate(7deg) scale(.94);
+}
+.focus-step.is-visible .focus-photo-mood{
+  opacity:1;
+  transform:translate3d(0, calc(var(--focus-parallax) * .65), 0) rotate(-2.5deg) scale(1);
+}
+.focus-step.is-visible .focus-photo-proposal{
+  opacity:1;
+  transform:translate3d(0, calc(var(--focus-parallax) * .5), 0) rotate(2.5deg) scale(1);
+}
+.focus-tape-clip{
+  position:absolute;
+  inset:0 -4% 0 -12%;
+  clip-path:inset(0 0 0 var(--tape-cut));
+  transform-origin:82% 42%;
+  transform:translateX(calc((1 - var(--focus-progress)) * 44px)) rotate(calc(-2deg + var(--focus-progress) * 3deg));
+  opacity:clamp(0, calc(var(--focus-progress) * 1.8), 1);
+  transition:clip-path .12s linear, opacity .12s linear, transform .12s linear;
+}
+.focus-tape-clip img{
+  width:min(760px, 124vw);
+  filter:drop-shadow(0 26px 34px rgba(24,21,18,.18));
+}
+.focus-mood{
+  min-height:480px;
+}
+.focus-advisory{
+  min-height:460px;
+}
+.focus-closing{
+  max-width:760px;
+  margin:clamp(76px, 12vw, 150px) auto 0;
+  text-align:center;
+}
+.focus-closing h3{
+  font-family:var(--serif);
+  font-size:clamp(3rem, 6vw, 6.2rem);
+  font-weight:400;
+  line-height:.94;
+  letter-spacing:-.02em;
+}
+.focus-closing .btn{
+  margin-top:28px;
+}
+.focus-scroll-note{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-top:30px;
+  color:var(--copper);
+  font-size:.72rem;
+  font-weight:760;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.focus-scroll-note::before{
+  content:"";
+  width:26px;
+  height:26px;
+  border-left:1.5px solid var(--copper);
+  border-bottom:1.5px solid var(--copper);
+  border-radius:0 0 0 22px;
+  transform:rotate(-32deg);
+}
+.focus-closing span{
+  color:rgba(24,21,18,.48);
+  font-size:.76rem;
+  font-weight:680;
+  letter-spacing:.22em;
+  text-transform:uppercase;
 }
 
 .collections{
@@ -1986,6 +2196,137 @@ h1{
   .signature-item::after{inset:10px;border-radius:17px}
   .signature-item img{width:76px;height:76px}
   .signature-item strong{font-size:1.72rem}
+  .focus-section{
+    padding:78px 22px 68px;
+    background:
+      radial-gradient(circle at 74% 12%, rgba(255,122,24,.075), transparent 220px),
+      linear-gradient(180deg, rgba(255,255,255,.38), rgba(255,255,255,0) 38%),
+      var(--paper);
+  }
+  .focus-wrap{
+    width:100%;
+    max-width:390px;
+  }
+  .focus-intro{
+    margin-bottom:26px;
+  }
+  .focus-intro .section-kicker{
+    color:var(--copper);
+    font-size:.72rem;
+    letter-spacing:.18em;
+  }
+  .focus-intro .section-kicker::before{width:28px}
+  .focus-intro p,
+  .focus-copy p{
+    font-size:.98rem;
+    line-height:1.64;
+  }
+  .focus-sequence{
+    position:relative;
+    display:block;
+    min-height:1120px;
+  }
+  .focus-step,
+  .focus-step:nth-child(even){
+    position:absolute;
+    left:0;
+    width:100%;
+    display:block;
+    min-height:0;
+  }
+  .focus-step:nth-child(even) .focus-copy,
+  .focus-step:nth-child(even) .focus-visual{
+    order:initial;
+  }
+  .focus-copy{
+    max-width:220px;
+  }
+  .focus-copy h3{
+    margin-top:18px;
+    font-size:clamp(2.55rem, 11vw, 3.75rem);
+    line-height:.98;
+    letter-spacing:-.026em;
+  }
+  .focus-copy h3::after{
+    width:28px;
+    margin-top:18px;
+  }
+  .focus-number{
+    font-size:.84rem;
+  }
+  .focus-visual{
+    position:absolute;
+    min-height:0;
+    margin:0;
+  }
+  .focus-step::after{
+    left:0;
+    right:auto;
+    width:206px;
+    bottom:-34px;
+    background:rgba(24,21,18,.13);
+  }
+  .focus-step-tape{top:8px}
+  .focus-step-mood{top:392px}
+  .focus-step-proposal{top:760px}
+  .focus-step-tape .focus-visual{
+    left:112px;
+    top:-34px;
+    width:570px;
+    height:302px;
+  }
+  .focus-tape-clip{
+    inset:0;
+    clip-path:inset(0 0 0 var(--tape-cut));
+  }
+  .focus-tape-clip img{
+    width:570px;
+    max-width:none;
+  }
+  .focus-scroll-note{
+    margin-top:26px;
+    font-size:.68rem;
+  }
+  .focus-mood{
+    left:128px;
+    top:-50px;
+    width:350px;
+    height:460px;
+  }
+  .focus-photo-mood{
+    width:330px;
+    left:0;
+    right:auto;
+    top:0;
+  }
+  .focus-advisory{
+    left:128px;
+    top:-18px;
+    width:390px;
+    height:370px;
+  }
+  .focus-photo-proposal{
+    width:385px;
+    left:-8px;
+    top:0;
+  }
+  .focus-closing{
+    margin-top:24px;
+    text-align:center;
+  }
+  .focus-closing::after{
+    content:"M";
+    display:grid;
+    place-items:center;
+    width:24px;
+    height:24px;
+    margin:18px auto 0;
+    border:1px solid rgba(24,21,18,.28);
+    border-radius:50%;
+    color:rgba(24,21,18,.42);
+    font-family:var(--brand);
+    font-size:.8rem;
+  }
   .process-grid,
   .locations,
   .catalog-grid{grid-template-columns:1fr}
@@ -2533,26 +2874,53 @@ h1{
       </div>
     </section>
 
-    <section class="section" aria-labelledby="adn-title">
-      <div class="brand-system">
-        <div class="brand-statement reveal">
-          <span class="section-kicker">ADN Maderarte</span>
-          <h2 id="adn-title">Lujo cálido, pensado para hogares reales.</h2>
-          <p>Creemos en los acabados limpios, las técnicas hechas a mano y una asesoría que no improvisa. Maderarte ha construido en Popayán una experiencia boutique confiable: procesos cuidados, materiales bien elegidos y servicio cercano antes, durante y después de cada entrega.</p>
+    <section class="section focus-section" aria-labelledby="adn-title">
+      <div class="focus-wrap">
+        <div class="focus-intro reveal">
+          <span class="section-kicker">Nuestro enfoque</span>
+          <h2 id="adn-title" class="sr-only">Nuestro enfoque Maderarte</h2>
         </div>
-        <div class="signature-board reveal">
-          <article class="signature-item">
-            <img src="icons/maderarte-signature-proporcion.png?v=signature-premium-0722" alt="">
-            <span><strong>Proporción primero</strong><span>El mueble se piensa desde tu espacio, no desde una vitrina genérica.</span></span>
+
+        <div class="focus-sequence" aria-label="Enfoque Maderarte">
+          <article class="focus-step focus-step-tape" data-focus-step>
+            <div class="focus-copy reveal">
+              <span class="focus-number">01</span>
+              <h3>Proporción primero</h3>
+              <p>El mueble se piensa desde tu espacio, no desde una vitrina genérica.</p>
+              <span class="focus-scroll-note" aria-hidden="true">Scroll reveal</span>
+            </div>
+            <div class="focus-visual focus-tape" aria-hidden="true">
+              <div class="focus-tape-clip">
+                <img src="icons/tape-measure.webp?v=photo-focus-0722" alt="" loading="lazy" decoding="async">
+              </div>
+            </div>
           </article>
-          <article class="signature-item">
-            <img src="icons/maderarte-signature-textura.png?v=signature-premium-0722" alt="">
-            <span><strong>Textura con criterio</strong><span>Telas, brillos, madera y acentos se combinan para una atmósfera coherente.</span></span>
+
+          <article class="focus-step focus-step-mood" data-focus-step>
+            <div class="focus-copy reveal">
+              <span class="focus-number">02</span>
+              <h3>Textura con criterio</h3>
+              <p>Telas, brillos, madera y acentos se combinan para una atmósfera coherente.</p>
+            </div>
+            <div class="focus-visual focus-mood" aria-hidden="true">
+              <img class="focus-photo focus-photo-mood" src="icons/material-moodboard.webp?v=photo-focus-0722" alt="" loading="lazy" decoding="async">
+            </div>
           </article>
-          <article class="signature-item">
-            <img src="icons/maderarte-signature-asesoria.png?v=signature-premium-0722" alt="">
-            <span><strong>Asesoría boutique</strong><span>Te acompañamos para elegir piezas que funcionen y envejezcan con dignidad.</span></span>
+
+          <article class="focus-step focus-step-proposal" data-focus-step>
+            <div class="focus-copy reveal">
+              <span class="focus-number">03</span>
+              <h3>Asesoría boutique</h3>
+              <p>Te acompañamos para elegir piezas que funcionen y envejezcan con dignidad.</p>
+            </div>
+            <div class="focus-visual focus-advisory" aria-hidden="true">
+              <img class="focus-photo focus-photo-proposal" src="icons/design-proposal.webp?v=photo-focus-0722" alt="" loading="lazy" decoding="async">
+            </div>
           </article>
+        </div>
+
+        <div class="focus-closing reveal">
+          <span>Desliza para descubrir</span>
         </div>
       </div>
     </section>
@@ -2871,6 +3239,33 @@ document.querySelectorAll(".reveal").forEach((el, index) => {
   el.style.setProperty("--reveal-delay", `${Math.min(delayIndex, 5) * 70}ms`);
   revealObserver.observe(el);
 });
+
+const focusSteps = document.querySelectorAll("[data-focus-step]");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function clamp(value, min = 0, max = 1){
+  return Math.min(max, Math.max(min, value));
+}
+function syncFocusSequence(){
+  focusSteps.forEach(step => {
+    if(reduceMotion){
+      step.classList.add("is-visible");
+      step.style.setProperty("--focus-progress", "1");
+      step.style.setProperty("--tape-cut", "0%");
+      step.style.setProperty("--focus-parallax", "0px");
+      return;
+    }
+    const rect = step.getBoundingClientRect();
+    const viewport = window.innerHeight || document.documentElement.clientHeight;
+    const progress = clamp((viewport * .86 - rect.top) / (rect.height + viewport * .42));
+    step.style.setProperty("--focus-progress", progress.toFixed(3));
+    step.style.setProperty("--tape-cut", `${Math.max(0, 58 - progress * 58).toFixed(2)}%`);
+    step.style.setProperty("--focus-parallax", `${((.5 - progress) * 18).toFixed(2)}px`);
+    if(progress > .12) step.classList.add("is-visible");
+  });
+}
+window.addEventListener("scroll", syncFocusSequence, { passive:true });
+window.addEventListener("resize", syncFocusSequence);
+syncFocusSequence();
 
 const navObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {

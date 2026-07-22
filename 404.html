@@ -540,8 +540,13 @@ h1{
 }
 .focus-step{
   --focus-progress:.02;
+  --focus-opacity:0;
   --focus-parallax:0px;
+  --focus-parallax-soft:0px;
+  --focus-parallax-light:0px;
   --tape-cut:58%;
+  --tape-x:44px;
+  --tape-rotate:-2deg;
   position:relative;
   display:grid;
   grid-template-columns:minmax(260px, .75fr) minmax(0, 1.08fr);
@@ -632,21 +637,44 @@ h1{
   top:10px;
   transform:translate3d(-6px, 56px, 0) rotate(7deg) scale(.94);
 }
-.focus-step.is-visible .focus-photo-mood{
-  opacity:1;
-  transform:translate3d(0, calc(var(--focus-parallax) * .65), 0) rotate(-2.5deg) scale(1);
-}
 .focus-step.is-visible .focus-photo-proposal{
   opacity:1;
-  transform:translate3d(0, calc(var(--focus-parallax) * .5), 0) rotate(2.5deg) scale(1);
+  transform:translate3d(0, var(--focus-parallax-light), 0) rotate(2.5deg) scale(1);
 }
+.focus-step.is-visible .focus-photo-mood{
+  opacity:1;
+  transform:translate3d(0, var(--focus-parallax-soft), 0) rotate(-2.5deg) scale(1);
+}
+.focus-piece{
+  position:absolute;
+  display:block;
+  max-width:none;
+  opacity:0;
+  filter:drop-shadow(0 26px 30px rgba(24,21,18,.16));
+  transition:
+    opacity .82s var(--ease-lux),
+    transform .92s var(--ease-lux),
+    filter .92s var(--ease-lux);
+  transition-delay:var(--piece-delay, 0ms);
+  transform:translate3d(var(--piece-start-x, 0), var(--piece-start-y, 26px), 0) rotate(var(--piece-start-rotate, 0deg)) scale(.92);
+}
+.focus-step.is-visible .focus-piece{
+  opacity:1;
+  transform:translate3d(var(--piece-x, 0), calc(var(--piece-y, 0px) + var(--focus-parallax-soft)), 0) rotate(var(--piece-rotate, 0deg)) scale(1);
+}
+.mood-boucle{width:250px;left:86px;top:18px;--piece-x:0px;--piece-y:0px;--piece-rotate:-8deg;--piece-start-x:-34px;--piece-start-y:50px;--piece-start-rotate:-16deg;--piece-delay:0ms}
+.mood-linen{width:220px;left:262px;top:24px;--piece-x:0px;--piece-y:0px;--piece-rotate:7deg;--piece-start-x:-72px;--piece-start-y:34px;--piece-start-rotate:0deg;--piece-delay:90ms}
+.mood-dark{width:226px;left:108px;top:214px;--piece-x:0px;--piece-y:0px;--piece-rotate:-12deg;--piece-start-x:24px;--piece-start-y:-24px;--piece-start-rotate:-4deg;--piece-delay:180ms}
+.mood-wood-light{width:232px;left:338px;top:196px;--piece-x:0px;--piece-y:0px;--piece-rotate:8deg;--piece-start-x:-60px;--piece-start-y:-12px;--piece-start-rotate:2deg;--piece-delay:270ms}
+.mood-wood-dark{width:238px;left:246px;top:316px;--piece-x:0px;--piece-y:0px;--piece-rotate:8deg;--piece-start-x:-28px;--piece-start-y:-34px;--piece-start-rotate:0deg;--piece-delay:360ms}
+.mood-metal{width:128px;left:478px;top:392px;--piece-x:0px;--piece-y:0px;--piece-rotate:10deg;--piece-start-x:-34px;--piece-start-y:-44px;--piece-start-rotate:0deg;--piece-delay:450ms}
 .focus-tape-clip{
   position:absolute;
   inset:0 -4% 0 -12%;
   clip-path:inset(0 0 0 var(--tape-cut));
   transform-origin:82% 42%;
-  transform:translateX(calc((1 - var(--focus-progress)) * 44px)) rotate(calc(-2deg + var(--focus-progress) * 3deg));
-  opacity:clamp(0, calc(var(--focus-progress) * 1.8), 1);
+  transform:translateX(var(--tape-x)) rotate(var(--tape-rotate));
+  opacity:var(--focus-opacity);
   transition:clip-path .12s linear, opacity .12s linear, transform .12s linear;
 }
 .focus-tape-clip img{
@@ -695,11 +723,34 @@ h1{
   transform:rotate(-32deg);
 }
 .focus-closing span{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding-bottom:22px;
   color:rgba(24,21,18,.48);
   font-size:.76rem;
   font-weight:680;
   letter-spacing:.22em;
   text-transform:uppercase;
+}
+.focus-closing span::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:7px;
+  height:7px;
+  border-radius:999px;
+  background:var(--copper);
+  box-shadow:0 0 0 1px rgba(255,122,24,.22), 0 9px 16px rgba(255,122,24,.2);
+  animation:discover-pulse 2.6s var(--ease-lux) infinite;
+}
+@keyframes discover-pulse{
+  0%{transform:translateX(-68px);opacity:0}
+  16%{opacity:1}
+  72%{transform:translateX(68px);opacity:1}
+  100%{transform:translateX(68px);opacity:0}
 }
 
 .collections{
@@ -2283,24 +2334,20 @@ h1{
     width:570px;
     max-width:none;
   }
-  .focus-scroll-note{
-    margin-top:26px;
-    font-size:.68rem;
-  }
   .focus-mood{
-    left:128px;
-    top:-50px;
+    left:162px;
+    top:-34px;
     width:350px;
     height:460px;
   }
   .focus-photo-mood{
-    width:330px;
+    width:315px;
     left:0;
     right:auto;
     top:0;
   }
   .focus-advisory{
-    left:128px;
+    left:144px;
     top:-18px;
     width:390px;
     height:370px;
@@ -2887,7 +2934,6 @@ h1{
               <span class="focus-number">01</span>
               <h3>Proporción primero</h3>
               <p>El mueble se piensa desde tu espacio, no desde una vitrina genérica.</p>
-              <span class="focus-scroll-note" aria-hidden="true">Scroll reveal</span>
             </div>
             <div class="focus-visual focus-tape" aria-hidden="true">
               <div class="focus-tape-clip">
@@ -2903,7 +2949,7 @@ h1{
               <p>Telas, brillos, madera y acentos se combinan para una atmósfera coherente.</p>
             </div>
             <div class="focus-visual focus-mood" aria-hidden="true">
-              <img class="focus-photo focus-photo-mood" src="icons/material-moodboard.webp?v=photo-focus-0722" alt="" loading="lazy" decoding="async">
+              <img class="focus-photo focus-photo-mood" src="icons/material-moodboard.webp?v=photo-focus-0722b" alt="" loading="lazy" decoding="async">
             </div>
           </article>
 
@@ -3242,7 +3288,7 @@ document.querySelectorAll(".reveal").forEach((el, index) => {
 
 const focusSteps = document.querySelectorAll("[data-focus-step]");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-function clamp(value, min = 0, max = 1){
+function clampFocus(value, min = 0, max = 1){
   return Math.min(max, Math.max(min, value));
 }
 function syncFocusSequence(){
@@ -3250,16 +3296,27 @@ function syncFocusSequence(){
     if(reduceMotion){
       step.classList.add("is-visible");
       step.style.setProperty("--focus-progress", "1");
+      step.style.setProperty("--focus-opacity", "1");
       step.style.setProperty("--tape-cut", "0%");
+      step.style.setProperty("--tape-x", "0px");
+      step.style.setProperty("--tape-rotate", "1deg");
       step.style.setProperty("--focus-parallax", "0px");
+      step.style.setProperty("--focus-parallax-soft", "0px");
+      step.style.setProperty("--focus-parallax-light", "0px");
       return;
     }
     const rect = step.getBoundingClientRect();
     const viewport = window.innerHeight || document.documentElement.clientHeight;
-    const progress = clamp((viewport * .86 - rect.top) / (rect.height + viewport * .42));
+    const progress = clampFocus((viewport * .86 - rect.top) / (rect.height + viewport * .42));
+    const parallax = (.5 - progress) * 18;
     step.style.setProperty("--focus-progress", progress.toFixed(3));
+    step.style.setProperty("--focus-opacity", Math.min(1, progress * 1.8).toFixed(3));
     step.style.setProperty("--tape-cut", `${Math.max(0, 58 - progress * 58).toFixed(2)}%`);
-    step.style.setProperty("--focus-parallax", `${((.5 - progress) * 18).toFixed(2)}px`);
+    step.style.setProperty("--tape-x", `${((1 - progress) * 44).toFixed(2)}px`);
+    step.style.setProperty("--tape-rotate", `${(-2 + progress * 3).toFixed(2)}deg`);
+    step.style.setProperty("--focus-parallax", `${parallax.toFixed(2)}px`);
+    step.style.setProperty("--focus-parallax-soft", `${(parallax * .65).toFixed(2)}px`);
+    step.style.setProperty("--focus-parallax-light", `${(parallax * .5).toFixed(2)}px`);
     if(progress > .12) step.classList.add("is-visible");
   });
 }

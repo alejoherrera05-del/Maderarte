@@ -622,7 +622,7 @@ h1{
   position:absolute;
   display:block;
   max-width:none;
-  opacity:0;
+  opacity:var(--focus-asset-opacity, 0);
   filter:drop-shadow(0 24px 26px rgba(24,21,18,.11));
   transition:opacity .9s var(--ease-lux), transform .9s var(--ease-lux), filter .9s var(--ease-lux);
 }
@@ -639,11 +639,11 @@ h1{
   transform:translate3d(-6px, 56px, 0) rotate(7deg) scale(.94);
 }
 .focus-step.is-visible .focus-photo-proposal{
-  opacity:1;
+  opacity:var(--focus-asset-opacity, 1);
   transform:translate3d(0, var(--focus-parallax-light), 0) rotate(2.5deg) scale(1);
 }
 .focus-step.is-visible .focus-photo-mood{
-  opacity:1;
+  opacity:var(--focus-asset-opacity, 1);
   transform:translate3d(0, var(--focus-parallax-soft), 0) rotate(-2.5deg) scale(1);
 }
 .focus-piece{
@@ -728,30 +728,32 @@ h1{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding-bottom:22px;
+  gap:16px;
+  padding-bottom:0;
   color:rgba(24,21,18,.48);
   font-size:.76rem;
   font-weight:680;
   letter-spacing:.22em;
   text-transform:uppercase;
 }
+.focus-closing span::before{
+  content:"";
+  width:54px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(24,21,18,.25), transparent);
+}
 .focus-closing span::after{
   content:"";
-  position:absolute;
-  left:50%;
-  bottom:0;
-  width:7px;
-  height:7px;
+  width:6px;
+  height:6px;
   border-radius:999px;
   background:var(--copper);
-  box-shadow:0 0 0 1px rgba(255,122,24,.22), 0 9px 16px rgba(255,122,24,.2);
-  animation:discover-pulse 2.6s var(--ease-lux) infinite;
+  box-shadow:0 0 0 5px rgba(255,122,24,.08);
+  animation:discover-breathe 2.8s var(--ease-lux) infinite;
 }
-@keyframes discover-pulse{
-  0%{transform:translateX(-68px);opacity:0}
-  16%{opacity:1}
-  72%{transform:translateX(68px);opacity:1}
-  100%{transform:translateX(68px);opacity:0}
+@keyframes discover-breathe{
+  0%,100%{transform:scale(.72);opacity:.42}
+  45%,58%{transform:scale(1);opacity:1}
 }
 
 .collections{
@@ -3302,6 +3304,7 @@ function syncFocusSequence(){
       step.classList.add("is-visible");
       step.style.setProperty("--focus-progress", "1");
       step.style.setProperty("--focus-opacity", "1");
+      step.style.setProperty("--focus-asset-opacity", "1");
       step.style.setProperty("--tape-cut", "0%");
       step.style.setProperty("--tape-x", "0px");
       step.style.setProperty("--tape-rotate", "1deg");
@@ -3312,17 +3315,22 @@ function syncFocusSequence(){
     }
     const rect = step.getBoundingClientRect();
     const viewport = window.innerHeight || document.documentElement.clientHeight;
-    const progress = clampFocus((viewport * .86 - rect.top) / (rect.height + viewport * .42));
+    const isMobileFocus = window.matchMedia("(max-width:700px)").matches;
+    const triggerLine = isMobileFocus ? viewport * .5 : viewport * .86;
+    const travel = rect.height + viewport * (isMobileFocus ? .2 : .42);
+    const progress = clampFocus((triggerLine - rect.top) / travel);
+    const assetOpacity = isMobileFocus ? clampFocus((progress - .08) / .34) : Math.min(1, progress * 1.8);
     const parallax = (.5 - progress) * 18;
     step.style.setProperty("--focus-progress", progress.toFixed(3));
     step.style.setProperty("--focus-opacity", Math.min(1, progress * 1.8).toFixed(3));
+    step.style.setProperty("--focus-asset-opacity", assetOpacity.toFixed(3));
     step.style.setProperty("--tape-cut", `${Math.max(0, 58 - progress * 58).toFixed(2)}%`);
     step.style.setProperty("--tape-x", `${((1 - progress) * 44).toFixed(2)}px`);
     step.style.setProperty("--tape-rotate", `${(-2 + progress * 3).toFixed(2)}deg`);
     step.style.setProperty("--focus-parallax", `${parallax.toFixed(2)}px`);
     step.style.setProperty("--focus-parallax-soft", `${(parallax * .65).toFixed(2)}px`);
     step.style.setProperty("--focus-parallax-light", `${(parallax * .5).toFixed(2)}px`);
-    if(progress > .12) step.classList.add("is-visible");
+    if(progress > (isMobileFocus ? .08 : .12)) step.classList.add("is-visible");
   });
 }
 window.addEventListener("scroll", syncFocusSequence, { passive:true });

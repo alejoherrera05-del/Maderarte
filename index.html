@@ -3,13 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>MADERARTE | Showroom boutique de mobiliario</title>
-<meta name="description" content="MADERARTE diseña salas, comedores, alcobas, sofá camas y mobiliario junior con asesoría boutique, oficio local y lujo urbano en Popayán.">
+<title>Maderarte</title>
+<meta name="description" content="Maderarte es un showroom boutique de muebles en Popayán: salas, comedores, alcobas, sofá camas, mobiliario junior, decoración y asesoría personalizada.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="keywords" content="muebles Popayán, mueblería Popayán, salas Popayán, comedores Popayán, alcobas Popayán, sofás Popayán, Maderarte Popayán, mobiliario de lujo Popayán">
+<link rel="canonical" href="https://maderartepopayan.com/">
+<link rel="icon" type="image/png" href="https://maderartepopayan.com/logomaderarte2026.png">
+<link rel="apple-touch-icon" href="https://maderartepopayan.com/logomaderarte2026.png">
 <meta name="theme-color" content="#181512">
-<meta property="og:title" content="MADERARTE | Mobiliario de lujo">
-<meta property="og:description" content="Showroom boutique de mobiliario, diseño cálido y asesoría personalizada en Popayán.">
+<meta property="og:title" content="Maderarte | Muebles en Popayán">
+<meta property="og:description" content="Showroom boutique de mobiliario, diseño cálido y asesoría personalizada en Popayán. Salas, comedores, alcobas, sofá camas y decoración.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="Portada.png">
+<meta property="og:url" content="https://maderartepopayan.com/">
+<meta property="og:site_name" content="Maderarte">
+<meta property="og:locale" content="es_CO">
+<meta property="og:image" content="https://maderartepopayan.com/Portada.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Maderarte | Muebles en Popayán">
+<meta name="twitter:description" content="Muebles, decoración y asesoría boutique para hogares en Popayán.">
+<meta name="twitter:image" content="https://maderartepopayan.com/Portada.png">
+<meta name="geo.region" content="CO-CAU">
+<meta name="geo.placename" content="Popayán, Cauca, Colombia">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FurnitureStore",
+  "name":"Maderarte",
+  "alternateName":"Maderarte Popayán",
+  "url":"https://maderartepopayan.com/",
+  "logo":"https://maderartepopayan.com/logomaderarte2026.png",
+  "image":"https://maderartepopayan.com/Portada.png",
+  "description":"Showroom boutique de muebles en Popayán con salas, comedores, alcobas, sofá camas, mobiliario junior, decoración y asesoría personalizada.",
+  "telephone":"+573117476465",
+  "address":{
+    "@type":"PostalAddress",
+    "addressLocality":"Popayán",
+    "addressRegion":"Cauca",
+    "addressCountry":"CO"
+  },
+  "areaServed":{
+    "@type":"City",
+    "name":"Popayán"
+  },
+  "sameAs":[
+    "https://instagram.com/maderartepopayan"
+  ],
+  "knowsAbout":[
+    "muebles en Popayán",
+    "salas",
+    "comedores",
+    "alcobas",
+    "sofá camas",
+    "decoración de interiores",
+    "mobiliario a medida"
+  ]
+}
+</script>
 <style>
 @font-face{
   font-family:"Maderarte Algerian";
@@ -2211,6 +2260,52 @@ function escapeHTML(value){
   }[char]));
 }
 
+function cleanPathname(){
+  const path = window.location.pathname || "/";
+  return path.endsWith("/index.html") ? path.slice(0, -10) || "/" : path;
+}
+
+const sectionRoutes = {
+  inicio: "/",
+  colecciones: "/colecciones",
+  catalogo: "/catalogo",
+  proceso: "/proceso",
+  historia: "/historia",
+  contacto: "/contacto"
+};
+
+const routeSections = Object.fromEntries(Object.entries(sectionRoutes).map(([key, value]) => [value, key]));
+
+function sectionPath(sectionId = "inicio"){
+  return sectionRoutes[sectionId] || sectionRoutes.inicio;
+}
+
+function sectionFromPath(){
+  const path = cleanPathname().replace(/\/$/, "") || "/";
+  return routeSections[path] || "inicio";
+}
+
+function cleanSectionUrl(sectionId = "inicio", options = {}){
+  const url = new URL(window.location.href);
+  url.pathname = sectionPath(sectionId);
+  url.search = "";
+  if(options.keepPrices && showPrices){
+    url.searchParams.set("precios", PRICE_ACCESS_KEY);
+  }
+  url.hash = "";
+  history.replaceState(null, "", url);
+}
+
+function productShareUrl(product){
+  const url = new URL(window.location.href);
+  url.pathname = sectionPath("catalogo");
+  url.hash = "";
+  url.search = "";
+  url.searchParams.set("producto", product.id);
+  if(showPrices) url.searchParams.set("precios", PRICE_ACCESS_KEY);
+  return url;
+}
+
 function readableValue(value){
   if(value == null) return "";
   if(typeof value === "object"){
@@ -2295,10 +2390,7 @@ function whatsappLink(product){
   const variantLine = showPrices && activeVariantLabel ? `\nTamaño elegido: ${activeVariantLabel}` : "";
   const priceValue = activeVariantPrice || product.precio;
   const priceLine = showPrices && priceValue ? `\nPrecio de referencia: ${formatCOP(priceValue)}` : "";
-  const productUrl = new URL(window.location.href);
-  productUrl.hash = "catalogo";
-  productUrl.searchParams.set("producto", product.id);
-  if(showPrices) productUrl.searchParams.set("precios", PRICE_ACCESS_KEY);
+  const productUrl = productShareUrl(product);
   const message = `Hola MADERARTE. Quiero asesoría sobre este producto:\n\n${product.nombre}\nCategoría: ${category}${variantLine}${priceLine}\n\nEnlace: ${productUrl.toString()}`;
   return "https://wa.me/573117476465?text=" + encodeURIComponent(message);
 }
@@ -2418,11 +2510,7 @@ function openProduct(id){
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-  const productUrl = new URL(window.location.href);
-  productUrl.hash = "catalogo";
-  productUrl.searchParams.set("producto", product.id);
-  if(showPrices) productUrl.searchParams.set("precios", PRICE_ACCESS_KEY);
-  history.replaceState(null, "", productUrl);
+  history.replaceState(null, "", productShareUrl(product));
 }
 
 function closeProduct(){
@@ -2431,6 +2519,7 @@ function closeProduct(){
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
+  cleanSectionUrl("catalogo", { keepPrices: showPrices });
 }
 
 function selectVariant(label, price, button){
@@ -2511,10 +2600,7 @@ function toggleImageZoom(){
 
 async function copyProductLink(){
   if(!activeDialogProduct) return;
-  const url = new URL(window.location.href);
-  url.hash = "catalogo";
-  url.searchParams.set("producto", activeDialogProduct.id);
-  if(showPrices) url.searchParams.set("precios", PRICE_ACCESS_KEY);
+  const url = productShareUrl(activeDialogProduct);
   try{
     await navigator.clipboard.writeText(url.toString());
     document.getElementById("dialog-copy-link").textContent = "Enlace copiado";
@@ -2526,6 +2612,20 @@ async function copyProductLink(){
 
 async function initCatalog(){
   setCatalogMode();
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    if(link.matches("[data-open-catalog]")) return;
+    link.addEventListener("click", event => {
+      const sectionId = link.getAttribute("href").replace("#", "") || "inicio";
+      const section = document.getElementById(sectionId);
+      if(!section) return;
+      event.preventDefault();
+      if(document.getElementById("catalog-modal")?.classList.contains("open")) closeProduct();
+      document.body.classList.remove("menu-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      section.scrollIntoView({ behavior:"smooth", block:"start" });
+      cleanSectionUrl(sectionId, { keepPrices: showPrices && sectionId === "catalogo" });
+    });
+  });
   document.querySelectorAll("[data-catalog-filter]").forEach(button => {
     button.addEventListener("click", () => {
       activeCatalogFilter = button.dataset.catalogFilter;
@@ -2542,6 +2642,7 @@ async function initCatalog(){
       });
       renderCatalog();
       document.getElementById("catalogo")?.scrollIntoView({ behavior:"smooth", block:"start" });
+      cleanSectionUrl("catalogo", { keepPrices: showPrices });
     });
   });
   document.querySelectorAll("[data-open-catalog-card]").forEach(card => {
@@ -2552,6 +2653,7 @@ async function initCatalog(){
       });
       renderCatalog();
       document.getElementById("catalogo")?.scrollIntoView({ behavior:"smooth", block:"start" });
+      cleanSectionUrl("catalogo", { keepPrices: showPrices });
     };
     card.addEventListener("click", event => {
       if(event.target.closest("a")) return;
@@ -2608,6 +2710,12 @@ async function initCatalog(){
   const productId = params.get("producto");
   if(productId){
     setTimeout(() => openProduct(productId), 400);
+  }else{
+    const sectionId = sectionFromPath();
+    const section = document.getElementById(sectionId);
+    if(sectionId !== "inicio" && section){
+      setTimeout(() => section.scrollIntoView({ behavior:"auto", block:"start" }), 80);
+    }
   }
 }
 initCatalog();

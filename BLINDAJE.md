@@ -40,6 +40,20 @@ La prueba valida:
 
 Si la prueba dice `BLINDAJE FALLIDO`, no se debe publicar hasta corregirlo.
 
+## Comando recomendado antes de publicar
+
+```powershell
+.\tools\prepublish-check.ps1
+```
+
+Este comando sincroniza rutas y ejecuta el blindaje en una sola pasada.
+
+Si Windows bloquea scripts, usar:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\prepublish-check.ps1
+```
+
 ## Regla practica
 
 Cambios esteticos: libres.

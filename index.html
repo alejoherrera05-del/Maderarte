@@ -159,10 +159,24 @@ body:not(.at-hero) .site-header{
   object-fit:contain;
   filter:drop-shadow(0 14px 22px rgba(0,0,0,.18));
 }
-.brand span{
+.brand-text > span{
   font-family:var(--brand);
   font-size:1.18rem;
   letter-spacing:.08em;
+}
+.brand-text{
+  display:grid;
+  gap:2px;
+  min-width:0;
+}
+.brand-text small{
+  color:currentColor;
+  opacity:.68;
+  font-size:.58rem;
+  font-weight:720;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  white-space:nowrap;
 }
 .nav{
   display:flex;
@@ -1698,6 +1712,7 @@ h1{
   }
   body.menu-open .nav{display:flex}
   .menu-toggle{
+    position:relative;
     width:42px;
     height:42px;
     display:grid;
@@ -1737,36 +1752,291 @@ h1{
   .warranty-seal{position:static}
 }
 @media (max-width:680px){
-  .site-header{padding:12px 16px;min-height:70px}
+  html{scroll-padding-top:88px}
+  main section[id]{scroll-margin-top:88px}
+  .site-header{
+    top:10px;
+    left:12px;
+    right:12px;
+    min-height:58px;
+    padding:8px 10px 8px 12px;
+    border-radius:30px;
+    gap:10px;
+  }
+  .brand{gap:10px}
   .brand img{width:38px;height:38px}
-  .brand span{font-size:1.1rem}
-  .nav{inset:70px 0 auto 0}
-  .hero-content{padding:120px 18px 42px}
-  h1{font-size:clamp(3.4rem, 15vw, 5.2rem)}
-  .hero-actions{display:grid}
-  .btn{width:100%;padding-inline:18px;text-align:center}
-  .section{padding:76px 18px}
+  .brand-text > span{font-size:1.18rem;letter-spacing:.075em}
+  .brand-text small{font-size:.5rem;letter-spacing:.13em}
+  .menu-toggle{
+    width:42px;
+    height:42px;
+    flex:0 0 42px;
+    border-radius:50%;
+    font-size:0;
+    background:linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08));
+  }
+  .menu-toggle::before,
+  .menu-toggle::after{
+    content:"";
+    width:18px;
+    height:1.5px;
+    background:currentColor;
+    border-radius:999px;
+    box-shadow:0 6px 0 currentColor;
+    transition:transform .24s var(--ease), box-shadow .24s var(--ease);
+  }
+  .menu-toggle::after{display:none}
+  body.menu-open .menu-toggle::before{
+    transform:translateY(3px) rotate(45deg);
+    box-shadow:0 0 0 currentColor;
+  }
+  body.menu-open .menu-toggle::after{
+    display:block;
+    position:absolute;
+    transform:rotate(-45deg);
+  }
+  .nav{
+    inset:78px 12px auto 12px;
+    border:1px solid rgba(255,255,255,.52);
+    border-radius:26px;
+    padding:18px;
+    gap:0;
+  }
+  .nav a{
+    width:100%;
+    padding:16px 4px;
+    border-bottom:1px solid rgba(24,21,18,.1);
+    font-size:.76rem;
+  }
+  .nav a:last-child{border-bottom:0}
+  .hero{
+    min-height:92svh;
+  }
+  .hero-media{
+    background-position:60% center;
+    transform:scale(1.015);
+  }
+  .hero::after{
+    background:
+      linear-gradient(90deg, rgba(13,10,8,.58), rgba(13,10,8,.22) 60%, transparent),
+      linear-gradient(0deg, rgba(13,10,8,.58), transparent 58%);
+  }
+  .hero-content{
+    min-height:92svh;
+    align-items:end;
+    padding:96px 18px max(30px, calc(env(safe-area-inset-bottom) + 24px));
+  }
+  .hero-kicker{font-size:.62rem;letter-spacing:.16em}
+  h1{font-size:clamp(3rem, 13vw, 4.45rem);line-height:.94;max-width:94vw}
+  .hero-lead{margin-top:18px;font-size:.98rem;line-height:1.58;max-width:92vw}
+  .hero-actions{
+    display:grid;
+    gap:10px;
+    margin-top:22px;
+  }
+  .btn{width:100%;min-height:50px;padding-inline:18px;text-align:center}
+  .section{padding:68px 18px}
   .section-head h2,
   .contact h2{font-size:clamp(3rem, 13vw, 4.8rem)}
+  .section-head{
+    gap:20px;
+    padding-bottom:28px;
+    margin-bottom:34px;
+  }
   .signature-item{grid-template-columns:58px 1fr;padding:20px}
   .signature-item img{width:50px;height:50px}
   .process-grid,
-  .metrics,
   .locations,
   .catalog-grid{grid-template-columns:1fr}
-  .collection-flow{grid-template-columns:1fr}
+  .collection-flow{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding:2px 18px 18px;
+    margin-left:-18px;
+    margin-right:-18px;
+    scrollbar-width:none;
+  }
+  .collection-flow::-webkit-scrollbar{display:none}
   .catalog-toolbar{margin-top:-18px}
   .catalog-share{width:100%}
-  .catalog-chip{flex:1 1 auto}
-  .catalog-dialog{max-height:92vh;border-radius:22px}
-  .catalog-dialog-media{height:auto;min-height:280px}
-  .catalog-dialog-copy{padding:26px 20px}
-  .collection-scene{min-height:340px}
+  .catalog-chip{
+    flex:1 1 auto;
+    min-height:38px;
+    padding:0 12px;
+    font-size:.64rem;
+  }
+  .catalog-grid{
+    gap:12px;
+  }
+  .product-card{
+    grid-template-columns:124px minmax(0,1fr);
+    align-items:stretch;
+    min-height:154px;
+    border-radius:18px;
+  }
+  .product-media{
+    aspect-ratio:auto;
+    height:100%;
+    min-height:154px;
+  }
+  .product-media img{object-fit:cover}
+  .product-count{
+    right:8px;
+    bottom:8px;
+    min-height:26px;
+    padding:0 8px;
+    font-size:.58rem;
+  }
+  .product-fav{
+    left:8px;
+    bottom:8px;
+    width:28px;
+    height:28px;
+    font-size:.88rem;
+  }
+  .product-body{padding:14px 14px 12px}
+  .product-eyebrow{font-size:.58rem;letter-spacing:.13em}
+  .product-body h3{font-size:1.55rem;line-height:1.02;margin-top:6px}
+  .product-body p{
+    -webkit-line-clamp:2;
+    min-height:auto;
+    margin-top:8px;
+    font-size:.84rem;
+    line-height:1.45;
+  }
+  .product-meta{display:none}
+  .product-price{
+    margin-top:10px;
+    padding:8px 10px;
+    border-radius:14px;
+    font-size:.54rem;
+  }
+  .product-price strong{font-size:.82rem;margin-top:4px}
+  .catalog-dialog{
+    width:100%;
+    max-height:calc(100svh - 18px);
+    border-radius:22px;
+  }
+  .catalog-dialog-media{
+    height:38svh;
+    min-height:230px;
+    margin:14px 14px 0;
+    border-radius:20px;
+  }
+  .catalog-dialog-copy{padding:24px 20px calc(env(safe-area-inset-bottom) + 28px)}
+  .catalog-dialog-copy h3{font-size:clamp(2.25rem, 11vw, 3.35rem)}
+  .catalog-close{
+    top:14px;
+    right:14px;
+    width:40px;
+    height:40px;
+  }
+  .dialog-gallery{grid-template-columns:repeat(4, 1fr)}
+  .collection-scene{
+    flex:0 0 min(82vw, 340px);
+    min-height:274px;
+    scroll-snap-align:start;
+    border-radius:22px;
+  }
   .collection-image{display:none}
-  .collection-copy{min-height:340px;padding:28px 22px 32px}
-  .collection-icon{width:190px;height:116px;margin-bottom:22px}
+  .collection-copy{
+    min-height:274px;
+    padding:24px 22px 22px;
+  }
+  .collection-icon{
+    width:150px;
+    height:86px;
+    margin:0 0 18px;
+    object-position:left center;
+  }
+  .collection-copy small{font-size:.62rem;letter-spacing:.14em}
+  .collection-copy h3{font-size:2.35rem}
+  .collection-copy p{
+    margin-top:10px;
+    font-size:.92rem;
+    line-height:1.5;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .collection-link{
+    margin-top:18px;
+    padding:9px 12px;
+    font-size:.62rem;
+  }
+  .metrics{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    border:0;
+  }
+  .metric{
+    min-height:112px;
+    padding:18px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:18px;
+    background:rgba(255,255,255,.035);
+  }
+  .metric strong{font-size:2.45rem}
+  .metric span{
+    font-size:.62rem;
+    letter-spacing:.13em;
+    line-height:1.35;
+  }
+  .story h2{font-size:clamp(3rem, 12vw, 4.25rem)}
+  .story-media img{max-height:none}
   .warranty-item{grid-template-columns:1fr;gap:8px}
   .footer-inner{display:grid}
+  .image-lightbox{
+    padding:0;
+    background:#050505;
+    backdrop-filter:none;
+  }
+  .image-lightbox img{
+    width:100vw;
+    height:100svh;
+    max-width:100vw;
+    max-height:100svh;
+    object-fit:contain;
+  }
+  .image-lightbox-close{
+    top:max(12px, env(safe-area-inset-top));
+    right:12px;
+    width:42px;
+    height:42px;
+    background:rgba(22,22,22,.64);
+  }
+  .image-lightbox-nav{
+    width:44px;
+    height:44px;
+    background:rgba(22,22,22,.58);
+  }
+  .image-lightbox-nav.prev{left:10px}
+  .image-lightbox-nav.next{right:10px}
+  .image-lightbox-count{
+    bottom:max(12px, env(safe-area-inset-bottom));
+    background:rgba(22,22,22,.58);
+  }
+}
+@media (max-width:900px) and (orientation:landscape){
+  .image-lightbox{
+    padding:0;
+    background:#000;
+    backdrop-filter:none;
+  }
+  .image-lightbox img{
+    width:100dvw;
+    height:100dvh;
+    max-width:100dvw;
+    max-height:100dvh;
+    object-fit:contain;
+  }
+  .image-lightbox-close{top:10px;right:10px}
+  .image-lightbox-count{bottom:10px}
+  .image-lightbox-nav.prev{left:10px}
+  .image-lightbox-nav.next{right:10px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -1778,7 +2048,7 @@ h1{
   <header class="site-header" id="site-header">
     <a class="brand" href="#inicio" aria-label="Ir al inicio">
       <img src="logomaderarte2026.png" alt="">
-      <span>MADERARTE</span>
+      <span class="brand-text"><span>MADERARTE</span><small>Muebles en Popayán</small></span>
     </a>
     <nav class="nav" id="main-nav" aria-label="Navegación principal">
       <a href="#inicio">Inicio</a>
@@ -1798,7 +2068,7 @@ h1{
         <div class="reveal visible">
           <span class="hero-kicker">Lujo urbano · diseño boutique</span>
           <h1>Diseño sereno para casas con carácter.</h1>
-          <p class="hero-lead">Mobiliario a medida, texturas cálidas e inspiración italiana, acompañado uno a uno por un equipo local que entiende cómo quieres vivir tu casa.</p>
+          <p class="hero-lead">Mobiliario a medida en Popayán, texturas cálidas e inspiración italiana, acompañado uno a uno por un equipo local que entiende cómo quieres vivir tu casa.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#colecciones">Ver ambientes</a>
             <a class="btn btn-light" href="https://wa.me/573117476465?text=Hola,%20MADERARTE.%20Quiero%20agendar%20una%20asesor%C3%ADa%20de%20dise%C3%B1o." target="_blank" rel="noopener">Hablar con asesor</a>
@@ -1838,7 +2108,7 @@ h1{
             <span class="section-kicker">Colecciones</span>
             <h2 id="collections-title">Elige el ambiente; luego mira las piezas reales.</h2>
           </div>
-          <p>Esta primera vista organiza la casa por intención: recibir, compartir, descansar, transformar o crecer. Abajo encuentras el catálogo vivo con productos reales de cada línea.</p>
+          <p>Elige primero el ambiente que quieres crear en tu casa. Abajo encuentras el catálogo vivo con productos reales de Maderarte en Popayán, listos para asesoría personalizada.</p>
         </div>
         <div class="collection-flow">
           <article class="collection-scene reveal" data-open-catalog-card="salas" tabindex="0" role="button" aria-label="Ver productos de salas">

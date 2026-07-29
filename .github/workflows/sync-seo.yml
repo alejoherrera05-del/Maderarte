@@ -1,0 +1,41 @@
+name: Sincronizar catalogo SEO
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - data/productos-publicos.json
+      - tools/build-seo-pages.mjs
+      - tools/validate-seo.mjs
+      - tools/guardrails.js
+      - tools/sync-routes.ps1
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: ${{ !contains(github.event.head_commit.message, '[skip seo]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generar rutas, metadatos y sitemap
+        run: node tools/build-seo-pages.mjs
+      - name: Validar metadatos, datos estructurados y sitemap
+        run: node tools/validate-seo.mjs
+      - name: Verificar contratos esenciales
+        run: node tools/guardrails.js
+      - name: Guardar paginas generadas
+        run: |
+          git config user.name "Maderarte SEO"
+          git config user.email "actions@users.noreply.github.com"
+          git add 404.html catalogo colecciones proceso historia contacto inicio sitemap.xml llms.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "Actualizar catalogo indexable [skip seo]"
+            git push
+          fi

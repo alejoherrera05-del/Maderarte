@@ -30,10 +30,13 @@ function readJson(relativePath) {
   }
 }
 
-function sameFile(a, b) {
-  const left = fs.readFileSync(path.join(root, a), "utf8");
-  const right = fs.readFileSync(path.join(root, b), "utf8");
-  return left === right;
+function slugify(value) {
+  return String(value || "pieza")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function checkStaticFiles() {
@@ -41,6 +44,9 @@ function checkStaticFiles() {
     "index.html",
     "404.html",
     "admin.html",
+    "sitemap.xml",
+    "robots.txt",
+    "llms.txt",
     "data/productos.json",
     "data/productos-publicos.json",
     "logomaderarte2026.png",
@@ -72,9 +78,14 @@ function checkStaticFiles() {
     if (!exists(file)) fail(`Falta archivo esencial: ${file}`);
   });
 
-  const routeCopies = [
+  const requiredRoutes = [
     "404.html",
     "catalogo/index.html",
+    "catalogo/salas/index.html",
+    "catalogo/comedores/index.html",
+    "catalogo/alcobas/index.html",
+    "catalogo/sofa-camas/index.html",
+    "catalogo/junior/index.html",
     "colecciones/index.html",
     "proceso/index.html",
     "historia/index.html",
@@ -82,14 +93,8 @@ function checkStaticFiles() {
     "inicio/index.html"
   ];
 
-  routeCopies.forEach((file) => {
-    if (!exists(file)) {
-      fail(`Falta ruta limpia: ${file}`);
-      return;
-    }
-    if (!sameFile("index.html", file)) {
-      fail(`${file} no esta sincronizado con index.html. Ejecuta tools/sync-routes.ps1`);
-    }
+  requiredRoutes.forEach((file) => {
+    if (!exists(file)) fail(`Falta ruta indexable: ${file}`);
   });
 }
 
@@ -101,7 +106,10 @@ function checkHtmlContracts() {
     ["Lightbox tiene imagen segura inicial", /id="image-lightbox-img" src="data:image\/gif;base64/],
     ["SEO local Popayan", /muebles (?:y|&) decoraci[oó]n en popay[aá]n/i],
     ["Ruta catalogo limpia", /catalogo:\s*"\/catalogo"/],
-    ["Ruta colecciones limpia", /colecciones:\s*"\/colecciones"/]
+    ["Ruta colecciones limpia", /colecciones:\s*"\/colecciones"/],
+    ["Productos con enlaces rastreables", /<a class="product-card" href="\$\{escapeHTML\(productPublicPath\(product\)\)\}"/],
+    ["Rutas de producto legibles", /function productPublicPath\(product\)/],
+    ["Precios privados sin indexacion", /noindex, nofollow, noarchive/]
   ];
 
   contracts.forEach(([label, pattern]) => {
@@ -168,6 +176,17 @@ function checkCatalogData() {
     if (Object.prototype.hasOwnProperty.call(product, "precio")) {
       fail(`${product.nombre}: el catalogo publico no debe mostrar precio`);
     }
+    const productRoute = `catalogo/producto/${slugify(product.nombre)}-${product.id}/index.html`;
+    if (!exists(productRoute)) fail(`${product.nombre}: falta su pagina SEO (${productRoute})`);
+  });
+
+  const sitemap = exists("sitemap.xml") ? fs.readFileSync(path.join(root, "sitemap.xml"), "utf8") : "";
+  if (!sitemap.includes("https://maderartepopayan.com/catalogo/salas")) {
+    fail("El sitemap no contiene las categorias del catalogo");
+  }
+  publicProducts.forEach((product) => {
+    const url = `https://maderartepopayan.com/catalogo/producto/${slugify(product.nombre)}-${product.id}`;
+    if (!sitemap.includes(url)) fail(`${product.nombre}: falta en sitemap.xml`);
   });
 }
 
@@ -194,7 +213,12 @@ function startServer() {
       const url = new URL(req.url, "http://127.0.0.1");
       let pathname = decodeURIComponent(url.pathname);
       if (pathname === "/") pathname = "/index.html";
-      const filePath = path.normalize(path.join(root, pathname));
+      let filePath = path.normalize(path.join(root, pathname));
+      if (pathname.endsWith("/")) {
+        filePath = path.join(filePath, "index.html");
+      } else if (!path.extname(filePath) && fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+        filePath = path.join(filePath, "index.html");
+      }
 
       if (!filePath.startsWith(root)) {
         res.writeHead(403);
@@ -238,6 +262,10 @@ async function checkBrowser() {
   }
 
   const { server, baseUrl } = await startServer();
+  const screenshotDir = process.env.REVIEW_SCREENSHOT_DIR
+    ? path.resolve(process.env.REVIEW_SCREENSHOT_DIR)
+    : "";
+  if (screenshotDir) fs.mkdirSync(screenshotDir, { recursive: true });
   const browser = await chromium.launch({
     headless: true,
     executablePath: process.env.CHROME_PATH || undefined
@@ -258,22 +286,44 @@ async function checkBrowser() {
       if (response.status() >= 400) failed.push(`${response.status()} ${response.url()}`);
     });
 
-    await page.goto(`${baseUrl}/catalogo/`, { waitUntil: "networkidle", timeout: 60000 });
+    await page.goto(`${baseUrl}/catalogo/salas/`, { waitUntil: "networkidle", timeout: 60000 });
     await page.locator("#catalogo").scrollIntoViewIfNeeded();
     await page.waitForTimeout(2500);
+    if (screenshotDir) {
+      await page.screenshot({ path: path.join(screenshotDir, "categoria-salas-mobile.png"), fullPage: true });
+    }
 
     const publicMetrics = await page.evaluate(() => ({
       cards: document.querySelectorAll(".product-card").length,
       hasPrices: [...document.querySelectorAll(".product-card")].some((card) => /\$\s?[\d.]+/.test(card.innerText)),
       broken: [...document.images].filter((img) => img.complete && img.naturalWidth === 0).map((img) => img.currentSrc || img.src),
       scrollWidth: document.documentElement.scrollWidth,
-      innerWidth: window.innerWidth
+      innerWidth: window.innerWidth,
+      intro: document.querySelector(".catalog-route-intro h1")?.textContent || "",
+      anchors: document.querySelectorAll('a.product-card[href^="/catalogo/producto/"]').length
     }));
 
     if (publicMetrics.cards < 1) fail("Navegador movil: el catalogo publico no renderiza productos");
     if (publicMetrics.hasPrices) fail("Navegador movil: el catalogo publico esta mostrando precios");
     if (publicMetrics.broken.length) fail(`Navegador movil: imagenes rotas (${publicMetrics.broken.slice(0, 5).join(", ")})`);
     if (publicMetrics.scrollWidth > publicMetrics.innerWidth + 1) fail(`Navegador movil: hay scroll horizontal (${publicMetrics.scrollWidth}/${publicMetrics.innerWidth})`);
+    if (!/Salas en Popayán/i.test(publicMetrics.intro)) fail("Navegador movil: la pagina de categoria no muestra su contenido local");
+    if (publicMetrics.anchors < 1) fail("Navegador movil: los productos no tienen enlaces rastreables");
+
+    const firstProduct = readJson("data/productos-publicos.json")[0];
+    const productUrl = `${baseUrl}/catalogo/producto/${slugify(firstProduct.nombre)}-${firstProduct.id}/`;
+    await page.goto(productUrl, { waitUntil: "networkidle", timeout: 60000 });
+    await page.waitForTimeout(1600);
+    if (screenshotDir) {
+      await page.screenshot({ path: path.join(screenshotDir, "producto-mobile.png"), fullPage: false });
+    }
+    if (!(await page.locator("#catalog-modal.open").count())) {
+      fail("Navegador movil: la URL directa de producto no abre su ficha");
+    }
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
+    if (!canonical?.includes(`/catalogo/producto/${slugify(firstProduct.nombre)}-${firstProduct.id}`)) {
+      fail("Navegador movil: la ficha de producto no tiene canonical propio");
+    }
 
     await page.goto(`${baseUrl}/catalogo/?precios=maderarte2026`, { waitUntil: "networkidle", timeout: 60000 });
     await page.locator("#catalogo").scrollIntoViewIfNeeded();
@@ -284,13 +334,15 @@ async function checkBrowser() {
       hasPrices: [...document.querySelectorAll(".product-card")].some((card) => /\$\s?[\d.]+/.test(card.innerText)),
       broken: [...document.images].filter((img) => img.complete && img.naturalWidth === 0).map((img) => img.currentSrc || img.src),
       scrollWidth: document.documentElement.scrollWidth,
-      innerWidth: window.innerWidth
+      innerWidth: window.innerWidth,
+      robots: document.querySelector('meta[name="robots"]')?.content || ""
     }));
 
     if (privateMetrics.cards < 1) fail("Navegador movil: el catalogo con precios no renderiza productos");
     if (!privateMetrics.hasPrices) fail("Navegador movil: el link con precios no muestra precios");
     if (privateMetrics.broken.length) fail(`Navegador movil con precios: imagenes rotas (${privateMetrics.broken.slice(0, 5).join(", ")})`);
     if (privateMetrics.scrollWidth > privateMetrics.innerWidth + 1) fail(`Navegador movil con precios: hay scroll horizontal (${privateMetrics.scrollWidth}/${privateMetrics.innerWidth})`);
+    if (!/noindex/i.test(privateMetrics.robots)) fail("Navegador movil: el enlace privado con precios debe permanecer fuera de Google");
 
     if (errors.length) fail(`Errores JS en navegador: ${errors.join(" | ")}`);
     if (failed.length) fail(`Recursos fallidos en navegador: ${failed.slice(0, 8).join(" | ")}`);

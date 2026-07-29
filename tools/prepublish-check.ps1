@@ -6,12 +6,16 @@ $root = Split-Path -Parent $PSScriptRoot
 
 $node = Get-Command node -ErrorAction SilentlyContinue
 if ($node) {
+  & $node.Source (Join-Path $PSScriptRoot "validate-seo.mjs")
+  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
   & $node.Source (Join-Path $PSScriptRoot "guardrails.js")
   exit $LASTEXITCODE
 }
 
 $bundledNode = Join-Path $env:USERPROFILE ".cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe"
 if (Test-Path -LiteralPath $bundledNode) {
+  & $bundledNode (Join-Path $PSScriptRoot "validate-seo.mjs")
+  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
   & $bundledNode (Join-Path $PSScriptRoot "guardrails.js")
   exit $LASTEXITCODE
 }

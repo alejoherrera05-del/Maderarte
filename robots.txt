@@ -1,5 +1,12 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /data/productos.json
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
 
 Sitemap: https://maderartepopayan.com/sitemap.xml

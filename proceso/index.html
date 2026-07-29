@@ -3469,6 +3469,17 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
     -webkit-transform-style:flat;
   }
 }
+@media (max-width:700px){
+  html.js-focus-timeline .focus-step .focus-number,
+  html.js-focus-timeline .focus-step .focus-copy h3,
+  html.js-focus-timeline .focus-step .focus-copy p,
+  html.js-focus-timeline .focus-step.is-visible .focus-number,
+  html.js-focus-timeline .focus-step.is-visible .focus-copy h3,
+  html.js-focus-timeline .focus-step.is-visible .focus-copy p{
+    opacity:1 !important;
+    transform:none !important;
+  }
+}
 .catalog-grid.visible .product-card{
   animation:catalogCardReveal .72s var(--ease-lux) both;
   animation-delay:calc(var(--product-index, 0) * 55ms);

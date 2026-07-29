@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 132" fill="none">
+  <defs>
+    <linearGradient id="chair" x1="30" y1="30" x2="181" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7EA"/>
+      <stop offset=".62" stop-color="#E5CFB3"/>
+      <stop offset="1" stop-color="#BC9468"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="65" y1="118" x2="156" y2="31" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8A4A27"/>
+      <stop offset=".55" stop-color="#C88540"/>
+      <stop offset="1" stop-color="#F8A046"/>
+    </linearGradient>
+    <filter id="shadow" x="16" y="18" width="188" height="106" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#000000" flood-opacity=".24"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M39 61c0-11 9-20 20-20h14c11 0 20 9 20 20v17H39V61Z" fill="url(#chair)"/>
+    <path d="M127 61c0-11 9-20 20-20h14c11 0 20 9 20 20v17h-54V61Z" fill="url(#chair)"/>
+    <path d="M35 76h61v12c0 5-4 9-9 9H44c-5 0-9-4-9-9V76Z" fill="#F5EADB"/>
+    <path d="M124 76h61v12c0 5-4 9-9 9h-43c-5 0-9-4-9-9V76Z" fill="#F5EADB"/>
+    <path d="M63 96v22M85 96v22M135 96v22M157 96v22" stroke="#D9A35D" stroke-width="5" stroke-linecap="round"/>
+    <path d="M74 53h72c16 0 28 13 28 28H46c0-15 12-28 28-28Z" fill="url(#wood)"/>
+    <path d="M83 80h54l-11 40H94L83 80Z" fill="#9B552D"/>
+    <path d="M66 48h88" stroke="#F4D8AF" stroke-width="4" stroke-linecap="round"/>
+    <path d="M64 35h92" stroke="#E6B16C" stroke-width="4" stroke-linecap="round"/>
+    <path d="M79 66h62" stroke="#FFE7C3" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+  </g>
+</svg>

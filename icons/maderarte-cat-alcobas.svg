@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 132" fill="none">
+  <defs>
+    <linearGradient id="linen" x1="36" y1="31" x2="176" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8EC"/>
+      <stop offset=".62" stop-color="#E6D1B5"/>
+      <stop offset="1" stop-color="#C39C70"/>
+    </linearGradient>
+    <linearGradient id="copper" x1="35" y1="112" x2="184" y2="24" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8E4E2A"/>
+      <stop offset=".56" stop-color="#D0934E"/>
+      <stop offset="1" stop-color="#FF8624"/>
+    </linearGradient>
+    <filter id="shadow" x="18" y="14" width="184" height="112" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="14" stdDeviation="10" flood-color="#000000" flood-opacity=".23"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M44 33c0-12 10-22 22-22h88c12 0 22 10 22 22v51H44V33Z" fill="#A86635"/>
+    <path d="M54 37c0-9 7-16 16-16h80c9 0 16 7 16 16v45H54V37Z" fill="url(#linen)"/>
+    <path d="M65 48h34v28H65V48ZM121 48h34v28h-34V48Z" fill="#F8ECDC"/>
+    <path d="M58 75h104c13 0 23 10 23 23v12H35V98c0-13 10-23 23-23Z" fill="url(#linen)"/>
+    <path d="M31 101h158v13c0 5-4 9-9 9H40c-5 0-9-4-9-9v-13Z" fill="#F5EADC"/>
+    <path d="M51 123v7M169 123v7" stroke="#D9A35D" stroke-width="5" stroke-linecap="round"/>
+    <path d="M34 99h152" stroke="url(#copper)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M82 23v53M138 23v53" stroke="#B99E7F" stroke-width="2" opacity=".42"/>
+    <path d="M63 91h94" stroke="#C7AB88" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+  </g>
+</svg>

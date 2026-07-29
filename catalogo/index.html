@@ -3472,14 +3472,17 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
   }
 }
 @media (max-width:700px){
-  html.js-focus-timeline .focus-step .focus-number,
-  html.js-focus-timeline .focus-step .focus-copy h3,
-  html.js-focus-timeline .focus-step .focus-copy p,
-  html.js-focus-timeline .focus-step.is-visible .focus-number,
-  html.js-focus-timeline .focus-step.is-visible .focus-copy h3,
-  html.js-focus-timeline .focus-step.is-visible .focus-copy p{
+  .focus-section .focus-step .focus-copy,
+  .focus-section .focus-step .focus-copy.reveal,
+  .focus-section .focus-step .focus-copy.reveal:not(.visible),
+  .focus-section .focus-step .focus-copy.reveal.visible,
+  .focus-section .focus-step .focus-number,
+  .focus-section .focus-step .focus-copy h3,
+  .focus-section .focus-step .focus-copy p{
     opacity:1 !important;
     transform:none !important;
+    visibility:visible !important;
+    filter:none !important;
   }
 }
 .catalog-grid.visible .product-card{
@@ -5955,11 +5958,18 @@ function setFocusStepProgress(step, rawProgress){
   step.style.setProperty("--focus-photo-scale", lerp(.935, 1, assetProgress).toFixed(3));
 
   const textNodes = step.querySelectorAll(".focus-number, .focus-copy h3, .focus-copy p");
-  textNodes.forEach((node, index) => {
-    const itemProgress = smoothStep(.08 + index * .08, .42 + index * .08, progress);
-    node.style.opacity = itemProgress.toFixed(3);
-    node.style.transform = `translate3d(0, ${lerp(34, 0, itemProgress).toFixed(2)}px, 0)`;
-  });
+  if(window.matchMedia("(max-width: 700px)").matches){
+    textNodes.forEach(node => {
+      node.style.removeProperty("opacity");
+      node.style.removeProperty("transform");
+    });
+  }else{
+    textNodes.forEach((node, index) => {
+      const itemProgress = smoothStep(.08 + index * .08, .42 + index * .08, progress);
+      node.style.opacity = itemProgress.toFixed(3);
+      node.style.transform = `translate3d(0, ${lerp(34, 0, itemProgress).toFixed(2)}px, 0)`;
+    });
+  }
 
   if(step.classList.contains("focus-step-tape")){
     const tapeCut = `${lerp(68, 0, assetProgress).toFixed(2)}%`;

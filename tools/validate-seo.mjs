@@ -73,6 +73,12 @@ async function validateHtml(file) {
     "canonical",
     relative
   );
+  const robots = match(
+    html,
+    /<meta\s+name="robots"\s+content="([^"]+)"/i,
+    "robots",
+    relative
+  );
   const ogImage = match(
     html,
     /<meta\s+property="og:image"\s+content="([^"]+)"/i,
@@ -86,6 +92,18 @@ async function validateHtml(file) {
   }
   if (!canonical.startsWith(baseUrl)) fail(`${relative}: canonical fuera del dominio oficial`);
   if (!ogImage.startsWith("https://")) fail(`${relative}: og:image no es absoluta`);
+
+  if (!/noindex/i.test(robots)) {
+    const expectedPath = relative === "index.html"
+      ? "/"
+      : `/${path.dirname(relative).replaceAll("\\", "/").replace(/^\/+|\/+$/g, "")}/`;
+    const expectedCanonical = `${baseUrl}${expectedPath}`;
+    if (canonical !== expectedCanonical) {
+      fail(`${relative}: canonical ${canonical} no coincide con la URL pública ${expectedCanonical}`);
+    }
+    const headings = [...html.matchAll(/<h1\b[^>]*>[\s\S]*?<\/h1>/gi)];
+    if (headings.length !== 1) fail(`${relative}: debe contener exactamente un H1 (encontrados ${headings.length})`);
+  }
 
   registerUnique(titles, title, relative, "title");
   registerUnique(descriptions, description, relative, "meta description");
@@ -110,6 +128,9 @@ async function validateSitemap() {
 
   for (const url of locations) {
     if (!url.startsWith(baseUrl)) fail(`sitemap.xml: URL fuera del dominio (${url})`);
+    if (new URL(url).pathname !== "/" && !new URL(url).pathname.endsWith("/")) {
+      fail(`sitemap.xml: URL sin barra final (${url})`);
+    }
     const relative = localPathFromUrl(url);
     if (!await exists(relative)) fail(`sitemap.xml: no existe ${relative}`);
   }

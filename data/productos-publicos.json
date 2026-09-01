@@ -4,11 +4,11 @@
     "categoria": "salas",
     "nombre": "Sala luxury",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675331587_vmkwh.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675333511_xb3a1.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675335964_42q21.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675337289_gleqc.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780675338930_hy323.jpg"
+      "/img/p_1780675331587_vmkwh.jpg",
+      "/img/p_1780675333511_xb3a1.jpg",
+      "/img/p_1780675335964_42q21.jpg",
+      "/img/p_1780675337289_gleqc.jpg",
+      "/img/p_1780675338930_hy323.jpg"
     ],
     "ajuste": "cover",
     "ancho": "",
@@ -31,10 +31,10 @@
     "categoria": "salas",
     "nombre": "Sala multifuncional",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676468333_19sno.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676470543_fxjlz.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676472898_o00wo.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676475802_t9bmi.jpg"
+      "/img/p_1780676468333_19sno.jpg",
+      "/img/p_1780676470543_fxjlz.jpg",
+      "/img/p_1780676472898_o00wo.jpg",
+      "/img/p_1780676475802_t9bmi.jpg"
     ],
     "ajuste": "cover",
     "ancho": "",
@@ -57,12 +57,12 @@
     "categoria": "salas",
     "nombre": "Sala Prisma “L”",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780676977097_mi9th.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677020709_3x4n2.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677022992_u696v.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677024325_xjtb7.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677025626_t38lp.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677027078_flv0f.jpg"
+      "/img/p_1780676977097_mi9th.jpg",
+      "/img/p_1780677020709_3x4n2.jpg",
+      "/img/p_1780677022992_u696v.jpg",
+      "/img/p_1780677024325_xjtb7.jpg",
+      "/img/p_1780677025626_t38lp.jpg",
+      "/img/p_1780677027078_flv0f.jpg"
     ],
     "ajuste": "cover",
     "ancho": "",
@@ -85,11 +85,11 @@
     "categoria": "salas",
     "nombre": "Sala Oslo",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677536048_tmalb.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677537779_lc9ol.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677539082_8nouu.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677540377_njh6a.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780677541635_0fiai.jpg"
+      "/img/p_1780677536048_tmalb.jpg",
+      "/img/p_1780677537779_lc9ol.jpg",
+      "/img/p_1780677539082_8nouu.jpg",
+      "/img/p_1780677540377_njh6a.jpg",
+      "/img/p_1780677541635_0fiai.jpg"
     ],
     "ajuste": "cover",
     "ancho": "",
@@ -116,12 +116,12 @@
     "categoria": "salas",
     "nombre": "Sala Diamante  (Reclinable)",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678305099_upuoa.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678307176_r71ne.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678308400_4gasf.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678309426_xc85u.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678310655_foe1x.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678311728_sr9qr.jpg"
+      "/img/p_1780678305099_upuoa.jpg",
+      "/img/p_1780678307176_r71ne.jpg",
+      "/img/p_1780678308400_4gasf.jpg",
+      "/img/p_1780678309426_xc85u.jpg",
+      "/img/p_1780678310655_foe1x.jpg",
+      "/img/p_1780678311728_sr9qr.jpg"
     ],
     "ajuste": "cover",
     "ancho": "",
@@ -144,13 +144,13 @@
     "categoria": "salas",
     "nombre": "Sala Canoa",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678901312_bdd9p.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678903244_4jkx9.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678904468_05ltu.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678905587_3hxma.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678908359_a3hpb.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678909796_tk8qr.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780678911126_jioeo.jpg"
+      "/img/p_1780678901312_bdd9p.jpg",
+      "/img/p_1780678903244_4jkx9.jpg",
+      "/img/p_1780678904468_05ltu.jpg",
+      "/img/p_1780678905587_3hxma.jpg",
+      "/img/p_1780678908359_a3hpb.jpg",
+      "/img/p_1780678909796_tk8qr.jpg",
+      "/img/p_1780678911126_jioeo.jpg"
     ],
     "thumbPosX": "53",
     "thumbPosY": "50",
@@ -179,11 +179,11 @@
     "categoria": "salas",
     "nombre": "Sala Nube",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682377564_cv5yf.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682379622_nsmsv.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682381775_dtxl7.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682382729_7uavx.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780682383715_2czb2.jpg"
+      "/img/p_1780682377564_cv5yf.jpg",
+      "/img/p_1780682379622_nsmsv.jpg",
+      "/img/p_1780682381775_dtxl7.jpg",
+      "/img/p_1780682382729_7uavx.jpg",
+      "/img/p_1780682383715_2czb2.jpg"
     ],
     "thumbPosX": "58",
     "thumbPosY": "50",
@@ -212,11 +212,11 @@
     "categoria": "salas",
     "nombre": "Sala Ditroit",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696059692_zpkvs.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696061512_t8no1.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696062605_zno0x.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696063861_egynj.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780696065295_64izx.jpg"
+      "/img/p_1780696059692_zpkvs.jpg",
+      "/img/p_1780696061512_t8no1.jpg",
+      "/img/p_1780696062605_zno0x.jpg",
+      "/img/p_1780696063861_egynj.jpg",
+      "/img/p_1780696065295_64izx.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -241,12 +241,12 @@
     "categoria": "salas",
     "nombre": "Sala Brunatty (Reclinable) “L”",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697281550_klcv1.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697283455_ndowk.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697284687_oaiwz.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697286320_20tvj.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697287581_nys9o.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780697288880_1f0db.jpg"
+      "/img/p_1780697281550_klcv1.jpg",
+      "/img/p_1780697283455_ndowk.jpg",
+      "/img/p_1780697284687_oaiwz.jpg",
+      "/img/p_1780697286320_20tvj.jpg",
+      "/img/p_1780697287581_nys9o.jpg",
+      "/img/p_1780697288880_1f0db.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -271,13 +271,13 @@
     "categoria": "salas",
     "nombre": "Sala Italiana",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700532109_nv2n5.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700534189_s2p1h.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700535987_9e2ve.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700537420_vqkai.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700538961_r1skb.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700540492_c841e.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780700541824_3q5zh.jpg"
+      "/img/p_1780700532109_nv2n5.jpg",
+      "/img/p_1780700534189_s2p1h.jpg",
+      "/img/p_1780700535987_9e2ve.jpg",
+      "/img/p_1780700537420_vqkai.jpg",
+      "/img/p_1780700538961_r1skb.jpg",
+      "/img/p_1780700540492_c841e.jpg",
+      "/img/p_1780700541824_3q5zh.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -304,12 +304,12 @@
     "categoria": "salas",
     "nombre": "Sala Chanel",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771173525_7d45v.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771176698_nz0jr.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771177929_dxxf0.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771179123_2907v.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771180443_vd25n.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1780771181570_rxl75.jpg"
+      "/img/p_1780771173525_7d45v.jpg",
+      "/img/p_1780771176698_nz0jr.jpg",
+      "/img/p_1780771177929_dxxf0.jpg",
+      "/img/p_1780771179123_2907v.jpg",
+      "/img/p_1780771180443_vd25n.jpg",
+      "/img/p_1780771181570_rxl75.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -335,11 +335,11 @@
     "categoria": "comedores",
     "nombre": "Comedor Alaska",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197237996_yh8p2.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197239810_80vvl.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197241456_652it.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197242780_0us7x.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197244215_o3wqu.jpg"
+      "/img/p_1781197237996_yh8p2.jpg",
+      "/img/p_1781197239810_80vvl.jpg",
+      "/img/p_1781197241456_652it.jpg",
+      "/img/p_1781197242780_0us7x.jpg",
+      "/img/p_1781197244215_o3wqu.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -364,11 +364,11 @@
     "categoria": "comedores",
     "nombre": "Comedor Holanda",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197670500_e1ttc.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197672452_1403a.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197673776_fsq60.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197675006_5s54b.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781197676337_tgmkl.jpg"
+      "/img/p_1781197670500_e1ttc.jpg",
+      "/img/p_1781197672452_1403a.jpg",
+      "/img/p_1781197673776_fsq60.jpg",
+      "/img/p_1781197675006_5s54b.jpg",
+      "/img/p_1781197676337_tgmkl.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -401,11 +401,11 @@
     "categoria": "comedores",
     "nombre": "Comedor Capry",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198053377_j7ixv.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198055217_f3lez.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198056444_37p8f.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198057568_r8isb.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198058698_4wc54.jpg"
+      "/img/p_1781198053377_j7ixv.jpg",
+      "/img/p_1781198055217_f3lez.jpg",
+      "/img/p_1781198056444_37p8f.jpg",
+      "/img/p_1781198057568_r8isb.jpg",
+      "/img/p_1781198058698_4wc54.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -430,11 +430,11 @@
     "categoria": "comedores",
     "nombre": "Comedor media luna",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198422701_j7myi.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198426450_8t0o0.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198429111_1w59k.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198431054_kzq33.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198432897_hrvis.jpg"
+      "/img/p_1781198422701_j7myi.jpg",
+      "/img/p_1781198426450_8t0o0.jpg",
+      "/img/p_1781198429111_1w59k.jpg",
+      "/img/p_1781198431054_kzq33.jpg",
+      "/img/p_1781198432897_hrvis.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -458,11 +458,11 @@
     "categoria": "comedores",
     "nombre": "Comedor Audi",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198872693_rz4cl.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198874569_foyl9.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198875974_edg8g.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198877362_upnhk.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781198879877_bd8iz.jpg"
+      "/img/p_1781198872693_rz4cl.jpg",
+      "/img/p_1781198874569_foyl9.jpg",
+      "/img/p_1781198875974_edg8g.jpg",
+      "/img/p_1781198877362_upnhk.jpg",
+      "/img/p_1781198879877_bd8iz.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -486,11 +486,11 @@
     "categoria": "comedores",
     "nombre": "Comedor Milano",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199219193_9ai8z.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199221073_0eia3.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199222501_mq2yp.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199224138_wt4xi.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199225572_ydpvx.jpg"
+      "/img/p_1781199219193_9ai8z.jpg",
+      "/img/p_1781199221073_0eia3.jpg",
+      "/img/p_1781199222501_mq2yp.jpg",
+      "/img/p_1781199224138_wt4xi.jpg",
+      "/img/p_1781199225572_ydpvx.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -514,11 +514,11 @@
     "categoria": "comedores",
     "nombre": "Comedor Nordico",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199552619_qs27f.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199555818_rcito.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199557789_6ik13.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199559501_xue9e.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199560835_famy7.jpg"
+      "/img/p_1781199552619_qs27f.jpg",
+      "/img/p_1781199555818_rcito.jpg",
+      "/img/p_1781199557789_6ik13.jpg",
+      "/img/p_1781199559501_xue9e.jpg",
+      "/img/p_1781199560835_famy7.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -542,11 +542,11 @@
     "categoria": "comedores",
     "nombre": "Comedor Siena",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199888980_dyyl6.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199890934_lc1fn.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199892366_7odsv.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199893482_jp7xs.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781199894829_z3b06.jpg"
+      "/img/p_1781199888980_dyyl6.jpg",
+      "/img/p_1781199890934_lc1fn.jpg",
+      "/img/p_1781199892366_7odsv.jpg",
+      "/img/p_1781199893482_jp7xs.jpg",
+      "/img/p_1781199894829_z3b06.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -570,13 +570,13 @@
     "categoria": "comedores",
     "nombre": "Comedor Herradura",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200377825_v60um.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200379734_biyfu.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200380860_5ecvk.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200381884_zd9nn.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200382952_jz1l3.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200383999_0ut93.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781200385058_71bcu.jpg"
+      "/img/p_1781200377825_v60um.jpg",
+      "/img/p_1781200379734_biyfu.jpg",
+      "/img/p_1781200380860_5ecvk.jpg",
+      "/img/p_1781200381884_zd9nn.jpg",
+      "/img/p_1781200382952_jz1l3.jpg",
+      "/img/p_1781200383999_0ut93.jpg",
+      "/img/p_1781200385058_71bcu.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -600,10 +600,10 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Majestic",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781302828118_m341t.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781302829836_g8nf3.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781302830963_2fnab.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781302832189_1z7t5.jpg"
+      "/img/p_1781302828118_m341t.jpg",
+      "/img/p_1781302829836_g8nf3.jpg",
+      "/img/p_1781302830963_2fnab.jpg",
+      "/img/p_1781302832189_1z7t5.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -627,11 +627,11 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Lluvia",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303098692_1okoi.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303100687_sqicj.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303101840_jgbdq.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303102841_uqlop.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303103960_6s6w3.jpg"
+      "/img/p_1781303098692_1okoi.jpg",
+      "/img/p_1781303100687_sqicj.jpg",
+      "/img/p_1781303101840_jgbdq.jpg",
+      "/img/p_1781303102841_uqlop.jpg",
+      "/img/p_1781303103960_6s6w3.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -652,11 +652,11 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Poro abierto",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303326023_4w60j.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303327803_6zksv.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303328929_rck5c.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303329953_fu4x4.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781303330979_oje39.jpg"
+      "/img/p_1781303326023_4w60j.jpg",
+      "/img/p_1781303327803_6zksv.jpg",
+      "/img/p_1781303328929_rck5c.jpg",
+      "/img/p_1781303329953_fu4x4.jpg",
+      "/img/p_1781303330979_oje39.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -677,11 +677,11 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Esplendor",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632970095_cmhnb.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632971949_m5m3o.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632973398_6btsl.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632976152_izo6i.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781632978609_hrfbm.jpg"
+      "/img/p_1781632970095_cmhnb.jpg",
+      "/img/p_1781632971949_m5m3o.jpg",
+      "/img/p_1781632973398_6btsl.jpg",
+      "/img/p_1781632976152_izo6i.jpg",
+      "/img/p_1781632978609_hrfbm.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -703,10 +703,10 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Temesis",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633277190_3sht8.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633280474_hcflb.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633283856_u2ueb.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633285801_6agfg.jpg"
+      "/img/p_1781633277190_3sht8.jpg",
+      "/img/p_1781633280474_hcflb.jpg",
+      "/img/p_1781633283856_u2ueb.jpg",
+      "/img/p_1781633285801_6agfg.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -727,11 +727,11 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Bosel",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633523909_69rxo.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633526213_3e1t1.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633527975_ro2t7.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633529436_05fwg.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633530935_4c0s1.jpg"
+      "/img/p_1781633523909_69rxo.jpg",
+      "/img/p_1781633526213_3e1t1.jpg",
+      "/img/p_1781633527975_ro2t7.jpg",
+      "/img/p_1781633529436_05fwg.jpg",
+      "/img/p_1781633530935_4c0s1.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -759,11 +759,11 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Turqueza",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633842038_md8u4.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633844081_tsc8m.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633845307_n58uz.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633847151_36wrj.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781633848891_9k7t5.jpg"
+      "/img/p_1781633842038_md8u4.jpg",
+      "/img/p_1781633844081_tsc8m.jpg",
+      "/img/p_1781633845307_n58uz.jpg",
+      "/img/p_1781633847151_36wrj.jpg",
+      "/img/p_1781633848891_9k7t5.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -785,10 +785,10 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Fantasía",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781643707187_u5fyg.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781643709530_90zux.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781643711048_1sq9a.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781643712384_4gad4.jpg"
+      "/img/p_1781643707187_u5fyg.jpg",
+      "/img/p_1781643709530_90zux.jpg",
+      "/img/p_1781643711048_1sq9a.jpg",
+      "/img/p_1781643712384_4gad4.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -813,10 +813,10 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Portofino",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644083521_8ntqa.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644087578_yywb9.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644090441_dq49m.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644092250_y5uqe.jpg"
+      "/img/p_1781644083521_8ntqa.jpg",
+      "/img/p_1781644087578_yywb9.jpg",
+      "/img/p_1781644090441_dq49m.jpg",
+      "/img/p_1781644092250_y5uqe.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -837,10 +837,10 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Armonía",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644972998_muuez.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644975002_i4dxf.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644976896_ypulp.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781644978438_fib3x.jpg"
+      "/img/p_1781644972998_muuez.jpg",
+      "/img/p_1781644975002_i4dxf.jpg",
+      "/img/p_1781644976896_ypulp.jpg",
+      "/img/p_1781644978438_fib3x.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -861,11 +861,11 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Roma",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649466687_vhaqd.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649469044_yv0l4.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649470375_1n1d5.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649471502_xp8up.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781649472630_mylz6.jpg"
+      "/img/p_1781649466687_vhaqd.jpg",
+      "/img/p_1781649469044_yv0l4.jpg",
+      "/img/p_1781649470375_1n1d5.jpg",
+      "/img/p_1781649471502_xp8up.jpg",
+      "/img/p_1781649472630_mylz6.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -890,10 +890,10 @@
     "categoria": "alcobas",
     "nombre": "Alcoba Milan",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781719116471_vx8yr.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781719119386_pr260.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781719120809_zy0qu.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1781719123001_rv5ag.jpg"
+      "/img/p_1781719116471_vx8yr.jpg",
+      "/img/p_1781719119386_pr260.jpg",
+      "/img/p_1781719120809_zy0qu.jpg",
+      "/img/p_1781719123001_rv5ag.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -915,15 +915,15 @@
     "subcategoria": "cama_cunas",
     "nombre": "Cama cuna modular",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782418341902_v7ecm.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782418344147_2t6eq.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782418345752_wut1c.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782418347525_ikwz6.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782418349369_ner4n.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782418350802_u767l.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782418352055_5tggo.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782418353362_qubu8.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782418354303_2n4un.jpg"
+      "/img/p_1782418341902_v7ecm.jpg",
+      "/img/p_1782418344147_2t6eq.jpg",
+      "/img/p_1782418345752_wut1c.jpg",
+      "/img/p_1782418347525_ikwz6.jpg",
+      "/img/p_1782418349369_ner4n.jpg",
+      "/img/p_1782418350802_u767l.jpg",
+      "/img/p_1782418352055_5tggo.jpg",
+      "/img/p_1782418353362_qubu8.jpg",
+      "/img/p_1782418354303_2n4un.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -945,12 +945,12 @@
     "subcategoria": "cunas_convertibles",
     "nombre": "Cuna convertible",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419403930_p8ehv.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419406033_im274.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419407381_lyn9a.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419408676_gj2dp.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419410211_05onp.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1782419411604_6w6dl.jpg"
+      "/img/p_1782419403930_p8ehv.jpg",
+      "/img/p_1782419406033_im274.jpg",
+      "/img/p_1782419407381_lyn9a.jpg",
+      "/img/p_1782419408676_gj2dp.jpg",
+      "/img/p_1782419410211_05onp.jpg",
+      "/img/p_1782419411604_6w6dl.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",
@@ -969,10 +969,10 @@
     "subcategoria": null,
     "nombre": "Alcoba buclé",
     "imagenes": [
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1783613269339_ey3sz.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1783613272895_jgo93.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1783613275248_cchnx.jpg",
-      "https://raw.githubusercontent.com/alejoherrera05-del/Maderarte/main/img/p_1783613277498_81v0j.jpg"
+      "/img/p_1783613269339_ey3sz.jpg",
+      "/img/p_1783613272895_jgo93.jpg",
+      "/img/p_1783613275248_cchnx.jpg",
+      "/img/p_1783613277498_81v0j.jpg"
     ],
     "thumbPosX": "50",
     "thumbPosY": "50",

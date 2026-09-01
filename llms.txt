@@ -3,8 +3,8 @@
 Maderarte es una tienda de muebles y decoración con más de 20 años acompañando hogares en Popayán, Cauca, Colombia.
 
 Sitio oficial: https://maderartepopayan.com/
-Catálogo público: https://maderartepopayan.com/catalogo
-Contacto y sedes: https://maderartepopayan.com/contacto
+Catálogo público: https://maderartepopayan.com/catalogo/
+Contacto y sedes: https://maderartepopayan.com/contacto/
 
 ## Qué ofrece
 

@@ -5,6 +5,15 @@ import { fileURLToPath } from "node:url";
 const toolsDir = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(toolsDir, "..");
 const baseUrl = "https://maderartepopayan.com";
+
+function withTrailingSlash(value) {
+  if (!value || value === "/") return "/";
+  return `/${String(value).replace(/^\/+|\/+$/g, "")}/`;
+}
+
+function publicUrl(value) {
+  return `${baseUrl}${withTrailingSlash(value)}`;
+}
 const source = (await fs.readFile(path.join(root, "index.html"), "utf8"))
   .replace(/^\uFEFF/, "")
   .replace(/\r\n?/g, "\n");
@@ -58,7 +67,10 @@ const pages = [
     image: "/catalogo-maderarte-share-v1.png",
     imageAlt: "Catálogo de muebles y decoración Maderarte Popayán",
     pageType: "CollectionPage",
-    breadcrumb: [["Inicio", "/"], ["Catálogo", "/catalogo"]]
+    breadcrumb: [["Inicio", "/"], ["Catálogo", "/catalogo"]],
+    keepSections: ["catalogo"],
+    bodyRoute: "catalog",
+    intro: catalogIntroMarkup()
   },
   {
     output: "colecciones/index.html",
@@ -70,7 +82,10 @@ const pages = [
     image: "/catalogo-maderarte-share-v1.png",
     imageAlt: "Colecciones Maderarte Popayán",
     pageType: "CollectionPage",
-    breadcrumb: [["Inicio", "/"], ["Catálogo", "/catalogo"]]
+    breadcrumb: [["Inicio", "/"], ["Catálogo", "/catalogo"]],
+    keepSections: ["catalogo"],
+    bodyRoute: "catalog",
+    intro: catalogIntroMarkup()
   },
   {
     output: "proceso/index.html",
@@ -80,7 +95,14 @@ const pages = [
     image: "/proceso-moodboard.png",
     imageAlt: "Proceso de diseño y selección de materiales Maderarte",
     pageType: "WebPage",
-    breadcrumb: [["Inicio", "/"], ["Proceso", "/proceso"]]
+    breadcrumb: [["Inicio", "/"], ["Proceso", "/proceso"]],
+    keepSections: ["proceso"],
+    bodyRoute: "content",
+    routeLead: {
+      kicker: "Asesoría personalizada",
+      heading: "Diseño y asesoría de muebles en Popayán",
+      description: "Te acompañamos a elegir proporciones, telas, maderas y acabados para crear muebles que funcionen en tu espacio."
+    }
   },
   {
     output: "historia/index.html",
@@ -90,7 +112,14 @@ const pages = [
     image: "/historia-actual.png",
     imageAlt: "Showroom actual de Maderarte en Popayán",
     pageType: "AboutPage",
-    breadcrumb: [["Inicio", "/"], ["Historia", "/historia"]]
+    breadcrumb: [["Inicio", "/"], ["Historia", "/historia"]],
+    keepSections: ["historia"],
+    bodyRoute: "content",
+    routeLead: {
+      kicker: "Nuestra historia",
+      heading: "Maderarte: más de 20 años amoblando hogares en Popayán",
+      description: "Conoce cómo una pequeña exhibición se convirtió en dos showrooms de muebles y decoración en Popayán."
+    }
   },
   {
     output: "contacto/index.html",
@@ -100,7 +129,14 @@ const pages = [
     image: "/Portada.png",
     imageAlt: "Maderarte muebles y decoración en Popayán",
     pageType: "ContactPage",
-    breadcrumb: [["Inicio", "/"], ["Contacto", "/contacto"]]
+    breadcrumb: [["Inicio", "/"], ["Contacto", "/contacto"]],
+    keepSections: ["contacto"],
+    bodyRoute: "content",
+    routeLead: {
+      kicker: "Dos sedes en Popayán",
+      heading: "Visita Maderarte en Popayán",
+      description: "Encuentra muebles, decoración y asesoría personalizada en nuestra sede principal y en Terraplaza."
+    }
   },
   {
     output: "inicio/index.html",
@@ -142,7 +178,7 @@ function normalizeCategory(category) {
 }
 
 function productPath(product) {
-  return `/catalogo/producto/${slugify(product.nombre)}-${product.id}`;
+  return `/catalogo/producto/${slugify(product.nombre)}-${product.id}/`;
 }
 
 function limitDescription(value, maxLength = 165) {
@@ -174,6 +210,12 @@ function xml(value) {
   })[char]);
 }
 
+function htmlText(value) {
+  return String(value ?? "").replace(/[<>&'\"]/g, (char) => ({
+    "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&#39;", '"': "&quot;"
+  })[char]);
+}
+
 function replaceTitle(html, value) {
   return html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${value}</title>`);
 }
@@ -198,13 +240,13 @@ function breadcrumbSchema(items) {
       "@type": "ListItem",
       position: index + 1,
       name,
-      item: `${baseUrl}${url === "/" ? "/" : url}`
+      item: publicUrl(url)
     }))
   };
 }
 
 function routeSchema(config) {
-  const canonical = config.canonical || config.url;
+  const canonical = withTrailingSlash(config.canonical || config.url);
   const graph = [
     {
       "@type": config.pageType || "WebPage",
@@ -245,6 +287,7 @@ function productSchema(product) {
         "@id": `${baseUrl}${url}#product`,
         url: `${baseUrl}${url}`,
         name: product.nombre,
+        sku: String(product.id),
         description,
         image: images,
         category: category?.label || product.categoria,
@@ -275,7 +318,7 @@ function productSchema(product) {
 function introMarkup(category) {
   return `<div id="catalog-route-intro" class="catalog-route-intro">
         <nav class="catalog-breadcrumb" aria-label="Migas de pan">
-          <a href="/catalogo">Catálogo</a><span aria-hidden="true">/</span><span>${category.label}</span>
+          <a href="/catalogo/">Catálogo</a><span aria-hidden="true">/</span><span>${category.label}</span>
         </nav>
         <div class="catalog-route-copy">
           <h1>${category.heading}</h1>
@@ -284,9 +327,73 @@ function introMarkup(category) {
       </div>`;
 }
 
+function catalogIntroMarkup() {
+  return `<div id="catalog-route-intro" class="catalog-route-intro">
+        <nav class="catalog-breadcrumb" aria-label="Migas de pan">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span><span>Catálogo</span>
+        </nav>
+        <div class="catalog-route-copy">
+          <h1>Catálogo de muebles en Popayán</h1>
+          <p>Explora salas, comedores, alcobas, sofá camas y muebles infantiles. Cada pieza se configura contigo en medidas, telas y acabados.</p>
+        </div>
+      </div>`;
+}
+
+function productIntroMarkup(product, category) {
+  const materialLabels = { estructura: "Estructura", tela: "Tela", espuma: "Espuma" };
+  const facts = Object.entries(product.materialesData || {})
+    .filter(([, value]) => String(value || "").trim())
+    .map(([key, value]) => `<li>${htmlText(materialLabels[key] || key)}: ${htmlText(value)}</li>`)
+    .join("");
+  const factsMarkup = facts
+    ? `\n            <ul class="seo-product-facts" aria-label="Materiales principales">${facts}</ul>`
+    : "";
+  const description = String(product.descripcion || `Pieza de ${category.label} configurable`)
+    .replace(/\s+/g, " ")
+    .trim();
+  return `<div id="catalog-route-intro" class="catalog-route-intro seo-product-intro">
+        <nav class="catalog-breadcrumb" aria-label="Migas de pan">
+          <a href="/">Inicio</a><span aria-hidden="true">/</span>
+          <a href="/catalogo/">Catálogo</a><span aria-hidden="true">/</span>
+          <a href="/catalogo/${category.path}/">${htmlText(category.label)}</a><span aria-hidden="true">/</span>
+          <span>${htmlText(product.nombre)}</span>
+        </nav>
+        <div class="catalog-route-copy">
+          <h1>${htmlText(product.nombre)} en Popayán</h1>
+          <div class="seo-product-summary">
+            <p>${htmlText(description)} Solicita asesoría para elegir medidas, tapizado y acabados en Maderarte Popayán.</p>${factsMarkup}
+          </div>
+        </div>
+      </div>`;
+}
+
+function routeLeadMarkup(lead) {
+  return `<section class="catalog-route-intro route-page-intro" aria-labelledby="route-page-title">
+      <div class="catalog-route-copy">
+        <div>
+          <span class="section-kicker">${htmlText(lead.kicker)}</span>
+          <h1 id="route-page-title">${htmlText(lead.heading)}</h1>
+        </div>
+        <p>${htmlText(lead.description)}</p>
+      </div>
+    </section>`;
+}
+
+function pruneSections(html, keepSections) {
+  const sectionIds = ["inicio", "proceso", "colecciones", "catalogo", "historia", "garantia", "contacto"];
+  const keep = new Set(keepSections || []);
+  let pruned = html;
+  for (const id of sectionIds) {
+    if (keep.has(id)) continue;
+    const pattern = new RegExp(`\\s*<section\\b[^>]*\\bid="${id}"[^>]*>[\\s\\S]*?<\\/section>\\s*`, "i");
+    pruned = pruned.replace(pattern, "\n");
+  }
+  return pruned;
+}
+
 function render(config) {
-  const canonicalPath = config.canonical || config.url;
-  const canonical = `${baseUrl}${canonicalPath === "/" ? "/" : canonicalPath}`;
+  const canonicalPath = withTrailingSlash(config.canonical || config.url);
+  const canonical = `${baseUrl}${canonicalPath}`;
   const image = absolute(config.image);
   let html = source;
   html = replaceTitle(html, config.title);
@@ -308,6 +415,16 @@ function render(config) {
   html = html.replace("<!-- SEO_ROUTE_SCHEMA -->", `<script type="application/ld+json" id="seo-route-schema">${schema}</script>`);
   if (config.intro) {
     html = html.replace('<div id="catalog-route-intro" class="catalog-route-intro" hidden></div>', config.intro);
+  }
+  if (config.routeLead) {
+    html = html.replace("<main>", `<main>\n    ${routeLeadMarkup(config.routeLead)}`);
+  }
+  if (config.keepSections) {
+    html = pruneSections(html, config.keepSections);
+  }
+  if (config.bodyRoute) {
+    const routeClass = config.bodyRoute === "product" ? " seo-product-route" : " seo-content-route";
+    html = html.replace('<body class="at-hero">', `<body class="at-hero${routeClass}" data-seo-route="${config.bodyRoute}">`);
   }
   return html;
 }
@@ -334,7 +451,9 @@ for (const [key, category] of Object.entries(categories)) {
     pageType: "CollectionPage",
     breadcrumb: [["Inicio", "/"], ["Catálogo", "/catalogo"], [category.label, `/catalogo/${category.path}`]],
     items,
-    intro: introMarkup(category)
+    intro: introMarkup(category),
+    keepSections: ["catalogo"],
+    bodyRoute: "catalog"
   };
   await write(config.output, render(config));
 }
@@ -344,13 +463,16 @@ for (const product of products) {
   const url = productPath(product);
   const description = productSeoDescription(product, category);
   const config = {
-    output: `${url.slice(1)}/index.html`,
+    output: `${url.replace(/^\/+|\/+$/g, "")}/index.html`,
     url,
     title: `${product.nombre} | Maderarte Popayán`,
     description,
     image: product.imagenes?.[0] || "/catalogo-maderarte-share-v1.png",
     imageAlt: `${product.nombre} de Maderarte Popayán`,
-    schema: productSchema(product)
+    schema: productSchema(product),
+    intro: productIntroMarkup(product, category),
+    keepSections: ["catalogo"],
+    bodyRoute: "product"
   };
   await write(config.output, render(config));
 }
@@ -373,7 +495,7 @@ const sitemapEntries = [
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${sitemapEntries.map((entry) => `  <url>
-    <loc>${xml(`${baseUrl}${entry.url === "/" ? "/" : entry.url}`)}</loc>
+    <loc>${xml(publicUrl(entry.url))}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${entry.url === "/" || entry.url === "/catalogo" ? "weekly" : "monthly"}</changefreq>
     <priority>${entry.priority}</priority>${entry.image ? `
@@ -391,8 +513,8 @@ const llms = `# Maderarte Popayán
 Maderarte es una tienda de muebles y decoración con más de 20 años acompañando hogares en Popayán, Cauca, Colombia.
 
 Sitio oficial: ${baseUrl}/
-Catálogo público: ${baseUrl}/catalogo
-Contacto y sedes: ${baseUrl}/contacto
+Catálogo público: ${baseUrl}/catalogo/
+Contacto y sedes: ${baseUrl}/contacto/
 
 ## Qué ofrece
 

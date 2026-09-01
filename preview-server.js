@@ -22,6 +22,8 @@ http.createServer((req, res) => {
   const url = new URL(req.url, `http://localhost:${port}`);
   let file = decodeURIComponent(url.pathname);
   if (file === "/") file = "/index.html";
+  if (file.endsWith("/")) file += "index.html";
+  if (!path.extname(file)) file += "/index.html";
 
   const filePath = path.join(root, file);
   if (!filePath.startsWith(root)) {

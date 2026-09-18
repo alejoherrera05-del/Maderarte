@@ -5615,6 +5615,8 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
 }
 </style>
 <script src="/security-notice.js?v=20260916" defer></script>
+<link rel="stylesheet" href="/assets/catalog-public.css?v=20260918">
+<script src="/assets/catalog-order.js?v=20260918"></script>
 </head>
 <body class="at-hero seo-content-route" data-seo-route="content">
 <div class="site-shell">
@@ -5746,6 +5748,7 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
     <div class="footer-inner">
       <div class="footer-brand"><img src="/logomaderarte2026.png" alt=""><span>MADERARTE</span></div>
        <span>Muebles y decoración en Popayán · atención cercana, siempre</span>
+      <a class="footer-admin" href="/admin.html" aria-label="Administrar el catálogo de Maderarte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></svg><span>ADMIN</span></a>
     </div>
   </footer>
   <a class="mobile-whatsapp-float" href="https://wa.me/573117476465?text=Hola,%20MADERARTE.%20Quiero%20recibir%20asesor%C3%ADa%20para%20mis%20muebles." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
@@ -6123,7 +6126,7 @@ setTimeout(() => clearInterval(counterWarmup), 5000);
 
 const params = new URLSearchParams(window.location.search);
 if(params.get("admin") === "1"){
-  window.location.href = "admin.html?admin=1";
+  window.location.href = "/admin.html";
 }
 
 const PRICE_ACCESS_KEY = "maderarte2026";
@@ -6512,6 +6515,8 @@ function renderCatalog(){
   const list = filteredProducts();
   if(!grid || !empty) return;
   empty.classList.toggle("visible", list.length === 0);
+  const groupedView = activeCatalogFilter === "todos" || activeCatalogFilter === "favoritos";
+  const categoryCounts = new Map(CatalogOrder.groups(list).map(group => [group.key, group.products.length]));
   grid.innerHTML = list.map((product, index) => {
     const images = Array.isArray(product.imagenes) ? product.imagenes : [];
     const img = normalizeImage(images[0]);
@@ -6523,7 +6528,10 @@ function renderCatalog(){
     const price = showPrices && minPrice
       ? `<div class="product-price"><span>Desde</span><strong>${formatCOP(minPrice)}</strong></div>`
        : `<div class="product-price"><span>Hecho para tu espacio</span><strong>Ver detalles</strong></div>`;
-    return `
+    const beginsCategory = groupedView && (index === 0 || list[index - 1].categoria !== product.categoria);
+    const groupCount = categoryCounts.get(product.categoria) || 0;
+    const groupHeading = beginsCategory ? `<div class="catalog-group-heading"><h3>${escapeHTML(CatalogOrder.label(product.categoria))}</h3><span>${groupCount} ${groupCount === 1 ? "diseño" : "diseños"}</span></div>` : "";
+    return `${groupHeading}
       <a class="product-card" href="${escapeHTML(productPublicPath(product))}" aria-label="Ver ${escapeHTML(product.nombre)}" data-product-id="${product.id}" style="--product-index:${index % 9}">
         <div class="product-media">
           <img src="${escapeHTML(img)}" alt="${escapeHTML(product.nombre)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${escapeHTML(fallback)}';">
@@ -7384,7 +7392,7 @@ async function initCatalog(){
   });
   try{
     const response = await fetch(catalogFile + "?t=" + Date.now(), { cache:"no-store" });
-    catalogProducts = response.ok ? await response.json() : [];
+    catalogProducts = CatalogOrder.sortProducts(response.ok ? await response.json() : []);
   }catch(error){
     catalogProducts = [];
   }

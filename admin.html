@@ -8,11 +8,11 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data: blob:; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'">
   <title>Administrar catálogo | Maderarte</title>
   <link rel="icon" href="/favicon-32.png">
-  <link rel="stylesheet" href="/assets/admin-catalog.css?v=20260918b">
-  <script src="/assets/catalog-order.js?v=20260918b" defer></script>
-  <script src="/assets/admin-store.js?v=20260918b" defer></script>
-  <script src="/assets/admin-access.js?v=20260918b" defer></script>
-  <script src="/assets/admin-catalog.js?v=20260918b" defer></script>
+  <link rel="stylesheet" href="/assets/admin-catalog.css?v=20260918-pin4">
+  <script src="/assets/catalog-order.js?v=20260918-pin4" defer></script>
+  <script src="/assets/admin-store.js?v=20260918-pin4" defer></script>
+  <script src="/assets/admin-access.js?v=20260918-pin4" defer></script>
+  <script src="/assets/admin-catalog.js?v=20260918-pin4" defer></script>
 </head>
 <body class="is-locked">
   <header class="topbar"><a class="brand" href="/" aria-label="Volver a Maderarte"><img src="/logomaderarte2026.png" alt="" width="40" height="40"><span class="brand-text"><span>MADERARTE</span><small>Administración</small></span></a><div class="top-actions"><a id="view-catalog" href="/catalogo/" target="_blank" rel="noopener" hidden>Ver catálogo ↗</a><button id="logout" type="button" hidden>Cerrar sesión</button></div></header>
@@ -21,8 +21,8 @@
       <div class="lock-mark" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg></div>
       <h1 id="login-title">Acceso privado</h1>
       <form id="login-form">
-        <label for="access-password">Contraseña</label>
-        <input id="access-password" type="password" autocomplete="current-password" required maxlength="256" placeholder="Tu contraseña" autofocus>
+        <label for="access-password">PIN de 4 números</label>
+        <input id="access-password" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="current-password" required placeholder="Tu PIN" title="Escribe tu PIN de 4 números" autofocus>
         <button class="primary" type="submit" id="connect">Entrar</button>
       </form>
       <p id="login-status" class="status" role="status" aria-live="polite"></p>
@@ -35,15 +35,15 @@
       <form id="setup-form">
         <label for="access-token">Token de GitHub</label>
         <input id="access-token" type="password" autocomplete="off" spellcheck="false" required maxlength="1024" placeholder="Conexión de publicación">
-        <label for="new-password">Nueva contraseña</label>
-        <input id="new-password" type="password" autocomplete="new-password" required minlength="15" maxlength="256">
-        <label for="confirm-password">Repetir contraseña</label>
-        <input id="confirm-password" type="password" autocomplete="new-password" required minlength="15" maxlength="256">
-        <p class="hint">Mínimo 15 caracteres. Puedes usar una frase.</p>
+        <label for="new-password">Crear PIN de 4 números</label>
+        <input id="new-password" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="new-password" required title="Escribe exactamente 4 números">
+        <label for="confirm-password">Repetir PIN</label>
+        <input id="confirm-password" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="new-password" required title="Escribe exactamente 4 números">
+        <p class="hint">Usa los mismos 4 números en ambos campos.</p>
         <button class="primary" type="submit" id="save-access">Guardar y entrar</button>
       </form>
       <p id="setup-status" class="status" role="status" aria-live="polite"></p>
-      <details><summary>Ayuda con la conexión</summary><p><a href="https://github.com/settings/personal-access-tokens/new?name=Maderarte%20Catalogo&amp;target_name=alejoherrera05-del&amp;expires_in=90&amp;contents=write" target="_blank" rel="noopener noreferrer">Crear conexión en GitHub ↗</a>. En Repository access, elige Only select repositories y selecciona únicamente Maderarte.</p><p>En GitHub, crea un token de acceso detallado limitado a tu repositorio Maderarte, con permiso Contents: Read and write. No uses la contraseña de tu cuenta de GitHub.</p><p>La conexión queda cifrada en este navegador. En otro equipo, o si borras sus datos, tendrás que configurarla de nuevo. Olvidar esta contraseña requiere volver a vincular un token autorizado.</p></details>
+      <details><summary>Ayuda con la conexión</summary><p><a href="https://github.com/settings/personal-access-tokens/new?name=Maderarte%20Catalogo&amp;target_name=alejoherrera05-del&amp;expires_in=90&amp;contents=write" target="_blank" rel="noopener noreferrer">Crear conexión en GitHub ↗</a>. En Repository access, elige Only select repositories y selecciona únicamente Maderarte.</p><p>En GitHub, crea un token de acceso detallado limitado a tu repositorio Maderarte, con permiso Contents: Read and write. No uses la contraseña de tu cuenta de GitHub.</p><p>La conexión queda cifrada en este navegador. En otro equipo, o si borras sus datos, tendrás que configurarla de nuevo. Olvidar este PIN requiere volver a vincular un token autorizado.</p></details>
       <button class="text-button login-extra" id="back-login" type="button">Volver</button>
     </section>
     <section id="workspace" hidden inert aria-label="Administración de productos">

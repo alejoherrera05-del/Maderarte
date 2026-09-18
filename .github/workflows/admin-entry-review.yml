@@ -5,6 +5,7 @@ on:
     paths:
       - assets/admin-access.js
       - tools/refine-admin-entry.mjs
+      - tools/refine-admin-session.cjs
       - tools/test-admin-access.cjs
       - .github/workflows/admin-entry-review.yml
   workflow_dispatch:
@@ -26,6 +27,7 @@ jobs:
       - name: Aplicar cambios limitados al administrador
         run: |
           if [ -f tools/refine-admin-entry.mjs ]; then node tools/refine-admin-entry.mjs; fi
+          if [ -f tools/refine-admin-session.cjs ]; then node tools/refine-admin-session.cjs; fi
           node --check assets/admin-access.js
           node --check assets/admin-catalog.js
           node --check tools/test-catalog-browser.cjs
@@ -64,8 +66,8 @@ jobs:
           git diff --exit-code -- data index.html
           git config user.name "Maderarte ADMIN QA"
           git config user.email "actions@users.noreply.github.com"
-          rm -f tools/refine-admin-entry.mjs
-          git add -A -- admin.html assets/admin-catalog.css assets/admin-catalog.js tools/test-catalog-browser.cjs tools/test-catalog-admin.cjs tools/refine-admin-entry.mjs CATALOGO-ADMIN.md
+          rm -f tools/refine-admin-entry.mjs tools/refine-admin-session.cjs
+          git add -A -- admin.html assets/admin-catalog.css assets/admin-catalog.js tools/test-catalog-browser.cjs tools/test-catalog-admin.cjs tools/refine-admin-entry.mjs tools/refine-admin-session.cjs CATALOGO-ADMIN.md
           if ! git diff --cached --quiet; then
             git commit -m "Refinar entrada ADMIN con marca original y contraseña por navegador"
             git push origin HEAD:admin-acceso-marca

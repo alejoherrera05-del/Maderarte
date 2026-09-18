@@ -115,3 +115,5 @@ test('Authorized fixture loads without failure injection', async () => {
   assert.equal((await repo.read()).products.length, products.length);
   assert.equal(mock.state.writes, 0);
 });
+
+require('./test-admin-access.cjs');

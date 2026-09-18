@@ -1,41 +1,71 @@
 name: Sincronizar catalogo SEO
-
 on:
   push:
     branches: [main]
     paths:
       - index.html
+      - admin.html
+      - assets/**
+      - data/productos.json
       - data/productos-publicos.json
       - tools/build-seo-pages.mjs
       - tools/validate-seo.mjs
       - tools/guardrails.js
+      - tools/test-catalog-admin.cjs
+      - tools/catalog-test-fixture.cjs
       - tools/sync-routes.ps1
+      - .github/workflows/sync-seo.yml
   workflow_dispatch:
-
 permissions:
   contents: write
-
+  pages: write
+concurrency:
+  group: catalogo-seo-main
+  cancel-in-progress: false
 jobs:
   generate:
     if: ${{ !contains(github.event.head_commit.message, '[skip seo]') }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Generar rutas, metadatos y sitemap
-        run: node tools/build-seo-pages.mjs
-      - name: Validar metadatos, datos estructurados y sitemap
-        run: node tools/validate-seo.mjs
-      - name: Verificar contratos esenciales
-        run: node tools/guardrails.js
-      - name: Guardar paginas generadas
+      - name: Generar y validar desde la ultima version, sin sobrescribir otras ediciones
+        id: sync
+        shell: bash
         run: |
           git config user.name "Maderarte SEO"
           git config user.email "actions@users.noreply.github.com"
-          git add 404.html catalogo colecciones proceso historia contacto inicio sitemap.xml llms.txt
-          if ! git diff --cached --quiet; then
+          success=false
+          changed=false
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            node tools/build-seo-pages.mjs
+            node tools/validate-seo.mjs
+            node --test tools/test-catalog-admin.cjs
+            node tools/guardrails.js
+            git add -A -- 404.html catalogo colecciones proceso historia contacto inicio sitemap.xml llms.txt
+            if git diff --cached --quiet; then
+              success=true
+              break
+            fi
             git commit -m "Actualizar catalogo indexable [skip seo]"
-            git push
-          fi
+            if git push origin HEAD:main; then
+              success=true
+              changed=true
+              break
+            fi
+          done
+          test "$success" = true
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+      - name: Publicar tambien las rutas generadas por el flujo automatico
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${{ github.repository }}/pages/builds"

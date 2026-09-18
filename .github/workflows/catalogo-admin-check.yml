@@ -1,17 +1,28 @@
 name: Validar administracion del catalogo
 on:
   push:
-    branches: [catalogo-admin-categorias]
+    branches: [main, catalogo-admin-categorias]
     paths:
-      - tools/catalog-admin-update.01.b64
-      - assets/**
+      - index.html
       - admin.html
-      - tools/test-catalog-*.cjs
+      - assets/**
+      - data/productos*.json
+      - tools/**
+      - .github/workflows/catalogo-admin-check.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - index.html
+      - admin.html
+      - assets/**
+      - data/productos*.json
+      - tools/**
+      - .github/workflows/catalogo-admin-check.yml
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
-  group: catalogo-admin-qa-${{ github.ref }}
+  group: catalogo-admin-qa-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   validate:
@@ -19,29 +30,11 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Preparar integracion aislada
-        if: github.ref == 'refs/heads/catalogo-admin-categorias'
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          import base64, json, lzma
-          from pathlib import Path
-          parts = sorted(Path('tools').glob('catalog-admin-update.*.b64'))
-          if parts:
-              payload = json.loads(lzma.decompress(base64.b64decode(''.join(p.read_text() for p in parts))))
-              allowed = {'admin.html', 'CATALOGO-ADMIN.md', 'assets/catalog-order.js', 'assets/catalog-public.css', 'assets/admin-store.js', 'assets/admin-catalog.js', 'assets/admin-catalog.css', 'tools/apply-catalog-admin.mjs', 'tools/catalog-test-fixture.cjs', 'tools/test-catalog-admin.cjs', 'tools/test-catalog-browser.cjs'}
-              assert set(payload) == allowed, 'Unexpected integration paths'
-              assert sum(len(value.encode()) for value in payload.values()) < 250000
-              for name, content in payload.items():
-                  target = Path(name)
-                  target.parent.mkdir(parents=True, exist_ok=True)
-                  target.write_text(content)
-          PY
-          node tools/apply-catalog-admin.mjs
-          if [ -f tools/test-catalog-fixes.cjs ]; then node tools/test-catalog-fixes.cjs; fi
       - name: Generar rutas de todas las categorias
         run: node tools/build-seo-pages.mjs
       - name: Validar SEO y logica del catalogo
@@ -67,14 +60,3 @@ jobs:
           name: catalogo-review
           retention-days: 3
           path: /tmp/maderarte-review/
-      - name: Guardar integracion validada solo en la rama de trabajo
-        if: github.ref == 'refs/heads/catalogo-admin-categorias'
-        run: |
-          git config user.name "Maderarte Catalogue QA"
-          git config user.email "actions@users.noreply.github.com"
-          rm -f tools/catalog-admin-update.*.b64
-          git add -A -- admin.html index.html assets tools CATALOGO-ADMIN.md 404.html catalogo colecciones proceso historia contacto inicio sitemap.xml llms.txt
-          if ! git diff --cached --quiet; then
-            git commit -m "Integrate validated category-based catalogue and dedicated ADMIN"
-            git push origin HEAD:catalogo-admin-categorias
-          fi

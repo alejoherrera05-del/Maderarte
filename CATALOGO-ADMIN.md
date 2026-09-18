@@ -1,31 +1,32 @@
-# Administración del catálogo de Maderarte
+# Acceso y catálogo de Maderarte
 
-## Uso
+## Entrada
 
-La web pública enlaza a `/admin.html` desde el candado **ADMIN** del pie de página. El editor es independiente de la aplicación interna de pedidos y ventas.
+El candado ADMIN del pie de página lleva a /admin.html. La entrada usa el mismo logo oficial, Algerian y SF Pro de la web. No tiene consulta anónima ni frases promocionales. No carga productos al abrirla sin iniciar sesión.
 
-Conecta un token de GitHub limitado al repositorio `alejoherrera05-del/Maderarte`, con permiso **Contents: Read and write**. La autorización efectiva de publicación la aplica GitHub; el editor no utiliza la antigua contraseña incluida en el código. Un token anterior de este mismo catálogo se traslada del almacenamiento permanente a la sesión de la pestaña. No se solicitan ni se publican credenciales en el catálogo o los respaldos.
+La pantalla normal muestra Contraseña y Entrar. No existe una contraseña universal ni una clave creada por el asistente: el propietario define su contraseña en el navegador.
 
-Selecciona **Nuevo producto**, indica su categoría y completa nombre, fotografías y datos. La categoría se elige explícitamente: no se deduce de la foto. Las categorías siguen este orden: Salas, Comedores, Alcobas, Sofá camas y Maderarte Junior. Dentro de Junior se respeta su subcategoría. El orden normal dentro de cada grupo es alfabético en español; el campo opcional Prioridad permite anteponer una pieza dentro de su grupo. Cambiar o subir fotografías no cambia la categoría.
+## Primera configuración
 
-**Guardar borrador** conserva el trabajo en este navegador, sin modificar internet. **Guardar y publicar** primero conserva el borrador y después publica fotos y ambos catálogos conjuntamente. El indicador distingue guardado local, guardado en GitHub y disponibilidad de los datos en la web. Las fichas indexables se sincronizan mediante el flujo SEO. GitHub Pages puede necesitar un intervalo de propagación; no se promete publicación instantánea.
+1. Pulsa Configurar este navegador.
+2. Vincula un token detallado de GitHub limitado al repositorio Maderarte, con Contents: Read and write. Una conexión anterior de este mismo catálogo puede rellenarse de forma enmascarada; nunca abre el panel automáticamente.
+3. Elige y confirma una contraseña de 15 a 256 caracteres. La contraseña no es la de tu cuenta de GitHub.
+4. Pulsa Guardar y entrar. La aplicación comprueba los permisos y carga el catálogo antes de guardar la conexión cifrada.
 
-La búsqueda ignora mayúsculas y tildes. Los filtros y encabezados permiten encontrar una categoría sin mezclar modelos. Las fotos pueden reordenarse con flechas o arrastrando; la primera es la principal. Se preservan proporciones, medidas, variantes, acabados, características e identificadores existentes.
+Después entras con tu contraseña. Cerrar sesión limpia el catálogo y la ficha de la pantalla y descarta la credencial descifrada. Al recargar o abrir otra pestaña vuelve a pedir la contraseña. Los borradores de producto permanecen en este navegador.
 
-## Recuperación y seguridad
+## Alcance y límites del acceso
 
-El borrador se almacena en IndexedDB y puede exportarse como JSON. Un borrador del editor anterior nunca sobrescribe automáticamente el catálogo remoto: se ofrece su descarga. Descarga el respaldo antes de limpiar los datos del navegador o resolver un conflicto. No hay importación automática destructiva.
+Esto es una contraseña para desbloquear la conexión DE ESTE NAVEGADOR, no un sistema central de cuentas. En otro dispositivo, tras borrar sus datos o al olvidar la contraseña, hay que configurar de nuevo un token autorizado. Cambiar la contraseña local no cambia otros equipos ni revoca un token: para revocarlo hay que hacerlo en GitHub. Una cuenta central con correo, recuperación y permisos por usuario requiere autenticación en un servidor; no se ha añadido ese servicio.
 
-Si otro equipo modificó el catálogo desde que abriste el editor, se bloquea la publicación para evitar sobrescribirlo. Conserva tu respaldo y carga la versión publicada antes de reconciliar cambios. Las modificaciones de código o SEO ajenas al archivo de productos se conservan.
+Solo la conexión se cifra en almacenamiento local, con AES-GCM-256, sal aleatoria, IV aleatorio y PBKDF2-SHA256 de 600000 iteraciones. No se guardan la contraseña ni la clave derivada; el token descifrado solo se usa en memoria durante la sesión. La contraseña no se envía a GitHub. GitHub sigue autorizando cada lectura/escritura remota. Un token inválido no permite configurar el acceso. Se retiran las credenciales antiguas en texto claro de este catálogo al completar la vinculación.
 
-Los tokens permanecen solamente en la sesión de la pestaña y se eliminan al desconectar. No publiques datos de clientes, costos ni información confidencial: el alojamiento y el repositorio siguen siendo públicos. El enlace comercial con precios conserva su funcionamiento; ocultar precios en el escaparate no convierte el archivo de precios en un recurso privado.
+Esto no privatiza GitHub Pages ni el repositorio: las fotos y los archivos ya publicados siguen siendo públicos, incluido el archivo comercial con precios. Los borradores locales no se cifran con este cambio. No introduzcas información confidencial. Este mecanismo no protege una sesión desbloqueada frente a una extensión maliciosa, código malicioso del mismo origen o un dispositivo comprometido. Usa una contraseña larga y distinta, un equipo de confianza y cierra sesión al terminar.
 
-## Arquitectura y verificación
+## Catálogo
 
-- `assets/catalog-order.js`: esquema, validación, orden compartido y eliminación recursiva de precios para el archivo público.
-- `assets/admin-store.js`: control de versiones y una publicación atómica mediante Git blobs/tree/commit, sin forzar la rama.
-- `assets/admin-catalog.js`: editor, borradores y estados de conexión. `admin.html` tiene noindex y política de seguridad de contenido.
-- `tools/build-seo-pages.mjs`: genera rutas ordenadas y retira únicamente fichas HTML generadas obsoletas; no elimina imágenes.
-- `.github/workflows/sync-seo.yml`: genera y valida rutas desde la última versión y solicita explícitamente una reconstrucción de Pages cuando guarda cambios con el token del flujo.
+Las categorías conservan el orden Salas, Comedores, Alcobas, Sofá camas y Junior. Dentro de cada grupo se aplica subcategoría, prioridad opcional y nombre. Las nuevas fotos no cambian la categoría. Guardar borrador guarda solo localmente; Guardar y publicar actualiza ambos catálogos y fotos conjuntamente. Los conflictos con otra edición bloquean la publicación; descarga el respaldo antes de reconciliar. No se cambia Maderarte-App.
 
-Pruebas: `node --test tools/test-catalog-admin.cjs`, `node tools/test-catalog-browser.cjs`, `node tools/validate-seo.mjs` y `node tools/guardrails.js`. Las pruebas del editor simulan todas las escrituras de GitHub: no crean ni editan productos reales. Las capturas se toman a 1440 y 390 píxeles.
+## Pruebas
+
+node --test tools/test-catalog-admin.cjs incluye pruebas del cifrado, contraseña incorrecta, manipulación de datos, errores de almacenamiento, permisos, orden y publicación atómica. node tools/test-catalog-browser.cjs verifica contraseña, configuración, ausencia de entrada anónima, limpieza al salir, marca y flujos de edición a 1440/390 px. Las escrituras de las pruebas son simuladas; no cambian productos reales.

@@ -1,11 +1,11 @@
 /* Dedicated catalogue UI. Product data keeps its existing IDs and optional metadata. */
 (() => {
   'use strict';
-  const Order = window.CatalogOrder, Store = window.CatalogStore;
+  const Order = window.CatalogOrder, Store = window.CatalogStore, Access = window.CatalogAccess;
   const $ = id => document.getElementById(id);
   const SESSION_KEY = 'maderarte_admin_session';
   const MATERIALS = ['estructura', 'madera', 'tela', 'espuma', 'pintura'];
-  const state = { products: [], sha: '', repository: null, pending: false, readonly: false, busy: false, conflict: false, editing: null, photos: [], finishes: [], dirty: false, legacy: null, poll: 0 };
+  const state = { products: [], sha: '', repository: null, pending: false, authorized: false, busy: false, conflict: false, editing: null, photos: [], finishes: [], dirty: false, legacy: null, poll: 0 };
   const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
   const money = value => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(Number(value));
   const slug = value => Order.fold(value).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'pieza';
@@ -16,8 +16,8 @@
   function status(text, kind = '') { $('sync-status').textContent = text; $('sync-status').className = `sync-status ${kind}`; }
   function setBusy(value) {
     state.busy = value;
-    for (const id of ['new-product', 'reload', 'publish', 'save-product', 'save-draft', 'delete-product', 'logout']) $(id).disabled = value || (state.readonly && !['reload', 'logout'].includes(id)) || (id === 'publish' && (!state.pending || state.conflict));
-    $('editor-fields').disabled = value; $('close-editor').disabled = value;
+    for (const id of ['new-product', 'reload', 'publish', 'save-product', 'save-draft', 'delete-product', 'logout']) $(id).disabled = value || !state.authorized || (id === 'publish' && (!state.pending || state.conflict));
+    $('editor-fields').disabled = value || !state.authorized; $('close-editor').disabled = value;
   }
   async function db() {
     if (database) return database;
@@ -68,13 +68,13 @@
     const query = Order.fold($('search').value), category = $('category-filter').value;
     const filtered = state.products.filter(p => (category === 'todos' || p.categoria === category) && (!query || Order.fold([p.nombre, Order.label(p.categoria), Order.sublabel(p.subcategoria), p.descripcion].join(' ')).includes(query)));
     const counts = Order.groups(state.products).length;
-    $('summary').textContent = `${state.products.length} productos · ${counts} categorías con productos${state.readonly ? ' · solo lectura' : ''}`;
+    $('summary').textContent = `${state.products.length} productos · ${counts} categorías con productos`;
     $('catalog-list').innerHTML = Order.groups(filtered).map(group => `<section class="catalog-group" aria-label="${escape(group.label)}"><div class="group-head"><h3>${escape(group.label)}</h3><span class="group-count">${group.products.length}</span></div>${group.products.map(product => {
       const prices = [product.precio, ...Object.values(product.variantesComedor || {}), ...Object.values(product.variantesAlcoba || {})].map(Number).filter(n => Number.isFinite(n) && n > 0);
-      const price = state.readonly ? 'Catálogo público' : prices.length ? `Desde ${money(Math.min(...prices))}` : 'Precio por definir';
+      const price = prices.length ? `Desde ${money(Math.min(...prices))}` : 'Precio por definir';
       const meta = [Order.label(product.categoria), product.categoria === 'junior' ? Order.sublabel(product.subcategoria) : '', `${product.imagenes?.length || 0} fotos`, product.orden != null ? `Prioridad ${product.orden}` : ''].filter(Boolean).join(' · ');
       const image = Order.validImage(product.imagenes?.[0]) ? product.imagenes[0] : '/logomaderarte2026.png';
-      return `<article class="product-row" data-product-id="${escape(product.id)}"><img class="row-photo" src="${escape(image)}" alt="${escape(product.nombre)}" loading="lazy"><div><strong class="row-title">${escape(product.nombre)}</strong><p class="row-meta">${escape(meta)}</p><span class="row-price">${escape(price)}</span></div><div class="row-actions">${state.readonly ? '' : `<button type="button" data-edit="${escape(product.id)}">Editar</button>`}<a href="${escape(productPath(product))}" target="_blank" rel="noopener">Ver ↗</a></div></article>`;
+      return `<article class="product-row" data-product-id="${escape(product.id)}"><img class="row-photo" src="${escape(image)}" alt="${escape(product.nombre)}" loading="lazy"><div><strong class="row-title">${escape(product.nombre)}</strong><p class="row-meta">${escape(meta)}</p><span class="row-price">${escape(price)}</span></div><div class="row-actions">${`<button type="button" data-edit="${escape(product.id)}">Editar</button>`}<a href="${escape(productPath(product))}" target="_blank" rel="noopener">Ver ↗</a></div></article>`;
     }).join('')}</section>`).join('') || '<div class="empty">No hay productos que coincidan. Prueba otra búsqueda o categoría.</div>';
     setBusy(state.busy);
   }
@@ -87,35 +87,83 @@
     state.pending = Boolean(restorable); state.conflict = Boolean(restorable && draft.baseSha !== remote.sha);
     if (state.conflict) status(new Store.ConflictError().message, 'error');
     else if (state.pending) status('Borrador recuperado en este dispositivo. Tiene cambios pendientes de publicar.', 'pending');
-    else status('Catálogo cargado desde GitHub. Cada producto se ordena automáticamente en su categoría.', 'ok');
+    else status('Catálogo actualizado.', 'ok');
     state.legacy = await legacyDraft();
     $('recovery').hidden = !state.legacy || JSON.stringify(Order.sortProducts(state.legacy)) === JSON.stringify(Order.sortProducts(remote.products));
     if (!restorable) await persist();
     render();
   }
-  async function connect(token) {
-    $('connect').disabled = true; $('login-status').className = 'status'; $('login-status').textContent = 'Verificando acceso y cargando el catálogo…';
+  let authBusy = false, authGeneration = 0;
+  function clearLegacyToken() {
     try {
-      const repository = new Store.Repository({ token }); await repository.verifyAccess();
-      state.repository = repository; state.readonly = false;
-      await loadAuthenticated();
-      sessionStorage.setItem(SESSION_KEY, token); $('access-token').value = '';
-      $('login-panel').hidden = true; $('workspace').hidden = false; $('logout').hidden = false;
-      render();
-    } catch (error) {
-      state.repository = null; sessionStorage.removeItem(SESSION_KEY);
-      $('login-status').textContent = error.message; $('login-status').className = 'status error';
-    } finally { $('connect').disabled = false; }
+      sessionStorage.removeItem(SESSION_KEY);
+      const previous = JSON.parse(localStorage.getItem('maderarte_gh') || '{}');
+      if (previous.owner === 'alejoherrera05-del' && previous.repo === 'Maderarte' && previous.token) {
+        delete previous.token; localStorage.setItem('maderarte_gh', JSON.stringify(previous));
+      }
+    } catch { /* A storage failure never grants access. */ }
   }
-  async function readOnly() {
-    $('read-only').disabled = true;
+  function lockWorkspace() {
+    authGeneration++; state.poll++; state.authorized = false;
+    if (state.repository) state.repository.token = '';
+    state.repository = null; state.products = []; state.sha = ''; state.editing = null;
+    state.photos = []; state.finishes = []; state.dirty = false; state.pending = false; state.conflict = false; state.legacy = null;
+    $('catalog-list').replaceChildren(); $('photo-list').replaceChildren(); $('finish-list').replaceChildren();
+    $('search').value = ''; $('category-filter').value = 'todos'; clearTimeout(toastTimer); $('toast').hidden = true; $('form-status').textContent = '';
+    $('summary').textContent = ''; $('sync-status').textContent = ''; $('focal-preview').style.backgroundImage = 'none';
+    $('product-form').reset(); $('product-dialog').close(); $('product-dialog').inert = true;
+    $('workspace').hidden = true; $('workspace').inert = true;
+    $('logout').hidden = true; $('view-catalog').hidden = true; document.body.classList.add('is-locked');
+    setBusy(false);
+  }
+  function authBusyState(busy) {
+    authBusy = busy;
+    for (const id of ['connect', 'save-access', 'configure-access', 'back-login', 'access-password', 'access-token', 'new-password', 'confirm-password']) $(id).disabled = busy;
+  }
+  async function connect(token, newPassword, ticket) {
+    const current = () => { if (ticket !== authGeneration) throw new Error('Vuelve a iniciar sesión.'); };
+    current();
+    const repository = new Store.Repository({ token });
+    await repository.verifyAccess(); current(); state.repository = repository;
+    await loadAuthenticated(); current();
+    if (newPassword !== undefined) { const encrypted = await Access.seal(token, newPassword); current(); Access.save(encrypted); }
+    clearLegacyToken(); state.authorized = true;
+    for (const id of ['access-password', 'access-token', 'new-password', 'confirm-password']) $(id).value = '';
+    $('login-panel').hidden = true; $('setup-panel').hidden = true;
+    $('workspace').hidden = false; $('workspace').inert = false; $('product-dialog').inert = false;
+    $('logout').hidden = false; $('view-catalog').hidden = false; document.body.classList.remove('is-locked');
+    render(); $('new-product').focus();
+  }
+  async function signIn(setup) {
+    if (authBusy || state.authorized) return;
+    const ticket = ++authGeneration;
+    const message = $(setup ? 'setup-status' : 'login-status');
+    message.className = 'status'; message.textContent = 'Entrando…'; authBusyState(true);
     try {
-      const response = await fetch('/data/productos-publicos.json?t=' + Date.now(), { cache: 'no-store' });
-      if (!response.ok) throw new Error('No se pudo cargar el catálogo público.');
-      state.products = Order.sortProducts(await response.json()); state.readonly = true; state.pending = false;
-      $('login-panel').hidden = true; $('workspace').hidden = false; $('logout').hidden = false; $('logout').textContent = 'Conectar para editar';
-      status('Modo de consulta. Para editar y publicar necesitas conectar el acceso de GitHub.'); render(); $('logout').disabled = false;
-    } catch (error) { $('login-status').textContent = error.message; } finally { $('read-only').disabled = false; }
+      if (setup) {
+        const password = $('new-password').value;
+        Access.validatePassword(password);
+        if (password !== $('confirm-password').value) throw new Error('Las contraseñas no coinciden.');
+        await connect($('access-token').value.trim(), password, ticket);
+      } else {
+        const token = await Access.unlock(Access.read(), $('access-password').value);
+        await connect(token, undefined, ticket);
+      }
+      message.textContent = '';
+    } catch (error) { lockWorkspace(); message.textContent = error.message; message.className = 'status error'; }
+    finally {
+      $('access-password').value = ''; $('new-password').value = ''; $('confirm-password').value = '';
+      authBusyState(false);
+    }
+  }
+  function showSetup() {
+    if (authBusy || state.authorized) return;
+    $('login-panel').hidden = true; $('setup-panel').hidden = false; $('setup-status').textContent = '';
+    try {
+      const previous = JSON.parse(localStorage.getItem('maderarte_gh') || '{}');
+      $('access-token').value = sessionStorage.getItem(SESSION_KEY) || (previous.owner === 'alejoherrera05-del' && previous.repo === 'Maderarte' ? previous.token || '' : '');
+    } catch { $('access-token').value = ''; }
+    ($('access-token').value ? $('new-password') : $('access-token')).focus();
   }
   function categoryChanged() {
     const category = $('product-category').value;
@@ -137,7 +185,7 @@
     $('finish-list').innerHTML = state.finishes.map((color, index) => `<button class="finish-chip" type="button" data-remove-finish="${index}" aria-label="Quitar acabado ${escape(color)}"><span class="swatch" style="background:${/^#[a-f0-9]{3,8}$/i.test(color) ? color : '#ddd'}"></span>${escape(color)} ×</button>`).join('');
   }
   function openEditor(id = null) {
-    if (state.readonly || state.busy) return;
+    if (!state.authorized || state.busy) return;
     const product = id == null ? null : state.products.find(p => String(p.id) === String(id));
     if (id != null && !product) return;
     $('product-form').reset(); state.editing = product ? clone(product) : null; state.photos = [...(product?.imagenes || [])]; state.finishes = [...(product?.acabados || [])]; state.dirty = false;
@@ -173,7 +221,7 @@
     return product;
   }
   async function saveProduct(publishNow) {
-    if (state.busy || state.readonly || !$('product-form').reportValidity()) return;
+    if (state.busy || !state.authorized || !$('product-form').reportValidity()) return;
     const product = formProduct(), errors = Order.validate([product]);
     if (errors.length) { $('form-status').textContent = errors.join('\n'); $('form-status').className = 'status error'; return; }
     setBusy(true);
@@ -187,7 +235,7 @@
     setBusy(false); if (publishNow) await publish(); else toast('Borrador guardado. Aún no está publicado.');
   }
   async function publish() {
-    if (state.busy || state.readonly || !state.pending) return;
+    if (state.busy || !state.authorized || !state.pending) return;
     setBusy(true); const generation = ++state.poll;
     try {
       if (state.conflict) throw new Store.ConflictError();
@@ -215,7 +263,7 @@
     setTimeout(() => checkDeployment(result, generation, attempt + 1), 5000);
   }
   async function deleteProduct() {
-    if (!state.editing || state.busy) return;
+    if (!state.authorized || !state.editing || state.busy) return;
     if (state.products.length <= 1) { $('form-status').textContent = 'Conserva al menos un producto en el catálogo publicado.'; return; }
     if (!confirm(`¿Eliminar «${state.editing.nombre}» del catálogo y publicar el cambio? Las fotos existentes no se borrarán del repositorio.`)) return;
     setBusy(true);
@@ -239,7 +287,7 @@
     } finally { URL.revokeObjectURL(url); }
   }
   async function addPhotos(event) {
-    if (state.busy) return; const files = [...event.target.files]; if (!files.length) return;
+    if (!state.authorized || state.busy) return; const files = [...event.target.files]; if (!files.length) return;
     setBusy(true); const errors = [];
     for (const [index, file] of files.entries()) {
       $('form-status').textContent = `Preparando foto ${index + 1} de ${files.length}…`;
@@ -247,16 +295,22 @@
     }
     event.target.value = ''; renderPhotos(); $('form-status').textContent = errors.join('\n'); $('form-status').className = errors.length ? 'status error' : 'status'; setBusy(false);
   }
-  function movePhoto(from, to) { if (state.busy || to < 0 || from < 0 || to >= state.photos.length || from === to) return; const [image] = state.photos.splice(from, 1); state.photos.splice(to, 0, image); state.dirty = true; renderPhotos(); }
+  function movePhoto(from, to) { if (!state.authorized || state.busy || to < 0 || from < 0 || to >= state.photos.length || from === to) return; const [image] = state.photos.splice(from, 1); state.photos.splice(to, 0, image); state.dirty = true; renderPhotos(); }
   for (const target of ['category-filter', 'product-category']) for (const category of Order.categories) $(target).add(new Option(category.label, category.key));
   for (const sub of Order.junior) $('product-subcategory').add(new Option(sub.label, sub.key));
-  $('login-form').addEventListener('submit', event => { event.preventDefault(); connect($('access-token').value.trim()); });
-  $('read-only').addEventListener('click', readOnly);
+  $('login-form').addEventListener('submit', event => { event.preventDefault(); signIn(false); });
+  $('setup-form').addEventListener('submit', event => { event.preventDefault(); signIn(true); });
+  $('configure-access').addEventListener('click', showSetup);
+  $('back-login').addEventListener('click', () => {
+    if (authBusy) return;
+    $('setup-panel').hidden = true; $('login-panel').hidden = false; $('login-status').textContent = '';
+    for (const id of ['access-token', 'new-password', 'confirm-password']) $(id).value = '';
+    $('access-password').focus();
+  });
   $('logout').addEventListener('click', () => {
     if (state.busy) return;
     if (state.dirty && !confirm('¿Cerrar sin guardar los cambios de esta ficha?')) return;
-    state.poll++; sessionStorage.removeItem(SESSION_KEY); state.repository = null; state.dirty = false;
-    $('workspace').hidden = true; $('login-panel').hidden = false; $('logout').hidden = true; $('logout').textContent = 'Cerrar sesión'; $('login-status').textContent = 'Conecta tu acceso para editar. Los borradores guardados se conservan en este dispositivo.';
+    clearLegacyToken(); lockWorkspace(); $('setup-panel').hidden = true; $('login-panel').hidden = false; $('login-status').textContent = ''; $('access-password').focus();
   });
   $('search').addEventListener('input', render); $('category-filter').addEventListener('change', render);
   $('catalog-list').addEventListener('click', event => { const button = event.target.closest('[data-edit]'); if (button) openEditor(button.dataset.edit); });
@@ -279,22 +333,20 @@
   $('photo-list').addEventListener('dragend', () => { dragPhoto = null; document.querySelectorAll('.dragging').forEach(item => item.classList.remove('dragging')); });
   $('add-finish').addEventListener('click', () => { const color = $('finish-color').value; if (!state.finishes.includes(color)) { state.finishes.push(color); state.dirty = true; renderFinishes(); } });
   $('finish-list').addEventListener('click', event => { const button = event.target.closest('[data-remove-finish]'); if (button) { state.finishes.splice(Number(button.dataset.removeFinish), 1); state.dirty = true; renderFinishes(); } });
-  $('export').addEventListener('click', () => exportData(state.products)); $('export-legacy').addEventListener('click', () => exportData(state.legacy, 'maderarte-borrador-anterior'));
+  $('export').addEventListener('click', () => { if (state.authorized) exportData(state.products); }); $('export-legacy').addEventListener('click', () => { if (state.authorized) exportData(state.legacy, 'maderarte-borrador-anterior'); });
   $('reload').addEventListener('click', async () => {
-    if (state.busy) return;
+    if (!state.authorized || state.busy) return;
     if ((state.pending || state.dirty) && !confirm('Recargar reemplazará el borrador de este dispositivo por lo publicado. Descarga un respaldo primero para conservarlo. ¿Continuar?')) return;
     setBusy(true); state.poll++;
-    try { if (state.readonly) await readOnly(); else await loadAuthenticated(true); } catch (error) { status(error.message, 'error'); } finally { setBusy(false); }
+    try { await loadAuthenticated(true); } catch (error) { status(error.message, 'error'); } finally { setBusy(false); }
   });
   window.addEventListener('beforeunload', event => { if (state.dirty || state.busy) { event.preventDefault(); event.returnValue = ''; } });
-  // Migrate only the matching public-site connection. Never use credentials for another app.
-  let token = '';
-  try {
-    token = sessionStorage.getItem(SESSION_KEY) || '';
-    const legacy = JSON.parse(localStorage.getItem('maderarte_gh') || '{}');
-    if (legacy.token && legacy.owner === 'alejoherrera05-del' && legacy.repo === 'Maderarte') {
-      token ||= legacy.token; delete legacy.token; localStorage.setItem('maderarte_gh', JSON.stringify(legacy)); sessionStorage.setItem(SESSION_KEY, token);
-    }
-  } catch { /* Storage restrictions are explained at login, never bypass authentication. */ }
-  if (token) connect(token);
+  function lockOnNavigation() {
+    lockWorkspace(); authBusyState(false); $('setup-panel').hidden = true; $('login-panel').hidden = false;
+    for (const id of ['access-password', 'access-token', 'new-password', 'confirm-password']) $(id).value = '';
+  }
+  window.addEventListener('pagehide', lockOnNavigation);
+  window.addEventListener('pageshow', event => { if (event.persisted) lockOnNavigation(); });
+  // A saved connection never unlocks the editor without the device password.
+  setBusy(false);
 })();

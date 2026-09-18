@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import CatalogOrder from "../assets/catalog-order.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -17,7 +18,7 @@ function publicUrl(value) {
 const source = (await fs.readFile(path.join(root, "index.html"), "utf8"))
   .replace(/^\uFEFF/, "")
   .replace(/\r\n?/g, "\n");
-const products = JSON.parse(await fs.readFile(path.join(root, "data", "productos-publicos.json"), "utf8"));
+const products = CatalogOrder.sortProducts(JSON.parse(await fs.readFile(path.join(root, "data", "productos-publicos.json"), "utf8")));
 const today = new Date().toISOString().slice(0, 10);
 
 const categories = {
@@ -456,6 +457,18 @@ for (const [key, category] of Object.entries(categories)) {
     bodyRoute: "catalog"
   };
   await write(config.output, render(config));
+}
+
+const productRoot = path.join(root, "catalogo", "producto");
+const expectedProductFolders = new Set(products.map(product => productPath(product).split("/").filter(Boolean).pop()));
+for (const entry of await fs.readdir(productRoot, { withFileTypes: true }).catch(error => { if (error.code === "ENOENT") return []; throw error; })) {
+  if (!entry.isDirectory() || expectedProductFolders.has(entry.name)) continue;
+  const oldPage = path.join(productRoot, entry.name, "index.html");
+  const oldMarkup = await fs.readFile(oldPage, "utf8").catch(error => { if (error.code === "ENOENT") return ""; throw error; });
+  if (oldMarkup.includes('data-seo-route="product"')) {
+    await fs.unlink(oldPage);
+    await fs.rmdir(path.dirname(oldPage)).catch(error => { if (error.code !== "ENOTEMPTY") throw error; });
+  }
 }
 
 for (const product of products) {

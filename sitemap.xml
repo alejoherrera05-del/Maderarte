@@ -2,67 +2,127 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://maderartepopayan.com/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://maderartepopayan.com/proceso/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://maderartepopayan.com/historia/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://maderartepopayan.com/contacto/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/salas/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/comedores/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/alcobas/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/sofa-camas/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/junior/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/sala-brunatty-reclinable-l-1780697281549/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1780697281550_klcv1.jpg</image:loc>
+      <image:title>Sala Brunatty (Reclinable) “L”</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/sala-canoa-1780678901311/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1780678901312_bdd9p.jpg</image:loc>
+      <image:title>Sala Canoa</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/sala-chanel-1780771173523/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1780771173525_7d45v.jpg</image:loc>
+      <image:title>Sala Chanel</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/sala-diamante-reclinable-1780678305098/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1780678305099_upuoa.jpg</image:loc>
+      <image:title>Sala Diamante  (Reclinable)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/sala-ditroit-1780696059688/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1780696059692_zpkvs.jpg</image:loc>
+      <image:title>Sala Ditroit</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/sala-italiana-1780700532107/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1780700532109_nv2n5.jpg</image:loc>
+      <image:title>Sala Italiana</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://maderartepopayan.com/catalogo/producto/sala-luxury-1780675331586/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -72,7 +132,7 @@
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/producto/sala-multifuncional-1780676468332/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -81,48 +141,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/sala-prisma-l-1780676977096/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1780676977097_mi9th.jpg</image:loc>
-      <image:title>Sala Prisma “L”</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/sala-oslo-1780677536047/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1780677536048_tmalb.jpg</image:loc>
-      <image:title>Sala Oslo</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/sala-diamante-reclinable-1780678305098/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1780678305099_upuoa.jpg</image:loc>
-      <image:title>Sala Diamante  (Reclinable)</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/sala-canoa-1780678901311/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1780678901312_bdd9p.jpg</image:loc>
-      <image:title>Sala Canoa</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://maderartepopayan.com/catalogo/producto/sala-nube-1780682377563/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -131,48 +151,28 @@
     </image:image>
   </url>
   <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/sala-ditroit-1780696059688/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <loc>https://maderartepopayan.com/catalogo/producto/sala-oslo-1780677536047/</loc>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1780696059692_zpkvs.jpg</image:loc>
-      <image:title>Sala Ditroit</image:title>
+      <image:loc>https://maderartepopayan.com/img/p_1780677536048_tmalb.jpg</image:loc>
+      <image:title>Sala Oslo</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/sala-brunatty-reclinable-l-1780697281549/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <loc>https://maderartepopayan.com/catalogo/producto/sala-prisma-l-1780676977096/</loc>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1780697281550_klcv1.jpg</image:loc>
-      <image:title>Sala Brunatty (Reclinable) “L”</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/sala-italiana-1780700532107/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1780700532109_nv2n5.jpg</image:loc>
-      <image:title>Sala Italiana</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/sala-chanel-1780771173523/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1780771173525_7d45v.jpg</image:loc>
-      <image:title>Sala Chanel</image:title>
+      <image:loc>https://maderartepopayan.com/img/p_1780676977097_mi9th.jpg</image:loc>
+      <image:title>Sala Prisma “L”</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/producto/comedor-alaska-1781197237995/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -181,38 +181,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/comedor-holanda-1781197670498/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781197670500_e1ttc.jpg</image:loc>
-      <image:title>Comedor Holanda</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/comedor-capry-1781198053375/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781198053377_j7ixv.jpg</image:loc>
-      <image:title>Comedor Capry</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/comedor-media-luna-1781198422699/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781198422701_j7myi.jpg</image:loc>
-      <image:title>Comedor media luna</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://maderartepopayan.com/catalogo/producto/comedor-audi-1781198872691/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -221,8 +191,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/comedor-capry-1781198053375/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781198053377_j7ixv.jpg</image:loc>
+      <image:title>Comedor Capry</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/comedor-herradura-1781200377824/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781200377825_v60um.jpg</image:loc>
+      <image:title>Comedor Herradura</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/comedor-holanda-1781197670498/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781197670500_e1ttc.jpg</image:loc>
+      <image:title>Comedor Holanda</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/comedor-media-luna-1781198422699/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781198422701_j7myi.jpg</image:loc>
+      <image:title>Comedor media luna</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://maderartepopayan.com/catalogo/producto/comedor-milano-1781199219192/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -232,7 +242,7 @@
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/producto/comedor-nordico-1781199552618/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -242,7 +252,7 @@
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/producto/comedor-siena-1781199888979/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -251,108 +261,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/comedor-herradura-1781200377824/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781200377825_v60um.jpg</image:loc>
-      <image:title>Comedor Herradura</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-majestic-1781302828117/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781302828118_m341t.jpg</image:loc>
-      <image:title>Alcoba Majestic</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-lluvia-1781303098691/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781303098692_1okoi.jpg</image:loc>
-      <image:title>Alcoba Lluvia</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-poro-abierto-1781303326021/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781303326023_4w60j.jpg</image:loc>
-      <image:title>Alcoba Poro abierto</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-esplendor-1781632970094/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781632970095_cmhnb.jpg</image:loc>
-      <image:title>Alcoba Esplendor</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-temesis-1781633277189/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781633277190_3sht8.jpg</image:loc>
-      <image:title>Alcoba Temesis</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-bosel-1781633523908/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781633523909_69rxo.jpg</image:loc>
-      <image:title>Alcoba Bosel</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-turqueza-1781633842037/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781633842038_md8u4.jpg</image:loc>
-      <image:title>Alcoba Turqueza</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-fantasia-1781643707186/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781643707187_u5fyg.jpg</image:loc>
-      <image:title>Alcoba Fantasía</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-portofino-1781644083519/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781644083521_8ntqa.jpg</image:loc>
-      <image:title>Alcoba Portofino</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://maderartepopayan.com/catalogo/producto/alcoba-armonia-1781644856902/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -361,18 +271,68 @@
     </image:image>
   </url>
   <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-roma-1781649466686/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-bosel-1781633523908/</loc>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1781649466687_vhaqd.jpg</image:loc>
-      <image:title>Alcoba Roma</image:title>
+      <image:loc>https://maderartepopayan.com/img/p_1781633523909_69rxo.jpg</image:loc>
+      <image:title>Alcoba Bosel</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-bucle-1783613269339/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1783613269339_ey3sz.jpg</image:loc>
+      <image:title>Alcoba buclé</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-esplendor-1781632970094/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781632970095_cmhnb.jpg</image:loc>
+      <image:title>Alcoba Esplendor</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-fantasia-1781643707186/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781643707187_u5fyg.jpg</image:loc>
+      <image:title>Alcoba Fantasía</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-lluvia-1781303098691/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781303098692_1okoi.jpg</image:loc>
+      <image:title>Alcoba Lluvia</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-majestic-1781302828117/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781302828118_m341t.jpg</image:loc>
+      <image:title>Alcoba Majestic</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/producto/alcoba-milan-1781719116470/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -381,8 +341,58 @@
     </image:image>
   </url>
   <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-poro-abierto-1781303326021/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781303326023_4w60j.jpg</image:loc>
+      <image:title>Alcoba Poro abierto</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-portofino-1781644083519/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781644083521_8ntqa.jpg</image:loc>
+      <image:title>Alcoba Portofino</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-roma-1781649466686/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781649466687_vhaqd.jpg</image:loc>
+      <image:title>Alcoba Roma</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-temesis-1781633277189/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781633277190_3sht8.jpg</image:loc>
+      <image:title>Alcoba Temesis</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-turqueza-1781633842037/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://maderartepopayan.com/img/p_1781633842038_md8u4.jpg</image:loc>
+      <image:title>Alcoba Turqueza</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://maderartepopayan.com/catalogo/producto/cama-cuna-modular-1781980321806/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -392,22 +402,12 @@
   </url>
   <url>
     <loc>https://maderartepopayan.com/catalogo/producto/cuna-convertible-1782419403925/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
       <image:loc>https://maderartepopayan.com/img/p_1782419403930_p8ehv.jpg</image:loc>
       <image:title>Cuna convertible</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://maderartepopayan.com/catalogo/producto/alcoba-bucle-1783613269339/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://maderartepopayan.com/img/p_1783613269339_ey3sz.jpg</image:loc>
-      <image:title>Alcoba buclé</image:title>
     </image:image>
   </url>
 </urlset>

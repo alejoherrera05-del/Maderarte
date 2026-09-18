@@ -1,0 +1,35 @@
+name: Validar administracion del catalogo
+on:
+  push:
+    branches: [catalogo-admin-categorias]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Copia de trabajo para auditoria
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalogo-source
+          retention-days: 3
+          path: |
+            *.html
+            *.js
+            *.txt
+            *.md
+            tools/
+            data/
+            catalogo/
+            inicio/
+            colecciones/
+            proceso/
+            historia/
+            contacto/
+            sitemap.xml
+      - name: Contratos actuales
+        run: node tools/guardrails.js

@@ -9,6 +9,7 @@ const root = path.resolve(__dirname, '..');
 const screenshots = path.resolve(process.env.REVIEW_SCREENSHOT_DIR || path.join(root, 'review-screenshots'));
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.ttf': 'font/ttf' };
 const tinyPng = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAwAAAAICAIAAABChommAAAAFUlEQVR4nGP88OkrAyHARFDFsFcEAE16AucbZEQ4AAAAAElFTkSuQmCC', 'base64');
+const testPIN = '0472'; // Simulated credential only; never the owner's PIN.
 (async () => {
   fs.mkdirSync(screenshots, { recursive: true });
   const server = http.createServer((request, response) => {
@@ -54,23 +55,38 @@ const tinyPng = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAwAAAAICAIAAABChommAAAAFUl
       await check(await page.locator('#view-catalog').isHidden(), `${width}: catalogue actions remain behind login`);
       await check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${width}: login fits viewport`);
       await check(await page.locator('.brand-text>span').evaluate(node => getComputedStyle(node).fontFamily.includes('Maderarte Algerian') && document.fonts.check('19px "Maderarte Algerian"')), `${width}: original Algerian wordmark loaded`);
+      for (const id of ['access-password', 'new-password', 'confirm-password']) {
+        const attrs = await page.locator('#' + id).evaluate(input => [input.type, input.inputMode, input.minLength, input.maxLength, input.pattern]);
+        assert.deepEqual(attrs, ['password', 'numeric', 4, 4, '[0-9]{4}'], `${width}: ${id} uses native numeric four-digit input`); checks++;
+      }
       await page.screenshot({ path: path.join(screenshots, `admin-login-${width}.png`), fullPage: true });
       await page.locator('#configure-access').click();
       await page.locator('#access-token').fill('invalid-test-token');
-      await page.locator('#new-password').fill('Maderarte prueba local 2026!');
-      await page.locator('#confirm-password').fill('Maderarte prueba local 2026!');
+      for (const invalid of ['123', '12a4']) {
+        await page.locator('#new-password').fill(invalid); await page.locator('#confirm-password').fill(testPIN);
+        await check(!await page.locator('#new-password').evaluate(input => input.checkValidity()), `${width}: malformed PIN is rejected by native input`);
+        await page.locator('#save-access').click();
+        await check(mock.state.requests.length === 0 && await page.locator('#workspace').isHidden(), `${width}: malformed PIN does not start authentication`);
+      }
+      await page.locator('#new-password').fill(testPIN); await page.locator('#confirm-password').fill('9999');
       await page.locator('#save-access').click();
-      try { await page.waitForFunction(() => document.getElementById('setup-status').textContent.includes('Token inválido')); } catch (error) { console.error('LOGIN STATUS:', await page.locator('#login-status').textContent(), 'SCRIPT ERRORS:', errors, 'MOCK REQUESTS:', mock.state.requests.map(r => [r.method, r.route])); await page.screenshot({ path: path.join(screenshots, `admin-login-failure-${width}.png`), fullPage: true }); throw error; }
+      await page.waitForFunction(() => document.getElementById('setup-status').textContent.includes('no coinciden'));
+      await check(mock.state.requests.length === 0, `${width}: mismatched PIN does not request catalogue`);
+      await page.locator('#new-password').fill(testPIN);
+      await page.locator('#confirm-password').fill(testPIN);
+      await page.screenshot({ path: path.join(screenshots, `admin-setup-${width}.png`), fullPage: true });
+      await page.locator('#save-access').click();
+      try { await page.waitForFunction(() => document.getElementById('setup-status').textContent.includes('Token inválido')); } catch (error) { console.error('SETUP STATUS:', await page.locator('#setup-status').textContent(), 'SCRIPT ERRORS:', errors, 'MOCK REQUESTS:', mock.state.requests.map(r => [r.method, r.route])); await page.screenshot({ path: path.join(screenshots, `admin-login-failure-${width}.png`), fullPage: true }); throw error; }
       await check(await page.locator('#workspace').isHidden(), `${width}: invalid access keeps editor closed`);
       await check(await page.evaluate(() => localStorage.getItem(CatalogAccess.KEY) === null), `${width}: invalid token cannot configure device`);
       await page.locator('#access-token').fill('test-only-not-a-real-token');
-      await page.locator('#new-password').fill('Maderarte prueba local 2026!');
-      await page.locator('#confirm-password').fill('Maderarte prueba local 2026!');
+      await page.locator('#new-password').fill(testPIN);
+      await page.locator('#confirm-password').fill(testPIN);
       await page.locator('#save-access').click();
-      await page.waitForFunction(() => !document.getElementById('workspace').hidden || document.getElementById('setup-status').classList.contains('error')); if (await page.locator('#workspace').isHidden()) { console.error('AUTHENTICATED LOAD:', await page.locator('#login-status').textContent(), 'SCRIPT ERRORS:', errors, 'MOCK REQUESTS:', mock.state.requests.map(r => [r.method, r.route])); await page.screenshot({ path: path.join(screenshots, `admin-load-failure-${width}.png`), fullPage: true }); throw new Error('Authenticated catalogue did not open'); }
+      await page.waitForFunction(() => !document.getElementById('workspace').hidden || document.getElementById('setup-status').classList.contains('error')); if (await page.locator('#workspace').isHidden()) { console.error('AUTHENTICATED LOAD:', await page.locator('#setup-status').textContent(), 'SCRIPT ERRORS:', errors, 'MOCK REQUESTS:', mock.state.requests.map(r => [r.method, r.route])); await page.screenshot({ path: path.join(screenshots, `admin-load-failure-${width}.png`), fullPage: true }); throw new Error('Authenticated catalogue did not open'); }
       await check(await page.locator('.product-row').count() === products.length, `${width}: all products loaded`);
       const vaultText = await page.evaluate(() => localStorage.getItem(CatalogAccess.KEY));
-      await check(Boolean(vaultText) && !vaultText.includes('test-only-not-a-real-token') && !vaultText.includes('Maderarte prueba local 2026!'), `${width}: persistent connection is encrypted`);
+      await check(Boolean(vaultText) && !vaultText.includes('test-only-not-a-real-token') && JSON.parse(vaultText).unlockMode === 'pin4', `${width}: connection is encrypted with the selected PIN mode`);
       await check(await page.evaluate(() => sessionStorage.getItem('maderarte_admin_session') === null), `${width}: no plaintext session credential`);
       const actualGroups = await page.locator('.group-head h3').allTextContents();
       assert.deepEqual(actualGroups, Order.categories.filter(c => products.some(p => p.categoria === c.key)).map(c => c.label)); checks++;
@@ -87,8 +103,8 @@ const tinyPng = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAwAAAAICAIAAABChommAAAAFUl
       await check(mock.state.writes === 0, `${width}: save draft does not publish`);
       await page.reload({ waitUntil: 'domcontentloaded' });
       await page.locator('#login-panel').waitFor({ state: 'visible' });
-      await check(await page.locator('.product-row').count() === 0, `${width}: reload does not bypass password`);
-      await page.locator('#access-password').fill('Maderarte prueba local 2026!'); await page.locator('#connect').click();
+      await check(await page.locator('.product-row').count() === 0, `${width}: reload does not bypass PIN`);
+      await page.locator('#access-password').fill(testPIN); await page.locator('#connect').click();
       await page.locator('#workspace').waitFor({ state: 'visible' });
       await check((await page.locator('#sync-status').textContent()).includes('Borrador recuperado'), `${width}: reload restores pending work`);
       await page.locator('#publish').click(); await page.waitForFunction(() => !document.getElementById('logout').disabled);
@@ -115,14 +131,14 @@ const tinyPng = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAwAAAAICAIAAABChommAAAAFUl
       const requestsAtLock = mock.state.requests.length;
       await page.evaluate(() => { for (const id of ['new-product', 'reload', 'export', 'publish']) document.getElementById(id).dispatchEvent(new Event('click')); });
       await check(await page.locator('#product-dialog').isHidden() && mock.state.requests.length === requestsAtLock, `${width}: locked actions cannot load or edit`);
-      await page.locator('#access-password').fill('Contraseña de prueba incorrecta'); await page.locator('#connect').click();
-      await page.waitForFunction(() => document.getElementById('login-status').textContent.includes('incorrecta'));
-      await check(mock.state.requests.length === requestsAtLock && await page.locator('.product-row').count() === 0, `${width}: wrong password never unlocks token or requests data`);
-      await page.locator('#access-password').fill('Maderarte prueba local 2026!'); await page.locator('#connect').click();
+      await page.locator('#access-password').fill('9999'); await page.locator('#connect').click();
+      await page.waitForFunction(() => document.getElementById('login-status').textContent.includes('PIN incorrecto'));
+      await check(mock.state.requests.length === requestsAtLock && await page.locator('.product-row').count() === 0, `${width}: wrong PIN never unlocks token or requests data`);
+      await page.locator('#access-password').fill(testPIN); await page.locator('#connect').click();
       await page.locator('#workspace').waitFor({ state: 'visible' });
-      await check(await page.locator('.product-row').count() === products.length + 1, `${width}: password-only login restores saved work`);
+      await check(await page.locator('.product-row').count() === products.length + 1, `${width}: PIN-only login restores saved work`);
       await page.evaluate(() => { window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })); window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true })); });
-      await check(await page.locator('#login-panel').isVisible() && await page.locator('.product-row').count() === 0, `${width}: restored page requires password again`);
+      await check(await page.locator('#login-panel').isVisible() && await page.locator('.product-row').count() === 0, `${width}: restored page requires PIN again`);
       await check(errors.length === 0, `${width}: no admin JavaScript exceptions: ${errors.join('; ')}`);
       await context.close();
     }

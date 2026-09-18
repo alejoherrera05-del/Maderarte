@@ -41,6 +41,7 @@ jobs:
                   target.write_text(content)
           PY
           node tools/apply-catalog-admin.mjs
+          if [ -f tools/test-catalog-fixes.cjs ]; then node tools/test-catalog-fixes.cjs; fi
       - name: Generar rutas de todas las categorias
         run: node tools/build-seo-pages.mjs
       - name: Validar SEO y logica del catalogo

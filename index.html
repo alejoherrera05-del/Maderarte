@@ -7142,7 +7142,8 @@ function toggleImageZoom(){
 
 function handleLightboxTouchStart(event){
   const lightbox = document.getElementById("image-lightbox");
-  if(!lightbox?.classList.contains("open")) return;
+  // Navigation/close taps must keep their native click, even while zoomed.
+  if(!lightbox?.classList.contains("open") || event.target?.closest?.("button")) return;
   lightbox.classList.add("is-touching");
   if(event.touches.length === 2){
     event.preventDefault();
@@ -7176,7 +7177,7 @@ function handleLightboxTouchStart(event){
 
 function handleLightboxTouchMove(event){
   const lightbox = document.getElementById("image-lightbox");
-  if(!lightbox?.classList.contains("open")) return;
+  if(!lightbox?.classList.contains("open") || event.target?.closest?.("button")) return;
   if(event.touches.length === 2 && lightboxGesture.pinching){
     event.preventDefault();
     const distance = touchDistance(event.touches);
@@ -7207,7 +7208,7 @@ function handleLightboxTouchMove(event){
 
 function handleLightboxTouchEnd(event){
   const lightbox = document.getElementById("image-lightbox");
-  if(!lightbox?.classList.contains("open")) return;
+  if(!lightbox?.classList.contains("open") || event.target?.closest?.("button")) return;
   if(!event.touches.length){
     lightbox.classList.remove("is-touching");
   }

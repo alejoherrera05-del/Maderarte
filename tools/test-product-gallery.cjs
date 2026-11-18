@@ -186,6 +186,15 @@ function check(condition, message) { assert.ok(condition, message); checks++; }
     await page.setViewportSize({ width: 390, height: 844 });
     await page.locator('#image-lightbox-next').tap();
     await inspectPhoto(page, fixture, 0, 'after-zoom-pan-and-rotation');
+    await page.waitForFunction(() => !lightboxGesture.ignoreClick);
+    await page.locator('#image-lightbox-img').click();
+    await page.locator('#image-lightbox.zoomed').waitFor();
+    await page.locator('#image-lightbox-prev').tap();
+    await inspectPhoto(page, fixture, 2, 'previous-photo-while-zoomed');
+    await page.locator('#image-lightbox-img').click();
+    await page.locator('#image-lightbox.zoomed').waitFor();
+    await page.locator('#image-lightbox-close').tap();
+    check(await page.locator('#image-lightbox').getAttribute('aria-hidden') === 'true', 'Touch close remains usable while zoomed');
     check(errors.length === 0, `Mixed gallery: no JavaScript errors: ${errors.join('; ')}`);
     await context.close();
     fs.writeFileSync(path.join(screenshots, 'gallery-dimensions.json'), JSON.stringify(results, null, 2));

@@ -103,6 +103,7 @@ function check(condition, message) { assert.ok(condition, message); checks++; }
           && document.getElementById('image-lightbox-count').textContent === `${index + 1} / ${length}`;
       }, { expectedPath, index, length: product.imagenes.length });
       await page.locator('#image-lightbox-img').evaluate(image => image.decode());
+      await page.locator('#image-lightbox-img').evaluate(image => Promise.all(image.getAnimations().map(animation => animation.finished)));
       const dimensions = await page.locator('#image-lightbox-img').evaluate(image => {
         const rect = image.getBoundingClientRect();
         const style = getComputedStyle(image);

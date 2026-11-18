@@ -27,8 +27,10 @@
 <meta property="og:site_name" content="Maderarte">
 <meta property="og:locale" content="es_CO">
 <meta property="og:image" content="https://maderartepopayan.com/img/p_1782418341902_v7ecm.jpg">
-<meta property="og:image:width" content="1672">
-<meta property="og:image:height" content="941">
+<meta property="og:image:height" content="880">
+<meta property="og:image:width" content="1100">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:secure_url" content="https://maderartepopayan.com/img/p_1782418341902_v7ecm.jpg">
 <meta property="og:image:alt" content="Cama cuna modular de Maderarte Popayán">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cama cuna modular | Maderarte Popayán">
@@ -374,7 +376,6 @@ body:not(.at-hero) .site-header{
 .mobile-hero-title{display:none}
 .dialog-gallery-mobile{display:none}
 .dialog-mobile-topbar{display:none}
-.mobile-whatsapp-float{display:none}
 
 .hero{
   min-height:100vh;
@@ -2545,10 +2546,10 @@ html.js-focus-reveal .focus-step.is-visible .focus-copy p{transition-delay:.28s}
   background:transparent;
   color:#e85f10;
 }
-@media (min-width:721px){
+@media (min-width:681px){
   .catalog-dialog .dialog-actions{
     display:grid;
-    grid-template-columns:repeat(3,58px);
+    grid-template-columns:repeat(2,58px);
     justify-content:start;
     align-items:center;
     gap:12px;
@@ -2659,7 +2660,7 @@ html.js-focus-reveal .focus-step.is-visible .focus-copy p{transition-delay:.28s}
 .dialog-action-control.dialog-favorite.saved .dialog-action-glyph{
   fill:currentColor;
 }
-@media (min-width:721px){
+@media (min-width:681px){
   .catalog-dialog .dialog-actions .dialog-action-control{
     position:relative;
     isolation:isolate;
@@ -2691,7 +2692,7 @@ html.js-focus-reveal .focus-step.is-visible .focus-copy p{transition-delay:.28s}
     display:none;
   }
 }
-@media (max-width:720px){
+@media (max-width:680px){
   .catalog-dialog .dialog-actions .dialog-action-control.dialog-advisor-cta{
     display:flex;
   }
@@ -2777,8 +2778,15 @@ html.js-focus-reveal .focus-step.is-visible .focus-copy p{transition-delay:.28s}
   animation:modalScrimIn .2s var(--ease-apple) both;
 }
 .image-lightbox img{
-  max-width:min(96vw, 1500px);
-  max-height:88vh;
+  /* Keep the viewing surface stable while each full-size photo loads. */
+  width:min(96vw, 1500px);
+  height:88vh;
+  height:88dvh;
+  max-width:100%;
+  max-height:100%;
+  min-width:0;
+  min-height:0;
+  flex:0 0 auto;
   object-fit:contain;
   cursor:zoom-in;
   transform:translate3d(var(--pan-x, 0px), var(--pan-y, 0px), 0) scale(var(--zoom, 1));
@@ -4394,14 +4402,6 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
   }
   .warranty-item{grid-template-columns:1fr;gap:8px}
   .footer-inner{display:grid}
-  .mobile-whatsapp-float{display:none}
-  .mobile-whatsapp-float svg{width:24px;height:24px;stroke-width:1.9}
-  body.at-hero .mobile-whatsapp-float,
-  body:has(.catalog-modal.open) .mobile-whatsapp-float{
-    opacity:0;
-    pointer-events:none;
-    transform:translateY(10px) scale(.94);
-  }
   .image-lightbox{
     padding:0;
     background:#050505;
@@ -4433,23 +4433,73 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
     background:rgba(22,22,22,.58);
   }
 }
-@media (max-width:900px) and (orientation:landscape){
+@media (max-width:900px) and (orientation:landscape), (hover:none) and (pointer:coarse){
   .image-lightbox{
     padding:0;
     background:#000;
+    -webkit-backdrop-filter:none;
     backdrop-filter:none;
   }
   .image-lightbox img{
+    width:100vw;
     width:100dvw;
+    height:100vh;
     height:100dvh;
+    max-width:100vw;
     max-width:100dvw;
+    max-height:100vh;
     max-height:100dvh;
     object-fit:contain;
   }
-  .image-lightbox-close{top:10px;right:10px}
-  .image-lightbox-count{bottom:10px}
-  .image-lightbox-nav.prev{left:10px}
-  .image-lightbox-nav.next{right:10px}
+  .image-lightbox-close{top:max(10px, env(safe-area-inset-top));right:max(10px, env(safe-area-inset-right))}
+  .image-lightbox-count{bottom:max(10px, env(safe-area-inset-bottom))}
+  .image-lightbox-nav.prev{left:max(10px, env(safe-area-inset-left))}
+  .image-lightbox-nav.next{right:max(10px, env(safe-area-inset-right))}
+}
+@media (orientation:landscape) and (max-height:600px) and (hover:none) and (pointer:coarse){
+  /* A short screen needs two independently sized columns, not a 360px-tall
+     image above a detail panel that is clipped by the viewport. */
+  .catalog-modal{padding:0;align-items:stretch}
+  .catalog-dialog{
+    width:100%;
+    height:100vh;
+    height:100dvh;
+    max-height:100vh;
+    max-height:100dvh;
+    grid-template-columns:minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-rows:minmax(0, 1fr);
+    border:0;
+    border-radius:0;
+  }
+  .catalog-dialog-media{
+    display:grid;
+    height:100%;
+    min-height:0;
+    min-width:0;
+    padding:12px;
+    gap:10px;
+    grid-template-rows:minmax(0, 1fr) auto;
+    align-self:stretch;
+  }
+  .catalog-dialog-media > img{height:100%;min-height:0;aspect-ratio:auto}
+  .dialog-gallery{display:flex;min-width:0;margin:0;justify-content:flex-start}
+  .dialog-gallery button{width:64px;height:48px;flex:0 0 64px}
+  .dialog-gallery-mobile{display:none}
+  .catalog-dialog-copy{
+    min-width:0;
+    min-height:0;
+    max-height:100%;
+    padding:20px 18px calc(86px + env(safe-area-inset-bottom));
+    overflow-y:auto;
+    overscroll-behavior:contain;
+  }
+  .catalog-dialog-copy h3{font-size:clamp(1.75rem, 3.7vw, 2.5rem)}
+  .catalog-dialog-copy > p{font-size:.92rem;line-height:1.5}
+  .catalog-close{
+    position:fixed;
+    top:max(10px, env(safe-area-inset-top));
+    right:max(10px, env(safe-area-inset-right));
+  }
 }
 @media (max-width:1180px){
   .collections-top{
@@ -5615,7 +5665,7 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
 }
 </style>
 <script src="/security-notice.js?v=20260916" defer></script>
-<link rel="stylesheet" href="/assets/catalog-public.css?v=20260918">
+<link rel="stylesheet" href="/assets/catalog-public.css?v=20261118">
 <script src="/assets/catalog-order.js?v=20260918"></script>
 </head>
 <body class="at-hero seo-product-route" data-seo-route="product">
@@ -5675,8 +5725,8 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
        <div class="catalog-empty" id="catalog-empty">Muy pronto encontrarás nuevas piezas en esta categoría.</div>
     </section>
 
-    <div class="catalog-modal" id="catalog-modal" aria-hidden="true">
-      <div class="catalog-dialog" role="dialog" aria-modal="true" aria-labelledby="catalog-dialog-title">
+    <div class="catalog-modal" id="catalog-modal" role="dialog" aria-modal="true" aria-labelledby="catalog-dialog-title" aria-hidden="true">
+      <div class="catalog-dialog">
         <div class="catalog-dialog-media" id="catalog-dialog-media">
           <img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="">
           <div class="dialog-gallery" id="dialog-gallery" aria-label="Galería del producto"></div>
@@ -5698,15 +5748,6 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
           <div class="dialog-options" id="dialog-options"></div>
           <div class="dialog-materials" id="dialog-materials"></div>
           <div class="dialog-actions" aria-label="Acciones del producto">
-            <a class="btn btn-primary dialog-advisor-cta dialog-action-control" id="dialog-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Hablar con un asesor por WhatsApp" title="Hablar con un asesor">
-              <span class="dialog-advisor-copy">
-                <small>Atención personal</small>
-                <strong>Hablar con un asesor</strong>
-              </span>
-              <svg class="dialog-action-glyph" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5.5 5.5h13a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H11l-4.5 3v-3h-1a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2Z"/>
-              </svg>
-            </a>
             <button class="btn btn-light dialog-favorite dialog-action-control" type="button" id="dialog-favorite" aria-label="Guardar en favoritos" title="Guardar en favoritos">
               <span class="dialog-action-label">Guardar</span>
               <svg class="dialog-action-glyph" viewBox="0 0 24 24" aria-hidden="true">
@@ -5749,13 +5790,27 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
       <a class="footer-admin" href="/admin.html" aria-label="Administrar el catálogo de Maderarte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></svg><span>ADMIN</span></a>
     </div>
   </footer>
-  <a class="mobile-whatsapp-float" href="https://wa.me/573117476465?text=Hola,%20MADERARTE.%20Quiero%20recibir%20asesor%C3%ADa%20para%20mis%20muebles." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+</div>
+  <a class="mobile-whatsapp-float" id="whatsapp-float" href="https://wa.me/573117476465?text=Hola,%20MADERARTE.%20Quiero%20recibir%20asesor%C3%ADa%20para%20mis%20muebles." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" title="Escribir por WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
       <path d="M5.4 18.7 6.2 15A7.5 7.5 0 1 1 9 17.8l-3.6.9Z"></path>
       <path d="M9.2 8.7c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.6 1.4c.1.2.1.4-.1.6l-.4.5c.6 1.1 1.4 1.9 2.5 2.5l.6-.5c.2-.1.4-.2.6-.1l1.4.7c.2.1.3.3.3.5v.4c0 .4-.2.7-.6.9-.6.3-1.5.3-2.6-.1-2.2-.8-4-2.6-4.8-4.8-.4-1-.4-1.8-.2-2Z"></path>
     </svg>
   </a>
-</div>
+  <dialog class="product-share-dialog" id="product-share-dialog" aria-labelledby="product-share-title">
+    <div class="product-share-header">
+      <h2 id="product-share-title">Compartir producto</h2>
+      <button type="button" id="product-share-close" aria-label="Cerrar opciones para compartir">×</button>
+    </div>
+    <p id="product-share-name"></p>
+    <label for="product-share-url">Enlace del producto</label>
+    <input id="product-share-url" type="text" readonly spellcheck="false" autocapitalize="off">
+    <div class="product-share-actions">
+      <button type="button" id="product-share-copy">Copiar enlace</button>
+      <a id="product-share-whatsapp" href="https://wa.me/" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+    </div>
+    <p id="product-share-feedback" role="status" aria-live="polite"></p>
+  </dialog>
 
 <script>
 const header = document.getElementById("site-header");
@@ -6314,12 +6369,9 @@ function productShareUrl(product){
   const url = new URL(window.location.href);
   url.hash = "";
   url.search = "";
+  url.pathname = productPublicPath(product);
   if(showPrices){
-    url.pathname = sectionPath("catalogo");
-    url.searchParams.set("producto", product.id);
     url.searchParams.set("precios", PRICE_ACCESS_KEY);
-  }else{
-    url.pathname = productPublicPath(product);
   }
   return url;
 }
@@ -6438,6 +6490,20 @@ function whatsappLink(product, includeVariant = true){
   const productUrl = productShareUrl(product);
   const message = `Hola, vi esta pieza en la página de Maderarte y quisiera saber si puede adaptarse a mi espacio:\n\n${product.nombre}\nCategoría: ${category}${variantLine}${priceLine}\n\nEnlace: ${productUrl.toString()}`;
   return "https://wa.me/573117476465?text=" + encodeURIComponent(message);
+}
+
+function syncWhatsAppButton(product = null){
+  const button = document.getElementById("whatsapp-float");
+  if(!button) return;
+  // Keep the same floating action inside the active dialog's accessibility tree.
+  const parent = product ? document.getElementById("catalog-modal") : document.body;
+  if(parent && button.parentElement !== parent) parent.append(button);
+  button.href = product
+    ? whatsappLink(product)
+    : "https://wa.me/573117476465?text=" + encodeURIComponent("Hola, MADERARTE. Quiero recibir asesoría para mis muebles.");
+  const label = product ? `Consultar por WhatsApp sobre ${product.nombre}` : "Escribir por WhatsApp";
+  button.setAttribute("aria-label", label);
+  button.title = label;
 }
 
 function productHasImages(product){
@@ -6705,7 +6771,7 @@ function openProduct(id){
   optionsBox.innerHTML = options;
   optionsBox.classList.toggle("visible", !!options);
   document.getElementById("dialog-materials").innerHTML = productMaterials(product) || "<span>Te ayudamos a revisar materiales, medidas y acabados según tu espacio.</span>";
-  document.getElementById("dialog-whatsapp").href = whatsappLink(product);
+  syncWhatsAppButton(product);
   updateFavoriteButton();
   const galleryMarkup = images.map((src, index) => `
     <button type="button" data-image-index="${index}" class="${index === 0 ? "active" : ""}" aria-label="Ver imagen ${index + 1}">
@@ -6738,6 +6804,13 @@ function closeProduct(){
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
+  syncWhatsAppButton();
+  if(document.body.dataset.seoRoute === "product"){
+    const catalogUrl = new URL("/catalogo/", window.location.origin);
+    if(showPrices) catalogUrl.searchParams.set("precios", PRICE_ACCESS_KEY);
+    window.location.assign(catalogUrl.toString());
+    return;
+  }
   cleanSectionUrl("catalogo", { keepPrices: showPrices });
 }
 
@@ -6750,7 +6823,7 @@ function selectVariant(label, price, button){
      priceBox.innerHTML = pricePanel(activeVariantLabel || "Presentación elegida", formatCOP(activeVariantPrice), "Confirmamos contigo materiales y acabado antes de definir el valor final.");
   }
   if(activeDialogProduct){
-    document.getElementById("dialog-whatsapp").href = whatsappLink(activeDialogProduct);
+    syncWhatsAppButton(activeDialogProduct);
   }
 }
 
@@ -6790,6 +6863,7 @@ function updateLightboxImage(){
   if(!image || !activeDialogImages.length) return;
   resetLightboxTransform();
   image.src = activeDialogImages[activeDialogImageIndex];
+  image.alt = `${activeDialogProduct?.nombre || "Maderarte"} · Foto ${activeDialogImageIndex + 1} de ${activeDialogImages.length}`;
   if(count) count.textContent = `${activeDialogImageIndex + 1} / ${activeDialogImages.length}`;
   document.getElementById("image-lightbox-prev").style.display = activeDialogImages.length > 1 ? "grid" : "none";
   document.getElementById("image-lightbox-next").style.display = activeDialogImages.length > 1 ? "grid" : "none";
@@ -6871,8 +6945,15 @@ function clampLightboxPan(){
     lightboxGesture.y = 0;
     return;
   }
-  const maxX = Math.max(0, (image.clientWidth * (lightboxGesture.scale - 1)) / 2);
-  const maxY = Math.max(0, (image.clientHeight * (lightboxGesture.scale - 1)) / 2);
+  // object-fit:contain may leave empty space inside the fixed viewing surface.
+  // Clamp the actual photo, so a narrow/portrait image cannot be panned offscreen.
+  const fit = image.naturalWidth && image.naturalHeight
+    ? Math.min(image.clientWidth / image.naturalWidth, image.clientHeight / image.naturalHeight)
+    : 1;
+  const contentWidth = image.naturalWidth ? image.naturalWidth * fit : image.clientWidth;
+  const contentHeight = image.naturalHeight ? image.naturalHeight * fit : image.clientHeight;
+  const maxX = Math.max(0, (contentWidth * lightboxGesture.scale - image.clientWidth) / 2);
+  const maxY = Math.max(0, (contentHeight * lightboxGesture.scale - image.clientHeight) / 2);
   lightboxGesture.x = Math.max(-maxX, Math.min(maxX, lightboxGesture.x));
   lightboxGesture.y = Math.max(-maxY, Math.min(maxY, lightboxGesture.y));
 }
@@ -6891,7 +6972,8 @@ function toggleImageZoom(){
 
 function handleLightboxTouchStart(event){
   const lightbox = document.getElementById("image-lightbox");
-  if(!lightbox?.classList.contains("open")) return;
+  // Navigation/close taps must keep their native click, even while zoomed.
+  if(!lightbox?.classList.contains("open") || event.target?.closest?.("button")) return;
   lightbox.classList.add("is-touching");
   if(event.touches.length === 2){
     event.preventDefault();
@@ -6925,7 +7007,7 @@ function handleLightboxTouchStart(event){
 
 function handleLightboxTouchMove(event){
   const lightbox = document.getElementById("image-lightbox");
-  if(!lightbox?.classList.contains("open")) return;
+  if(!lightbox?.classList.contains("open") || event.target?.closest?.("button")) return;
   if(event.touches.length === 2 && lightboxGesture.pinching){
     event.preventDefault();
     const distance = touchDistance(event.touches);
@@ -6956,7 +7038,7 @@ function handleLightboxTouchMove(event){
 
 function handleLightboxTouchEnd(event){
   const lightbox = document.getElementById("image-lightbox");
-  if(!lightbox?.classList.contains("open")) return;
+  if(!lightbox?.classList.contains("open") || event.target?.closest?.("button")) return;
   if(!event.touches.length){
     lightbox.classList.remove("is-touching");
   }
@@ -6993,53 +7075,83 @@ function handleLightboxTouchEnd(event){
   lightboxGesture.swiping = false;
 }
 
-async function copyProductLink(){
-  if(!activeDialogProduct) return;
-  const url = productShareUrl(activeDialogProduct);
-  try{
-    await navigator.clipboard.writeText(url.toString());
-    const mobileButton = document.getElementById("dialog-mobile-share");
-    if(mobileButton){
-      mobileButton.classList.add("copied");
-      setTimeout(() => mobileButton.classList.remove("copied"), 1500);
-    }
-    const label = document.querySelector("#dialog-copy-link span");
-    if(label){
-      label.textContent = "Copiado";
-      setTimeout(() => { label.textContent = "Compartir"; }, 1500);
-    }
-  }catch(error){
-    window.prompt("Copia este enlace:", url.toString());
+let shareReturnFocus = null;
+let productShareInProgress = false;
+
+function openProductShareOptions(product, button){
+  const dialog = document.getElementById("product-share-dialog");
+  const url = productShareUrl(product).toString();
+  shareReturnFocus = button || document.activeElement;
+  document.getElementById("product-share-name").textContent = product.nombre || "Producto Maderarte";
+  document.getElementById("product-share-url").value = url;
+  document.getElementById("product-share-copy").textContent = "Copiar enlace";
+  document.getElementById("product-share-feedback").textContent = "";
+  document.getElementById("product-share-whatsapp").href = "https://wa.me/?text=" + encodeURIComponent(`Mira ${product.nombre} en Maderarte:\n${url}`);
+  if(!dialog.open){
+    if(typeof dialog.showModal === "function") dialog.showModal();
+    else dialog.setAttribute("open", "");
+  }
+  document.getElementById("product-share-copy").focus({ preventScroll:true });
+}
+
+function closeProductShareOptions(){
+  const dialog = document.getElementById("product-share-dialog");
+  if(!dialog?.open) return;
+  if(typeof dialog.close === "function") dialog.close();
+  else dialog.removeAttribute("open");
+  if(shareReturnFocus instanceof HTMLElement && shareReturnFocus.isConnected){
+    shareReturnFocus.focus({ preventScroll:true });
   }
 }
 
-async function shareCatalogProduct(productId, button){
-  const product = catalogProducts.find(item => String(item.id) === String(productId));
-  if(!product) return;
-  const url = productShareUrl(product).toString();
+async function copyProductLink(){
+  const input = document.getElementById("product-share-url");
+  const feedback = document.getElementById("product-share-feedback");
+  if(!input?.value) return;
   try{
-    if(navigator.share){
+    if(!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
+    await navigator.clipboard.writeText(input.value);
+    document.getElementById("product-share-copy").textContent = "Copiado";
+    feedback.textContent = "Enlace copiado. Ya puedes pegarlo donde quieras.";
+  }catch(error){
+    input.focus({ preventScroll:true });
+    input.select();
+    input.setSelectionRange(0, input.value.length);
+    feedback.textContent = "Selecciona y copia el enlace. En celular, mantén presionado el texto.";
+  }
+}
+
+async function shareProduct(product, button){
+  if(!product || productShareInProgress) return;
+  // Invoke the native sheet directly from the tap; awaiting a fetch first loses
+  // the user activation required by Safari and other mobile browsers.
+  if(typeof navigator.share === "function"){
+    productShareInProgress = true;
+    try{
       await navigator.share({
         title: `${product.nombre} · Maderarte`,
         text: `Mira ${product.nombre} en el catálogo de Maderarte.`,
-        url
+        url: productShareUrl(product).toString()
       });
       return;
-    }
-    await navigator.clipboard.writeText(url);
-    if(button){
-      button.classList.add("confirmed");
-      button.setAttribute("aria-label", "Enlace copiado");
-      setTimeout(() => {
-        button.classList.remove("confirmed");
-        button.setAttribute("aria-label", `Compartir ${product.nombre}`);
-      }, 1500);
-    }
-  }catch(error){
-    if(error?.name !== "AbortError"){
-      window.prompt("Copia este enlace:", url);
+    }catch(error){
+      if(error?.name === "AbortError") return;
+    }finally{
+      productShareInProgress = false;
     }
   }
+  // A fresh click on Copy/WhatsApp works even when native share is blocked by
+  // an in-app browser. Never leave a failed share with no visible response.
+  openProductShareOptions(product, button);
+}
+
+function shareCatalogProduct(productId, button){
+  const product = catalogProducts.find(item => String(item.id) === String(productId));
+  return shareProduct(product, button);
+}
+
+function shareActiveProduct(event){
+  return shareProduct(activeDialogProduct, event.currentTarget);
 }
 
 function initStageCollections(){
@@ -7374,10 +7486,33 @@ async function initCatalog(){
   imageLightbox?.addEventListener("touchmove", handleLightboxTouchMove, { passive:false });
   imageLightbox?.addEventListener("touchend", handleLightboxTouchEnd, { passive:false });
   imageLightbox?.addEventListener("touchcancel", handleLightboxTouchEnd, { passive:false });
+  window.addEventListener("resize", () => {
+    if(!imageLightbox?.classList.contains("open")) return;
+    clampLightboxPan();
+    applyLightboxTransform();
+  }, { passive:true });
   document.getElementById("dialog-favorite")?.addEventListener("click", toggleFavorite);
   document.getElementById("dialog-mobile-favorite")?.addEventListener("click", toggleFavorite);
-  document.getElementById("dialog-copy-link")?.addEventListener("click", copyProductLink);
-  document.getElementById("dialog-mobile-share")?.addEventListener("click", copyProductLink);
+  document.getElementById("dialog-copy-link")?.addEventListener("click", shareActiveProduct);
+  document.getElementById("dialog-mobile-share")?.addEventListener("click", shareActiveProduct);
+  document.getElementById("product-share-copy")?.addEventListener("click", copyProductLink);
+  document.getElementById("product-share-close")?.addEventListener("click", closeProductShareOptions);
+  document.getElementById("product-share-url")?.addEventListener("click", event => event.currentTarget.select());
+  const shareDialog = document.getElementById("product-share-dialog");
+  shareDialog?.addEventListener("cancel", event => {
+    event.preventDefault();
+    closeProductShareOptions();
+  });
+  shareDialog?.addEventListener("keydown", event => {
+    if(event.key === "Escape") event.stopPropagation();
+  });
+  shareDialog?.addEventListener("click", event => {
+    if(event.target !== shareDialog) return;
+    const rect = shareDialog.getBoundingClientRect();
+    if(event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom){
+      closeProductShareOptions();
+    }
+  });
   window.addEventListener("keydown", event => {
     if(event.key === "Escape"){
       if(document.getElementById("image-lightbox")?.classList.contains("open")) closeImageLightbox();

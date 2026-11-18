@@ -665,6 +665,45 @@
     "acabados": []
   },
   {
+    "id": 1795044554080,
+    "categoria": "comedores",
+    "subcategoria": null,
+    "nombre": "Comedor Oslo",
+    "precio": 8500000,
+    "variantesComedor": {
+      "p6": 8500000,
+      "p8": 10900000
+    },
+    "variantesAlcoba": null,
+    "imagenes": [
+      "/img/p_1795044555309_8caec31d-0eda-4bbb-8528-2b922327f126.jpg",
+      "/img/p_1795044557324_eab58b63-022a-4914-a9b9-22b13e8dee18.jpg",
+      "/img/p_1795044558588_d6ab26ba-7184-476e-b7a1-4f53dfda3299.jpg",
+      "/img/p_1795044559918_aa8b58ae-e6d0-4c39-9bac-2e3506a2b583.jpg",
+      "/img/p_1795044561149_d068b7d6-69a9-4a8e-b655-d1319033bab1.jpg",
+      "/img/p_1795044562275_b60d1f4e-1113-4c71-ae92-b278e057b1dd.jpg",
+      "/img/p_1795044563607_ffb0a459-3112-4ea5-83e9-8a4dd9d626cc.jpg"
+    ],
+    "thumbPosX": "50",
+    "thumbPosY": "50",
+    "ajuste": "cover",
+    "ancho": "",
+    "alto": "",
+    "fondo": "",
+    "descripcion": "",
+    "materialesData": {
+      "madera": "Flormorado",
+      "tela": "Microfibra",
+      "espuma": "Penta",
+      "pintura": "Poliuretano"
+    },
+    "certificados": [
+      "mascotas",
+      "antifluido"
+    ],
+    "acabados": []
+  },
+  {
     "id": 1781199888979,
     "categoria": "comedores",
     "nombre": "Comedor Siena",

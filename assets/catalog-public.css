@@ -1,3 +1,26 @@
 /* Catalogue grouping and a discreet, keyboard-accessible administration entry. */
+/* One contact action stays reachable while scrolling the catalogue or a product. */
+.mobile-whatsapp-float{position:fixed;right:calc(18px + env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:150;display:grid;place-items:center;width:58px;height:58px;border:2px solid #fff;border-radius:50%;background:#128c57;color:#fff;box-shadow:0 5px 20px #0003;transition:transform .18s ease,background-color .18s ease;touch-action:manipulation}
+.mobile-whatsapp-float svg{width:32px;height:32px;stroke-width:1.8;pointer-events:none}
+.mobile-whatsapp-float:hover{background:#0d7548;transform:translateY(-2px)}
+.mobile-whatsapp-float:focus-visible{outline:3px solid #ff7a18;outline-offset:4px}
+body:has(.image-lightbox.open) .mobile-whatsapp-float{visibility:hidden;pointer-events:none}
+.footer{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+.product-share-dialog{position:fixed;inset:0;margin:auto;width:min(430px,calc(100% - 32px));max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:24px;border:1px solid #d8d4ce;border-radius:20px;background:#f4f5f7;color:#181512;box-shadow:0 22px 70px #0004;font-family:var(--sans,system-ui);z-index:180}
+.product-share-dialog::backdrop{background:#18151299}
+.product-share-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.product-share-header h2{margin:0;font-size:1.2rem;line-height:1.25;font-weight:650}
+.product-share-header button{flex:none;display:grid;place-items:center;width:44px;height:44px;border:1px solid #18151220;border-radius:50%;font-size:1.65rem;color:inherit;background:#fff;cursor:pointer}
+#product-share-name{margin:12px 0 22px;font-size:1rem;line-height:1.5;color:#625a53}
+.product-share-dialog label{display:block;margin-bottom:8px;font-size:.85rem;font-weight:600}
+#product-share-url{display:block;width:100%;min-height:48px;padding:10px 12px;border:1px solid #18151240;border-radius:10px;background:#fff;color:#181512;font:400 16px/1.4 var(--sans,system-ui);user-select:text;-webkit-user-select:text}
+.product-share-actions{display:grid;gap:10px;margin-top:16px}
+.product-share-actions button,.product-share-actions a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:10px 16px;border:1px solid #181512;border-radius:12px;background:#181512;color:#fff;font:600 .95rem/1.4 var(--sans,system-ui);text-align:center;cursor:pointer}
+.product-share-actions a{background:transparent;color:#181512;border-color:#18151240}
+.product-share-dialog :is(button,a,input):focus-visible{outline:2px solid #ff7a18;outline-offset:3px}
+#product-share-feedback{margin-top:14px;font-size:.9rem;line-height:1.5;color:#285c3d}
+#product-share-feedback:empty{display:none}
+@media(max-width:680px){.catalog-dialog-copy{padding-bottom:calc(92px + env(safe-area-inset-bottom))}.catalog-dialog .dialog-actions{display:none}.mobile-whatsapp-float{width:56px;height:56px;right:calc(14px + env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom))}}
+@media(prefers-reduced-motion:reduce){.mobile-whatsapp-float{transition:none}}
 .footer .footer-admin{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 13px;border:1px solid rgba(255,255,255,.19);border-radius:9px;color:rgba(255,255,255,.72);font-family:var(--sans,system-ui);font-size:.65rem;font-weight:650;letter-spacing:.12em;text-decoration:none;white-space:nowrap;flex-shrink:0}
 .footer .footer-admin svg{width:13px;height:13px;flex-shrink:0}.footer .footer-admin:hover{background:rgba(255,255,255,.07);border-color:rgba(255,207,145,.6);color:#ffcf91}.footer .footer-admin:focus-visible{outline:2px solid #ffcf91;outline-offset:5px}.catalog-group-heading{grid-column:1/-1;display:flex;align-items:center;gap:16px;margin:28px 0 2px;padding:0 0 16px;border-bottom:1px solid rgba(26,26,26,.13)}.catalog-group-heading:first-child{margin-top:0}.catalog-group-heading h3{margin:0;font-family:var(--sans,system-ui);font-size:clamp(1.05rem,2vw,1.4rem);font-weight:650;letter-spacing:-.035em}.catalog-group-heading span{color:#706a64;font-size:.72rem;white-space:nowrap}@media(max-width:760px){.footer .footer-admin{justify-self:start}.catalog-group-heading{gap:12px;margin-top:20px}}

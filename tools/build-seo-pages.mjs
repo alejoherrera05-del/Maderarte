@@ -110,7 +110,7 @@ const pages = [
     url: "/historia",
     title: "Historia de Maderarte | Más de 20 años en Popayán",
     description: "Conoce la evolución de Maderarte: más de 20 años acompañando hogares, dos sedes en Popayán y fabricación propia.",
-    image: "/historia-actual.png",
+    image: "/images/history/maderarte-hoy.webp",
     imageAlt: "Showroom actual de Maderarte en Popayán",
     pageType: "AboutPage",
     breadcrumb: [["Inicio", "/"], ["Historia", "/historia"]],
@@ -205,6 +205,44 @@ function absolute(value) {
   return `${baseUrl}${value.startsWith("/") ? "" : "/"}${value}`;
 }
 
+// Read the real image headers: route pages must not inherit the home cover's size.
+const imageInfoCache = new Map();
+async function imageInfo(value) {
+  const url = new URL(value, baseUrl);
+  if (url.origin !== baseUrl) return null;
+  if (imageInfoCache.has(url.pathname)) return imageInfoCache.get(url.pathname);
+  const file = path.resolve(root, `.${decodeURIComponent(url.pathname)}`);
+  if (!file.startsWith(`${root}${path.sep}`)) throw new Error(`Imagen fuera del sitio: ${value}`);
+  const bytes = await fs.readFile(file);
+  let result = null;
+  if (bytes.length >= 24 && bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) {
+    result = { type: "image/png", width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) };
+  } else if (bytes.length >= 4 && bytes.readUInt16BE(0) === 0xffd8) {
+    for (let offset = 2; offset + 3 < bytes.length;) {
+      if (bytes[offset++] !== 0xff) break;
+      while (offset < bytes.length && bytes[offset] === 0xff) offset++;
+      const marker = bytes[offset++];
+      if (marker === 0xd9 || marker === 0xda) break;
+      if (marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) continue;
+      if (offset + 2 > bytes.length) break;
+      const length = bytes.readUInt16BE(offset);
+      if (length < 2 || offset + length > bytes.length) break;
+      if ([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf].includes(marker) && length >= 7) {
+        result = { type: "image/jpeg", width: bytes.readUInt16BE(offset + 5), height: bytes.readUInt16BE(offset + 3) };
+        break;
+      }
+      offset += length;
+    }
+  } else if (bytes.length >= 30 && bytes.toString("ascii", 0, 4) === "RIFF" && bytes.toString("ascii", 8, 12) === "WEBP") {
+    const chunk = bytes.toString("ascii", 12, 16);
+    if (chunk === "VP8X") result = { type: "image/webp", width: 1 + bytes.readUIntLE(24, 3), height: 1 + bytes.readUIntLE(27, 3) };
+    if (chunk === "VP8 " && bytes.toString("hex", 23, 26) === "9d012a") result = { type: "image/webp", width: bytes.readUInt16LE(26) & 0x3fff, height: bytes.readUInt16LE(28) & 0x3fff };
+    if (chunk === "VP8L" && bytes[20] === 0x2f) result = { type: "image/webp", width: 1 + (((bytes[22] & 0x3f) << 8) | bytes[21]), height: 1 + (((bytes[24] & 0x0f) << 10) | (bytes[23] << 2) | (bytes[22] >> 6)) };
+  }
+  imageInfoCache.set(url.pathname, result);
+  return result;
+}
+
 function xml(value) {
   return String(value).replace(/[<>&'"]/g, (char) => ({
     "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;"
@@ -218,14 +256,18 @@ function htmlText(value) {
 }
 
 function replaceTitle(html, value) {
-  return html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${value}</title>`);
+  return html.replace(/<title>[\s\S]*?<\/title>/i, () => `<title>${htmlText(value)}</title>`);
 }
 
 function replaceMeta(html, selector, value, attribute = "name") {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const pattern = new RegExp(`<meta\\s+${attribute}="${escaped}"\\s+content="[^"]*"\\s*\\/?>`, "i");
-  const tag = `<meta ${attribute}="${selector}" content="${value}">`;
-  return pattern.test(html) ? html.replace(pattern, tag) : html.replace("</head>", `${tag}\n</head>`);
+  const tag = `<meta ${attribute}="${selector}" content="${htmlText(value)}">`;
+  if (!pattern.test(html) && attribute === "property" && selector.startsWith("og:image:")) {
+    // Keep image details beside og:image, before the large inline stylesheet.
+    return html.replace(/<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/i, anchor => `${anchor}\n${tag}`);
+  }
+  return pattern.test(html) ? html.replace(pattern, () => tag) : html.replace("</head>", () => `${tag}\n</head>`);
 }
 
 function replaceLink(html, rel, value) {
@@ -392,10 +434,11 @@ function pruneSections(html, keepSections) {
   return pruned;
 }
 
-function render(config) {
+async function render(config) {
   const canonicalPath = withTrailingSlash(config.canonical || config.url);
   const canonical = `${baseUrl}${canonicalPath}`;
   const image = absolute(config.image);
+  const info = await imageInfo(image);
   let html = source;
   html = replaceTitle(html, config.title);
   html = replaceMeta(html, "description", config.description);
@@ -407,6 +450,13 @@ function render(config) {
   html = replaceMeta(html, "og:description", config.description, "property");
   html = replaceMeta(html, "og:url", canonical, "property");
   html = replaceMeta(html, "og:image", image, "property");
+  html = replaceMeta(html, "og:image:secure_url", image, "property");
+  html = html.replace(/<meta\s+property="og:image:(?:width|height|type)"[^>]*>\s*/gi, "");
+  if (info) {
+    html = replaceMeta(html, "og:image:type", info.type, "property");
+    html = replaceMeta(html, "og:image:width", info.width, "property");
+    html = replaceMeta(html, "og:image:height", info.height, "property");
+  }
   html = replaceMeta(html, "og:image:alt", config.imageAlt || config.title, "property");
   html = replaceMeta(html, "twitter:title", config.title);
   html = replaceMeta(html, "twitter:description", config.description);
@@ -437,7 +487,7 @@ async function write(relativePath, content) {
 }
 
 for (const config of pages) {
-  await write(config.output, render(config));
+  await write(config.output, await render(config));
 }
 
 for (const [key, category] of Object.entries(categories)) {
@@ -456,7 +506,7 @@ for (const [key, category] of Object.entries(categories)) {
     keepSections: ["catalogo"],
     bodyRoute: "catalog"
   };
-  await write(config.output, render(config));
+  await write(config.output, await render(config));
 }
 
 const productRoot = path.join(root, "catalogo", "producto");
@@ -487,7 +537,7 @@ for (const product of products) {
     keepSections: ["catalogo"],
     bodyRoute: "product"
   };
-  await write(config.output, render(config));
+  await write(config.output, await render(config));
 }
 
 const sitemapEntries = [

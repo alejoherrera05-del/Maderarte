@@ -81,8 +81,18 @@ test('Concurrent product edit is not overwritten', async () => {
   assert.equal(JSON.parse(mock.state.text)[0].descripcion, 'Cambio de otro equipo');
 });
 test('Unrelated concurrent SEO commit is safely retained and retried', async () => {
-  const mock = mockRepository(); mock.state.race = 'seo'; const result = await repository(mock).publish(products, mock.sha);
+  const mock = mockRepository(); mock.state.race = 'seo';
+  // Exercise an actual edit, regardless of whether the live catalogue is already sorted.
+  const edited = copy(products); edited[0].descripcion = `${edited[0].descripcion || ''} Cambio de prueba.`;
+  const result = await repository(mock).publish(edited, mock.sha);
   assert.equal(mock.state.writes, 1); assert.equal(mock.state.commits.length, 2); assert.equal(mock.state.trees[1].base_tree, 'concurrent-tree'); assert.equal(result.sha, mock.sha);
+  assert.equal(JSON.parse(mock.state.text).find(p => p.id === edited[0].id).descripcion, edited[0].descripcion);
+});
+test('An unchanged sorted catalogue remains valid after a concurrent SEO commit', async () => {
+  const sorted = Order.sortProducts(copy(products)); const mock = mockRepository(sorted); mock.state.race = 'seo';
+  const result = await repository(mock).publish(sorted, mock.sha);
+  assert.equal(mock.state.writes, 0); assert.equal(mock.state.head, 'concurrent-head');
+  assert.equal(result.sha, mock.sha); assert.deepEqual(result.products, sorted);
 });
 test('Lost successful PATCH response is confirmed instead of double-publishing', async () => {
   const mock = mockRepository(); mock.state.ambiguous = true; const result = await repository(mock).publish(products, mock.sha); assert.equal(mock.state.writes, 1); assert.equal(result.sha, mock.sha);

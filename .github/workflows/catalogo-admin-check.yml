@@ -26,7 +26,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    # Match the pinned browser's supported OS instead of following runner upgrades.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -49,6 +50,12 @@ jobs:
         env:
           REVIEW_SCREENSHOT_DIR: /tmp/maderarte-review
         run: node tools/test-catalog-browser.cjs
+      - name: Probar compartir, WhatsApp y fotos en celulares verticales y horizontales
+        env:
+          REVIEW_SCREENSHOT_DIR: /tmp/maderarte-review
+        run: |
+          node tools/test-product-sharing.cjs
+          node tools/test-product-gallery.cjs
       - name: Probar contratos existentes, precios, imagenes y fichas
         env:
           REVIEW_SCREENSHOT_DIR: /tmp/maderarte-review

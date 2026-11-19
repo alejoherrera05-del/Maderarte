@@ -1,11 +1,32 @@
 /* Catalogue grouping and a discreet, keyboard-accessible administration entry. */
-/* One contact action stays reachable while scrolling the catalogue or a product. */
-.mobile-whatsapp-float{position:fixed;right:calc(18px + env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:150;display:grid;place-items:center;width:58px;height:58px;border:2px solid #fff;border-radius:50%;background:#128c57;color:#fff;box-shadow:0 5px 20px #0003;transition:transform .18s ease,background-color .18s ease;touch-action:manipulation}
-.mobile-whatsapp-float svg{width:32px;height:32px;stroke-width:1.8;pointer-events:none}
-.mobile-whatsapp-float:hover{background:#0d7548;transform:translateY(-2px)}
-.mobile-whatsapp-float:focus-visible{outline:3px solid #ff7a18;outline-offset:4px}
-body:has(.image-lightbox.open) .mobile-whatsapp-float{visibility:hidden;pointer-events:none}
-.footer{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+/* Quote is part of the product actions, alongside Save and Share. */
+.dialog-quote{box-sizing:border-box;display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;gap:7px;min-width:100px;min-height:44px;padding:0 12px;border:1px solid rgba(24,21,18,.12);border-radius:999px;background:rgba(255,255,255,.72);color:#201b16;font-family:var(--sans,system-ui);font-size:.84rem;font-weight:650;line-height:1;text-decoration:none;white-space:nowrap;touch-action:manipulation;transition:background-color .18s ease,transform .18s ease}
+.dialog-quote .dialog-whatsapp-icon{display:block;flex:none;width:22px;height:22px;fill:currentColor;stroke:none;pointer-events:none}
+.dialog-quote>span{display:block}
+.dialog-quote:hover{background:#fff}
+.dialog-quote:active{transform:scale(.97)}
+.dialog-quote:focus-visible{outline:2px solid #ff7a18;outline-offset:4px}
+@media(min-width:681px){
+  .catalog-dialog .dialog-actions{grid-template-columns:58px 58px max-content}
+  .catalog-dialog .dialog-actions .dialog-quote{min-width:120px;height:58px;padding:0 18px;gap:9px;border:2px solid transparent;background:linear-gradient(145deg,#272625 0%,#171716 100%) padding-box,conic-gradient(from 218deg,#dfbc69 0 73%,#ff7412 73% 84%,#dfbc69 84% 100%) border-box;color:#e3bd68;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 20px rgba(31,24,18,.18);font-size:.9rem}
+  .catalog-dialog .dialog-actions .dialog-quote:hover{background:linear-gradient(145deg,#302b27 0%,#191817 100%) padding-box,conic-gradient(from 218deg,#eccd7d 0 68%,#ff7412 68% 87%,#eccd7d 87% 100%) border-box;color:#f0ca75;transform:translateY(-2px)}
+  .dialog-quote .dialog-whatsapp-icon{width:24px;height:24px}
+}
+@media(max-width:680px){
+  .dialog-mobile-topbar{gap:10px}
+  .dialog-back{flex:0 0 auto;padding:0}
+  .dialog-mobile-actions{gap:8px}
+  .dialog-mobile-favorite,.dialog-mobile-share{flex:0 0 44px}
+  .catalog-dialog .dialog-actions{display:none}
+}
+@media(max-width:360px){
+  .dialog-mobile-topbar{gap:8px}
+  .dialog-back{gap:6px;letter-spacing:.08em}
+  .dialog-mobile-actions{gap:6px}
+  .dialog-quote{min-width:92px;padding:0 9px;gap:6px;font-size:.78rem}
+  .dialog-quote .dialog-whatsapp-icon{width:20px;height:20px}
+}
+@media(prefers-reduced-motion:reduce){.dialog-quote{transition:none}}
 .product-share-dialog{position:fixed;inset:0;margin:auto;width:min(430px,calc(100% - 32px));max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:24px;border:1px solid #d8d4ce;border-radius:20px;background:#f4f5f7;color:#181512;box-shadow:0 22px 70px #0004;font-family:var(--sans,system-ui);z-index:180}
 .product-share-dialog::backdrop{background:#18151299}
 .product-share-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -20,7 +41,5 @@ body:has(.image-lightbox.open) .mobile-whatsapp-float{visibility:hidden;pointer-
 .product-share-dialog :is(button,a,input):focus-visible{outline:2px solid #ff7a18;outline-offset:3px}
 #product-share-feedback{margin-top:14px;font-size:.9rem;line-height:1.5;color:#285c3d}
 #product-share-feedback:empty{display:none}
-@media(max-width:680px){.catalog-dialog-copy{padding-bottom:calc(92px + env(safe-area-inset-bottom))}.catalog-dialog .dialog-actions{display:none}.mobile-whatsapp-float{width:56px;height:56px;right:calc(14px + env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom))}}
-@media(prefers-reduced-motion:reduce){.mobile-whatsapp-float{transition:none}}
 .footer .footer-admin{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 13px;border:1px solid rgba(255,255,255,.19);border-radius:9px;color:rgba(255,255,255,.72);font-family:var(--sans,system-ui);font-size:.65rem;font-weight:650;letter-spacing:.12em;text-decoration:none;white-space:nowrap;flex-shrink:0}
 .footer .footer-admin svg{width:13px;height:13px;flex-shrink:0}.footer .footer-admin:hover{background:rgba(255,255,255,.07);border-color:rgba(255,207,145,.6);color:#ffcf91}.footer .footer-admin:focus-visible{outline:2px solid #ffcf91;outline-offset:5px}.catalog-group-heading{grid-column:1/-1;display:flex;align-items:center;gap:16px;margin:28px 0 2px;padding:0 0 16px;border-bottom:1px solid rgba(26,26,26,.13)}.catalog-group-heading:first-child{margin-top:0}.catalog-group-heading h3{margin:0;font-family:var(--sans,system-ui);font-size:clamp(1.05rem,2vw,1.4rem);font-weight:650;letter-spacing:-.035em}.catalog-group-heading span{color:#706a64;font-size:.72rem;white-space:nowrap}@media(max-width:760px){.footer .footer-admin{justify-self:start}.catalog-group-heading{gap:12px;margin-top:20px}}

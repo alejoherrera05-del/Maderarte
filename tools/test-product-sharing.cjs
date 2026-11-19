@@ -31,7 +31,7 @@ async function main() {
   let browser;
   try {
     browser = await chromium.launch({ headless:true, executablePath:process.env.CHROME_PATH || undefined });
-    for (const viewport of [{width:390,height:844}, {width:700,height:390}, {width:956,height:440}, {width:1440,height:1000}]) {
+    for (const viewport of [{width:320,height:844}, {width:390,height:844}, {width:700,height:390}, {width:956,height:440}, {width:1440,height:1000}]) {
       const mobile = viewport.width !== 1440;
       const context = await browser.newContext({ viewport, isMobile:mobile, hasTouch:mobile });
       const page = await context.newPage();
@@ -54,16 +54,52 @@ async function main() {
       });
       await page.goto(base + osloPath, { waitUntil:'domcontentloaded' });
       await page.locator('#catalog-modal.open').waitFor();
+      await page.evaluate(async () => { await document.fonts.ready; });
       const share = page.locator(viewport.width <= 680 ? '#dialog-mobile-share' : '#dialog-copy-link');
-      const float = page.locator('#whatsapp-float');
-      check(await float.isVisible(), `${viewport.width}: WhatsApp remains visible in product`);
-      check(await float.evaluate(el => !!el.closest('[role="dialog"][aria-modal="true"]')), `${viewport.width}: WhatsApp belongs to the active modal for assistive technology`);
-      check(await float.evaluate(el => {
-        const r = el.getBoundingClientRect();
-        return r.width >= 44 && r.height >= 44 && r.left >= 0 && r.right <= innerWidth && r.bottom <= innerHeight && r.top >= 0 && el.contains(document.elementFromPoint(r.left + r.width/2, r.top + r.height/2));
-      }), `${viewport.width}: floating WhatsApp is fully inside viewport and receives taps`);
-      const wa = new URL(await float.getAttribute('href'));
-      check(wa.pathname === '/573117476465' && wa.searchParams.get('text').includes(oslo.nombre) && wa.searchParams.get('text').includes(osloPath), `${viewport.width}: consultation contains exact product and URL`);
+      const quote = page.locator(viewport.width <= 680 ? '#dialog-mobile-quote' : '#dialog-quote');
+      await quote.scrollIntoViewIfNeeded();
+      await page.screenshot({path:path.join(screenshots, `product-actions-${viewport.width}.png`)});
+      check(await page.locator('#whatsapp-float, .mobile-whatsapp-float').count() === 0, `${viewport.width}: floating WhatsApp is removed`);
+      check(await quote.isVisible() && await quote.locator('span').innerText() === 'Cotizar' && await quote.locator('svg.dialog-whatsapp-icon').isVisible(), `${viewport.width}: quote action has a visible Cotizar label and WhatsApp icon`);
+      check(await quote.evaluate(el => !!el.closest('[role="dialog"][aria-modal="true"]')), `${viewport.width}: quote action belongs to the active modal for assistive technology`);
+      const row = await quote.evaluate(el => {
+        const mobile = innerWidth <= 680;
+        const controls = [
+          document.getElementById(mobile ? 'dialog-mobile-favorite' : 'dialog-favorite'),
+          document.getElementById(mobile ? 'dialog-mobile-share' : 'dialog-copy-link'),
+          el,
+        ];
+        const rects = controls.map(control => control.getBoundingClientRect());
+        const actionRow = el.closest('.dialog-mobile-actions, .dialog-actions');
+        const label = el.querySelector('span');
+        const range = document.createRange();
+        range.selectNodeContents(label);
+        const text = range.getBoundingClientRect();
+        const quoteRect = el.getBoundingClientRect();
+        const topbar = mobile ? el.closest('.dialog-mobile-topbar') : actionRow;
+        const back = mobile ? document.getElementById('catalog-mobile-back').getBoundingClientRect() : null;
+        return {
+          sameRow:rects.every(r => Math.abs((r.top + r.height/2) - (quoteRect.top + quoteRect.height/2)) <= 2),
+          separate:rects.every((r, i) => rects.every((other, j) => i === j || r.right <= other.left + 1 || other.right <= r.left + 1)),
+          targets:rects.every(r => r.width >= 44 && r.height >= 44),
+          tappable:controls.every((control, i) => {
+            const r = rects[i];
+            return r.left >= 0 && r.right <= innerWidth + 1 && r.top >= 0 && r.bottom <= innerHeight + 1 && control.contains(document.elementFromPoint(r.left + r.width/2, r.top + r.height/2));
+          }),
+          inline:getComputedStyle(el).position !== 'fixed' && getComputedStyle(actionRow).position !== 'fixed',
+          fullLabel:text.width > 0 && text.height > 0 && text.left >= quoteRect.left && text.right <= quoteRect.right + 1 && text.top >= quoteRect.top && text.bottom <= quoteRect.bottom + 1,
+          noOverflow:topbar.scrollWidth <= topbar.clientWidth + 1 && document.documentElement.scrollWidth <= innerWidth + 1 && (!back || (back.left >= 0 && back.right <= Math.min(...rects.map(r => r.left)) + 1)),
+        };
+      });
+      check(row.sameRow && row.separate && row.inline, `${viewport.width}: Cotizar, favorite and share occupy one inline row without overlap: ${JSON.stringify(row)}`);
+      check(row.targets && row.tappable, `${viewport.width}: every product action is at least 44px and receives taps inside the viewport: ${JSON.stringify(row)}`);
+      check(row.fullLabel && row.noOverflow, `${viewport.width}: Cotizar stays fully readable and the action row fits without horizontal overflow: ${JSON.stringify(row)}`);
+      const quoteLinks = await page.locator('[data-product-whatsapp]').evaluateAll(links => links.map(link => link.href));
+      check(quoteLinks.length === 2 && quoteLinks.every(href => {
+        const wa = new URL(href);
+        const text = wa.searchParams.get('text') || '';
+        return wa.protocol === 'https:' && wa.hostname === 'wa.me' && wa.pathname === '/573117476465' && text.includes(oslo.nombre) && text.includes(base + osloPath) && /cotizar/i.test(text);
+      }), `${viewport.width}: both quote links contain the exact product, URL and quote request`);
       check(await page.locator('#dialog-whatsapp').count() === 0, `${viewport.width}: the old bottom advisor CTA is removed`);
       await share.click();
       const shared = await page.evaluate(() => window.__shares.at(-1));
@@ -93,16 +129,12 @@ async function main() {
       await page.waitForFunction(() => document.getElementById('product-share-feedback').textContent.includes('mantén presionado'));
       check(await page.locator('#product-share-url').evaluate(input => input.selectionStart === 0 && input.selectionEnd === input.value.length), `${viewport.width}: clipboard denial leaves a selectable link and visible instructions`);
       await page.locator('#product-share-close').click();
-      await page.locator('.catalog-dialog-copy').evaluate(el => { el.scrollTop = el.scrollHeight; });
-      check(await float.evaluate(el => { const r=el.getBoundingClientRect(); return r.bottom <= innerHeight && el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)); }), `${viewport.width}: WhatsApp remains reachable after scrolling details`);
-      await page.screenshot({path:path.join(screenshots, `product-actions-${viewport.width}.png`)});
 
       await page.locator(viewport.width <= 680 ? '#catalog-mobile-back' : '#catalog-close').click();
       await page.waitForURL('**/catalogo/');
       await page.locator('.product-card').first().waitFor();
       check(await page.locator('.product-card').count() === products.length, `${viewport.width}: closing a direct product URL returns to the real catalogue`);
-      check(await float.isVisible(), `${viewport.width}: WhatsApp is visible outside the product too`);
-      check(!new URL(await float.getAttribute('href')).searchParams.get('text').includes(osloPath), `${viewport.width}: general WhatsApp does not retain stale product`);
+      check(await page.locator('#whatsapp-float, .mobile-whatsapp-float').count() === 0 && await page.locator('.dialog-quote:visible').count() === 0, `${viewport.width}: closing the product leaves no floating or visible product quote action in the catalogue`);
       check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${viewport.width}: catalogue does not overflow horizontally`);
       check(errors.length === 0, `${viewport.width}: no script errors: ${errors.join('; ')}`);
       await context.close();
@@ -121,13 +153,14 @@ async function main() {
     if(await options.count()) {
       await options.last().click();
       const selected = await options.last().getAttribute('data-variant-label');
-      check(new URL(await page.locator('#whatsapp-float').getAttribute('href')).searchParams.get('text').includes(selected), 'WhatsApp consultation includes selected size');
+      const quoteLinks = await page.locator('[data-product-whatsapp]').evaluateAll(links => links.map(link => link.href));
+      check(quoteLinks.length === 2 && quoteLinks.every(href => new URL(href).searchParams.get('text').includes(selected)), 'Both WhatsApp quote links include the selected size');
     }
     await page.locator('#dialog-mobile-share').click();
     check(await page.evaluate(() => window.__shares.at(-1).url) === base + osloPath + '?precios=maderarte2026', 'Priced share retains a product-specific page for its thumbnail');
     check((await page.locator('meta[name="robots"]').getAttribute('content')).includes('noindex'), 'Commercial price links keep their existing noindex behavior');
     await page.close();
-    console.log(`PRODUCT SHARING OK: ${checks} checks; native/blocked/cancelled share, copy fallback, WhatsApp, direct links, 390/700/956/1440px. No messages sent.`);
+    console.log(`PRODUCT SHARING OK: ${checks} checks; native/blocked/cancelled share, copy fallback, inline Cotizar, direct links, 320/390/700/956/1440px. No messages sent.`);
   } finally {
     if (browser) await browser.close();
     await new Promise(resolve => server.close(resolve));

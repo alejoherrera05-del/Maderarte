@@ -7961,15 +7961,20 @@ initCatalog();
   const assets = mobile
     ? ["/black-friday-mobile-black-only-v5.png", "/black-friday-friday-neon-mobile.png"]
     : ["/black-friday-desktop-black-only-v5.png", "/black-friday-friday-neon-desktop.png"];
-  const loadImage = source => new Promise(resolve => {
+  const loadImage = source => new Promise((resolve, reject) => {
     const image = new Image();
-    image.onload = resolve;
-    image.onerror = resolve;
+    image.onload = () => {
+      const decoded = typeof image.decode === "function" ? image.decode() : Promise.resolve();
+      decoded.catch(() => {}).then(resolve);
+    };
+    image.onerror = reject;
     image.src = source;
   });
   Promise.all(assets.map(loadImage)).then(() => {
-    requestAnimationFrame(() => document.body.classList.add("bf-assets-ready"));
-  });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.body.classList.add("bf-assets-ready");
+    }));
+  }).catch(() => {});
 })();
 </script>
 </body>

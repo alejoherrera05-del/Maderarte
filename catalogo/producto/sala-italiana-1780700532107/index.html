@@ -13,8 +13,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://maderartepopayan.com/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="https://maderartepopayan.com/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="https://maderartepopayan.com/apple-touch-icon.png">
-<link rel="preload" as="image" href="/black-friday-mobile.png" media="(max-width: 820px)">
-<link rel="preload" as="image" href="/black-friday-desktop.png" media="(min-width: 821px)">
+<link rel="preload" as="image" href="/black-friday-mobile-full-v2.png" media="(max-width: 820px)">
+<link rel="preload" as="image" href="/black-friday-desktop-full-v2.png" media="(min-width: 821px)">
 <link rel="preload" as="image" href="/icons/tape-measure-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/material-moodboard-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/design-proposal-mobile.webp" media="(max-width: 700px)">
@@ -5672,16 +5672,22 @@ body.black-friday-mode .hero{
   min-height:100svh;
   height:100vh;
   height:100svh;
-  background:#211008;
+  background:linear-gradient(to bottom, #241109 0 52%, #765036 52% 100%);
 }
 body.black-friday-mode .hero-media{
   inset:0;
-  background-image:url("/black-friday-desktop.png");
+  background-image:url("/black-friday-desktop-full-v2.png");
   background-position:center;
-  background-size:100% 100%;
+  background-size:cover;
   background-repeat:no-repeat;
   transform:none;
   animation:none;
+}
+body.black-friday-mode .hero-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("/black-friday-desktop-full-v2.png") center/contain no-repeat;
 }
 body.black-friday-mode .hero::after{
   display:none;
@@ -5694,13 +5700,29 @@ body.black-friday-mode .hero-content{
 }
 body.black-friday-mode .black-friday-hero-link{
   position:absolute;
-  inset:0;
-  z-index:2;
+  left:5.75%;
+  top:calc(50% + 4.55vw);
+  width:19.75%;
+  height:3.1vw;
+  z-index:3;
   display:block;
+  border-radius:999px;
+  cursor:pointer;
+  background:transparent;
+  transition:background-color .2s ease, box-shadow .2s ease, transform .16s ease;
+}
+body.black-friday-mode .black-friday-hero-link:hover{
+  background:rgba(255,111,14,.12);
+  box-shadow:0 0 0 2px rgba(255,115,20,.7), 0 10px 28px rgba(255,96,0,.28);
+}
+body.black-friday-mode .black-friday-hero-link:active{
+  transform:scale(.98);
+  background:rgba(255,111,14,.2);
 }
 body.black-friday-mode .black-friday-hero-link:focus-visible{
   outline:3px solid var(--copper);
-  outline-offset:-8px;
+  outline-offset:4px;
+  background:rgba(255,111,14,.12);
 }
 @media (max-width:820px){
   body.black-friday-mode .hero{
@@ -5709,16 +5731,32 @@ body.black-friday-mode .black-friday-hero-link:focus-visible{
     height:100vh;
     height:100svh;
     max-height:none;
-    background:#211008;
+    background:linear-gradient(to bottom, #241109 0 58%, #765036 58% 100%);
   }
   body.black-friday-mode .hero-media{
     top:84px;
-    background-image:url("/black-friday-mobile.png");
+    background-image:url("/black-friday-mobile-full-v2.png");
     background-position:center top;
-    background-size:100% 100%;
+    background-size:cover;
+  }
+  body.black-friday-mode .hero-media::after{
+    background-image:url("/black-friday-mobile-full-v2.png");
+    background-position:center top;
+    background-size:contain;
   }
   body.black-friday-mode .black-friday-hero-link{
-    top:84px;
+    left:23.6%;
+    top:calc(84px + 52.3vw);
+    width:52.8%;
+    height:7vw;
+  }
+}
+@media (min-aspect-ratio:2/1) and (min-width:821px){
+  body.black-friday-mode .black-friday-hero-link{
+    left:calc(50% - 88.5vh);
+    top:58.8%;
+    width:39.5vh;
+    height:6.4%;
   }
 }
 </style>

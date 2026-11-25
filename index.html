@@ -15,8 +15,6 @@
 <link rel="apple-touch-icon" sizes="180x180" href="https://maderartepopayan.com/apple-touch-icon.png">
 <link rel="preload" as="image" href="/black-friday-mobile-black-only-v5.png" media="(max-width: 820px)">
 <link rel="preload" as="image" href="/black-friday-desktop-black-only-v5.png" media="(min-width: 821px)">
-<link rel="preload" as="image" href="/black-friday-friday-neon-mobile.png" media="(max-width: 820px)">
-<link rel="preload" as="image" href="/black-friday-friday-neon-desktop.png" media="(min-width: 821px)">
 <link rel="preload" as="image" href="/icons/tape-measure-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/material-moodboard-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/design-proposal-mobile.webp" media="(max-width: 700px)">
@@ -5706,57 +5704,122 @@ body.black-friday-mode .black-friday-neon{
   display:block;
   width:18.04vw;
   height:6.48vw;
-  overflow:hidden;
-  color:transparent;
-  font-size:0;
-  background:url("/black-friday-friday-neon-desktop.png") center/contain no-repeat;
+  overflow:visible;
   pointer-events:none;
-  will-change:filter, opacity;
   opacity:0;
+  transition:opacity .12s linear;
 }
 body.black-friday-mode.bf-assets-ready .black-friday-neon{
-  animation:blackFridayNeonSoft 5.8s ease-in-out infinite;
+  opacity:1;
 }
-@keyframes blackFridayNeonSoft{
-  0%, 16%, 100%{
-    opacity:.12;
-    filter:brightness(.38) saturate(.42);
-  }
-  27%, 57%{
-    opacity:.9;
-    filter:
-      brightness(1.16)
-      saturate(.96)
-      drop-shadow(0 0 2px rgba(255,226,190,.8))
-      drop-shadow(0 0 7px rgba(255,133,54,.72))
-      drop-shadow(0 0 14px rgba(255,82,12,.46));
-  }
-  63%{
-    opacity:.34;
-    filter:brightness(.65) saturate(.62) drop-shadow(0 0 3px rgba(255,111,32,.26));
-  }
-  68%{
-    opacity:.78;
-    filter:brightness(1.02) saturate(.88) drop-shadow(0 0 7px rgba(255,115,37,.52));
-  }
-  73%{
-    opacity:.28;
-    filter:brightness(.58) saturate(.56);
-  }
-  82%, 91%{
-    opacity:.86;
-    filter:
-      brightness(1.1)
-      saturate(.92)
-      drop-shadow(0 0 2px rgba(255,222,183,.72))
-      drop-shadow(0 0 8px rgba(255,124,42,.6));
-  }
+body.black-friday-mode .neon-tube-shadow,
+body.black-friday-mode .neon-tube-shell,
+body.black-friday-mode .neon-tube-highlight,
+body.black-friday-mode .neon-on-segment path{
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+body.black-friday-mode .neon-tube-shadow{
+  stroke:#24100a;
+  stroke-width:17;
+  opacity:.86;
+}
+body.black-friday-mode .neon-tube-shell{
+  stroke:#713019;
+  stroke-width:11;
+  opacity:.92;
+}
+body.black-friday-mode .neon-tube-highlight{
+  stroke:#bf5a26;
+  stroke-width:2.2;
+  opacity:.34;
+}
+body.black-friday-mode .neon-on-segment{
+  opacity:0;
+  will-change:opacity;
+}
+body.black-friday-mode .neon-on-segment .neon-glow-wide{
+  stroke:#ff4d08;
+  stroke-width:19;
+  opacity:.17;
+}
+body.black-friday-mode .neon-on-segment .neon-glow-near{
+  stroke:#ff7b1d;
+  stroke-width:11;
+  opacity:.42;
+}
+body.black-friday-mode .neon-on-segment .neon-core{
+  stroke:#fff2d5;
+  stroke-width:3.4;
+}
+body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment{
+  animation-duration:7.6s;
+  animation-timing-function:steps(1, end);
+  animation-iteration-count:infinite;
+  animation-fill-mode:both;
+  animation-play-state:var(--neon-play-state, running);
+}
+body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-child(3n + 1){
+  animation-name:fridayNeonFaultA;
+}
+body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-child(3n + 2){
+  animation-name:fridayNeonFaultB;
+}
+body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-child(3n){
+  animation-name:fridayNeonFaultC;
+}
+@keyframes fridayNeonFaultA{
+  0%, 1.8%{opacity:0}
+  2.4%{opacity:.96}
+  3.5%{opacity:.08}
+  5.2%{opacity:.82}
+  6.4%{opacity:.12}
+  8.6%{opacity:1}
+  10.3%{opacity:.16}
+  13%, 53.8%{opacity:1}
+  54.6%{opacity:.12}
+  55.5%, 88.5%{opacity:1}
+  89.2%{opacity:.18}
+  90.3%, 93.2%{opacity:1}
+  94.5%, 100%{opacity:0}
+}
+@keyframes fridayNeonFaultB{
+  0%, 3%{opacity:0}
+  4%{opacity:.92}
+  5.3%{opacity:.08}
+  7.2%{opacity:1}
+  8.4%{opacity:.15}
+  11%{opacity:.95}
+  12.6%{opacity:.1}
+  16%, 56.4%{opacity:1}
+  57.1%{opacity:.24}
+  58.1%, 91.8%{opacity:1}
+  92.6%{opacity:.18}
+  93.7%{opacity:1}
+  95%, 100%{opacity:0}
+}
+@keyframes fridayNeonFaultC{
+  0%, 1.2%{opacity:0}
+  1.9%{opacity:.86}
+  3%{opacity:.06}
+  6%{opacity:.9}
+  7.3%{opacity:.12}
+  9.5%{opacity:1}
+  11.2%{opacity:.2}
+  15%, 58.6%{opacity:1}
+  59.3%{opacity:.1}
+  60.5%, 87.6%{opacity:1}
+  88.4%{opacity:.2}
+  89.6%, 92.8%{opacity:1}
+  94.2%, 100%{opacity:0}
 }
 @media (prefers-reduced-motion:reduce){
-  body.black-friday-mode.bf-assets-ready .black-friday-neon{
-    animation:none;
-    opacity:.62;
-    filter:brightness(.86) saturate(.74) drop-shadow(0 0 5px rgba(255,115,37,.38));
+  body.black-friday-mode.bf-assets-ready .neon-on-segment{
+    opacity:.78 !important;
+    animation:none !important;
+    will-change:auto;
   }
 }
 .black-friday-live-copy{
@@ -5861,7 +5924,6 @@ body.black-friday-mode .black-friday-hero-link:focus-visible{
     top:calc(84px + 29.35vw);
     width:40.16vw;
     height:13.9vw;
-    background-image:url("/black-friday-friday-neon-mobile.png");
   }
   body.black-friday-mode .black-friday-live-copy p{
     font-size:clamp(1.06rem, 4.9vw, 1.4rem);
@@ -5918,7 +5980,57 @@ body.black-friday-mode .black-friday-hero-link:focus-visible{
   <main>
     <section class="hero" id="inicio">
       <div class="hero-media" aria-hidden="true"></div>
-      <span class="black-friday-neon" aria-hidden="true">FRIDAY</span>
+      <svg class="black-friday-neon" viewBox="0 0 640 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <path id="neon-f-1" d="M44 198V32"></path>
+          <path id="neon-f-2" d="M44 32H112"></path>
+          <path id="neon-f-3" d="M44 108H101"></path>
+          <path id="neon-r-1" d="M142 198V32"></path>
+          <path id="neon-r-2" d="M142 32H185C214 32 228 46 228 71S213 109 185 109H142"></path>
+          <path id="neon-r-3" d="M184 109L231 198"></path>
+          <path id="neon-i-1" d="M256 32H320"></path>
+          <path id="neon-i-2" d="M288 32V198"></path>
+          <path id="neon-i-3" d="M256 198H320"></path>
+          <path id="neon-d-1" d="M348 198V32"></path>
+          <path id="neon-d-2" d="M348 32H383C430 32 449 64 449 115S430 198 383 198H348"></path>
+          <path id="neon-a-1" d="M472 198L520 32"></path>
+          <path id="neon-a-2" d="M520 32L568 198"></path>
+          <path id="neon-a-3" d="M490 130H550"></path>
+          <path id="neon-y-1" d="M574 32L606 108"></path>
+          <path id="neon-y-2" d="M638 32L606 108"></path>
+          <path id="neon-y-3" d="M606 108V198"></path>
+          <g id="friday-tube-shape">
+            <use href="#neon-f-1"></use><use href="#neon-f-2"></use><use href="#neon-f-3"></use>
+            <use href="#neon-r-1"></use><use href="#neon-r-2"></use><use href="#neon-r-3"></use>
+            <use href="#neon-i-1"></use><use href="#neon-i-2"></use><use href="#neon-i-3"></use>
+            <use href="#neon-d-1"></use><use href="#neon-d-2"></use>
+            <use href="#neon-a-1"></use><use href="#neon-a-2"></use><use href="#neon-a-3"></use>
+            <use href="#neon-y-1"></use><use href="#neon-y-2"></use><use href="#neon-y-3"></use>
+          </g>
+        </defs>
+        <g class="neon-tube-shadow"><use href="#friday-tube-shape"></use></g>
+        <g class="neon-tube-shell"><use href="#friday-tube-shape"></use></g>
+        <g class="neon-tube-highlight"><use href="#friday-tube-shape"></use></g>
+        <g class="neon-live-layer">
+          <g class="neon-on-segment" data-neon-letter="F"><path class="neon-glow-wide" d="M44 198V32"></path><path class="neon-glow-near" d="M44 198V32"></path><path class="neon-core" d="M44 198V32"></path></g>
+          <g class="neon-on-segment" data-neon-letter="F"><path class="neon-glow-wide" d="M44 32H112"></path><path class="neon-glow-near" d="M44 32H112"></path><path class="neon-core" d="M44 32H112"></path></g>
+          <g class="neon-on-segment" data-neon-letter="F"><path class="neon-glow-wide" d="M44 108H101"></path><path class="neon-glow-near" d="M44 108H101"></path><path class="neon-core" d="M44 108H101"></path></g>
+          <g class="neon-on-segment" data-neon-letter="R"><path class="neon-glow-wide" d="M142 198V32"></path><path class="neon-glow-near" d="M142 198V32"></path><path class="neon-core" d="M142 198V32"></path></g>
+          <g class="neon-on-segment" data-neon-letter="R"><path class="neon-glow-wide" d="M142 32H185C214 32 228 46 228 71S213 109 185 109H142"></path><path class="neon-glow-near" d="M142 32H185C214 32 228 46 228 71S213 109 185 109H142"></path><path class="neon-core" d="M142 32H185C214 32 228 46 228 71S213 109 185 109H142"></path></g>
+          <g class="neon-on-segment" data-neon-letter="R"><path class="neon-glow-wide" d="M184 109L231 198"></path><path class="neon-glow-near" d="M184 109L231 198"></path><path class="neon-core" d="M184 109L231 198"></path></g>
+          <g class="neon-on-segment" data-neon-letter="I"><path class="neon-glow-wide" d="M256 32H320"></path><path class="neon-glow-near" d="M256 32H320"></path><path class="neon-core" d="M256 32H320"></path></g>
+          <g class="neon-on-segment" data-neon-letter="I"><path class="neon-glow-wide" d="M288 32V198"></path><path class="neon-glow-near" d="M288 32V198"></path><path class="neon-core" d="M288 32V198"></path></g>
+          <g class="neon-on-segment" data-neon-letter="I"><path class="neon-glow-wide" d="M256 198H320"></path><path class="neon-glow-near" d="M256 198H320"></path><path class="neon-core" d="M256 198H320"></path></g>
+          <g class="neon-on-segment" data-neon-letter="D"><path class="neon-glow-wide" d="M348 198V32"></path><path class="neon-glow-near" d="M348 198V32"></path><path class="neon-core" d="M348 198V32"></path></g>
+          <g class="neon-on-segment" data-neon-letter="D"><path class="neon-glow-wide" d="M348 32H383C430 32 449 64 449 115S430 198 383 198H348"></path><path class="neon-glow-near" d="M348 32H383C430 32 449 64 449 115S430 198 383 198H348"></path><path class="neon-core" d="M348 32H383C430 32 449 64 449 115S430 198 383 198H348"></path></g>
+          <g class="neon-on-segment" data-neon-letter="A"><path class="neon-glow-wide" d="M472 198L520 32"></path><path class="neon-glow-near" d="M472 198L520 32"></path><path class="neon-core" d="M472 198L520 32"></path></g>
+          <g class="neon-on-segment" data-neon-letter="A"><path class="neon-glow-wide" d="M520 32L568 198"></path><path class="neon-glow-near" d="M520 32L568 198"></path><path class="neon-core" d="M520 32L568 198"></path></g>
+          <g class="neon-on-segment" data-neon-letter="A"><path class="neon-glow-wide" d="M490 130H550"></path><path class="neon-glow-near" d="M490 130H550"></path><path class="neon-core" d="M490 130H550"></path></g>
+          <g class="neon-on-segment" data-neon-letter="Y"><path class="neon-glow-wide" d="M574 32L606 108"></path><path class="neon-glow-near" d="M574 32L606 108"></path><path class="neon-core" d="M574 32L606 108"></path></g>
+          <g class="neon-on-segment" data-neon-letter="Y"><path class="neon-glow-wide" d="M638 32L606 108"></path><path class="neon-glow-near" d="M638 32L606 108"></path><path class="neon-core" d="M638 32L606 108"></path></g>
+          <g class="neon-on-segment" data-neon-letter="Y"><path class="neon-glow-wide" d="M606 108V198"></path><path class="neon-glow-near" d="M606 108V198"></path><path class="neon-core" d="M606 108V198"></path></g>
+        </g>
+      </svg>
       <div class="black-friday-live-copy">
         <h1 class="sr-only">Black Friday Maderarte</h1>
         <p><span>LO MÁS EXCLUSIVO,</span><strong>HOY A UN PRECIO ESPECIAL.</strong></p>
@@ -7959,8 +8071,8 @@ initCatalog();
   if(!document.body.classList.contains("black-friday-mode")) return;
   const mobile = window.matchMedia("(max-width: 820px)").matches;
   const assets = mobile
-    ? ["/black-friday-mobile-black-only-v5.png", "/black-friday-friday-neon-mobile.png"]
-    : ["/black-friday-desktop-black-only-v5.png", "/black-friday-friday-neon-desktop.png"];
+    ? ["/black-friday-mobile-black-only-v5.png"]
+    : ["/black-friday-desktop-black-only-v5.png"];
   const loadImage = source => new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => {
@@ -7975,6 +8087,21 @@ initCatalog();
       document.body.classList.add("bf-assets-ready");
     }));
   }).catch(() => {});
+  const neon = document.querySelector(".black-friday-neon");
+  if(neon){
+    let visible = true;
+    const syncPlayback = () => {
+      neon.style.setProperty("--neon-play-state", document.hidden || !visible ? "paused" : "running");
+    };
+    if("IntersectionObserver" in window){
+      new IntersectionObserver(entries => {
+        visible = entries[0]?.isIntersecting ?? true;
+        syncPlayback();
+      }, {threshold:.08}).observe(neon);
+    }
+    document.addEventListener("visibilitychange", syncPlayback);
+    syncPlayback();
+  }
 })();
 </script>
 </body>

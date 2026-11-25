@@ -13,8 +13,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://maderartepopayan.com/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="https://maderartepopayan.com/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="https://maderartepopayan.com/apple-touch-icon.png">
-<link rel="preload" as="image" href="/black-friday-mobile-full-v2.png" media="(max-width: 820px)">
-<link rel="preload" as="image" href="/black-friday-desktop-full-v2.png" media="(min-width: 821px)">
+<link rel="preload" as="image" href="/black-friday-mobile-grid-v3.png" media="(max-width: 820px)">
+<link rel="preload" as="image" href="/black-friday-desktop-grid-v3.png" media="(min-width: 821px)">
 <link rel="preload" as="image" href="/icons/tape-measure-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/material-moodboard-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/design-proposal-mobile.webp" media="(max-width: 700px)">
@@ -28,14 +28,14 @@
 <meta property="og:url" content="https://maderartepopayan.com/">
 <meta property="og:site_name" content="Maderarte">
 <meta property="og:locale" content="es_CO">
-<meta property="og:image" content="https://maderartepopayan.com/black-friday-desktop-full-v2.png">
+<meta property="og:image" content="https://maderartepopayan.com/black-friday-desktop-grid-v3.png">
 <meta property="og:image:width" content="1774">
 <meta property="og:image:height" content="887">
 <meta property="og:image:alt" content="Black Friday Maderarte · Lo más exclusivo, hoy a un precio especial">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tienda de muebles en Popayán | Maderarte">
 <meta name="twitter:description" content="Muebles y decoración en Popayán con más de 20 años de experiencia y atención cercana.">
-<meta name="twitter:image" content="https://maderartepopayan.com/black-friday-desktop-full-v2.png">
+<meta name="twitter:image" content="https://maderartepopayan.com/black-friday-desktop-grid-v3.png">
 <meta name="twitter:image:alt" content="Black Friday Maderarte · Lo más exclusivo, hoy a un precio especial">
 <meta name="geo.region" content="CO-CAU">
 <meta name="geo.placename" content="Popayán, Cauca, Colombia">
@@ -5674,7 +5674,7 @@ body.black-friday-mode .hero{
 }
 body.black-friday-mode .hero-media{
   inset:0;
-  background-image:url("/black-friday-desktop-full-v2.png");
+  background-image:url("/black-friday-desktop-grid-v3.png");
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
@@ -5685,7 +5685,7 @@ body.black-friday-mode .hero-media::after{
   content:"";
   position:absolute;
   inset:0;
-  background:url("/black-friday-desktop-full-v2.png") center/contain no-repeat;
+  background:url("/black-friday-desktop-grid-v3.png") center/contain no-repeat;
 }
 body.black-friday-mode .hero::after{
   display:none;
@@ -5693,29 +5693,73 @@ body.black-friday-mode .hero::after{
 body.black-friday-mode .hero-content{
   display:none;
 }
-.black-friday-hero-link{
+.black-friday-live-copy{
   display:none;
 }
-body.black-friday-mode .black-friday-hero-link{
+body.black-friday-mode .black-friday-live-copy{
   position:absolute;
-  left:5.75%;
-  top:calc(50% + 4.55vw);
-  width:19.75%;
-  height:3.1vw;
-  z-index:3;
+  left:23.6%;
+  top:calc(50% + 4vw);
+  z-index:4;
+  width:min(36vw, 640px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transform:translate(-50%, -50%);
+  text-align:center;
+  pointer-events:none;
+}
+body.black-friday-mode .black-friday-live-copy p{
+  margin:0;
+  color:#f7ecdf;
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:clamp(1.22rem, 1.55vw, 1.82rem);
+  font-weight:700;
+  line-height:1.18;
+  text-shadow:0 3px 12px rgba(0,0,0,.42);
+}
+body.black-friday-mode .black-friday-live-copy p span,
+body.black-friday-mode .black-friday-live-copy p strong{
   display:block;
+}
+body.black-friday-mode .black-friday-live-copy p strong{
+  margin-top:.18em;
+  color:#f47a28;
+}
+body.black-friday-mode .black-friday-copy-rule{
+  width:100%;
+  height:1px;
+  margin:clamp(14px, 1.4vw, 24px) 0 clamp(20px, 2.2vw, 34px);
+  background:rgba(255,244,232,.82);
+}
+body.black-friday-mode .black-friday-hero-link{
+  width:min(76%, 390px);
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
   border-radius:999px;
+  border:2px solid #f26816;
   cursor:pointer;
-  background:transparent;
+  color:#fff;
+  background:rgba(31,14,8,.82);
+  font-size:clamp(.76rem, .9vw, .94rem);
+  font-weight:760;
+  letter-spacing:.19em;
+  line-height:1.2;
+  text-decoration:none;
+  pointer-events:auto;
   transition:background-color .2s ease, box-shadow .2s ease, transform .16s ease;
 }
 body.black-friday-mode .black-friday-hero-link:hover{
-  background:rgba(255,111,14,.12);
+  background:rgba(86,34,10,.94);
   box-shadow:0 0 0 2px rgba(255,115,20,.7), 0 10px 28px rgba(255,96,0,.28);
+  transform:translateY(-2px);
 }
 body.black-friday-mode .black-friday-hero-link:active{
-  transform:scale(.98);
-  background:rgba(255,111,14,.2);
+  transform:translateY(0) scale(.98);
+  background:rgba(108,41,9,.98);
 }
 body.black-friday-mode .black-friday-hero-link:focus-visible{
   outline:3px solid var(--copper);
@@ -5733,28 +5777,41 @@ body.black-friday-mode .black-friday-hero-link:focus-visible{
   }
   body.black-friday-mode .hero-media{
     top:84px;
-    background-image:url("/black-friday-mobile-full-v2.png");
+    background-image:url("/black-friday-mobile-grid-v3.png");
     background-position:center top;
     background-size:cover;
   }
   body.black-friday-mode .hero-media::after{
-    background-image:url("/black-friday-mobile-full-v2.png");
+    background-image:url("/black-friday-mobile-grid-v3.png");
     background-position:center top;
     background-size:contain;
   }
+  body.black-friday-mode .black-friday-live-copy{
+    left:50%;
+    top:calc(84px + 79.2vw);
+    width:min(86vw, 430px);
+  }
+  body.black-friday-mode .black-friday-live-copy p{
+    font-size:clamp(1.06rem, 4.9vw, 1.4rem);
+  }
+  body.black-friday-mode .black-friday-copy-rule{
+    width:92%;
+    margin:12px 0 18px;
+  }
   body.black-friday-mode .black-friday-hero-link{
-    left:23.6%;
-    top:calc(84px + 52.3vw);
-    width:52.8%;
-    height:7vw;
+    width:min(82vw, 370px);
+    min-height:56px;
+    gap:14px;
+    padding:0 20px;
+    font-size:clamp(.76rem, 3.4vw, .9rem);
+    letter-spacing:.15em;
   }
 }
 @media (min-aspect-ratio:2/1) and (min-width:821px){
-  body.black-friday-mode .black-friday-hero-link{
-    left:calc(50% - 88.5vh);
-    top:58.8%;
-    width:39.5vh;
-    height:6.4%;
+  body.black-friday-mode .black-friday-live-copy{
+    left:calc(50% - 52.8vh);
+    top:58%;
+    width:min(72vh, 640px);
   }
 }
 </style>
@@ -5782,7 +5839,14 @@ body.black-friday-mode .black-friday-hero-link:focus-visible{
   <main>
     <section class="hero" id="inicio">
       <div class="hero-media" aria-hidden="true"></div>
-      <a class="black-friday-hero-link" href="/catalogo/" aria-label="Descubrir la selección Black Friday de Maderarte"></a>
+      <div class="black-friday-live-copy">
+        <h1 class="sr-only">Black Friday Maderarte</h1>
+        <p><span>LO MÁS EXCLUSIVO,</span><strong>HOY A UN PRECIO ESPECIAL.</strong></p>
+        <span class="black-friday-copy-rule" aria-hidden="true"></span>
+        <a class="black-friday-hero-link" href="/catalogo/" aria-label="Descubrir la selección Black Friday de Maderarte">
+          <span>DESCUBRIR LA SELECCIÓN</span><span aria-hidden="true">→</span>
+        </a>
+      </div>
       <div class="hero-content">
         <div class="reveal visible">
           <span class="hero-kicker">Muebles &amp; decoración en Popayán</span>

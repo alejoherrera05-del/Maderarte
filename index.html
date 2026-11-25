@@ -15,6 +15,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="https://maderartepopayan.com/apple-touch-icon.png">
 <link rel="preload" as="image" href="/black-friday-mobile-black-only-v5.png" media="(max-width: 820px)">
 <link rel="preload" as="image" href="/black-friday-desktop-black-only-v5.png" media="(min-width: 821px)">
+<link rel="preload" as="image" href="/black-friday-friday-off-v6.png">
+<link rel="preload" as="image" href="/black-friday-friday-on-v6.png">
 <link rel="preload" as="image" href="/icons/tape-measure-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/material-moodboard-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/design-proposal-mobile.webp" media="(max-width: 700px)">
@@ -5715,59 +5717,30 @@ body.black-friday-mode.bf-assets-ready .black-friday-neon{
 body.black-friday-mode .neon-tube-shadow,
 body.black-friday-mode .neon-tube-shell,
 body.black-friday-mode .neon-tube-highlight,
-body.black-friday-mode .neon-on-segment path{
-  fill:none;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  vector-effect:non-scaling-stroke;
+body.black-friday-mode .neon-live-layer{
+  display:none;
 }
-body.black-friday-mode .neon-tube-shadow{
-  stroke:#24100a;
-  stroke-width:17;
-  opacity:.86;
+body.black-friday-mode .neon-off-image{
+  opacity:1;
 }
-body.black-friday-mode .neon-tube-shell{
-  stroke:#713019;
-  stroke-width:11;
-  opacity:.92;
-}
-body.black-friday-mode .neon-tube-highlight{
-  stroke:#bf5a26;
-  stroke-width:2.2;
-  opacity:.34;
-}
-body.black-friday-mode .neon-on-segment{
+body.black-friday-mode .neon-on-letter{
   opacity:0;
   will-change:opacity;
 }
-body.black-friday-mode .neon-on-segment .neon-glow-wide{
-  stroke:#ff4d08;
-  stroke-width:19;
-  opacity:.17;
-}
-body.black-friday-mode .neon-on-segment .neon-glow-near{
-  stroke:#ff7b1d;
-  stroke-width:11;
-  opacity:.42;
-}
-body.black-friday-mode .neon-on-segment .neon-core{
-  stroke:#fff2d5;
-  stroke-width:3.4;
-}
-body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment{
+body.black-friday-mode.bf-assets-ready .neon-on-letter{
   animation-duration:7.6s;
   animation-timing-function:steps(1, end);
   animation-iteration-count:infinite;
   animation-fill-mode:both;
   animation-play-state:var(--neon-play-state, running);
 }
-body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-child(3n + 1){
+body.black-friday-mode.bf-assets-ready .neon-on-letter:nth-of-type(3n + 1){
   animation-name:fridayNeonFaultA;
 }
-body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-child(3n + 2){
+body.black-friday-mode.bf-assets-ready .neon-on-letter:nth-of-type(3n + 2){
   animation-name:fridayNeonFaultB;
 }
-body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-child(3n){
+body.black-friday-mode.bf-assets-ready .neon-on-letter:nth-of-type(3n){
   animation-name:fridayNeonFaultC;
 }
 @keyframes fridayNeonFaultA{
@@ -5816,7 +5789,7 @@ body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-chi
   94.2%, 100%{opacity:0}
 }
 @media (prefers-reduced-motion:reduce){
-  body.black-friday-mode.bf-assets-ready .neon-on-segment{
+  body.black-friday-mode.bf-assets-ready .neon-on-letter{
     opacity:.78 !important;
     animation:none !important;
     will-change:auto;
@@ -5883,7 +5856,8 @@ body.black-friday-mode .black-friday-hero-link{
 }
 body.black-friday-mode .black-friday-hero-link:hover{
   background:rgba(86,34,10,.94);
-  box-shadow:0 0 0 2px rgba(255,115,20,.7), 0 10px 28px rgba(255,96,0,.28);
+  border-color:#ff7314;
+  box-shadow:0 10px 28px rgba(15,6,3,.32);
   transform:translateY(-2px);
 }
 body.black-friday-mode .black-friday-hero-link:active{
@@ -5916,7 +5890,7 @@ body.black-friday-mode .black-friday-hero-link:focus-visible{
   }
   body.black-friday-mode .black-friday-live-copy{
     left:50%;
-    top:calc(84px + 61vw);
+    top:calc(84px + 65.5vw);
     width:min(86vw, 430px);
   }
   body.black-friday-mode .black-friday-neon{
@@ -6007,7 +5981,20 @@ body.black-friday-mode .black-friday-hero-link:focus-visible{
             <use href="#neon-a-1"></use><use href="#neon-a-2"></use><use href="#neon-a-3"></use>
             <use href="#neon-y-1"></use><use href="#neon-y-2"></use><use href="#neon-y-3"></use>
           </g>
+          <clipPath id="friday-letter-f" clipPathUnits="userSpaceOnUse"><rect x="0" y="0" width="134" height="230"></rect></clipPath>
+          <clipPath id="friday-letter-r" clipPathUnits="userSpaceOnUse"><rect x="102" y="0" width="136" height="230"></rect></clipPath>
+          <clipPath id="friday-letter-i" clipPathUnits="userSpaceOnUse"><rect x="210" y="0" width="58" height="230"></rect></clipPath>
+          <clipPath id="friday-letter-d" clipPathUnits="userSpaceOnUse"><rect x="242" y="0" width="144" height="230"></rect></clipPath>
+          <clipPath id="friday-letter-a" clipPathUnits="userSpaceOnUse"><rect x="352" y="0" width="148" height="230"></rect></clipPath>
+          <clipPath id="friday-letter-y" clipPathUnits="userSpaceOnUse"><rect x="462" y="0" width="178" height="230"></rect></clipPath>
         </defs>
+        <image class="neon-off-image" href="/black-friday-friday-off-v6.png" x="0" y="0" width="640" height="230"></image>
+        <image class="neon-on-letter" href="/black-friday-friday-on-v6.png" x="0" y="0" width="640" height="230" clip-path="url(#friday-letter-f)"></image>
+        <image class="neon-on-letter" href="/black-friday-friday-on-v6.png" x="0" y="0" width="640" height="230" clip-path="url(#friday-letter-r)"></image>
+        <image class="neon-on-letter" href="/black-friday-friday-on-v6.png" x="0" y="0" width="640" height="230" clip-path="url(#friday-letter-i)"></image>
+        <image class="neon-on-letter" href="/black-friday-friday-on-v6.png" x="0" y="0" width="640" height="230" clip-path="url(#friday-letter-d)"></image>
+        <image class="neon-on-letter" href="/black-friday-friday-on-v6.png" x="0" y="0" width="640" height="230" clip-path="url(#friday-letter-a)"></image>
+        <image class="neon-on-letter" href="/black-friday-friday-on-v6.png" x="0" y="0" width="640" height="230" clip-path="url(#friday-letter-y)"></image>
         <g class="neon-tube-shadow"><use href="#friday-tube-shape"></use></g>
         <g class="neon-tube-shell"><use href="#friday-tube-shape"></use></g>
         <g class="neon-tube-highlight"><use href="#friday-tube-shape"></use></g>
@@ -8070,9 +8057,10 @@ initCatalog();
 (() => {
   if(!document.body.classList.contains("black-friday-mode")) return;
   const mobile = window.matchMedia("(max-width: 820px)").matches;
+  const titleAssets = ["/black-friday-friday-off-v6.png", "/black-friday-friday-on-v6.png"];
   const assets = mobile
-    ? ["/black-friday-mobile-black-only-v5.png"]
-    : ["/black-friday-desktop-black-only-v5.png"];
+    ? ["/black-friday-mobile-black-only-v5.png", ...titleAssets]
+    : ["/black-friday-desktop-black-only-v5.png", ...titleAssets];
   const loadImage = source => new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => {

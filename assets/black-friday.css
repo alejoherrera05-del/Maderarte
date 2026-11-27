@@ -2,31 +2,40 @@
 .black-friday-live-copy,
 .black-friday-scene{display:none}
 body.black-friday-mode .hero{
-  min-height:0;
-  aspect-ratio:2 / 1;
+  min-height:100svh;
+  aspect-ratio:auto;
   height:auto;
   max-height:none;
   display:grid;
   grid-template-columns:minmax(0, 1fr);
-  align-items:start;
+  align-items:center;
   isolation:isolate;
-  background:#28140b;
+  background:radial-gradient(ellipse at 28% 42%, #45220f 0, #28140b 72%);
 }
 body.black-friday-mode .hero-content,
-body.black-friday-mode .hero::after{display:none}
-body.black-friday-mode .hero-media{
+body.black-friday-mode .hero::after,
+body.black-friday-mode .hero-media{display:none}
+/* Recompose the existing artwork at its native ratio; never stretch it to fill. */
+body.black-friday-mode .black-friday-scene-desktop{
+  position:absolute;
+  inset:auto 0 0 auto;
+  z-index:-1;
   display:block;
-  inset:0;
-  background:url("/black-friday-desktop-grid-v3.png") center top / 100% auto no-repeat;
-  transform:none;
-  animation:none;
+  width:64%;
+  height:auto;
+  aspect-ratio:1124 / 887;
+  /* Blend the wall and exclude the old logo above the intact furniture. */
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 5%), linear-gradient(180deg, transparent, #000 18%), linear-gradient(90deg, transparent 11.4%, #000 15%), linear-gradient(180deg, transparent 42%, #000 49%);
+  mask-image:linear-gradient(90deg, transparent, #000 5%), linear-gradient(180deg, transparent, #000 18%), linear-gradient(90deg, transparent 11.4%, #000 15%), linear-gradient(180deg, transparent 42%, #000 49%);
+  -webkit-mask-composite:source-in, source-in, source-over;
+  mask-composite:intersect, intersect, add;
 }
-body.black-friday-mode .black-friday-scene{display:none}
 body.black-friday-mode .black-friday-live-copy{
   position:relative;
   width:43%;
+  max-width:660px;
   margin:0 0 0 2.3%;
-  padding:21.8vw 12px 20px;
+  padding:112px 12px 56px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -35,12 +44,11 @@ body.black-friday-mode .black-friday-live-copy{
   text-align:center;
 }
 body.black-friday-mode .black-friday-title{
-  position:absolute;
-  width:1px;
-  height:1px;
+  position:relative;
+  width:100%;
+  height:auto;
   margin:0;
-  overflow:hidden;
-  clip-path:inset(50%);
+  overflow:visible;
   font-size:inherit;
   line-height:0;
 }
@@ -58,7 +66,7 @@ body.black-friday-mode .black-friday-title{
 }
 .black-friday-brand-mobile{display:none}
 .black-friday-dates{
-  margin:0;
+  margin:16px 0 0;
   color:#f6d9bf;
   font-family:var(--sans);
   font-size:.9375rem;
@@ -156,7 +164,7 @@ body.black-friday-mode .black-friday-title{
 .black-friday-hero-link:active{background:#8d3d1766}
 .black-friday-hero-link:focus-visible{outline:3px solid #fff2e3;outline-offset:5px}
 @media (min-width:901px) and (max-width:1200px){
-  body.black-friday-mode .black-friday-live-copy{padding-bottom:0}
+  body.black-friday-mode .black-friday-live-copy{padding:104px 12px 44px}
   .black-friday-dates{font-size:.875rem;line-height:1.45}
   .black-friday-message{margin-top:12px;font-size:1.25rem;line-height:1.2}
   .black-friday-countdown{margin-top:16px;width:300px;max-width:100%}
@@ -175,23 +183,26 @@ body.black-friday-mode .black-friday-title{
     justify-content:flex-start;
     background:radial-gradient(ellipse at 50% 26%, #45220f 0, #28140b 72%);
   }
-  body.black-friday-mode .hero-media{display:none}
+  body.black-friday-mode .black-friday-scene-desktop{display:none}
   body.black-friday-mode .black-friday-live-copy{
+    flex:1;
     width:100%;
     max-width:560px;
     margin:0 auto;
     padding:106px 18px 0;
     align-items:center;
+    justify-content:center;
   }
   body.black-friday-mode .black-friday-title{
     position:relative;
-    width:100vw;
-    max-width:none;
+    width:calc(100% + 36px);
+    max-width:560px;
     height:auto;
     margin:0;
     overflow:visible;
     clip-path:none;
   }
+  .black-friday-brand-desktop{display:none}
   .black-friday-brand-mobile{
     display:block;
     aspect-ratio:971 / 310;
@@ -211,17 +222,19 @@ body.black-friday-mode .black-friday-title{
     inset:auto;
     z-index:-1;
     display:block;
-    width:100%;
+    flex:0 0 auto;
+    width:min(100%, 643px);
     height:auto;
     aspect-ratio:971 / 770;
-    max-height:510px;
-    margin-top:-14px;
+    max-height:none;
+    margin:0 auto;
     -webkit-mask-image:linear-gradient(180deg, transparent, #000 23%);
     mask-image:linear-gradient(180deg, transparent, #000 23%);
   }
 }
 @media (max-width:360px){
   body.black-friday-mode .black-friday-live-copy{padding:100px 14px 0}
+  body.black-friday-mode .black-friday-title{width:calc(100% + 28px)}
   .black-friday-message{font-size:1.35rem}
   .black-friday-unit > span{font-size:2.2rem}
 }

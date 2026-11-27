@@ -5664,300 +5664,11 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
   }
 }
 
-/* BLACK FRIDAY MODE — remove the body class to restore the evergreen hero. */
-body.black-friday-mode .hero{
-  min-height:100vh;
-  min-height:100svh;
-  height:100vh;
-  height:100svh;
-  background:linear-gradient(to bottom, #241109 0 52%, #765036 52% 100%);
-}
-body.black-friday-mode .hero-media{
-  inset:0;
-  background-image:url("/black-friday-desktop-grid-v3.png");
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  transform:none;
-  animation:none;
-}
-body.black-friday-mode .hero-media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url("/black-friday-desktop-grid-v3.png") center/contain no-repeat;
-}
-body.black-friday-mode .hero::after{
-  display:none;
-}
-body.black-friday-mode .hero-content{
-  display:none;
-}
-.black-friday-neon{
-  display:none;
-}
-body.black-friday-mode .black-friday-neon{
-  position:absolute;
-  left:23.68%;
-  top:calc(50% - 13.45vw);
-  z-index:4;
-  display:none;
-  width:18.04vw;
-  height:6.48vw;
-  overflow:visible;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity .12s linear;
-}
-body.black-friday-mode.bf-assets-ready .black-friday-neon{
-  opacity:1;
-}
-body.black-friday-mode .neon-tube-shadow,
-body.black-friday-mode .neon-tube-shell,
-body.black-friday-mode .neon-tube-highlight,
-body.black-friday-mode .neon-on-segment path{
-  fill:none;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  vector-effect:non-scaling-stroke;
-}
-body.black-friday-mode .neon-tube-shadow{
-  stroke:#24100a;
-  stroke-width:17;
-  opacity:.86;
-}
-body.black-friday-mode .neon-tube-shell{
-  stroke:#713019;
-  stroke-width:11;
-  opacity:.92;
-}
-body.black-friday-mode .neon-tube-highlight{
-  stroke:#bf5a26;
-  stroke-width:2.2;
-  opacity:.34;
-}
-body.black-friday-mode .neon-on-segment{
-  opacity:0;
-  will-change:opacity;
-}
-body.black-friday-mode .neon-on-segment .neon-glow-wide{
-  stroke:#ff4d08;
-  stroke-width:19;
-  opacity:.17;
-}
-body.black-friday-mode .neon-on-segment .neon-glow-near{
-  stroke:#ff7b1d;
-  stroke-width:11;
-  opacity:.42;
-}
-body.black-friday-mode .neon-on-segment .neon-core{
-  stroke:#fff2d5;
-  stroke-width:3.4;
-}
-body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment{
-  animation-duration:7.6s;
-  animation-timing-function:steps(1, end);
-  animation-iteration-count:infinite;
-  animation-fill-mode:both;
-  animation-play-state:var(--neon-play-state, running);
-}
-body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-child(3n + 1){
-  animation-name:fridayNeonFaultA;
-}
-body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-child(3n + 2){
-  animation-name:fridayNeonFaultB;
-}
-body.black-friday-mode.bf-assets-ready .neon-live-layer .neon-on-segment:nth-child(3n){
-  animation-name:fridayNeonFaultC;
-}
-@keyframes fridayNeonFaultA{
-  0%, 1.8%{opacity:0}
-  2.4%{opacity:.96}
-  3.5%{opacity:.08}
-  5.2%{opacity:.82}
-  6.4%{opacity:.12}
-  8.6%{opacity:1}
-  10.3%{opacity:.16}
-  13%, 53.8%{opacity:1}
-  54.6%{opacity:.12}
-  55.5%, 88.5%{opacity:1}
-  89.2%{opacity:.18}
-  90.3%, 93.2%{opacity:1}
-  94.5%, 100%{opacity:0}
-}
-@keyframes fridayNeonFaultB{
-  0%, 3%{opacity:0}
-  4%{opacity:.92}
-  5.3%{opacity:.08}
-  7.2%{opacity:1}
-  8.4%{opacity:.15}
-  11%{opacity:.95}
-  12.6%{opacity:.1}
-  16%, 56.4%{opacity:1}
-  57.1%{opacity:.24}
-  58.1%, 91.8%{opacity:1}
-  92.6%{opacity:.18}
-  93.7%{opacity:1}
-  95%, 100%{opacity:0}
-}
-@keyframes fridayNeonFaultC{
-  0%, 1.2%{opacity:0}
-  1.9%{opacity:.86}
-  3%{opacity:.06}
-  6%{opacity:.9}
-  7.3%{opacity:.12}
-  9.5%{opacity:1}
-  11.2%{opacity:.2}
-  15%, 58.6%{opacity:1}
-  59.3%{opacity:.1}
-  60.5%, 87.6%{opacity:1}
-  88.4%{opacity:.2}
-  89.6%, 92.8%{opacity:1}
-  94.2%, 100%{opacity:0}
-}
-@media (prefers-reduced-motion:reduce){
-  body.black-friday-mode.bf-assets-ready .neon-on-segment{
-    opacity:.78 !important;
-    animation:none !important;
-    will-change:auto;
-  }
-}
-.black-friday-live-copy{
-  display:none;
-}
-body.black-friday-mode .black-friday-live-copy{
-  position:absolute;
-  left:23.6%;
-  top:calc(50% + 4vw);
-  z-index:4;
-  width:min(36vw, 640px);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  transform:translate(-50%, -50%);
-  text-align:center;
-  pointer-events:none;
-}
-body.black-friday-mode .black-friday-live-copy p{
-  margin:0;
-  color:#f7ecdf;
-  font-family:Georgia, "Times New Roman", serif;
-  font-size:clamp(1.22rem, 1.55vw, 1.82rem);
-  font-weight:700;
-  line-height:1.18;
-  text-shadow:0 3px 12px rgba(0,0,0,.42);
-}
-body.black-friday-mode .black-friday-live-copy p span,
-body.black-friday-mode .black-friday-live-copy p strong{
-  display:block;
-}
-body.black-friday-mode .black-friday-live-copy p strong{
-  margin-top:.18em;
-  color:#f47a28;
-}
-body.black-friday-mode .black-friday-copy-rule{
-  width:100%;
-  height:1px;
-  margin:clamp(14px, 1.4vw, 24px) 0 clamp(20px, 2.2vw, 34px);
-  background:rgba(255,244,232,.82);
-}
-body.black-friday-mode .black-friday-hero-link{
-  width:min(76%, 390px);
-  min-height:58px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:18px;
-  border-radius:999px;
-  border:2px solid #f26816;
-  cursor:pointer;
-  color:#fff;
-  background:rgba(31,14,8,.82);
-  font-size:clamp(.76rem, .9vw, .94rem);
-  font-weight:760;
-  letter-spacing:.19em;
-  line-height:1.2;
-  text-decoration:none;
-  pointer-events:auto;
-  transition:background-color .2s ease, box-shadow .2s ease, transform .16s ease;
-}
-body.black-friday-mode .black-friday-hero-link:hover{
-  background:rgba(86,34,10,.94);
-  box-shadow:0 0 0 2px rgba(255,115,20,.7), 0 10px 28px rgba(255,96,0,.28);
-  transform:translateY(-2px);
-}
-body.black-friday-mode .black-friday-hero-link:active{
-  transform:translateY(0) scale(.98);
-  background:rgba(108,41,9,.98);
-}
-body.black-friday-mode .black-friday-hero-link:focus-visible{
-  outline:3px solid var(--copper);
-  outline-offset:4px;
-  background:rgba(255,111,14,.12);
-}
-@media (max-width:820px){
-  body.black-friday-mode .hero{
-    min-height:100vh;
-    min-height:100svh;
-    height:100vh;
-    height:100svh;
-    max-height:none;
-    background:linear-gradient(to bottom, #241109 0 58%, #765036 58% 100%);
-  }
-  body.black-friday-mode .hero-media{
-    top:84px;
-    background-color:#6d482f;
-    background-image:url("/black-friday-mobile-grid-v3.png");
-    background-position:center top;
-    background-size:100% auto;
-  }
-  body.black-friday-mode .hero-media::after{
-    display:none;
-  }
-  body.black-friday-mode .black-friday-live-copy{
-    left:50%;
-    top:calc(84px + 84vw);
-    width:min(86vw, 430px);
-  }
-  body.black-friday-mode .black-friday-neon{
-    left:50.46%;
-    top:calc(84px + 29.35vw);
-    width:40.16vw;
-    height:13.9vw;
-  }
-  body.black-friday-mode .black-friday-live-copy p{
-    font-size:clamp(1.06rem, 4.9vw, 1.4rem);
-    line-height:1.1;
-  }
-  body.black-friday-mode .black-friday-copy-rule{
-    width:92%;
-    margin:6px 0 10px;
-  }
-  body.black-friday-mode .black-friday-hero-link{
-    width:min(82vw, 370px);
-    min-height:50px;
-    gap:14px;
-    padding:0 20px;
-    font-size:clamp(.76rem, 3.4vw, .9rem);
-    letter-spacing:.15em;
-  }
-}
-@media (min-aspect-ratio:2/1) and (min-width:821px){
-  body.black-friday-mode .black-friday-neon{
-    left:calc(50% - 52.65vh);
-    top:23.11%;
-    width:36.08vh;
-    height:12.97vh;
-  }
-  body.black-friday-mode .black-friday-live-copy{
-    left:calc(50% - 52.8vh);
-    top:58%;
-    width:min(72vh, 640px);
-  }
-}
 </style>
 <script src="/security-notice.js?v=20260916" defer></script>
 <link rel="stylesheet" href="/assets/catalog-public.css?v=20261118-cotizar">
+<link rel="stylesheet" href="/assets/black-friday.css?v=20261127">
+<script src="/assets/black-friday.js?v=20261127" defer></script>
 <script src="/assets/catalog-order.js?v=20260918"></script>
 </head>
 <body class="at-hero black-friday-mode">
@@ -5980,69 +5691,33 @@ body.black-friday-mode .black-friday-hero-link:focus-visible{
   <main>
     <section class="hero" id="inicio">
       <div class="hero-media" aria-hidden="true"></div>
-      <svg class="black-friday-neon" viewBox="0 0 640 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <defs>
-          <path id="neon-f-1" d="M44 198V32"></path>
-          <path id="neon-f-2" d="M44 32H112"></path>
-          <path id="neon-f-3" d="M44 108H101"></path>
-          <path id="neon-r-1" d="M142 198V32"></path>
-          <path id="neon-r-2" d="M142 32H185C214 32 228 46 228 71S213 109 185 109H142"></path>
-          <path id="neon-r-3" d="M184 109L231 198"></path>
-          <path id="neon-i-1" d="M256 32H320"></path>
-          <path id="neon-i-2" d="M288 32V198"></path>
-          <path id="neon-i-3" d="M256 198H320"></path>
-          <path id="neon-d-1" d="M348 198V32"></path>
-          <path id="neon-d-2" d="M348 32H383C430 32 449 64 449 115S430 198 383 198H348"></path>
-          <path id="neon-a-1" d="M472 198L520 32"></path>
-          <path id="neon-a-2" d="M520 32L568 198"></path>
-          <path id="neon-a-3" d="M490 130H550"></path>
-          <path id="neon-y-1" d="M574 32L606 108"></path>
-          <path id="neon-y-2" d="M638 32L606 108"></path>
-          <path id="neon-y-3" d="M606 108V198"></path>
-          <g id="friday-tube-shape">
-            <use href="#neon-f-1"></use><use href="#neon-f-2"></use><use href="#neon-f-3"></use>
-            <use href="#neon-r-1"></use><use href="#neon-r-2"></use><use href="#neon-r-3"></use>
-            <use href="#neon-i-1"></use><use href="#neon-i-2"></use><use href="#neon-i-3"></use>
-            <use href="#neon-d-1"></use><use href="#neon-d-2"></use>
-            <use href="#neon-a-1"></use><use href="#neon-a-2"></use><use href="#neon-a-3"></use>
-            <use href="#neon-y-1"></use><use href="#neon-y-2"></use><use href="#neon-y-3"></use>
-          </g>
-        </defs>
-        <g class="neon-tube-shadow"><use href="#friday-tube-shape"></use></g>
-        <g class="neon-tube-shell"><use href="#friday-tube-shape"></use></g>
-        <g class="neon-tube-highlight"><use href="#friday-tube-shape"></use></g>
-        <g class="neon-live-layer">
-          <g class="neon-on-segment" data-neon-letter="F"><path class="neon-glow-wide" d="M44 198V32"></path><path class="neon-glow-near" d="M44 198V32"></path><path class="neon-core" d="M44 198V32"></path></g>
-          <g class="neon-on-segment" data-neon-letter="F"><path class="neon-glow-wide" d="M44 32H112"></path><path class="neon-glow-near" d="M44 32H112"></path><path class="neon-core" d="M44 32H112"></path></g>
-          <g class="neon-on-segment" data-neon-letter="F"><path class="neon-glow-wide" d="M44 108H101"></path><path class="neon-glow-near" d="M44 108H101"></path><path class="neon-core" d="M44 108H101"></path></g>
-          <g class="neon-on-segment" data-neon-letter="R"><path class="neon-glow-wide" d="M142 198V32"></path><path class="neon-glow-near" d="M142 198V32"></path><path class="neon-core" d="M142 198V32"></path></g>
-          <g class="neon-on-segment" data-neon-letter="R"><path class="neon-glow-wide" d="M142 32H185C214 32 228 46 228 71S213 109 185 109H142"></path><path class="neon-glow-near" d="M142 32H185C214 32 228 46 228 71S213 109 185 109H142"></path><path class="neon-core" d="M142 32H185C214 32 228 46 228 71S213 109 185 109H142"></path></g>
-          <g class="neon-on-segment" data-neon-letter="R"><path class="neon-glow-wide" d="M184 109L231 198"></path><path class="neon-glow-near" d="M184 109L231 198"></path><path class="neon-core" d="M184 109L231 198"></path></g>
-          <g class="neon-on-segment" data-neon-letter="I"><path class="neon-glow-wide" d="M256 32H320"></path><path class="neon-glow-near" d="M256 32H320"></path><path class="neon-core" d="M256 32H320"></path></g>
-          <g class="neon-on-segment" data-neon-letter="I"><path class="neon-glow-wide" d="M288 32V198"></path><path class="neon-glow-near" d="M288 32V198"></path><path class="neon-core" d="M288 32V198"></path></g>
-          <g class="neon-on-segment" data-neon-letter="I"><path class="neon-glow-wide" d="M256 198H320"></path><path class="neon-glow-near" d="M256 198H320"></path><path class="neon-core" d="M256 198H320"></path></g>
-          <g class="neon-on-segment" data-neon-letter="D"><path class="neon-glow-wide" d="M348 198V32"></path><path class="neon-glow-near" d="M348 198V32"></path><path class="neon-core" d="M348 198V32"></path></g>
-          <g class="neon-on-segment" data-neon-letter="D"><path class="neon-glow-wide" d="M348 32H383C430 32 449 64 449 115S430 198 383 198H348"></path><path class="neon-glow-near" d="M348 32H383C430 32 449 64 449 115S430 198 383 198H348"></path><path class="neon-core" d="M348 32H383C430 32 449 64 449 115S430 198 383 198H348"></path></g>
-          <g class="neon-on-segment" data-neon-letter="A"><path class="neon-glow-wide" d="M472 198L520 32"></path><path class="neon-glow-near" d="M472 198L520 32"></path><path class="neon-core" d="M472 198L520 32"></path></g>
-          <g class="neon-on-segment" data-neon-letter="A"><path class="neon-glow-wide" d="M520 32L568 198"></path><path class="neon-glow-near" d="M520 32L568 198"></path><path class="neon-core" d="M520 32L568 198"></path></g>
-          <g class="neon-on-segment" data-neon-letter="A"><path class="neon-glow-wide" d="M490 130H550"></path><path class="neon-glow-near" d="M490 130H550"></path><path class="neon-core" d="M490 130H550"></path></g>
-          <g class="neon-on-segment" data-neon-letter="Y"><path class="neon-glow-wide" d="M574 32L606 108"></path><path class="neon-glow-near" d="M574 32L606 108"></path><path class="neon-core" d="M574 32L606 108"></path></g>
-          <g class="neon-on-segment" data-neon-letter="Y"><path class="neon-glow-wide" d="M638 32L606 108"></path><path class="neon-glow-near" d="M638 32L606 108"></path><path class="neon-core" d="M638 32L606 108"></path></g>
-          <g class="neon-on-segment" data-neon-letter="Y"><path class="neon-glow-wide" d="M606 108V198"></path><path class="neon-glow-near" d="M606 108V198"></path><path class="neon-core" d="M606 108V198"></path></g>
-        </g>
+      <svg class="black-friday-scene black-friday-scene-desktop" viewBox="775 0 999 887" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <image href="/black-friday-desktop-grid-v3.png" width="1774" height="887"></image>
       </svg>
-      <div class="black-friday-live-copy">
-        <h1 class="sr-only">Black Friday Maderarte</h1>
-        <p><span>LO MÁS EXCLUSIVO,</span><strong>HOY A UN PRECIO ESPECIAL.</strong></p>
-        <span class="black-friday-copy-rule" aria-hidden="true"></span>
-        <a class="black-friday-hero-link" href="/catalogo/" aria-label="Descubrir la selección Black Friday de Maderarte">
-          <span>DESCUBRIR LA SELECCIÓN</span><span aria-hidden="true">→</span>
-        </a>
+      <div class="black-friday-live-copy" data-black-friday>
+        <p class="black-friday-kicker" data-bf-kicker>Solo por 4 días</p>
+        <h1 class="black-friday-title" aria-label="Black Friday Maderarte"><span>Black</span> <span>Friday</span></h1>
+        <p class="black-friday-dates">Del <time datetime="2026-11-27">27</time> al <time datetime="2026-11-30">lunes 30 de noviembre</time></p>
+        <p class="black-friday-message" data-bf-message>Lo más exclusivo,<br><strong>a un precio especial.</strong></p>
+        <div class="black-friday-countdown">
+          <p class="black-friday-countdown-label" id="bf-countdown-label" data-bf-label>Estas ofertas terminan en</p>
+          <div class="black-friday-clock" data-bf-clock role="timer" aria-labelledby="bf-countdown-label" aria-live="off" hidden>
+            <div class="black-friday-unit"><span data-bf-days>00</span><small>Días</small></div>
+            <div class="black-friday-unit"><span data-bf-hours>00</span><small>Horas</small></div>
+            <div class="black-friday-unit"><span data-bf-minutes>00</span><small>Min</small></div>
+            <div class="black-friday-unit"><span data-bf-seconds>00</span><small>Seg</small></div>
+          </div>
+          <p class="black-friday-fallback" data-bf-fallback>Hasta el lunes 30 de noviembre, 11:59 p. m. (hora Colombia).</p>
+        </div>
+        <a class="black-friday-hero-link" data-bf-cta href="/catalogo/">Aprovechar las ofertas</a>
       </div>
+      <svg class="black-friday-scene black-friday-scene-mobile" viewBox="0 850 971 770" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <image href="/black-friday-mobile-grid-v3.png" width="971" height="1620"></image>
+      </svg>
       <div class="hero-content">
         <div class="reveal visible">
           <span class="hero-kicker">Muebles &amp; decoración en Popayán</span>
-          <h1 class="desktop-hero-title">Muebles y decoración en Popayán para casas con carácter.</h1>
+          <h2 class="desktop-hero-title">Muebles y decoración en Popayán para casas con carácter.</h2>
               <p class="mobile-hero-title" aria-hidden="true">Muebles y decoración en Popayán para casas con carácter.</p>
           <p class="hero-lead">Más de 20 años acompañando hogares en Popayán con muebles, decoración, acabados limpios y asesoría profesional.</p>
           <div class="hero-actions">
@@ -8066,44 +7741,7 @@ async function initCatalog(){
 }
 initCatalog();
 </script>
-<script>
-(() => {
-  if(!document.body.classList.contains("black-friday-mode")) return;
-  const mobile = window.matchMedia("(max-width: 820px)").matches;
-  const assets = mobile
-    ? ["/black-friday-mobile-grid-v3.png"]
-    : ["/black-friday-desktop-grid-v3.png"];
-  const loadImage = source => new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => {
-      const decoded = typeof image.decode === "function" ? image.decode() : Promise.resolve();
-      decoded.catch(() => {}).then(resolve);
-    };
-    image.onerror = reject;
-    image.src = source;
-  });
-  Promise.all(assets.map(loadImage)).then(() => {
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      document.body.classList.add("bf-assets-ready");
-    }));
-  }).catch(() => {});
-  const neon = document.querySelector(".black-friday-neon");
-  if(neon){
-    let visible = true;
-    const syncPlayback = () => {
-      neon.style.setProperty("--neon-play-state", document.hidden || !visible ? "paused" : "running");
-    };
-    if("IntersectionObserver" in window){
-      new IntersectionObserver(entries => {
-        visible = entries[0]?.isIntersecting ?? true;
-        syncPlayback();
-      }, {threshold:.08}).observe(neon);
-    }
-    document.addEventListener("visibilitychange", syncPlayback);
-    syncPlayback();
-  }
-})();
-</script>
+
 </body>
 </html>
 

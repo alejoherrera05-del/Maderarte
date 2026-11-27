@@ -473,9 +473,26 @@ async function render(config) {
   if (config.keepSections) {
     html = pruneSections(html, config.keepSections);
   }
-  if (config.bodyRoute) {
-    const routeClass = config.bodyRoute === "product" ? " seo-product-route" : " seo-content-route";
-    html = html.replace('<body class="at-hero">', `<body class="at-hero${routeClass}" data-seo-route="${config.bodyRoute}">`);
+  const removesHero = config.keepSections && !config.keepSections.includes("inicio");
+  if (config.bodyRoute || removesHero) {
+    html = html.replace(/<body\b([^>]*)>/i, (_, attributes) => {
+      const classPattern = /(\s)class\s*=\s*(["'])(.*?)\2/is;
+      const classMatch = attributes.match(classPattern);
+      const classes = new Set((classMatch?.[3] || "").split(/\s+/).filter(Boolean));
+      if (removesHero) classes.delete("black-friday-mode");
+      if (config.bodyRoute) {
+        classes.add(config.bodyRoute === "product" ? "seo-product-route" : "seo-content-route");
+      }
+      const classAttribute = `class="${htmlText([...classes].join(" "))}"`;
+      let updated = classMatch
+        ? attributes.replace(classPattern, (_, whitespace) => `${whitespace}${classAttribute}`)
+        : `${attributes} ${classAttribute}`;
+      if (config.bodyRoute) {
+        updated = updated.replace(/\s+data-seo-route\s*=\s*(["'])(.*?)\1/i, "");
+        updated += ` data-seo-route="${htmlText(config.bodyRoute)}"`;
+      }
+      return `<body${updated}>`;
+    });
   }
   return html;
 }

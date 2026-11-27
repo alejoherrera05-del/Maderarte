@@ -41,7 +41,7 @@ jobs:
       - name: Validar SEO y logica del catalogo
         run: |
           node tools/validate-seo.mjs
-          node --test tools/test-catalog-admin.cjs
+          node --test tools/test-catalog-admin.cjs tools/test-black-friday.cjs
       - name: Preparar navegador de pruebas
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0

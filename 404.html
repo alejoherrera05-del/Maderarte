@@ -13,8 +13,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://maderartepopayan.com/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="https://maderartepopayan.com/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="https://maderartepopayan.com/apple-touch-icon.png">
-<link rel="preload" as="image" href="/black-friday-mobile-full-v2.png" media="(max-width: 820px)">
-<link rel="preload" as="image" href="/black-friday-desktop-full-v2.png" media="(min-width: 821px)">
+<link rel="preload" as="image" href="/black-friday-mobile-grid-v3.png" media="(max-width: 820px)">
+<link rel="preload" as="image" href="/black-friday-desktop-grid-v3.png" media="(min-width: 821px)">
 <link rel="preload" as="image" href="/icons/tape-measure-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/material-moodboard-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/design-proposal-mobile.webp" media="(max-width: 700px)">
@@ -5666,102 +5666,11 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
   }
 }
 
-/* BLACK FRIDAY MODE — remove the body class to restore the evergreen hero. */
-body.black-friday-mode .hero{
-  min-height:100vh;
-  min-height:100svh;
-  height:100vh;
-  height:100svh;
-  background:linear-gradient(to bottom, #241109 0 52%, #765036 52% 100%);
-}
-body.black-friday-mode .hero-media{
-  inset:0;
-  background-image:url("/black-friday-desktop-full-v2.png");
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  transform:none;
-  animation:none;
-}
-body.black-friday-mode .hero-media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url("/black-friday-desktop-full-v2.png") center/contain no-repeat;
-}
-body.black-friday-mode .hero::after{
-  display:none;
-}
-body.black-friday-mode .hero-content{
-  display:none;
-}
-.black-friday-hero-link{
-  display:none;
-}
-body.black-friday-mode .black-friday-hero-link{
-  position:absolute;
-  left:5.75%;
-  top:calc(50% + 4.55vw);
-  width:19.75%;
-  height:3.1vw;
-  z-index:3;
-  display:block;
-  border-radius:999px;
-  cursor:pointer;
-  background:transparent;
-  transition:background-color .2s ease, box-shadow .2s ease, transform .16s ease;
-}
-body.black-friday-mode .black-friday-hero-link:hover{
-  background:rgba(255,111,14,.12);
-  box-shadow:0 0 0 2px rgba(255,115,20,.7), 0 10px 28px rgba(255,96,0,.28);
-}
-body.black-friday-mode .black-friday-hero-link:active{
-  transform:scale(.98);
-  background:rgba(255,111,14,.2);
-}
-body.black-friday-mode .black-friday-hero-link:focus-visible{
-  outline:3px solid var(--copper);
-  outline-offset:4px;
-  background:rgba(255,111,14,.12);
-}
-@media (max-width:820px){
-  body.black-friday-mode .hero{
-    min-height:100vh;
-    min-height:100svh;
-    height:100vh;
-    height:100svh;
-    max-height:none;
-    background:linear-gradient(to bottom, #241109 0 58%, #765036 58% 100%);
-  }
-  body.black-friday-mode .hero-media{
-    top:84px;
-    background-image:url("/black-friday-mobile-full-v2.png");
-    background-position:center top;
-    background-size:cover;
-  }
-  body.black-friday-mode .hero-media::after{
-    background-image:url("/black-friday-mobile-full-v2.png");
-    background-position:center top;
-    background-size:contain;
-  }
-  body.black-friday-mode .black-friday-hero-link{
-    left:23.6%;
-    top:calc(84px + 52.3vw);
-    width:52.8%;
-    height:7vw;
-  }
-}
-@media (min-aspect-ratio:2/1) and (min-width:821px){
-  body.black-friday-mode .black-friday-hero-link{
-    left:calc(50% - 88.5vh);
-    top:58.8%;
-    width:39.5vh;
-    height:6.4%;
-  }
-}
 </style>
 <script src="/security-notice.js?v=20260916" defer></script>
 <link rel="stylesheet" href="/assets/catalog-public.css?v=20261118-cotizar">
+<link rel="stylesheet" href="/assets/black-friday.css?v=20261127">
+<script src="/assets/black-friday.js?v=20261127" defer></script>
 <script src="/assets/catalog-order.js?v=20260918"></script>
 </head>
 <body class="at-hero black-friday-mode">
@@ -5784,11 +5693,33 @@ body.black-friday-mode .black-friday-hero-link:focus-visible{
   <main>
     <section class="hero" id="inicio">
       <div class="hero-media" aria-hidden="true"></div>
-      <a class="black-friday-hero-link" href="/catalogo/" aria-label="Descubrir la selección Black Friday de Maderarte"></a>
+      <svg class="black-friday-scene black-friday-scene-desktop" viewBox="775 0 999 887" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <image href="/black-friday-desktop-grid-v3.png" width="1774" height="887"></image>
+      </svg>
+      <div class="black-friday-live-copy" data-black-friday>
+        <p class="black-friday-kicker" data-bf-kicker>Solo por 4 días</p>
+        <h1 class="black-friday-title" aria-label="Black Friday Maderarte"><span>Black</span> <span>Friday</span></h1>
+        <p class="black-friday-dates">Del <time datetime="2026-11-27">27</time> al <time datetime="2026-11-30">lunes 30 de noviembre</time></p>
+        <p class="black-friday-message" data-bf-message>Lo más exclusivo,<br><strong>a un precio especial.</strong></p>
+        <div class="black-friday-countdown">
+          <p class="black-friday-countdown-label" id="bf-countdown-label" data-bf-label>Estas ofertas terminan en</p>
+          <div class="black-friday-clock" data-bf-clock role="timer" aria-labelledby="bf-countdown-label" aria-live="off" hidden>
+            <div class="black-friday-unit"><span data-bf-days>00</span><small>Días</small></div>
+            <div class="black-friday-unit"><span data-bf-hours>00</span><small>Horas</small></div>
+            <div class="black-friday-unit"><span data-bf-minutes>00</span><small>Min</small></div>
+            <div class="black-friday-unit"><span data-bf-seconds>00</span><small>Seg</small></div>
+          </div>
+          <p class="black-friday-fallback" data-bf-fallback>Hasta el lunes 30 de noviembre, 11:59 p. m. (hora Colombia).</p>
+        </div>
+        <a class="black-friday-hero-link" data-bf-cta href="/catalogo/">Aprovechar las ofertas</a>
+      </div>
+      <svg class="black-friday-scene black-friday-scene-mobile" viewBox="0 850 971 770" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <image href="/black-friday-mobile-grid-v3.png" width="971" height="1620"></image>
+      </svg>
       <div class="hero-content">
         <div class="reveal visible">
           <span class="hero-kicker">Muebles &amp; decoración en Popayán</span>
-          <h1 class="desktop-hero-title">Muebles y decoración en Popayán para casas con carácter.</h1>
+          <h2 class="desktop-hero-title">Muebles y decoración en Popayán para casas con carácter.</h2>
               <p class="mobile-hero-title" aria-hidden="true">Muebles y decoración en Popayán para casas con carácter.</p>
           <p class="hero-lead">Más de 20 años acompañando hogares en Popayán con muebles, decoración, acabados limpios y asesoría profesional.</p>
           <div class="hero-actions">
@@ -7812,6 +7743,7 @@ async function initCatalog(){
 }
 initCatalog();
 </script>
+
 </body>
 </html>
 

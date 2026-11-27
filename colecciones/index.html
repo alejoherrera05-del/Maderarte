@@ -13,8 +13,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://maderartepopayan.com/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="https://maderartepopayan.com/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="https://maderartepopayan.com/apple-touch-icon.png">
-<link rel="preload" as="image" href="/black-friday-mobile-full-v2.png" media="(max-width: 820px)">
-<link rel="preload" as="image" href="/black-friday-desktop-full-v2.png" media="(min-width: 821px)">
+<link rel="preload" as="image" href="/black-friday-mobile-grid-v3.png" media="(max-width: 820px)">
+<link rel="preload" as="image" href="/black-friday-desktop-grid-v3.png" media="(min-width: 821px)">
 <link rel="preload" as="image" href="/icons/tape-measure-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/material-moodboard-mobile.webp" media="(max-width: 700px)">
 <link rel="preload" as="image" href="/icons/design-proposal-mobile.webp" media="(max-width: 700px)">
@@ -5666,105 +5666,14 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
   }
 }
 
-/* BLACK FRIDAY MODE — remove the body class to restore the evergreen hero. */
-body.black-friday-mode .hero{
-  min-height:100vh;
-  min-height:100svh;
-  height:100vh;
-  height:100svh;
-  background:linear-gradient(to bottom, #241109 0 52%, #765036 52% 100%);
-}
-body.black-friday-mode .hero-media{
-  inset:0;
-  background-image:url("/black-friday-desktop-full-v2.png");
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  transform:none;
-  animation:none;
-}
-body.black-friday-mode .hero-media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url("/black-friday-desktop-full-v2.png") center/contain no-repeat;
-}
-body.black-friday-mode .hero::after{
-  display:none;
-}
-body.black-friday-mode .hero-content{
-  display:none;
-}
-.black-friday-hero-link{
-  display:none;
-}
-body.black-friday-mode .black-friday-hero-link{
-  position:absolute;
-  left:5.75%;
-  top:calc(50% + 4.55vw);
-  width:19.75%;
-  height:3.1vw;
-  z-index:3;
-  display:block;
-  border-radius:999px;
-  cursor:pointer;
-  background:transparent;
-  transition:background-color .2s ease, box-shadow .2s ease, transform .16s ease;
-}
-body.black-friday-mode .black-friday-hero-link:hover{
-  background:rgba(255,111,14,.12);
-  box-shadow:0 0 0 2px rgba(255,115,20,.7), 0 10px 28px rgba(255,96,0,.28);
-}
-body.black-friday-mode .black-friday-hero-link:active{
-  transform:scale(.98);
-  background:rgba(255,111,14,.2);
-}
-body.black-friday-mode .black-friday-hero-link:focus-visible{
-  outline:3px solid var(--copper);
-  outline-offset:4px;
-  background:rgba(255,111,14,.12);
-}
-@media (max-width:820px){
-  body.black-friday-mode .hero{
-    min-height:100vh;
-    min-height:100svh;
-    height:100vh;
-    height:100svh;
-    max-height:none;
-    background:linear-gradient(to bottom, #241109 0 58%, #765036 58% 100%);
-  }
-  body.black-friday-mode .hero-media{
-    top:84px;
-    background-image:url("/black-friday-mobile-full-v2.png");
-    background-position:center top;
-    background-size:cover;
-  }
-  body.black-friday-mode .hero-media::after{
-    background-image:url("/black-friday-mobile-full-v2.png");
-    background-position:center top;
-    background-size:contain;
-  }
-  body.black-friday-mode .black-friday-hero-link{
-    left:23.6%;
-    top:calc(84px + 52.3vw);
-    width:52.8%;
-    height:7vw;
-  }
-}
-@media (min-aspect-ratio:2/1) and (min-width:821px){
-  body.black-friday-mode .black-friday-hero-link{
-    left:calc(50% - 88.5vh);
-    top:58.8%;
-    width:39.5vh;
-    height:6.4%;
-  }
-}
 </style>
 <script src="/security-notice.js?v=20260916" defer></script>
 <link rel="stylesheet" href="/assets/catalog-public.css?v=20261118-cotizar">
+<link rel="stylesheet" href="/assets/black-friday.css?v=20261127">
+<script src="/assets/black-friday.js?v=20261127" defer></script>
 <script src="/assets/catalog-order.js?v=20260918"></script>
 </head>
-<body class="at-hero black-friday-mode">
+<body class="at-hero seo-content-route" data-seo-route="catalog">
 <div class="site-shell">
   <header class="site-header" id="site-header">
     <a class="brand" href="/" aria-label="Ir al inicio">
@@ -7633,6 +7542,7 @@ async function initCatalog(){
 }
 initCatalog();
 </script>
+
 </body>
 </html>
 

@@ -5669,8 +5669,8 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
 </style>
 <script src="/security-notice.js?v=20260916" defer></script>
 <link rel="stylesheet" href="/assets/catalog-public.css?v=20261118-cotizar">
-<link rel="stylesheet" href="/assets/black-friday.css?v=20261127-fit">
-<script src="/assets/black-friday.js?v=20261127" defer></script>
+<link rel="stylesheet" href="/assets/black-friday.css?v=20261127-catalog">
+<script src="/assets/black-friday.js?v=20261127-catalog" defer></script>
 <script src="/assets/catalog-order.js?v=20260918"></script>
 </head>
 <body class="at-hero seo-product-route" data-seo-route="product">
@@ -5706,6 +5706,13 @@ html.js-focus-timeline .focus-step:not(.is-visible) .focus-tape-clip{
             <ul class="seo-product-facts" aria-label="Materiales principales"><li>Estructura: Flormorado</li><li>madera: Enchape roble europeo</li><li>Tela: Microfibra</li><li>pintura: Poliuretano mate o brillante</li></ul>
           </div>
         </div>
+      </div>
+      <div class="black-friday-catalog-strip" data-bf-catalog hidden role="region" aria-label="Black Friday Maderarte, del 27 al lunes 30 de noviembre">
+        <svg class="black-friday-catalog-logo" viewBox="50 168 740 224" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+          <image href="/black-friday-desktop-grid-v3.png" width="1774" height="887"></image>
+        </svg>
+        <p class="black-friday-catalog-message">Lo más exclusivo,<br><strong>hoy a un precio especial.</strong></p>
+        <p class="black-friday-catalog-dates">Del <time datetime="2026-11-27">27</time> al <time datetime="2026-11-30">lunes 30 de noviembre</time></p>
       </div>
       <div class="catalog-toolbar reveal">
         <div class="catalog-mode" id="catalog-mode">Te atiende una persona de nuestro equipo</div>
@@ -6603,6 +6610,11 @@ function renderCatalog(){
       <a class="product-card" href="${escapeHTML(productPublicPath(product))}" aria-label="Ver ${escapeHTML(product.nombre)}" data-product-id="${product.id}" style="--product-index:${index % 9}">
         <div class="product-media">
           <img src="${escapeHTML(img)}" alt="${escapeHTML(product.nombre)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${escapeHTML(fallback)}';">
+          <span class="product-black-friday-badge" aria-hidden="true">
+            <svg viewBox="115 212 610 100" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <image href="/black-friday-desktop-grid-v3.png" width="1774" height="887"></image>
+            </svg>
+          </span>
           <span class="product-fav ${saved ? "saved" : ""}" aria-hidden="true">${saved ? "♥" : "♡"}</span>
           <span class="product-count">${images.length || 1} fotos</span>
         </div>

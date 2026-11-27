@@ -23,31 +23,36 @@
     module.exports = Object.freeze({ STARTS_AT, ENDS_AT, getCountdownState });
     return;
   }
-  if (typeof document === 'undefined' || !document.body?.classList.contains('black-friday-mode')) return;
+  if (typeof document === 'undefined' || !document.body) return;
 
   const campaign = document.querySelector('[data-black-friday]');
-  if (!campaign) return;
-  const label = campaign.querySelector('[data-bf-label]');
-  const clock = campaign.querySelector('[data-bf-clock]');
-  const fallback = campaign.querySelector('[data-bf-fallback]');
-  const message = campaign.querySelector('[data-bf-message]');
-  const cta = campaign.querySelector('[data-bf-cta]');
-  const kicker = campaign.querySelector('[data-bf-kicker]');
+  const catalog = document.body.dataset.seoRoute === 'product' ? null : document.getElementById('catalogo');
+  if (!campaign && !catalog) return;
+  const catalogStrip = catalog?.querySelector('[data-bf-catalog]');
+  const label = campaign?.querySelector('[data-bf-label]');
+  const clock = campaign?.querySelector('[data-bf-clock]');
+  const fallback = campaign?.querySelector('[data-bf-fallback]');
+  const message = campaign?.querySelector('[data-bf-message]');
+  const cta = campaign?.querySelector('[data-bf-cta]');
+  const kicker = campaign?.querySelector('[data-bf-kicker]');
   const units = Object.fromEntries(['days', 'hours', 'minutes', 'seconds'].map(unit => [
-    unit, campaign.querySelector(`[data-bf-${unit}]`)
+    unit, campaign?.querySelector(`[data-bf-${unit}]`)
   ]));
-  if (!label || !clock || !fallback || !message || !cta || Object.values(units).some(unit => !unit)) return;
+  const hasHeroCountdown = label && clock && fallback && message && cta && Object.values(units).every(Boolean);
 
-  const originalMessage = message.innerHTML;
+  const originalMessage = message?.innerHTML;
   const originalKicker = kicker?.textContent;
-  const originalFallback = fallback.textContent;
+  const originalFallback = fallback?.textContent;
   let renderedPhase = null;
   let interval = null;
-  clock.setAttribute('aria-live', 'off');
+  clock?.setAttribute('aria-live', 'off');
 
   function update() {
     const state = getCountdownState(Date.now());
-    if (state.phase !== renderedPhase) {
+    const catalogActive = Boolean(catalog) && state.phase === 'active';
+    document.body.classList.toggle('black-friday-catalog-active', catalogActive);
+    if (catalogStrip) catalogStrip.hidden = !catalogActive;
+    if (hasHeroCountdown && state.phase !== renderedPhase) {
       renderedPhase = state.phase;
       campaign.dataset.bfState = state.phase;
       const ended = state.phase === 'ended';
@@ -69,7 +74,7 @@
       }
     }
     for (const [unit, element] of Object.entries(units)) {
-      element.textContent = String(state[unit]).padStart(2, '0');
+      if (element) element.textContent = String(state[unit]).padStart(2, '0');
     }
     if (document.hidden || state.phase === 'ended') {
       if (interval !== null) clearInterval(interval);

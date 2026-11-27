@@ -1,0 +1,239 @@
+/* A content-led campaign: text keeps its natural height at every viewport. */
+.black-friday-live-copy,
+.black-friday-scene{display:none}
+
+body.black-friday-mode .hero{
+  min-height:760px;
+  min-height:max(720px, 100svh);
+  height:auto;
+  max-height:none;
+  display:grid;
+  grid-template-columns:minmax(0, 1fr);
+  align-items:center;
+  isolation:isolate;
+  background:#28140b;
+}
+body.black-friday-mode .hero-media,
+body.black-friday-mode .hero-content,
+body.black-friday-mode .hero::after{display:none}
+
+body.black-friday-mode .black-friday-scene{
+  position:absolute;
+  inset:0 0 0 auto;
+  z-index:-1;
+  width:64%;
+  height:100%;
+  display:block;
+  pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 24%);
+  mask-image:linear-gradient(90deg, transparent, #000 24%);
+}
+body.black-friday-mode .black-friday-scene-mobile{display:none}
+
+body.black-friday-mode .black-friday-live-copy{
+  position:relative;
+  width:min(49%, 720px);
+  margin:0 0 0 max(32px, calc((100vw - 1320px) / 2));
+  padding:132px 24px 64px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
+  color:#fff2e3;
+}
+.black-friday-kicker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 16px;
+  color:#ffbd82;
+  font-size:.875rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  line-height:1.4;
+  text-transform:uppercase;
+}
+.black-friday-kicker::before{
+  content:"";
+  width:30px;
+  height:2px;
+  flex:none;
+  background:#ff7a18;
+}
+body.black-friday-mode .black-friday-title{
+  display:flex;
+  flex-wrap:wrap;
+  column-gap:.18em;
+  max-width:100%;
+  margin:0;
+  font-family:var(--display-sans);
+  font-size:clamp(3rem, 5.2vw, 5.25rem);
+  font-weight:900;
+  letter-spacing:-.055em;
+  line-height:1.02;
+  text-transform:uppercase;
+  text-shadow:0 2px 0 #997754, 0 8px 26px #0005;
+}
+.black-friday-title > span:last-of-type{
+  color:#ff861f;
+  text-shadow:0 2px 0 #ab430c, 0 8px 28px #ff6a1420;
+}
+.black-friday-dates{
+  margin:20px 0 0;
+  padding:8px 14px;
+  border:1px solid #f6b16a59;
+  border-radius:6px;
+  background:#7b47161f;
+  color:#ffe0bf;
+  font-size:.9375rem;
+  line-height:1.5;
+}
+.black-friday-dates time{font-weight:650;white-space:nowrap}
+.black-friday-message{
+  margin:24px 0 0;
+  font-family:var(--serif);
+  font-size:clamp(1.65rem, 2.5vw, 2.25rem);
+  font-weight:400;
+  line-height:1.2;
+  letter-spacing:-.02em;
+  text-wrap:balance;
+}
+.black-friday-message strong{font-weight:400}
+.black-friday-countdown{margin-top:30px;width:min(100%, 392px)}
+.black-friday-countdown-label{
+  margin:0 0 12px;
+  color:#ffeedc;
+  font-size:1rem;
+  font-weight:500;
+  line-height:1.4;
+}
+.black-friday-clock{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:10px;
+  padding:0;
+}
+.black-friday-clock[hidden],
+.black-friday-fallback[hidden]{display:none}
+.black-friday-unit{
+  min-width:0;
+  padding:13px 6px 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  border:1px solid #ffb57147;
+  border-radius:10px;
+  background:linear-gradient(145deg, #ffffff0b, #1a0b0673);
+  box-shadow:inset 0 1px 0 #ffffff0d;
+}
+.black-friday-unit > span{
+  font-size:clamp(2rem, 3vw, 2.65rem);
+  font-weight:650;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum";
+  letter-spacing:-.035em;
+  line-height:1;
+}
+.black-friday-unit > small{
+  margin-top:8px;
+  color:#e3bea0;
+  font-size:.875rem;
+  font-weight:400;
+  line-height:1.2;
+}
+.black-friday-unit:last-child > span{color:#ffab69}
+.black-friday-fallback{margin:0;font-size:.9375rem;line-height:1.5;color:#e3bea0}
+.black-friday-hero-link{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  width:min(100%, 392px);
+  min-height:54px;
+  margin-top:24px;
+  padding:15px 24px;
+  border:1px solid #ff9c56;
+  border-radius:999px;
+  color:#231107;
+  background:linear-gradient(110deg, #ffad61, #ff801f);
+  box-shadow:0 6px 28px #f074161f;
+  font-size:1rem;
+  font-weight:750;
+  line-height:1.4;
+  text-align:center;
+  text-decoration:none;
+  transition:background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.black-friday-hero-link:hover{
+  background:#ffb46e;
+  box-shadow:0 8px 32px #f074163b;
+  transform:translateY(-2px);
+}
+.black-friday-hero-link:active{transform:translateY(0)}
+.black-friday-hero-link:focus-visible{outline:3px solid #fff2e3;outline-offset:5px}
+
+@media (min-width:1600px){
+  body.black-friday-mode .black-friday-live-copy{width:610px}
+}
+@media (max-width:1100px) and (min-width:821px){
+  body.black-friday-mode .black-friday-live-copy{width:52%;margin-left:12px;padding-left:24px;padding-right:16px}
+  body.black-friday-mode .black-friday-scene{width:61%}
+}
+@media (max-width:820px){
+  body.black-friday-mode .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    background:radial-gradient(ellipse at 50% 28%, #4a250f 0, #28140b 72%);
+  }
+  body.black-friday-mode .black-friday-scene-desktop{display:none}
+  body.black-friday-mode .black-friday-live-copy{
+    width:100%;
+    max-width:560px;
+    margin:0 auto;
+    padding:112px 24px 0;
+    align-items:center;
+    text-align:center;
+  }
+  .black-friday-kicker{font-size:.8125rem;letter-spacing:.13em;margin-bottom:12px;gap:10px}
+  .black-friday-kicker::before{width:22px}
+  body.black-friday-mode .black-friday-title{
+    justify-content:center;
+    font-size:clamp(2.1rem, 11.1vw, 4.4rem);
+    column-gap:.18em;
+    letter-spacing:-.05em;
+  }
+  .black-friday-dates{margin-top:16px;padding:7px 11px;font-size:.875rem}
+  .black-friday-message{margin-top:20px;font-size:clamp(1.55rem, 6.1vw, 2rem);line-height:1.2}
+  .black-friday-countdown{margin-top:23px;max-width:354px}
+  .black-friday-countdown-label{margin-bottom:10px;font-size:.9375rem}
+  .black-friday-clock{gap:8px}
+  .black-friday-unit{padding:12px 5px 9px;border-radius:8px}
+  .black-friday-unit > span{font-size:2rem}
+  .black-friday-unit > small{margin-top:6px}
+  .black-friday-hero-link{max-width:354px;margin-top:20px;min-height:50px;padding:13px 20px}
+  body.black-friday-mode .black-friday-scene-mobile{
+    position:relative;
+    inset:auto;
+    z-index:-1;
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:971 / 770;
+    max-height:510px;
+    margin-top:-22px;
+    -webkit-mask-image:linear-gradient(180deg, transparent, #000 23%);
+    mask-image:linear-gradient(180deg, transparent, #000 23%);
+  }
+}
+@media (max-width:360px){
+  body.black-friday-mode .black-friday-live-copy{padding:104px 18px 0}
+  .black-friday-dates{padding:7px 8px}
+  .black-friday-countdown-label{font-size:.875rem}
+  .black-friday-clock{gap:6px}
+  .black-friday-unit > span{font-size:1.85rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .black-friday-hero-link{transition:none}
+  .black-friday-hero-link:hover{transform:none}
+}

@@ -241,3 +241,133 @@ body.black-friday-mode .black-friday-title{
 @media (prefers-reduced-motion:reduce){
   .black-friday-hero-link{transition:none}
 }
+
+/* The catalogue uses the same campaign artwork without changing product photos. */
+.product-black-friday-badge,
+.black-friday-catalog-strip,
+.black-friday-catalog-strip[hidden]{display:none}
+.black-friday-catalog-active .product-black-friday-badge{
+  position:absolute;
+  left:12px;
+  top:12px;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:142px;
+  min-height:34px;
+  padding:5px 9px;
+  border:1px solid #e39b526b;
+  border-radius:7px;
+  background:#2b170d;
+  box-shadow:0 3px 12px #160a0640;
+  pointer-events:none;
+}
+.product-black-friday-badge svg{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:610 / 100;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 2%, #000 98%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 2%, #000 98%, transparent);
+}
+.black-friday-catalog-strip:not([hidden]){
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(20px, 3vw, 42px);
+  width:100%;
+  max-width:1280px;
+  margin:0 auto 28px;
+  padding:20px 28px;
+  overflow:hidden;
+  border:1px solid #d993543d;
+  border-radius:12px;
+  background:radial-gradient(ellipse at 16% 50%, #45220f, #28140b 76%);
+  color:#fff2e3;
+  font-family:var(--sans);
+}
+.black-friday-catalog-strip::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  right:-24px;
+  bottom:-132px;
+  width:300px;
+  height:280px;
+  border:1px solid #f18c3b38;
+  border-radius:50%;
+  box-shadow:0 0 0 16px #f18c3b08;
+  pointer-events:none;
+}
+.black-friday-catalog-logo{
+  display:block;
+  flex:0 0 224px;
+  width:224px;
+  height:auto;
+  aspect-ratio:740 / 224;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 2%, #000 98%, transparent), linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 2%, #000 98%, transparent), linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
+}
+.black-friday-catalog-message{
+  margin:0;
+  flex:1;
+  font-family:var(--display-sans);
+  font-size:clamp(1.05rem, 1.5vw, 1.3rem);
+  font-weight:400;
+  line-height:1.35;
+  letter-spacing:-.025em;
+}
+.black-friday-catalog-message strong{color:#ffa460;font-weight:500}
+.black-friday-catalog-dates{
+  margin:0;
+  color:#f6d9bf;
+  font-size:.9375rem;
+  line-height:1.55;
+  text-align:right;
+}
+.black-friday-catalog-dates time{font-weight:500;white-space:nowrap}
+.black-friday-catalog-active .catalog-chip.active{
+  color:#fff2e3;
+  border-color:#9e5a2b;
+  background:#2d180e;
+  box-shadow:none;
+}
+.black-friday-catalog-active .catalog-group-heading{border-bottom-color:#a9673433}
+body.black-friday-catalog-active[data-seo-route="catalog"] .catalog-section{padding-top:122px}
+body.black-friday-catalog-active[data-seo-route="catalog"] .catalog-route-intro{
+  margin-bottom:26px;
+  padding-bottom:0;
+  border-bottom:0;
+}
+body.black-friday-catalog-active[data-seo-route="catalog"] .catalog-route-copy h1{
+  font-size:clamp(2.2rem, 3.2vw, 3.6rem);
+  line-height:1.03;
+}
+body.black-friday-catalog-active[data-seo-route="catalog"] .site-header{color:var(--ink)}
+@media (max-width:900px){
+  .black-friday-catalog-strip:not([hidden]){gap:16px;padding:17px 20px}
+  .black-friday-catalog-logo{width:192px;flex-basis:192px}
+  .black-friday-catalog-message{display:none}
+  .black-friday-catalog-dates{font-size:.875rem}
+}
+@media (max-width:600px){
+  .black-friday-catalog-strip:not([hidden]){
+    flex-direction:column;
+    gap:7px;
+    padding:14px 16px 16px;
+    margin-bottom:24px;
+    border-radius:10px;
+  }
+  .black-friday-catalog-logo{flex:none;width:204px}
+  .black-friday-catalog-dates{text-align:center}
+  .black-friday-catalog-active .product-black-friday-badge{width:136px;left:10px;top:10px}
+  body.black-friday-catalog-active[data-seo-route="catalog"] .catalog-section{padding-top:108px}
+  body.black-friday-catalog-active[data-seo-route="catalog"] .catalog-route-copy{gap:12px}
+  body.black-friday-catalog-active[data-seo-route="catalog"] .catalog-route-copy h1{font-size:2.15rem}
+}
